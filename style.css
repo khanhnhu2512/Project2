@@ -1,118 +1,143 @@
-body{
-	margin: 0;
-	/*padding: 0;*/
-}
-*{
-	/*background-color: #eeedee;*/
-}
-.container{
-	margin: auto;
-	/*max-width: 1024px;*/
-	background-color: #ffffff;
-	display: flex;
-	flex-direction: column;
-}
-.header-background{
-	width: 100%;
-	background-color: #4466ff;
-}
-.header{ 
-	margin: auto;
-	width: 1024px;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	/*background-color: #ffffff;*/
-	background-color: #4466ff;
+body {
+    margin: 0;
+    /*padding: 0;*/
 }
 
-.header-name{
-	font-family: arial;
-	margin: 0;
-	color: #2939d0;	
-	/*background-color: #4466ff;*/
+* {
+    /*background-color: #eeedee;*/
 }
+
+.container {
+    margin: auto;
+    /*max-width: 1024px;*/
+    /* background-color: #ffffff; */
+    /* height: 30%; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* background-position: center;
+    background-repeat: no-repeat;
+	background-size: cover; */
+    /* background-image: url=(); */
+    background-image: url("image/bg2.jpg");
+    width: 100%;
+    /* height: 60%; */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.header-background {
+    width: 100%;
+    /* background-color: #4466ff; */
+}
+
+.header {
+    margin: auto;
+    width: 1024px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /*background-color: #ffffff;*/
+    /* background-color: #4466ff; */
+}
+
+.header-name {
+    font-family: arial;
+    margin: 0;
+    color: #ffffff;
+    /*background-color: #4466ff;*/
+}
+
+
 /*.header-option{
 	color: #4466ff;
 }*/
-.header ul{
-	display: flex;
-	list-style-type: none;
-	margin-left: -250px;
-	/*background-color: #4466ff;*/
 
+.header ul {
+    display: flex;
+    list-style-type: none;
+    margin-left: -250px;
+    /*background-color: #4466ff;*/
 }
+
 .header li {
-	margin-left: 0 !important;
-	width: 100px;
-	/*height: 40px;*/
-	line-height: 40px;
-	text-align: center;
-	font-size: 20px;
+    margin-left: 0 !important;
+    width: 100px;
+    /*height: 40px;*/
+    line-height: 40px;
+    text-align: center;
+    font-size: 20px;
 }
-.header a{
-	text-decoration: none;
-	color: #2939d0;
-	display: block;
-	font-weight: bold;
-	/*background-color: #4466ff;*/
-}
-.header a:hover{
-	color: white;
-	background-color: #0431fc;
-}
-.input-search{
-	position: relative;
-	background-color: #4466ff;
-	border: 0px;
-}
-.input-search input{
-	width: 250px;
-	border: 1px solid black;
-}
-.btn-search{
-	position: absolute;
-	right: 0px;
 
-	border: 1px solid black;
-	/*background-color: green;*/
+.header a {
+    text-decoration: none;
+    color: #ffffff;
+    display: block;
+    font-weight: bold;
+    /*background-color: #4466ff;*/
 }
-.header-image img{
-	width: 100%;
 
-	/*background-position: center;*/
-  /*background-repeat: no-repeat;
+.header a:hover {
+    color: white;
+    background-color: #0431fc;
+}
+
+.input-search {
+    position: relative;
+    background-color: #4466ff;
+    border: 0px;
+}
+
+.input-search input {
+    width: 250px;
+    border: 1px solid black;
+}
+
+.btn-search {
+    position: absolute;
+    right: 0px;
+    border: 1px solid black;
+    /*background-color: green;*/
+}
+
+.header-image img {
+    width: 100%;
+    /*background-position: center;*/
+    /*background-repeat: no-repeat;
   background-size: cover;*/
-	/*background-size: cover;*/
+    /*background-size: cover;*/
 }
-.header-background{
-	/*width: 150%;
+
+.header-background {
+    /*width: 150%;
 	background-position: center;
   background-repeat: no-repeat;
   background-size: cover;*/
 }
-.content-home{
-	
-	display: flex;
-	width: 1024px;
-	height: 1000px;
-	margin: auto;
-	box-shadow:
-	0 2px 7px 1px #C7EDE4;
-	-webkit-box-shadow: 
-	0 2px 7px 1px #C7EDE4;
-	margin-top: 20px;
-	margin-bottom: 20px; 
+
+.content-home {
+    display: flex;
+    width: 1024px;
+    height: 1000px;
+    margin: auto;
+    /* box-shadow: 0 2px 7px 1px #C7EDE4;
+    -webkit-box-shadow: 0 2px 7px 1px #C7EDE4; */
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
-.footer-background{
-	/*display: flex;*/
-	background-color: black;
-	width: 100%;
+
+.footer-background {
+    /*display: flex;*/
+    /* background-color: black; */
+    width: 100%;
 }
-.footer{
-	display: flex;
-	width: 1024px;
-	height: 100px;
-	margin: auto;
-	/*background-color: white;*/
+
+.footer {
+    display: flex;
+    width: 1024px;
+    height: 100px;
+    margin: auto;
+    /*background-color: white;*/
 }
