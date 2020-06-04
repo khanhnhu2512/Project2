@@ -44,7 +44,7 @@ body {
 }
 
 .header-name {
-    font-family: arial;
+    font-family: Georgia;
     margin: 0;
     color: #ffffff;
     /*background-color: #4466ff;*/
@@ -58,7 +58,7 @@ body {
 .header ul {
     display: flex;
     list-style-type: none;
-    margin-left: -250px;
+    margin-left: px;
     /*background-color: #4466ff;*/
 }
 
@@ -86,21 +86,39 @@ body {
 
 .input-search {
     position: relative;
-    background-color: #4466ff;
-    border: 0px;
+    /* background-color: #4466ff; */
+    vertical-align: middle;
+    white-space: nowrap;
 }
 
 .input-search input {
-    width: 250px;
-    border: 1px solid black;
+    width: 200px;
+    height: 30px;
+    background: #ffffff;
+    border: none;
+    font-size: 10pt;
+    float: left;
+    color: #63717f;
+    padding-left: 30px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
-.btn-search {
+.input-search .icon-search {
     position: absolute;
-    right: 0px;
-    border: 1px solid black;
-    /*background-color: green;*/
+    top: 50%;
+    margin-left: 6px;
+    margin-top: -7px;
+    z-index: 1;
+    color: #4f5b66;
 }
+
+
+/* .input-search input {
+    width: 250px;
+    border: 1px solid black;
+} */
 
 .header-image img {
     width: 100%;
@@ -116,6 +134,34 @@ body {
   background-repeat: no-repeat;
   background-size: cover;*/
 }
+
+.header-login {
+    display: flex;
+    font-size: 20px;
+    /* align-items: center;
+    justify-content: space-between; */
+}
+
+.login {
+    border: 1px solid red;
+    border-radius: 8px;
+    margin-right: 20px;
+    padding: 5px;
+}
+
+.login a {
+    color: red;
+}
+
+.signup {
+    margin-top: 5px;
+}
+
+
+/* .signup a:hover {
+    color: #4466ff;
+    background-color: aquamarine;
+} */
 
 .content-home {
     display: flex;
@@ -135,9 +181,44 @@ body {
 }
 
 .footer {
-    display: flex;
+    /* display: flex; */
     width: 1024px;
-    height: 100px;
+    /* height: 100px; */
     margin: auto;
     /*background-color: white;*/
+}
+
+.footer-link {
+    display: block;
+    list-style-type: none;
+    padding-left: 0px;
+    /*background-color: #4466ff;*/
+    margin-bottom: 15px;
+}
+
+.footer-link li {
+    display: inline-block;
+    margin-left: 0 !important;
+    /* width: 100px; */
+    /*height: 40px;*/
+    line-height: 40px;
+    text-align: center;
+    font-size: 16px;
+    padding-right: 25px;
+    margin: 0px;
+    ;
+}
+
+.footer-link a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.footer-link a:hover {
+    text-decoration: underline;
+}
+
+.footer p {
+    color: white;
 }
