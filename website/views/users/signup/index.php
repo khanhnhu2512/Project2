@@ -4,7 +4,7 @@
 <head>
     <title></title>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="website/css/signup.css">
     <!-- <script src="https://kit.fontawesome.com/b1d0494dab.js" crossorigin="anonymous"></script> -->
     <link href="fontawesome-free-5.13.0-web/css/all.css" rel="stylesheet">
 </head>
@@ -27,47 +27,42 @@
                         <a href="contact.php">Contact</a>
                     </li>
                 </ul>
-                <!-- <div class="input-search">
-                    <span class="icon-search">
-                        <i class="fas fa-search"></i>
-                    </span>
-                    <input placeholder="Search..." type="search" name="search">
-                </div>
-                <div class="header-login">
-                    <div class="login">
-                        <a href="#">Log In</a>
-                    </div>
-                    <div class="signup">
-                        <a href="#">Sign Up</a>
-                    </div>
-                </div> -->
             </div>
         </div>
         <div class="content-home">
             <form method="POST" action="#">
-                <div class="login-form">
+                <div class="signup-form">
+                    <div class="title">
+                        <p><b>SIGNUP</b></p>
+                    </div>
+                    <div class="input"><?php if(isset($_POST['signup-btn'])){echo $log;} ?></div>
                     <div class="input">
-                        <span><b>Username</b></span><br>
+                        <span><b>Full name*</b></span><br>
+                        <input type="text" placeholder="Họ và tên..." name="fullname">
+                    </div>
+                    <div class="input">
+                        <span><b>Username*</b></span><br>
                         <input type="text" placeholder="Tên đăng nhập..." name="username">
                     </div>
                     <div class="input">
-                        <span><b>Password</b></span><br>
+                        <span><b>Email*</b></span><br>
+                        <input type="text" placeholder="Email..." name="email">
+                    </div>
+                    <div class="input">
+                        <span><b>Password*</b></span><br>
                         <input type="password" placeholder="Mật khẩu..." name="password">
                     </div>
-                    <div class="input-remember">
-                        <input type="checkbox" name="remember">
-                        <p>Remember me</p>
+                    <div class="input">
+                        <span><b>Repassword*</b></span><br>
+                        <input type="password" placeholder="Nhập lại mật khẩu..." name="repassword">
                     </div>
-                    <div class="login-btn">
-                        <!-- <div> -->
-                        <input type="button" name="login-btn" value="Login">
-                        <!-- </div> -->
-
+                    <div class="signup-btn">
+                        <input type="submit" name="signup-btn" value="Sign up"><a href="index.php?method=signup"></a>
                     </div>
                 </div>
-                <div class="login-form-signup">
+                <div class="signup-form-signup">
                     <div>
-                        <p>Create an account? <a href="#">Click here</a></p>
+                        <p>Have an account? <a href="index.php?method=login">Login</a></p>
                     </div>
                 </div>
             </form>
