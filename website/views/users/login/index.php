@@ -1,3 +1,6 @@
+<php 
+    session_destroy();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -51,7 +54,7 @@
                         <p>Remember me</p>
                     </div>
                     <div class="login-btn">
-                        <input class="btn" type="submit" name="login-btn" value="Login"><a href="index.php"></a>
+                        <input class="btn" type="submit" name="login-btn" value="Login"><a href="index.php?method=login"></a>
                     </div>
                 </div>
                 <div class="login-form-signup">

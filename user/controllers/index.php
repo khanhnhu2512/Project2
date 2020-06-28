@@ -1,5 +1,5 @@
 <?php
-    include_once 'website/models/users.php';
+    require_once "../user/model/index.php";
     class C_website extends M_users
     {
         public $m_users;
@@ -31,16 +31,74 @@
                     $product = $this->m_users->pagination($table,$start,$limit);
                     
                     //*page
-                    include_once 'website/views/home/index.php';
+                    include_once 'views/index.php';
                 break;
+                case('profile'):
+                    require_once 'views/profile.php';          
+                break;
+
+                case('logout'):
+                    session_unset();
+                    header("location:../index.php");
+                break;
+
                 
+                case('add-cart'):
+                    $id = isset($_GET['id']) ? $_GET['id'] : "";
+                    if(!isset($_SESSION['cart'][$id])){
+                        $table = 'product_iphone';
+                        $product=$this->getObject_id($id,$table);
+                        $_SESSION['cart'][$id]=$product;
+                    }
+                    
+                    if(isset($_SESSION['cart'])){
+                            
+                            if(isset($_SESSION['cart'][$id])){
+                                
+                                $_SESSION['cart'][$id]['amount-session']++;
+                                
+                            }
+                            else{
+                                $_SESSION['cart'][$id]['amount-session']=1;
+                                
+                            }
+                            header('location:index.php');
+                        }
+                    else{
+                        // $_SESSION['cart'][$id]['amount-session']=1;
+                        header('location:index.php');
+                        exit();
+                    }
+                        // include_once 'views/index.php';
+                         
+                break;
+                case('list-cart'): 
+                    // $table = 'product_iphone';
+                    // $id = isset($_GET['id']) ? $_GET['id'] : ""; 
+                    // $product=$this->getObject_id($id,$table);
+                    // $_SESSION['cart']=$product;
+                    // $_SESSION['cart'][3]['name']=$product['name'];
+                    // $_SESSION['cart'][3]['price']=$product['price'];
+                    // $_SESSION['cart'][$id]['image']=$product['image'];
+                    
+                    include_once 'views/list_cart.php';
+                break;
+                case('delete-cart'):
+                    $id = isset($_GET['id']) ? $_GET['id'] : "";
+                    if(isset($_SESSION['cart'][$id])){
+                        unset($_SESSION['cart'][$id]);
+                        // echo "xoa";
+                    }
+                    include_once 'views/list_cart.php';
+                break;
+
                 case('detail-iphone'):
                     $table = 'product_iphone';
                     if (isset($_GET['id'])){
                         $id = $_GET['id'];
                     }
                     $product = $this->m_users->getObject_id($id,$table);
-                    include_once 'website/views/home/product_details.php';
+                    include_once 'views/product_details.php';
                 break;
                 case('login'):  
                     if(!empty($_POST['username']) && !empty($_POST['password'])){
@@ -49,10 +107,10 @@
                         if ($this->m_users->login($username,$password)) {
                             $user = $_SESSION['user'];
                             if ($user['lv']==1){
-                            header('location:admin/controllers/');
+                            header('location:admin/controller/');
                             }
                             else{
-                                header('location:/Project1/user/index.php');
+                                header('location:users/controller/');
                             }
                         }
                         else{
@@ -85,8 +143,15 @@
 
 
                 
-                case('cart'):
-                    require_once 'website/views/users/login/index.php';
+                case('delete'):
+                    if (isset($_GET['id'])){
+                        $id = $_GET['id'];
+                    }
+                    else{
+                        header("localtion: View/list-nv.php");
+                    }
+                    $this->model->deleteMember($id);
+                    echo "<p>Succesful!</p>";
                 break;
                 default:
                 break;
@@ -94,17 +159,4 @@
 
         }
     } 
-    
-    // if (!empty($_POST)) {
-    //     $email = escape($_POST['email']);
-    //     $password = md5($_POST['password']);
-    //     user_login($email, $password);
-    // }
-    
-    // if (isset($_SESSION['user'])) {
-    //     $user = $_SESSION['user'];
-    //     if ($user['RoleId']==1||$user['RoleId']==2){
-    //     header('location:admin.php');
-    //     }
-    // }
 ?>

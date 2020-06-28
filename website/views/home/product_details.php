@@ -1,7 +1,5 @@
 <?php 
-    if(!isset($_SESSION)){
-        session_start();
-    }
+
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +41,7 @@
                 </div>
                 <div class="cart">
                     <span class="icon-cart">
-                        <a href="index.php?method=cart"><i class="fas fa-shopping-cart"></i></a>
+                        <a href="#"><i class="fas fa-shopping-cart"></i></a>
                     </span>
                 </div>
                 <div class="header-login">
@@ -56,39 +54,21 @@
                 </div>
             </div>
         </div>
-        <div class="content-home">
-            <div class="panner">
-                <div><a><img src="images/image-bg/bg5.jpg"></a></div>
-            </div>
-            <div class="product-ip">
-                <div class="title">
-                    <div><h1>Choose your iPhone!</h1></div>
-                </div>
-                <div class="pagination">
-                <?php $i = 1; ?>
-                    <a class="left"  href="index.php?page=<?php echo ($i>=1) ? $i-- : $i;?>"><i class="fas fa-caret-left"></i></a>
-                    <a class="right" href="index.php?page=<?php echo $i+=1; ?>"><i class="fas fa-caret-right"></i></a>
-                        <!-- <ul class="page">
-                            <?php for($i=1;$i<=$total_page;$i++){ ?>
-                            <li <?php if($page == $i) echo "class='active'"; ?> ><a href="index.php?page=<?php echo $i ?>"><?php echo $i; ?></a></li>
-                            <?php } ?>
-                        </ul> -->
+        <div class="content-home">    
+            <div class="content-display-detail">   
+                <div class="product-display-detail">
+                    <div class="img"><a href=""><img src="images/image-product/<?php echo $product['image'];?>"></a></div>
+                    <h1 class="product-name"><?php echo $product['name']; ?></h1>
+                    <p class="product-content"><?php echo $product['content']; ?></p>
+                    <p class="product-price">Buy now $<span><?php echo $product['price']; ?></span></p>
+                    <div class="icon-add-cart">
+                        <span>
+                            <a href=""><i class="fas fa-cart-plus"></i></a>
+                        </span>
                     </div>
-                <div class="content-display">   
-                    <?php foreach ($product as $key => $value): ?> 
-                    <div class="product-display">
-                        <div class="img"><a href="index.php?method=detail-iphone&id=<?php echo $value['id'];?>"><img src="images/image-product/<?php echo $value['image'];?>  "></a></div>
-                        <h3 class="product-name"><?php echo $value['name']; ?></h3>
-                        <p class="product-price">Starting at $<span><?php echo $value['price']; ?></span></p>
-                        <div class="icon-add-cart">
-                            <span>
-                                <a href="index.php?method=cart"><i class="fas fa-cart-plus"></i></a>
-                            </span>
-                        </div>
-                    </div>
-                    <?php endforeach; ?>
                 </div>
             </div>
+            
         </div>
         <div class="footer-background">
             <div class="footer">
