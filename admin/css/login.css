@@ -1,0 +1,232 @@
+body {
+    margin: 0;
+    /*padding: 0;*/
+}
+
+* {
+    /*background-color: #eeedee;*/
+}
+
+.container {
+    margin: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #dfe2db;
+}
+
+.header-background {
+    width: 100%;
+    background-color: #000000;
+}
+
+.header {
+    margin: auto;
+    width: 1024px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-name {
+    font-family: Georgia;
+    margin: 0;
+    color: #ffffff;
+    /*background-color: #4466ff;*/
+}
+
+.header ul {
+    display: flex;
+    list-style-type: none;
+    margin-left: px;
+    /*background-color: #4466ff;*/
+}
+
+.header li {
+    margin-left: 0 !important;
+    width: 100px;
+    /*height: 40px;*/
+    line-height: 40px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.header a {
+    text-decoration: none;
+    color: #ffffff;
+    display: block;
+    font-weight: bold;
+    /*background-color: #4466ff;*/
+}
+
+.header a:hover {
+    color: cyan;
+    /* background-color: #0431fc; */
+}
+
+.content-home {
+    display: flex;
+    width: 1024px;
+    height: 1000px;
+    margin: auto;
+    /* box-shadow: 0 2px 7px 1px #C7EDE4;
+    -webkit-box-shadow: 0 2px 7px 1px #C7EDE4; */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /* background-color: #7c7c7c; */
+}
+
+.footer-background {
+    background-color: #000000;
+    width: 100%;
+}
+
+.footer {
+    width: 1024px;
+    margin: auto;
+}
+
+.footer-link {
+    display: block;
+    list-style-type: none;
+    padding-left: 0px;
+    /*background-color: #4466ff;*/
+    margin-bottom: 15px;
+}
+
+.footer-link li {
+    display: inline-block;
+    margin-left: 0 !important;
+    /* width: 100px; */
+    /*height: 40px;*/
+    line-height: 40px;
+    text-align: center;
+    font-size: 16px;
+    padding-right: 25px;
+    margin: 0px;
+    ;
+}
+
+.footer-link a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.footer-link a:hover {
+    text-decoration: underline;
+}
+
+.footer p {
+    color: white;
+}
+
+.content-home>form {
+    margin-right: 256px;
+    margin-left: 256px;
+    /* border: 2px solid violet; */
+}
+
+.login-form {
+    border: 0px solid violet;
+    font-size: 25px;
+    width: 512px;
+    display: flexbox;
+    /* margin: auto; */
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.login-form>.input {
+    margin: 15px;
+    /* margin-bottom: 30px; */
+    margin-top: 30px;
+    /* padding: 20px; */
+    /* background-color: yellow; */
+}
+
+.login-form>.input>input {
+    width: 475px;
+    height: 50px;
+    margin: 10px;
+    margin-left: 0px;
+    margin-right: 0px;
+    font-size: 25px;
+    /* border-radius: 8px; */
+    padding-left: 5px;
+    border: none;
+    border-bottom: 1px solid grey;
+}
+
+.login-form>.login-btn {
+    margin-bottom: 30px;
+    margin-top: 30px;
+    margin: 15px;
+    display: flex;
+    /* text-align: center; */
+}
+
+.login-form>.login-btn>input {
+    width: 300px;
+    height: 50px;
+    text-align: center;
+    margin: auto;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 6px;
+}
+
+.login-form>.login-btn>input:hover {
+    background-color: gray;
+    color: black;
+}
+
+.login-form>.input-remember {
+    display: flex;
+    margin: 15px;
+    margin-bottom: 10px;
+    /* margin-top: 10px; */
+    font-size: 15px;
+    align-items: center;
+    /* text-align: center; */
+}
+
+.login-form-signup {
+    margin-top: 10px;
+    border: 0px solid violet;
+    font-size: 20px;
+    width: 532px;
+    display: flexbox;
+    /* margin: auto; */
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+.login-form-signup>div>p {
+    margin: 5px;
+    /* background-color: black; */
+}
+
+.login-form>p {
+    margin: 0px;
+}
+
+.login-form .title {
+    font-size: 30px;
+    /* margin-bottom: 5px; */
+    margin: 10px;
+    width: 400px;
+    margin: auto;
+    text-align: center;
+    border-bottom: 2px solid black;
+}
+
+.login-form .input input:focus {
+    outline: none;
+}

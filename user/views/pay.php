@@ -11,11 +11,11 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <style>
         .product .img{
-            width: 100px;
+            width: 50px;
         }
         .product .img img{
-            width: 90px;
-            height: 90px;
+            width: 40px;
+            height: 40px;
             margin: 10px;
         }
         /* td{
@@ -42,19 +42,19 @@
         }
         .btn-pay{
 
-        line-height: 30px;
+            line-height: 30px;
         }
         .btn-pay a{
-
-        text-decoration: none;
-        border: 1px solid black;
-        padding: 3px;
-        margin: px;
-        border-radius: 3px;
-        background-color: cyan;
+            
+            text-decoration: none;
+            border: 1px solid black;
+            padding: 3px;
+            margin: px;
+            border-radius: 3px;
+            background-color: cyan;
         }
         .btn-pay a:hover{
-        background-color: red;
+            background-color: red;
         }
     </style>
 </head>
@@ -85,7 +85,7 @@
                 </div>
                 <div class="cart">
                     <span class="icon-cart">
-                        <a href="#"><i class="fas fa-shopping-cart"></i></a>
+                        <a href="index.php?method=list-cart"><i class="fas fa-shopping-cart"></i></a>
                     </span>
                 </div>
                 <div class="header-profile">
@@ -107,11 +107,12 @@
                     <div><a><img src="../images/image-bg/bg5.jpg"></a></div>
                 </div> -->
             <div class="product">
-                <?php if(isset($_SESSION['cart'])){ ?>
-                <table border="1px" width="100%" cellpadding="0" cellspacing="0">
+                
+                <h3>Products</h3>
+                <table border="1px" width="100%" cellpadding="0" cellspacing="0";>
                     <tr>
                         <td style="width: 40px">STT</td>
-                        <td style="width: 100px">Image</td>
+                        <td style="width: 50px">Image</td>
                         <td style="width: 300px">Name</td>
                         <td style="width: 100px">Amount</td>
                         <td>Price</td>
@@ -148,13 +149,11 @@
                             <div class="btn-del"><a href="index.php?method=delete-cart&id=<?php echo $value['id'];?>">Delete</a></div>
                         </td>
                     </tr>
-                    
-                    <?php } ?>
-                    
-                    <tr>
+                    <?php } ?>  
+                    <!-- <tr>
                         <td colspan="5";> 
                         </td>
-                        <td>
+                        <td style:"width: 100px;" >
                             <?php  
                                 // $total_final=0;
                                 $_SESSION['total'] = 0;
@@ -164,18 +163,62 @@
                                 // print_r($_SESSION['cart']);
                             ?>
                         </td>
-                        <td class="">
-                            <div class="btn-pay"><a href="index.php?method=pay-now">Buy now</a></div>
+                        <td class="btn">
+                            <div class="btn-pay"><a href="index.php?method=pay-now">Pay now</a></div>
                         </td>
-                    </tr>
-                    <?php
-                    }
-                    else{
-                        echo "<h1>Giỏ hàng trống!</h1>";
-                    }                
-                    ?>
+                    </tr> -->
+                   
                 </table>
             </div>
+            <form method="post" action="">
+            <div>
+                <?php  ?>
+                <h3>Address</h3>
+                <div class="">
+                    
+                        <input style="border: 0px;" type="text" name="address" value="<?php if(isset($_SESSION['cart']['address'])){echo $_SESSION['cart']['address'];}?>">
+                        <!-- <input type="submit" name="address-edit" value="Edit"> -->
+                    <!-- <?php if(isset($_POST['payment-method'])){ echo ($_POST['payment-method']==1) ? "checked" : ""; } ?> -->
+                    
+                    <!-- <?php if(isset($_POST['address-edit'])){$_SESSION['cart'][$key]['address']=$_POST['address'];} ?> -->
+                </div>
+            </div>
+            <div>
+                <h3>Payment method</h3>
+                <div class="">
+                    
+                        <input type="radio" name="payment-method" value=0 checked >By cast
+                        <input type="radio" name="payment-method" value=1 >Visa
+                        
+                     
+                    <!-- <?php if(isset($_POST['payment-method-submit'])){$_SESSION['cart']['payment-method']=$_POST['payment-method'];} ?> -->
+                </div>
+            </div>
+            <div>
+                <div>
+                    <p>Total amount of goods: </p>
+                    <span>
+                        <?php
+                            $_SESSION['total'] = 0;
+                            foreach ($_SESSION['cart'] as $key=>$value){ $_SESSION['total'] += $_SESSION['cart'][$key]['price']*$_SESSION['cart'][$key]['amount-session']; }
+                            echo $_SESSION['total'];
+                        ?>
+                    </span>
+                </div>
+                <div>
+                    <p>Total payment: </p>
+                    <span>
+                        <?php
+                            $_SESSION['total-payment'] = 0;
+                            $_SESSION['total-payment'] = $_SESSION['total'];
+                            echo $_SESSION['total-payment'];
+                        ?>
+                    </span>
+                </div>
+                <input type="submit" name="payment" value="Payment">
+            </div>
+            </form>
+            <a href="index.php?method=payment">done</a>
         </div>
         <div class="footer-background">
             <div class="footer">

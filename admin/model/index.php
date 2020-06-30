@@ -1,6 +1,6 @@
 <?php
     // require_once 'libs/connect-db.php';
-    class M_users
+    class M_admin
     {
         public function connect(){        
             $this->serverName = "localhost:3306";
@@ -42,7 +42,6 @@
             $total_record = mysqli_num_rows($query);//tính tổng số bản ghi có trong bảng        
             $total_page=ceil($total_record/$limit);//tính tổng số trang sẽ chia
             return $total_page;
-            
         }
         public function pagination($table,$start,$limit){
             $this->connect();
@@ -102,6 +101,19 @@
                 $result = $row;
             }
             return $result;
+        }
+        public function delete($table,$object,$id)
+        {
+            $this->connect();
+            $sql = "DELETE FROM $table WHERE $object = $id";
+			return mysqli_query($this->con, $sql);
+        }
+        public function edit_user($table,$id,$username,$password,$fullname,$email,$lv)
+        {
+            $this->connect();
+            $sql = "UPDATE $table SET username = '$username', fullname = '$fullname', password = '$password', email = '$email', lv = $lv WHERE id = $id";
+            $query = mysqli_query($this->con, $sql);
+            return $query;
         }
         // public function logout(){
         //     session_destroy();

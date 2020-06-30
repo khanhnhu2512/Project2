@@ -46,10 +46,11 @@
                     if(!empty($_POST['username']) && !empty($_POST['password'])){
                         $username = ($_POST['username']);
                         $password = ($_POST['password']);
+                        // $log="";
                         if ($this->m_users->login($username,$password)) {
                             $user = $_SESSION['user'];
                             if ($user['lv']==1){
-                            header('location:admin/controllers/');
+                            header('location:/Project1/admin/index.php');
                             }
                             else{
                                 header('location:/Project1/user/index.php');
@@ -89,6 +90,7 @@
                     require_once 'website/views/users/login/index.php';
                 break;
                 default:
+                    header('website/home/index.php');
                 break;
             }
 

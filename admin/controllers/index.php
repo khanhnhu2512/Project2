@@ -1,11 +1,11 @@
 <?php
-    require_once "../user/model/index.php";
-    class C_website extends M_users
+    require_once "../admin/model/index.php";
+    class C_website extends M_admin
     {
-        public $m_users;
+        public $m_admin;
         function __construct()
         {
-            $this->m_users = new M_users();
+            $this->admin = new M_admin();
         }
 
         public function control(){
@@ -25,24 +25,37 @@
                     // $product = $this->m_users->getProduct();
                     //*page
                     $table = 'product_iphone';
-                    $total_page = $this->m_users->getPagination($table,$limit);
+                    $total_page = $this->getPagination($table,$limit);
                     if($page>$total_page) $page=$total_page;  
                     $start=($page-1)*$limit;
-                    $product = $this->m_users->pagination($table,$start,$limit);
+                    $product = $this->pagination($table,$start,$limit);
                     
                     //*page
-                    include_once 'views/index.php';
+                    require_once 'views/index.php';
                 break;
-                case('profile'):
-                    require_once 'views/profile.php';          
-                break;
+                
 
                 case('logout'):
                     session_unset();
                     header("location:../index.php");
                 break;
 
-                
+                case('profile'):
+                    require_once 'views/profile.php';          
+                break;
+
+                case('list-user'):
+                    $_SESSION['users'] = $this->getObject("user");                   
+                    require_once ('views/list-user.php');
+                break;
+
+                case('list-product'):
+                    require_once ('views/list-product.php');
+                break;
+
+                case('display'):
+                break;
+
                 case('add-cart'):
                     $id = isset($_GET['id']) ? $_GET['id'] : "";
                     if(!isset($_SESSION['cart'][$id])){
@@ -97,7 +110,7 @@
                     if (isset($_GET['id'])){
                         $id = $_GET['id'];
                     }
-                    $product = $this->m_users->getObject_id($id,$table);
+                    $product = $this->getObject_id($id,$table);
                     include_once 'views/product_details.php';
                 break;
                 
@@ -114,10 +127,10 @@
                         if(isset($_POST['payment-method']) && isset($_POST['address'])){ 
                             $_SESSION['payment-method']=$_POST['payment-method']; 
                             $_SESSION['address']=$_POST['address'];
-                            $add_order = $this->m_users->getEverything_id('order_list','username',$_SESSION['user']['username']);
+                            $add_order = $this->getEverything_id('order_list','username',$_SESSION['user']['username']);
 
                             $this->m_users->addOrder($_SESSION['user']['username'],'order_list');
-                            $add_order_detail=$this->m_users->addOrderDetail('order_detail',$add_order['id_order'],$_SESSION['total-payment'],$_SESSION['address'],$_SESSION['payment-method']);
+                            $add_order_detail=$this->m_admin->addOrderDetail('order_detail',$add_order['id_order'],$_SESSION['total-payment'],$_SESSION['address'],$_SESSION['payment-method']);
                         } 
                         
                         // $_SESSION['address']=$_POST['address'] ;
@@ -136,18 +149,22 @@
                 break;
 
                 
-
-
-                
-                case('delete'):
+                case('edit-user'):
                     if (isset($_GET['id'])){
                         $id = $_GET['id'];
                     }
-                    else{
-                        header("localtion: View/list-nv.php");
+                    $table = ''
+                break;
+
+                
+                case('delete-user'):
+                    if (isset($_GET['id'])){
+                        $id = $_GET['id'];
                     }
-                    $this->model->deleteMember($id);
-                    echo "<p>Succesful!</p>";
+                    $table ='user';
+                    $object = 'id';
+                    $this->delete($table,$object,$id);
+                    include_once 'views/list-user.php';
                 break;
                 default:
                 break;
