@@ -140,8 +140,8 @@
     }
     
     .header-profile div:last-child {
-        width: 20px;
-        margin-left: 60%;
+       /* width: 20px;
+        margin-left: 60%;*/
     }
     
     .icon-profile {
@@ -387,9 +387,9 @@
     .cart .icon-cart {
         position: absolute;
         font-size: 18px;
-        top: 3.5%;
+        /*top: 3.5%;*/
         margin-left: 3px;
-        /* margin-top: -7px; */
+         margin-top: -9px; 
         /* z-index: 1; */
         color: #ffffff;
     }

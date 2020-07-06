@@ -14,6 +14,17 @@
     <link href="../libs/fontawesome-free-5.13.0-web/css/all.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
+<style type="text/css">
+    .cart .icon-cart {
+            position: absolute;
+            font-size: 18px;
+            /*top: 3.5%;*/
+            margin-left: 3px;
+            margin-top: 5px; 
+            /* z-index: 1; */
+            color: #ffffff;
+        }
+</style>
 
 <body>
     <div class="container">

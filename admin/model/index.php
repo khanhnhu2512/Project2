@@ -79,17 +79,13 @@
             // return $result; 
         }
 
-        public function addOrderProduct($table,$id_product,$amount){
+        public function addProduct($table,$name,$image,$price,$amount,$content){
             $this->connect();
-            $sql = "INSERT INTO $table (id_product,amount) VALUES ($id_product,$amount);";
+            $sql = "INSERT INTO $table (name,image,price,amount,content) VALUES ('$name','$image',$price,$amount,'$content');";
             $query = mysqli_query($this->con,$sql);
-            $result = array();
-            if (mysqli_num_rows($query) > 0) {
-                $row = mysqli_fetch_assoc($query);
-                $result = $row;
-            }
-            return $result;
+            return $query;
         }
+
         public function getEverything_id($table,$object,$id)
         {
             $this->connect();
@@ -108,7 +104,7 @@
             $sql = "DELETE FROM $table WHERE $object = $id";
 			return mysqli_query($this->con, $sql);
         }
-        public function edit_user($table,$id,$username,$password,$fullname,$email,$lv)
+        public function editUser($table,$id,$username,$password,$fullname,$email,$lv)
         {
             $this->connect();
             $sql = "UPDATE $table SET username = '$username', fullname = '$fullname', password = '$password', email = '$email', lv = $lv WHERE id = $id";
@@ -121,4 +117,4 @@
         // }
         
     }    
-?>
+?> 

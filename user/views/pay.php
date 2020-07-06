@@ -56,12 +56,24 @@
         .btn-pay a:hover{
             background-color: red;
         }
+        .header-profile div:last-child {
+        width: 0px;
+        margin-left: 0%;
+         }
+        .cart .icon-cart {
+            position: absolute;
+            font-size: 18px;
+            /*top: 3.5%;*/
+            margin-left: 3px;
+            margin-top: 5px; 
+            /* z-index: 1; */
+            color: #ffffff;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <!-- <img src="image/bg4.jpg"> -->
         <div class="header-background">
             <div class="header">
                 <a href="index.php"><h1 class="header-name">N-BUY</h1></a>
@@ -92,22 +104,14 @@
                     <div><?php echo $_SESSION['user']['fullname']; ?></div>
                     <div>
                         <span class="icon-profile" >
-                            <a href="index.php?method=profile"><i class="fas fa-user"></i><a>
+                            <a href="index.php?method=profile"><i class="fas fa-user"></i></a>
                         </span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="content-home">
-            <!-- <?php
-            echo "<pre>";
-            print_r($_SESSION['cart']);
-            ?> -->
-                <!-- <div class="panner">
-                    <div><a><img src="../images/image-bg/bg5.jpg"></a></div>
-                </div> -->
-            <div class="product">
-                
+            <div class="product">               
                 <h3>Products</h3>
                 <table border="1px" width="100%" cellpadding="0" cellspacing="0";>
                     <tr>
@@ -119,9 +123,9 @@
                         <td style="width: 200px">Total</td>
                         <td style="width: 100px"></td>
                     </tr>
-                    
-                    <tr>
                     <?php  $i=0; foreach ($_SESSION['cart'] as $key => $value){ $i++; ?>
+                    <tr>
+                    
                         <td style="width: 40px">
                             <?php echo $i; ?>
                         </td>
@@ -144,54 +148,26 @@
                         <td>
                             <p>$<?php echo $value['price']*$_SESSION['cart'][$key]['amount-session']; ?></p>
                         </td>
-                        <td class="btn">
-                            <!-- <div class="btn-list"><a href="index.php?method=edit-cart&id=<?php echo $value['id'];?>">Edit</a></div> -->
+                        <td class="btn">                          
                             <div class="btn-del"><a href="index.php?method=delete-cart&id=<?php echo $value['id'];?>">Delete</a></div>
                         </td>
-                    </tr>
-                    <?php } ?>  
-                    <!-- <tr>
-                        <td colspan="5";> 
-                        </td>
-                        <td style:"width: 100px;" >
-                            <?php  
-                                // $total_final=0;
-                                $_SESSION['total'] = 0;
-                                foreach ($_SESSION['cart'] as $key=>$value){ $_SESSION['total'] += $_SESSION['cart'][$key]['price']*$_SESSION['cart'][$key]['amount-session']; }
-                                echo "= $".$_SESSION['total'];
-                                // echo "<pre>";
-                                // print_r($_SESSION['cart']);
-                            ?>
-                        </td>
-                        <td class="btn">
-                            <div class="btn-pay"><a href="index.php?method=pay-now">Pay now</a></div>
-                        </td>
-                    </tr> -->
-                   
+                    
+                    </tr>   
+                    <?php } ?>               
                 </table>
             </div>
             <form method="post" action="">
             <div>
-                <?php  ?>
                 <h3>Address</h3>
-                <div class="">
-                    
-                        <input style="border: 0px;" type="text" name="address" value="<?php if(isset($_SESSION['cart']['address'])){echo $_SESSION['cart']['address'];}?>">
-                        <!-- <input type="submit" name="address-edit" value="Edit"> -->
-                    <!-- <?php if(isset($_POST['payment-method'])){ echo ($_POST['payment-method']==1) ? "checked" : ""; } ?> -->
-                    
-                    <!-- <?php if(isset($_POST['address-edit'])){$_SESSION['cart'][$key]['address']=$_POST['address'];} ?> -->
+                <div class="">                   
+                        <input style="border: 0px;" type="text" name="address" value="<?php if(isset($_SESSION['cart']['address'])){echo $_SESSION['cart']['address'];} ?>">                   
                 </div>
             </div>
             <div>
                 <h3>Payment method</h3>
-                <div class="">
-                    
+                <div class="">                    
                         <input type="radio" name="payment-method" value=0 checked >By cast
-                        <input type="radio" name="payment-method" value=1 >Visa
-                        
-                     
-                    <!-- <?php if(isset($_POST['payment-method-submit'])){$_SESSION['cart']['payment-method']=$_POST['payment-method'];} ?> -->
+                        <input type="radio" name="payment-method" value=1 >Visa                    
                 </div>
             </div>
             <div>
@@ -200,7 +176,9 @@
                     <span>
                         <?php
                             $_SESSION['total'] = 0;
-                            foreach ($_SESSION['cart'] as $key=>$value){ $_SESSION['total'] += $_SESSION['cart'][$key]['price']*$_SESSION['cart'][$key]['amount-session']; }
+                            foreach ($_SESSION['cart'] as $key=>$value){ 
+                                $_SESSION['total'] += $_SESSION['cart'][$key]['price']*$_SESSION['cart'][$key]['amount-session']; 
+                            }
                             echo $_SESSION['total'];
                         ?>
                     </span>
@@ -215,10 +193,10 @@
                         ?>
                     </span>
                 </div>
-                <input type="submit" name="payment" value="Payment">
+                <!-- <input type="submit" name="payment" value="Payment"> -->
             </div>
             </form>
-            <a href="index.php?method=payment">done</a>
+            <a name="payment" href="index.php?method=payment">done</a>
         </div>
         <div class="footer-background">
             <div class="footer">
@@ -236,9 +214,7 @@
                 <p>Designed with all the love in the world by KhanhNhu2512.</p>
                 <p>Copyright © 2020 KhanhNhu's N-BUY. All rights reserved.</p>
             </div>
-
         </div>
     </div>
 </body>
-
 </html>

@@ -16,6 +16,8 @@
     <!-- <script src="https://kit.fontawesome.com/b1d0494dab.js" crossorigin="anonymous"></script> -->
     <link href="../libs/fontawesome-free-5.13.0-web/css/all.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap4/css/bootstrap.min.css">
+
 </head>
 
 <body>
@@ -66,14 +68,14 @@
                     <div><h1>Choose your iPhone!</h1></div>
                 </div>
                 <div class="pagination">
-                    <?php $i = 1; ?>
+                    <!-- <?php $i = 1; ?>
                     <a class="left"  href="index.php?page=<?php echo ($i>=1) ? $i-- : $i;?>"><i class="fas fa-caret-left"></i></a>
-                    <a class="right" href="index.php?page=<?php echo $i+=1; ?>"><i class="fas fa-caret-right"></i></a>
-                        <!-- <ul class="page">
+                    <a class="right" href="index.php?page=<?php echo $i+=1; ?>"><i class="fas fa-caret-right"></i></a> -->
+                        <ul class="page">
                             <?php for($i=1;$i<=$total_page;$i++){ ?>
                             <li <?php if($page == $i) echo "class='active'"; ?> ><a href="index.php?page=<?php echo $i ?>"><?php echo $i; ?></a></li>
                             <?php } ?>
-                        </ul> -->
+                        </ul>
                     </div>
                 <div class="content-display">   
                     <?php foreach ($product as $key => $value): ?> 
@@ -83,7 +85,7 @@
                         <p class="product-price">Starting at $<span><?php echo $value['price']; ?></span></p>
                         <div class="icon-add-cart">
                             <span>
-                                <a href="index.php?method=add-cart&id=<?php echo $value['id']; ?>"><i class="fas fa-cart-plus"></i></a>
+                                <a href=""><i class="fas fa-cart-plus"></i></a>
                             </span>
                         </div>
                     </div>
@@ -110,6 +112,8 @@
 
         </div>
     </div>
+    <script type="text/javascript" src="bootstrap4/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>

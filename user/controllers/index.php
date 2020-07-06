@@ -73,14 +73,7 @@
                          
                 break;
                 case('list-cart'): 
-                    // $table = 'product_iphone';
-                    // $id = isset($_GET['id']) ? $_GET['id'] : ""; 
-                    // $product=$this->getObject_id($id,$table);
-                    // $_SESSION['cart']=$product;
-                    // $_SESSION['cart'][3]['name']=$product['name'];
-                    // $_SESSION['cart'][3]['price']=$product['price'];
-                    // $_SESSION['cart'][$id]['image']=$product['image'];
-                    
+
                     include_once 'views/list_cart.php';
                 break;
                 case('delete-cart'):
@@ -111,7 +104,7 @@
                     // echo "<h1>Done</h1>";
                     
                     // if(isset($_POST['payment'])){
-                        if(isset($_POST['payment-method']) && isset($_POST['address'])){ 
+                        if(isset($_POST['payment'])){ 
                             $_SESSION['payment-method']=$_POST['payment-method']; 
                             $_SESSION['address']=$_POST['address'];
                             $add_order = $this->m_users->getEverything_id('order_list','username',$_SESSION['user']['username']);

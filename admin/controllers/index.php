@@ -50,113 +50,55 @@
                 break;
 
                 case('list-product'):
+                    $_SESSION['product-iphone'] = $this->getObject("product_iphone");
                     require_once ('views/list-product.php');
                 break;
 
                 case('display'):
                 break;
-
-                case('add-cart'):
-                    $id = isset($_GET['id']) ? $_GET['id'] : "";
-                    if(!isset($_SESSION['cart'][$id])){
-                        $table = 'product_iphone';
-                        $product=$this->getObject_id($id,$table);
-                        $_SESSION['cart'][$id]=$product;
-                    }
-                    
-                    if(isset($_SESSION['cart'])){
-                            
-                            if(isset($_SESSION['cart'][$id])){
-                                
-                                $_SESSION['cart'][$id]['amount-session']++;
-                                
-                            }
-                            else{
-                                $_SESSION['cart'][$id]['amount-session']=1;
-                                
-                            }
-                            header('location:index.php');
-                        }
-                    else{
-                        // $_SESSION['cart'][$id]['amount-session']=1;
-                        header('location:index.php');
-                        exit();
-                    }
-                        // include_once 'views/index.php';
-                         
-                break;
-                case('list-cart'): 
-                    // $table = 'product_iphone';
-                    // $id = isset($_GET['id']) ? $_GET['id'] : ""; 
-                    // $product=$this->getObject_id($id,$table);
-                    // $_SESSION['cart']=$product;
-                    // $_SESSION['cart'][3]['name']=$product['name'];
-                    // $_SESSION['cart'][3]['price']=$product['price'];
-                    // $_SESSION['cart'][$id]['image']=$product['image'];
-                    
-                    include_once 'views/list_cart.php';
-                break;
-                case('delete-cart'):
-                    $id = isset($_GET['id']) ? $_GET['id'] : "";
-                    if(isset($_SESSION['cart'][$id])){
-                        unset($_SESSION['cart'][$id]);
-                        // echo "xoa";
-                    }
-                    include_once 'views/list_cart.php';
-                break;
-
-                case('detail-iphone'):
-                    $table = 'product_iphone';
-                    if (isset($_GET['id'])){
-                        $id = $_GET['id'];
-                    }
-                    $product = $this->getObject_id($id,$table);
-                    include_once 'views/product_details.php';
-                break;
-                
-                
-
-                case('pay-now'):
-                
-                    include_once 'views/pay.php';
-                break;
-                case('payment'):
-                    // echo "<h1>Done</h1>";
-                    
-                    // if(isset($_POST['payment'])){
-                        if(isset($_POST['payment-method']) && isset($_POST['address'])){ 
-                            $_SESSION['payment-method']=$_POST['payment-method']; 
-                            $_SESSION['address']=$_POST['address'];
-                            $add_order = $this->getEverything_id('order_list','username',$_SESSION['user']['username']);
-
-                            $this->m_users->addOrder($_SESSION['user']['username'],'order_list');
-                            $add_order_detail=$this->m_admin->addOrderDetail('order_detail',$add_order['id_order'],$_SESSION['total-payment'],$_SESSION['address'],$_SESSION['payment-method']);
-                        } 
-                        
-                        // $_SESSION['address']=$_POST['address'] ;
-                        
-                        // echo $_SESSION['user']['username'];
-                        // $add_order = $this->m_users->getEverything_id('order_list','username',$_SESSION['user']['username']);
-
-                        // $this->m_users->addOrder($_SESSION['user']['username'],'order_list');
-                        // $add_order_detail=$this->m_users->addOrderDetail('order_detail',$add_order['id_order'],$_SESSION['total-payment'],$_SESSION['address'],$_SESSION['payment-method']);
-                        // echo "done";
-                        // echo "<pre>";
-                        // print_r($add_order);
-                        // print_r($this->m_users->addOrder($_SESSION['user']['username'],'order_list'));
-                    // }
-                    include_once 'views/pay.php';
-                break;
-
-                
+               
                 case('edit-user'):
                     if (isset($_GET['id'])){
                         $id = $_GET['id'];
                     }
-                    $table = ''
+                    $table = 'user';
+                    $object = 'id';
+                    $user = $this->getEverything_id($table,$object,$id);
+                    if (isset($_POST['update'])){
+                        $fullname = $_POST['fullname'];
+                        $username = $_POST['username'];
+                        $password = $_POST['password'];
+                        $email = $_POST['email'];
+                        $lv = $_POST['lv'];
+                        $this->editUser($table,$id,$username,$password,$fullname,$email,$lv);
+                        $log = "Done!";
+                    }
+                    
+                    
+                    include_once 'views/edit-user.php';
                 break;
 
-                
+                case('add-product'):
+                    $log = null;
+                    if (isset($_POST['add'])){
+                        if(!empty($_POST['name']) && !empty($_POST['image']) && !empty($_POST['price']) && !empty($_POST['amount']) && !empty($_POST['content'])){
+                            $table = 'product_iphone';
+                            $name = $_POST['name'];
+                            $image = $_POST['image'];
+                            $price = $_POST['price'];
+                            $amount = $_POST['amount'];
+                            $content = $_POST['content'];
+                            $this->addProduct($table,$name,$image,$price,$amount,$content);
+                            $log="<p>Succesful!</p>";
+                        }
+                        else{
+                            $log="<p>Error!</p>";
+                        }
+                    }
+                    include_once 'views/add-product.php';
+                         
+                break;
+
                 case('delete-user'):
                     if (isset($_GET['id'])){
                         $id = $_GET['id'];

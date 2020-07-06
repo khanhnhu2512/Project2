@@ -501,15 +501,6 @@
         margin-top: 20px;
     }
     
-    .product-display-detail .img {
-        width: 500px;
-        margin: auto;
-    }
-    
-    .product-display-detail .img img {
-        width: 100%;
-    }
-    
     .product-display-detail h1 {
         margin-top: 40px;
         font-size: 60px;

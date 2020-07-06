@@ -56,6 +56,15 @@
         .btn-pay a:hover{
         background-color: red;
         }
+        .cart .icon-cart {
+            position: absolute;
+            font-size: 18px;
+            /*top: 3.5%;*/
+            margin-left: 3px;
+            margin-top: -8px; 
+            /* z-index: 1; */
+            color: #ffffff;
+        }
     </style>
 </head>
 
