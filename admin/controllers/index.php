@@ -78,13 +78,67 @@
                     include_once 'views/edit-user.php';
                 break;
 
-                case('add-product'):
+                case('edit-product'):
                     $log = null;
-                    if (isset($_POST['add'])){
-                        if(!empty($_POST['name']) && !empty($_POST['image']) && !empty($_POST['price']) && !empty($_POST['amount']) && !empty($_POST['content'])){
+                    if (isset($_GET['id'])){
+                        $id = $_GET['id'];
+                    }
+                    $table = 'product_iphone';
+                    $object = 'id';
+                    $product = $this->getEverything_id($table,$object,$id);
+                    
+                    // print_r($product);
+                    if (isset($_POST['update-img'])){
+                        $target_dir = "../images/image-product/";
+                        $_SESSION['image-upload'] = $_FILES["fileToUpload"];
+                        $target_file = $target_dir . basename($_FILES['fileToUpload']["name"]);
+                        $uploadOk = 1;
+                        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+                        $progress = move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
+                    }
+                    if (isset($_POST['edit'])){
+                        if(!empty($_POST['name']) && !empty($_POST['price']) && !empty($_POST['amount']) && !empty($_POST['content'])){
                             $table = 'product_iphone';
                             $name = $_POST['name'];
-                            $image = $_POST['image'];
+                            $image = (isset($_SESSION['image'])) ? $_SESSION['image-upload']['name'] : $product['image'];
+                            $price = $_POST['price'];
+                            $amount = $_POST['amount'];
+                            $content = $_POST['content'];
+                            $this->editProduct($table,$id,$name,$image,$price,$amount,$content);
+                            $log="<p>Succesful!</p>";
+                        }
+                        else{
+                            $log="<p>Error!</p>";
+                        }
+                    }
+                    include_once 'views/edit-product.php';
+                break;
+
+                case('add-product'):
+                    $log = null;
+                    
+                    if (isset($_POST['update-img'])){
+                        $target_dir = "../images/image-product/";
+                        $_SESSION['image-upload'] = $_FILES["fileToUpload"];
+                        $target_file = $target_dir . basename($_FILES['fileToUpload']["name"]);
+                        $uploadOk = 1;
+                        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+                        $progress = move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
+                        // if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                        //     echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+                        //   } else {
+                        //     echo "Sorry, there was an error uploading your file.";
+                        //   }
+                    }
+
+                    // if(isset($_SESSION['image-upload'])){echo " Test".$_SESSION['image-upload']['name'];}
+                    if (isset($_POST['add'])){
+                        if(!empty($_POST['name']) && !empty($_POST['price']) && !empty($_POST['amount']) && !empty($_POST['content'])){
+                            $table = 'product_iphone';
+                            $name = $_POST['name'];
+                            $image = $_SESSION['image-upload']['name'];
+                            // echo " Test2 ".$image2;
+                            // $image = $_FILES["fileToUpload"]["name"];
                             $price = $_POST['price'];
                             $amount = $_POST['amount'];
                             $content = $_POST['content'];

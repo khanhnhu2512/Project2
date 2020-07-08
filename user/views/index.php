@@ -77,15 +77,15 @@
                     <div><h1>Choose your iPhone!</h1></div>
                 </div>
                 <div class="pagination">
-                    <?php $i = 1; ?>
+                    <!-- <?php $i = 1; ?>
                     <a class="left"  href="index.php?page=<?php echo ($i>=1) ? $i-- : $i;?>"><i class="fas fa-caret-left"></i></a>
-                    <a class="right" href="index.php?page=<?php echo $i+=1; ?>"><i class="fas fa-caret-right"></i></a>
-                        <!-- <ul class="page">
+                    <a class="right" href="index.php?page=<?php echo $i+=1; ?>"><i class="fas fa-caret-right"></i></a> -->
+                        <ul class="page">
                             <?php for($i=1;$i<=$total_page;$i++){ ?>
                             <li <?php if($page == $i) echo "class='active'"; ?> ><a href="index.php?page=<?php echo $i ?>"><?php echo $i; ?></a></li>
                             <?php } ?>
-                        </ul> -->
-                    </div>
+                        </ul>
+                </div>
                 <div class="content-display">   
                     <?php foreach ($product as $key => $value): ?> 
                     <div class="product-display">

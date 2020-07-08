@@ -56,33 +56,9 @@
             }
             return $result;
         }
-        public function addOrder($username,$table){
+        public function getOrderId($table,$username){
             $this->connect();
-            $sql = "INSERT INTO $table (username,status) VALUES ('$username',0);";
-            $query = mysqli_query($this->con,$sql);
-            // $result = array();
-            // if (mysqli_num_rows($query) > 0) {
-            //     $row = mysqli_fetch_assoc($query);
-            //     $result = $row;
-            // }
-            // return $result;
-        }
-        
-        public function addOrderDetail($table,$id_order,$price_total,$address,$payment_method){
-            $this->connect();
-            $sql = "INSERT INTO $table (id_order,id_product,price_total,address,payment_method) VALUES ($id_order,$id_order,$price_total,'$address',$payment_method);";
-            $query = mysqli_query($this->con,$sql);
-            // $result = array();
-            // if (mysqli_num_rows($query) > 0) {
-            //     $row = mysqli_fetch_assoc($query);
-            //     $result = $row;
-            // }
-            // return $result; 
-        }
-
-        public function addOrderProduct($table,$id_product,$amount){
-            $this->connect();
-            $sql = "INSERT INTO $table (id_product,amount) VALUES ($id_product,$amount);";
+            $sql = "SELECT * FROM $table WHERE username = '$username' ORDER BY id_order DESC";
             $query = mysqli_query($this->con,$sql);
             $result = array();
             if (mysqli_num_rows($query) > 0) {
@@ -90,7 +66,33 @@
                 $result = $row;
             }
             return $result;
+            
         }
+        public function addOrderList($table,$username,$total_price,$address,$payment_method){
+            $this->connect();
+            $sql = "INSERT INTO $table (username,status,total_price,address,payment_method) VALUES ('$username',0,$total_price,'$address',$payment_method);";
+            $query = mysqli_query($this->con,$sql);
+            return $query;
+        }
+        
+        public function addOrderDetail($table,$id_order,$id_product,$price,$amount){
+            $this->connect();
+            $sql = "INSERT INTO $table (id_order,id_product,price,amount) VALUES ($id_order,$id_product,$price,$amount);";
+            $query = mysqli_query($this->con,$sql);
+            return $query;
+        }
+
+        // public function addOrderProduct($table,$id_product,$amount){
+        //     $this->connect();
+        //     $sql = "INSERT INTO $table (id_product,amount) VALUES ($id_product,$amount);";
+        //     $query = mysqli_query($this->con,$sql);
+        //     $result = array();
+        //     if (mysqli_num_rows($query) > 0) {
+        //         $row = mysqli_fetch_assoc($query);
+        //         $result = $row;
+        //     }
+        //     return $result;
+        // }
         public function getEverything_id($table,$object,$id)
         {
             $this->connect();

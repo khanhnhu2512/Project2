@@ -76,7 +76,7 @@
                             <li <?php if($page == $i) echo "class='active'"; ?> ><a href="index.php?page=<?php echo $i ?>"><?php echo $i; ?></a></li>
                             <?php } ?>
                         </ul>
-                    </div>
+                </div>
                 <div class="content-display">   
                     <?php foreach ($product as $key => $value): ?> 
                     <div class="product-display">

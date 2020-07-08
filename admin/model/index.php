@@ -89,7 +89,7 @@
         public function getEverything_id($table,$object,$id)
         {
             $this->connect();
-            $sql = "SELECT * from $table WHERE $object = '$id'";
+            $sql = "SELECT * from $table WHERE $object = $id";
             $query = mysqli_query($this->con, $sql);
             $result = array();
             if (mysqli_num_rows($query) > 0) {
@@ -108,6 +108,13 @@
         {
             $this->connect();
             $sql = "UPDATE $table SET username = '$username', fullname = '$fullname', password = '$password', email = '$email', lv = $lv WHERE id = $id";
+            $query = mysqli_query($this->con, $sql);
+            return $query;
+        }
+        public function editProduct($table,$id,$name,$image,$price,$amount,$content)
+        {
+            $this->connect();
+            $sql = "UPDATE $table SET name = '$name', image = '$image', price = $price, amount = $amount, content = '$content' WHERE id = $id";
             $query = mysqli_query($this->con, $sql);
             return $query;
         }

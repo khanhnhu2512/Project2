@@ -80,6 +80,15 @@
             width: 50%;
             text-align: right;
         }
+        .img {
+            width: 768px;
+            height: auto;
+            margin: auto;
+        }
+        .img img{
+            width: auto;
+            height: auto;
+        }
     </style>
 </head>
 
@@ -134,6 +143,10 @@
             </div>    
             <div class="content-display-detail">
                 <div class="product-display-detail" style="text-align: left;" >
+                <div class="img">
+                    <img src="../images/image-product/<?php echo (isset($_POST['update-img'])) ? $_SESSION['image-upload']['name'] : $product['image']; ?>" alt="">
+                </div>
+                
                 <form action="" method="post" enctype="multipart/form-data">
                             Select image to upload:
                             <input type="file" name="fileToUpload" id="fileToUpload">
@@ -142,12 +155,12 @@
                 <form action="" method="post">   
                     
                         <?php if(isset($_POST['add'])){echo "<h3>".$log."</h3>";} ?>
-                        <label for="name">Product Name</label><input type="text" id="name" name="name" value="<?php echo (isset($_POST['add'])) ? $_POST['name'] : ""; ?>" ><br>
+                        <label for="name">Product Name</label><input type="text" id="name" name="name" value="<?php echo (isset($_POST['edit'])) ? $_POST['name'] : $product['name']; ?>" ><br>
                         
-                        <label for="price">Price</label><input type="text" id="price" name="price" value="<?php echo (isset($_POST['add'])) ? $_POST['price'] : ""; ?>"><br>
-                        <label for="amount" >Quantity</label><input type="number" id="amount" name="amount" value="<?php echo (isset($_POST['add'])) ? $_POST['amount'] : ""; ?>"><br>
-                        <label for="content">Content</label><input type="text" id="content" name="content" value="<?php echo (isset($_POST['add'])) ? $_POST['content'] : ""; ?>" ><br>
-                        <input type="submit" name="add" value="Add">  
+                        <label for="price">Price</label><input type="text" id="price" name="price" value="<?php echo (isset($_POST['edit'])) ? $_POST['price'] : $product['price']; ?>"><br>
+                        <label for="amount" >Quantity</label><input type="number" id="amount" name="amount" value="<?php echo (isset($_POST['edit'])) ? $_POST['amount'] : $product['amount']; ?>"><br>
+                        <label for="content">Content</label><input type="text" id="content" name="content" value="<?php echo (isset($_POST['edit'])) ? $_POST['content'] : $product['content']; ?>" ><br>
+                        <input type="submit" name="edit" value="Save">  
                     
                 </form>
                 </div>

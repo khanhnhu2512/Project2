@@ -111,6 +111,7 @@
             </div>
         </div>
         <div class="content-home">
+            <?php echo (isset($log)) ? "<h2>.$log.</h2>" : ""; ?>
             <div class="product">               
                 <h3>Products</h3>
                 <table border="1px" width="100%" cellpadding="0" cellspacing="0";>
@@ -193,10 +194,12 @@
                         ?>
                     </span>
                 </div>
+                <input type="submit" name="payment" value="Done" >
                 <!-- <input type="submit" name="payment" value="Payment"> -->
             </div>
             </form>
-            <a name="payment" href="index.php?method=payment">done</a>
+            
+            <!-- <a name="payment" href="#">done</a> -->
         </div>
         <div class="footer-background">
             <div class="footer">
