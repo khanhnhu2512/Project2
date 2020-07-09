@@ -198,7 +198,6 @@
                 <!-- <input type="submit" name="payment" value="Payment"> -->
             </div>
             </form>
-            
             <!-- <a name="payment" href="#">done</a> -->
         </div>
         <div class="footer-background">

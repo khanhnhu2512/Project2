@@ -58,7 +58,7 @@
         }
         public function getOrderId($table,$username){
             $this->connect();
-            $sql = "SELECT * FROM $table WHERE username = '$username' ORDER BY id_order DESC";
+            $sql = "SELECT * FROM $table ORDER BY id_order DESC";
             $query = mysqli_query($this->con,$sql);
             $result = array();
             if (mysqli_num_rows($query) > 0) {
@@ -77,7 +77,7 @@
         
         public function addOrderDetail($table,$id_order,$id_product,$price,$amount){
             $this->connect();
-            $sql = "INSERT INTO $table (id_order,id_product,price,amount) VALUES ($id_order,$id_product,$price,$amount);";
+            $sql = "INSERT INTO $table (id_order,id_product,price,amount) VALUES ($id_order,$id_product,$price,$amount)";
             $query = mysqli_query($this->con,$sql);
             return $query;
         }

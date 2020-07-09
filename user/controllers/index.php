@@ -100,51 +100,49 @@
                     if(isset($_POST['payment'])){ 
                         $_SESSION['payment-method']=$_POST['payment-method']; 
                         $_SESSION['address']=$_POST['address'];
-                        // $add_order = $this->m_users->getEverything_id('order_list','username',$_SESSION['user']['username']);
                         $add_order_list = $this->m_users->addOrderList('order_list',$_SESSION['user']['username'],$_SESSION['total-payment'],$_SESSION['address'],$_SESSION['payment-method']);
                         if($add_order_list){$log = "Successful!";}else{$log = "Error!";}
                         $order_id = $this->m_users->getOrderId('order_list',$_SESSION['user']['username']);
-                        // echo  "oder_id ".$order_id['id_order'];
-                        // $order = $this->m_users->getEverything_id('order_list','username',$_SESSION['user']['username']); //van de o day: function nay chi lay duoc 1 gia tri duy nhat
                         $i = 0;
                         $count = count(array_keys($_SESSION['cart']));
-                        fo
-                        // echo "count ".$count;
-                        // foreach ($_SESSION['cart'] as $key => $value){  //giai phap la function addOrderList se tra ve gia tri cua $order_id luon
-                        //     $this->m_users->addOrderDetail('order_detail',$order_id['id_order'],$key,$value['price'],$value['amount-session']);
-                        //     echo $i;
-                        //     $i++;
-                            
-                        //     echo "key ".$key;
-                        //     // echo " order ".$order['id_order'];
-                        //     // echo " id_product ".
-                        // }
+                        
+                        foreach ($_SESSION['cart'] as $key => $value){  //giai phap la function addOrderList se tra ve gia tri cua $order_id luon
+                            $add_order_detail=$this->m_users->addOrderDetail('order_detail',$order_id['id_order'],$i,$value['price'],$value['amount-session']);
+                            // echo "i= ".$i;
+                            // echo ";key = ".$key;
+                            // echo ";idorder = ".$order_id['id_order'];
+                            // echo ";price = ".$value['price']; 
+                            // $add_order_list = $this->m_users->addOrderList('order_list',$_SESSION['user']['username'],$i,$_SESSION['address'],$_SESSION['payment-method']);
+                            $i++;
+
+
+                        }
                     } 
                     include_once 'views/pay.php';
                 break;
-                case('payment'):
-                    // echo "<h1>Done</h1>";
-                    // echo "<pre>";
-                    // print_r($_SESSION['cart']);
-                    // $rows = array_count_keys($_SESSION['cart']);
-                    // echo $rows;
-                    // if(isset($_POST['payment'])){
+                // case('payment'):
+                //     // echo "<h1>Done</h1>";
+                //     // echo "<pre>";
+                //     // print_r($_SESSION['cart']);
+                //     // $rows = array_count_keys($_SESSION['cart']);
+                //     // echo $rows;
+                //     // if(isset($_POST['payment'])){
                         
                         
-                        // $_SESSION['address']=$_POST['address'] ;
+                //         // $_SESSION['address']=$_POST['address'] ;
                         
-                        // echo $_SESSION['user']['username'];
-                        // $add_order = $this->m_users->getEverything_id('order_list','username',$_SESSION['user']['username']);
+                //         // echo $_SESSION['user']['username'];
+                //         // $add_order = $this->m_users->getEverything_id('order_list','username',$_SESSION['user']['username']);
 
-                        // $this->m_users->addOrder($_SESSION['user']['username'],'order_list');
-                        // $add_order_detail=$this->m_users->addOrderDetail('order_detail',$add_order['id_order'],$_SESSION['total-payment'],$_SESSION['address'],$_SESSION['payment-method']);
-                        // echo "done";
-                        // echo "<pre>";
-                        // print_r($add_order);
-                        // print_r($this->m_users->addOrder($_SESSION['user']['username'],'order_list'));
-                    // }
-                    include_once 'views/pay.php';
-                break;
+                //         // $this->m_users->addOrder($_SESSION['user']['username'],'order_list');
+                //         // $add_order_detail=$this->m_users->addOrderDetail('order_detail',$add_order['id_order'],$_SESSION['total-payment'],$_SESSION['address'],$_SESSION['payment-method']);
+                //         // echo "done";
+                //         // echo "<pre>";
+                //         // print_r($add_order);
+                //         // print_r($this->m_users->addOrder($_SESSION['user']['username'],'order_list'));
+                //     // }
+                //     include_once 'views/pay.php';
+                // break;
 
                 
 
