@@ -118,6 +118,13 @@
             $query = mysqli_query($this->con, $sql);
             return $query;
         }
+        public function acceptOrder($id)
+        {
+            $this->connect();
+            $sql = "UPDATE order_list SET status = 1 WHERE id_order = $id";
+            $query = mysqli_query($this->con, $sql);
+            return $query;
+        }
         // public function logout(){
         //     session_destroy();
         //     header('location:../index.php'); 

@@ -146,7 +146,6 @@
                 <div class="img">
                     <img src="../images/image-product/<?php echo (isset($_POST['update-img'])) ? $_SESSION['image-upload']['name'] : $product['image']; ?>" alt="">
                 </div>
-                
                 <form action="" method="post" enctype="multipart/form-data">
                             Select image to upload:
                             <input type="file" name="fileToUpload" id="fileToUpload">

@@ -72,17 +72,6 @@
         .product-display-detail .btn-update a:hover{
             background-color: green;
         }
-        .img{
-            width: 100px;
-        }
-        .product-display-detail .img {
-            width: 100px;
-            margin: auto;
-        }
-        .img img{
-            width: 95px;
-            margin: 5px;
-        }
     </style>
 </head>
 
@@ -104,7 +93,17 @@
                         <a href="contact.php">Contact</a>
                     </li>
                 </ul>
-                
+                <!-- <div class="input-search">
+                    <span class="icon-search">
+                        <a href=""><i class="fas fa-search"></i></a>
+                    </span>
+                    <input placeholder="Search..." type="search" name="search">
+                </div> -->
+                <!-- <div class="cart">
+                    <span class="icon-cart">
+                        <a href="index.php?method=list-cart"><i class="fas fa-shopping-cart"></i></a>
+                    </span>
+                </div> -->
                 <div class="header-profile">
                     <!-- <div><?php echo $_SESSION['user']['fullname']; ?></div> -->
                     <div>
@@ -138,52 +137,58 @@
             <div class="content-display-detail">   
                 <div class="product-display-detail">
                     <div class="product">
-                        <h3>Iphone</h3>
+                    <?php if(isset($_SESSION['users'])){ ?>
                         <table border="1px" width="100%" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td style="width: 40px">STT</td>
-                                <td style="width: 100px">Image</td>
-                                <td style="width: 300px">Name</td>
-                                <td style="width: 100px">Amount</td>
-                                <td>Price</td>
-                                <td style="width: 100px"></td>
+                                <td style="width: 100px">Username</td>
+                                <td style="width: 100px">Total price</td>
+                                <td style="width: 300px">Address</td>
+                                <td style="width: 100px">Payment method</td>
+                                <td style="width: 100px">Status</td>
+                                <td></td>
                             </tr>
                             
                             <tr>
-                            <?php  $i=0; foreach ($_SESSION['product-iphone'] as $key => $value){ $i++; ?>
-                                <a href="">
+                            <?php  $i=0; foreach ($_SESSION['order'] as $key => $value){ $i++; ?>
+                            <a href="#">
                                 <td style="width: 40px">
                                     <?php echo $i; ?>
                                 </td>
-                                <td class="img">
-                                    <img  src="../images/image-product/<?php echo $value['image'];?>">
+                                <td class="">
+                                    <?php echo ($value['username']); ?>
                                 </td>
-                                <td style="width: 300px">
-                                    <?php echo ($value['name']); ?>
+                                <td style="">
+                                    <?php echo ($value['total_price']); ?>
                                 </td>
-                                <td style="width: 100px">
-                                    <?php echo ($value['amount']); ?>
+                                <td style="">
+                                    <?php echo ($value['address']); ?>
                                 </td>
                                 <td>
-                                    <p>$<?php echo $value['price']; ?></p>
+                                    <?php echo ($value['payment_method'] == 0) ? "By cast" : "Visa"; ?>
+                                </td>
+                                <td>
+                                    <?php echo ($value['status']==0) ? 'Pending' :'Complete'; ?>
                                 </td>
                                 </a>
                                 <td class="btn">
-                                    <div class="btn-list"><a href="index.php?method=edit-product&id=<?php echo $value['id'];?>">Edit</a></div>
-                                    <div class="btn-del"><a href="index.php?method=delete-product&id=<?php echo $value['id'];?>">Delete</a></div>
+                                    <?php echo ($value['status']==0) ? "<div class='btn-block'><a href='index.php?method=list-order&action=accept-order&id=".$value['id_order']."'>Accept</a></div>" : ""; ?>
+                                    <div class="btn-block"><a href="index.php?method=list-order&action=delete-order&id=<?php echo $value['id_order'];?>">Delete</a></div>
                                 </td>
                             </tr>
                             
                             <?php } ?>
                             
-                            <tr>
-                                <td class="" colspan="7">
-                                    <div class="btn-pay"><a href="index.php?method=add-product">Add product</a></div>
-                                </td>
-                            </tr>
-                            <?php echo (isset($logDelete)) ? "<script type='text/javascript'>alert('Deleted!');</script>" : ""; ?>
+                            
+                            <?php
+                            }
+                            else{
+                                echo "<h1>Danh sách trống!</h1>";
+                            }                
+                            ?>
                         </table>
-                    </div>                  
+                </div>
+                    
                 </div>
             </div>
             

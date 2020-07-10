@@ -49,6 +49,25 @@
                     require_once ('views/list-user.php');
                 break;
 
+                case('list-order'):
+                    $_SESSION['order'] = $this->getObject("order_list");
+                    if (isset($_GET['action'])){
+                        $action = $_GET['action'];
+                        $id = $_GET['id'];
+                        if ($action == 'accept-order'){
+                            $this->acceptOrder($id);
+                            header('location:index.php?method=list-order');
+                        }
+                        if ($action == 'delete-order'){
+
+                            $this->delete('order_list','id_order',$id);
+                            $this->delete('order_detail','id_order',$id);
+                            header('location:index.php?method=list-order');
+                        }
+                    }               
+                    require_once ('views/list-order.php');
+                break;
+
                 case('list-product'):
                     $_SESSION['product-iphone'] = $this->getObject("product_iphone");
                     require_once ('views/list-product.php');
@@ -72,6 +91,7 @@
                         $lv = $_POST['lv'];
                         $this->editUser($table,$id,$username,$password,$fullname,$email,$lv);
                         $log = "Done!";
+                        $user['lv'] = $lv;
                     }
                     
                     
@@ -95,17 +115,19 @@
                         $uploadOk = 1;
                         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
                         $progress = move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
+                        // $product['image'] = $_SESSION['image-upload']['name'];
                     }
                     if (isset($_POST['edit'])){
                         if(!empty($_POST['name']) && !empty($_POST['price']) && !empty($_POST['amount']) && !empty($_POST['content'])){
                             $table = 'product_iphone';
                             $name = $_POST['name'];
-                            $image = (isset($_SESSION['image'])) ? $_SESSION['image-upload']['name'] : $product['image'];
+                            $image = (isset($_SESSION['image-upload'])) ? $_SESSION['image-upload']['name'] : $product['image'];
                             $price = $_POST['price'];
                             $amount = $_POST['amount'];
                             $content = $_POST['content'];
                             $this->editProduct($table,$id,$name,$image,$price,$amount,$content);
                             $log="<p>Succesful!</p>";
+                            $product['image'] = $image; 
                         }
                         else{
                             $log="<p>Error!</p>";
@@ -161,6 +183,19 @@
                     $object = 'id';
                     $this->delete($table,$object,$id);
                     include_once 'views/list-user.php';
+                break;
+                case('delete-product'):
+                    if (isset($_GET['id'])){
+                        $id = $_GET['id'];
+                    }
+                    $table ='product_iphone';
+                    $object = 'id';
+                    $this->delete($table,$object,$id);
+                    $logDelete = true;
+                    header('location:index.php?method=list-product');
+                    // echo "<script> alert('Deleted!'); </script>";
+                    include_once 'views/list-product.php';
+                    
                 break;
                 default:
                 break;

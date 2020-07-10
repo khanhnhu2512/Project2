@@ -107,13 +107,13 @@
                         $count = count(array_keys($_SESSION['cart']));
                         
                         foreach ($_SESSION['cart'] as $key => $value){  //giai phap la function addOrderList se tra ve gia tri cua $order_id luon
-                            $add_order_detail=$this->m_users->addOrderDetail('order_detail',$order_id['id_order'],$i,$value['price'],$value['amount-session']);
+                            $add_order_detail=$this->m_users->addOrderDetail('order_detail',$order_id['id_order'],$key,$value['price'],$value['amount-session']);
                             // echo "i= ".$i;
                             // echo ";key = ".$key;
                             // echo ";idorder = ".$order_id['id_order'];
                             // echo ";price = ".$value['price']; 
                             // $add_order_list = $this->m_users->addOrderList('order_list',$_SESSION['user']['username'],$i,$_SESSION['address'],$_SESSION['payment-method']);
-                            $i++;
+                            // $i++;
 
 
                         }
