@@ -67,6 +67,16 @@
                     }               
                     require_once ('views/list-order.php');
                 break;
+                case('detail-order'):
+                    if (isset($_GET['id'])){
+                        $id = $_GET['id'];
+                    }
+                    $table = 'order_detail';
+                    $object = 'id_order';
+                    $_SESSION['order-detail'] = $this->getEverything_id($table,$object,$id);
+                    $_SESSION['product-iphone'] = $this->getObject("product_iphone");
+                    require_once ('views/detail-order.php');
+                break;
 
                 case('list-product'):
                     $_SESSION['product-iphone'] = $this->getObject("product_iphone");

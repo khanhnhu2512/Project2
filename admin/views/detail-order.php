@@ -138,55 +138,46 @@
                 <div class="product-display-detail">
                     <div class="product">
                     <?php if(isset($_SESSION['users'])){ ?>
-                        <table border="1px" width="100%" cellpadding="0" cellspacing="0">
+                        <!-- <pre>
+                            <?php print_r($_SESSION['order']); ?>
+                        </pre> -->
+                        <h4>#<?php echo $id; $subtotal = 0;?></h4>
+                        <table border="1px" width="100%" cellpadding="0" cellspacing="0";>
                             <tr>
                                 <td style="width: 40px">STT</td>
-                                <td style="width: 100px">Username</td>
-                                <td style="width: 100px">Total price</td>
-                                <td style="width: 300px">Address</td>
-                                <td style="width: 100px">Payment method</td>
-                                <td style="width: 100px">Status</td>
-                                <td></td>
+                                <td style="width: 50px">Image</td>
+                                <td style="width: 300px">Name</td>
+                                <td style="width: 100px">Amount</td>
+                                <td style="width: 100px">Price</td>
+                                <td style="width: 200px">Total</td>
                             </tr>
-                            
-                            <tr>
-                            <?php  $i=0; foreach ($_SESSION['order'] as $key => $value){ $i++; ?>
-                            <a href="#">
+                            <?php  $i=0; foreach ($_SESSION['order-detail'] as $key => $value){ $i++; ?>
+                            <tr>                      
                                 <td style="width: 40px">
                                     <?php echo $i; ?>
                                 </td>
-                                <td class="">
-                                    <?php echo ($value['username']); ?>
+                                <td class="img">
+                                    <img style="width: 50px; height: auto;"  src="../images/image-product/<?php echo $_SESSION['product-iphone'][$value['id_product']]['image'];?>">
                                 </td>
-                                <td style="">
-                                    <?php echo ($value['total_price']); ?>
+                                <td style="width: 300px">
+                                    <?php echo $_SESSION['product-iphone'][$value['id_product']]['name']; ?>
                                 </td>
-                                <td style="">
-                                    <?php echo ($value['address']); ?>
-                                </td>
-                                <td>
-                                    <?php echo ($value['payment_method'] == 0) ? "By cast" : "Visa"; ?>
+                                <td style="width: 100px">    
+                                    <?php echo ($value['amount']); ?>
                                 </td>
                                 <td>
-                                    <?php echo ($value['status']==0) ? 'Pending' :'Complete'; ?>
+                                    <p>$<?php echo $value['price']; ?></p>
                                 </td>
-                                </a>
-                                <td class="btn">
-                                    <?php echo ($value['status']==0) ? "<div class='btn-block'><a href='index.php?method=list-order&action=accept-order&id=".$value['id_order']."'>Accept</a></div>" : ""; ?>
-                                    <div class="btn-block"><a href="index.php?method=list-order&action=delete-order&id=<?php echo $value['id_order'];?>">Delete</a></div>
+                                <td>
+                                    <p>$<?php echo $value['price']*$value['amount']; $subtotal += $value['price']*$value['amount']; ?></p>
                                 </td>
-                            </tr>
-                            
+                            </tr>   
                             <?php } ?>
-                            
-                            
-                            <?php
-                            }
-                            else{
-                                echo "<h1>Danh sách trống!</h1>";
-                            }                
-                            ?>
+                            <tr>
+                                <td>Subtotal: <?php echo $subtotal; ?></td>
+                            </tr>               
                         </table>
+                    <?php } ?>
                 </div>
                     
                 </div>

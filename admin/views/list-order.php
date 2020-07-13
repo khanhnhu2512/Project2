@@ -147,11 +147,13 @@
                                 <td style="width: 100px">Payment method</td>
                                 <td style="width: 100px">Status</td>
                                 <td></td>
+                                <td></td>
                             </tr>
-                            
-                            <tr>
                             <?php  $i=0; foreach ($_SESSION['order'] as $key => $value){ $i++; ?>
                             <a href="#">
+                            <tr>
+                            
+                            
                                 <td style="width: 40px">
                                     <?php echo $i; ?>
                                 </td>
@@ -170,13 +172,16 @@
                                 <td>
                                     <?php echo ($value['status']==0) ? 'Pending' :'Complete'; ?>
                                 </td>
-                                </a>
+                                
                                 <td class="btn">
                                     <?php echo ($value['status']==0) ? "<div class='btn-block'><a href='index.php?method=list-order&action=accept-order&id=".$value['id_order']."'>Accept</a></div>" : ""; ?>
                                     <div class="btn-block"><a href="index.php?method=list-order&action=delete-order&id=<?php echo $value['id_order'];?>">Delete</a></div>
                                 </td>
+                                <td class="btn">
+                                    <div class="btn-block"><a href="index.php?method=detail-order&id=<?php echo $value['id_order'];?>">View</a></div>
+                                </td>
                             </tr>
-                            
+                            </a>
                             <?php } ?>
                             
                             
