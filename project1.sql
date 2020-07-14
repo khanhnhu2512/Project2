@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 09, 2020 lúc 04:09 AM
+-- Thời gian đã tạo: Th7 14, 2020 lúc 08:27 AM
 -- Phiên bản máy phục vụ: 10.4.13-MariaDB
 -- Phiên bản PHP: 7.2.31
 
@@ -42,6 +42,7 @@ CREATE TABLE `image_library` (
 --
 
 CREATE TABLE `order_detail` (
+  `id` int(11) NOT NULL,
   `id_order` int(11) NOT NULL,
   `id_product` int(11) NOT NULL,
   `price` float NOT NULL,
@@ -52,15 +53,22 @@ CREATE TABLE `order_detail` (
 -- Đang đổ dữ liệu cho bảng `order_detail`
 --
 
-INSERT INTO `order_detail` (`id_order`, `id_product`, `price`, `amount`) VALUES
-(57, 1, 10999, 1),
-(69, 1, 10999, 2),
-(70, 1, 10999, 2),
-(71, 1, 10999, 2),
-(72, 1, 10999, 2),
-(73, 1, 10999, 2),
-(74, 1, 10999, 2),
-(75, 1, 10999, 2);
+INSERT INTO `order_detail` (`id`, `id_order`, `id_product`, `price`, `amount`) VALUES
+(48, 104, 1, 10999, 1),
+(49, 104, 2, 1249, 1),
+(50, 104, 3, 599, 1),
+(51, 105, 1, 10999, 1),
+(52, 105, 2, 1249, 1),
+(53, 105, 3, 599, 1),
+(54, 106, 1, 10999, 1),
+(55, 106, 2, 1249, 1),
+(56, 106, 3, 599, 1),
+(57, 107, 1, 10999, 1),
+(58, 107, 2, 1249, 1),
+(59, 108, 1, 10999, 1),
+(60, 108, 2, 1249, 1),
+(61, 109, 1, 10999, 2),
+(62, 109, 2, 1249, 1);
 
 -- --------------------------------------------------------
 
@@ -82,23 +90,12 @@ CREATE TABLE `order_list` (
 --
 
 INSERT INTO `order_list` (`username`, `id_order`, `status`, `total_price`, `address`, `payment_method`) VALUES
-('khanhnhu2', 57, 0, 13646, '', 0),
-('khanhnhu2', 60, 0, 2647, 'dadsad', 1),
-('khanhnhu2', 61, 0, 2647, 'dadsad', 1),
-('khanhnhu2', 62, 0, 2647, 'dadsad', 1),
-('khanhnhu2', 63, 0, 2647, 'dadsad', 1),
-('khanhnhu2', 64, 0, 2647, 'dadsad', 1),
-('khanhnhu2', 65, 0, 2647, '', 0),
-('khanhnhu2', 66, 0, 22397, 'test case', 1),
-('khanhnhu2', 67, 0, 22397, 'test case', 1),
-('khanhnhu2', 68, 0, 22397, 'test case', 1),
-('khanhnhu2', 69, 0, 22397, 'test case', 1),
-('khanhnhu2', 70, 0, 22397, 'test case', 1),
-('khanhnhu2', 71, 0, 22397, 'asdasd', 0),
-('khanhnhu2', 72, 0, 22397, 'asdasd', 0),
-('khanhnhu2', 73, 0, 22397, 'asdasd', 0),
-('khanhnhu2', 74, 0, 22397, 'asdasd', 0),
-('khanhnhu2', 75, 0, 23696, '', 0);
+('khanhnhu2', 104, 1, 12847, '', 0),
+('khanhnhu2', 105, 1, 12847, '', 0),
+('khanhnhu2', 106, 0, 12847, '', 0),
+('khanhnhu', 107, 0, 12248, 'nhu3', 0),
+('khanhnhu', 108, 0, 12248, 'nhu3', 0),
+('khanhnhu', 109, 0, 23247, '', 0);
 
 -- --------------------------------------------------------
 
@@ -155,13 +152,7 @@ INSERT INTO `product_iphone` (`id`, `name`, `image`, `price`, `amount`, `content
 (1, 'Iphone 11 Pro Max', 'ip12-1.jpg', 10999, 1, 'Triple-camera system (Ultra Wide, Wide, Telephoto)<br>    Up to 20 hours of video playback1    Water resistant to a depth of 4 meters for up to 30 minutes    5.8” or 6.5” Super Retina XDR display', 16062020, 16062020),
 (2, 'iPhone XS Max', 'ip12-2.jpg', 1249, 0, '\r\n    Dual-camera system (Ultra Wide, Wide)\r\n    Up to 17 hours of video playback1\r\n    Water resistant to a depth of 2 meters for up to 30 minutes\r\n    6.1” Liquid Retina HD display\r\n', 16062020, 16062020),
 (3, 'iPhone 11', 'ip12-3.jpg', 599, 0, '\r\n    \r\n    Dual-camera system (Ultra Wide, Wide)\r\n    Up to 17 hours of video playback1\r\n    Water resistant to a depth of 2 meters for up to 30 minutes\r\n    6.1” Liquid Retina HD display\r\n\r\n', 16062020, 16062020),
-(4, 'iPhone SE', 'ip12-4.jpg', 399, 0, '\r\n    Single-camera system\r\n    (Wide)\r\n    Up to 13 hours of video playback1\r\n    Water resistant to a depth of 1 meter for up to 30 minutes\r\n    4.7” Retina HD display\r\n', 16062020, 16062020),
-(20, 'iPhone 11 Pro Max', 'iphone-11-pro-max-midnight-green-select-2019.png', 1499, 4, 'Best', 0, 0),
-(21, 'iPhone 11 Pro Max', 'iphone-11-pro-max-silver-select-2019.png', 1499, 2, 'Best', 0, 0),
-(22, 'iPhone 11 Pro Max', 'iphone-11-pro-max-silver-select-2019.png', 1299, 2, 'Best', 0, 0),
-(23, 'iPhone', '600_ip_X_gray_800x800_2.jpg', 999, 2, 'Best', 0, 0),
-(24, 'iPhone', '600_ip_X_white_800x800_3.jpg', 999, 2, 'Best', 0, 0),
-(25, 'iPhone 11', 'iphone-11-pro-max-silver-select-2019.png', 998, 11, 'abc', 0, 0);
+(26, 'iPhone 11 Pro Max', 'iphone-11-pro-max-silver-select-2019.png', 1299, 10, 'Best', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -186,8 +177,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `fullname`, `email`, `password`, `lv`, `birthday`, `create_time`, `last_updated`) VALUES
-(1, 'admin', 'Luong Van Nhu', 'luongvannhu@gmail.com', 'abc123', 1, '0000-00-00', '0000-00-00', '0000-00-00'),
-(2, 'khanhnhu2', 'Luong Khanh Nhu', 'luongkhanhnhu@gmail.com', '251201', 2, '0000-00-00', '0000-00-00', '0000-00-00'),
+(1, 'admin', 'Luong Van Nhu', 'luongvannhu@gmail.com', '1', 1, '0000-00-00', '0000-00-00', '0000-00-00'),
+(2, 'khanhnhu', 'Luong Khanh Nhu', 'luongkhanhnhu@gmail.com', '1', 2, '0000-00-00', '0000-00-00', '0000-00-00'),
 (5, 'thinhu123', 'Lương Thị Như', 'luongthinhu@gmail.com', '789', 2, '0000-00-00', '0000-00-00', '0000-00-00');
 
 --
@@ -204,7 +195,7 @@ ALTER TABLE `image_library`
 -- Chỉ mục cho bảng `order_detail`
 --
 ALTER TABLE `order_detail`
-  ADD PRIMARY KEY (`id_order`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Chỉ mục cho bảng `order_list`
@@ -247,10 +238,16 @@ ALTER TABLE `image_library`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT cho bảng `order_detail`
+--
+ALTER TABLE `order_detail`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+
+--
 -- AUTO_INCREMENT cho bảng `order_list`
 --
 ALTER TABLE `order_list`
-  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT cho bảng `product_airpod`
@@ -268,7 +265,7 @@ ALTER TABLE `product_ipad`
 -- AUTO_INCREMENT cho bảng `product_iphone`
 --
 ALTER TABLE `product_iphone`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
