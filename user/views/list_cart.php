@@ -69,8 +69,8 @@
 </head>
 
 <body>
+    
     <div class="container">
-        <!-- <img src="image/bg4.jpg"> -->
         <div class="header-background">
             <div class="header">
                 <a href="index.php"><h1 class="header-name">N-BUY</h1></a>
@@ -108,13 +108,6 @@
             </div>
         </div>
         <div class="content-home">
-            <!-- <?php
-            echo "<pre>";
-            print_r($_SESSION['cart']);
-            ?> -->
-                <!-- <div class="panner">
-                    <div><a><img src="../images/image-bg/bg5.jpg"></a></div>
-                </div> -->
             <div class="product">
                 <?php if(isset($_SESSION['cart'])){ ?>
                 <table border="1px" width="100%" cellpadding="0" cellspacing="0">
@@ -127,7 +120,7 @@
                         <td style="width: 200px">Total</td>
                         <td style="width: 100px"></td>
                     </tr>
-                    
+                    <form action="" method="post">
                     <tr>
                     <?php  $i=0; foreach ($_SESSION['cart'] as $key => $value){ $i++; ?>
                         <td style="width: 40px">
@@ -140,20 +133,20 @@
                             <?php echo ($value['name']); ?>
                         </td>
                         <td style="width: 100px">
-                            <form action="" method="post">
-                            <input style="width: 40px; text-align:center; " type="number" name="amount-session<?php echo $key; ?>" min="1" value="<?php if(isset($_POST['submit'.$key])){ echo $_POST['amount-session'.$key];} else{ echo $value['amount-session'];} ?>">
-                            <input style="width: 30px text-align:center;" type="submit" name="submit<?php echo $key; ?>" value="OK" >
-                            </form>
-                            <?php if(isset($_POST['submit'.$key])){ $_SESSION['cart'][$key]['amount-session']=$_POST['amount-session'.$key]; } ?>
+                            <!-- <form action="" method="post"> -->
+                            <input class="qty" style="width: 40px; text-align:center; " type="number" name="amount-session<?php echo $key; ?>" onchange="show_total(<?php echo $i-1; ?>)"  value="<?php echo $value['amount-session']; ?>">
+                            <!-- <input style="width: 30px text-align:center;" type="submit" name="submit<?php echo $key; ?>" value="OK" > -->
+                            <!-- </form> -->
+                            <!-- <?php echo (isset($_POST['amount-session'.$key])) ? $_POST['amount-session'.$key] : ""; ?> -->
+                            <!-- <?php if(isset($_POST['pay'])){ $_SESSION['cart'][$key]['amount-session']=$_POST['amount-session'.$key]; } ?> -->
                         </td>
                         <td>
-                            <p>$<?php echo $value['price']; ?></p>
+                            <p class="price"><?php echo $value['price']; ?></p>
                         </td>
                         <td>
-                            <p>$<?php echo $value['price']*$_SESSION['cart'][$key]['amount-session']; ?></p>
+                            <p class="total"><?php echo ($value['amount-session'] * $value['price']); ?></p>
                         </td>
                         <td class="btn">
-                            <!-- <div class="btn-list"><a href="index.php?method=edit-cart&id=<?php echo $value['id'];?>">Edit</a></div> -->
                             <div class="btn-del"><a href="index.php?method=delete-cart&id=<?php echo $value['id'];?>">Delete</a></div>
                         </td>
                     </tr>
@@ -164,20 +157,24 @@
                         <td colspan="5";> 
                         </td>
                         <td>
+                            <div id="subtotal"></div>
                             <?php  
                                 // $total_final=0;
                                 $_SESSION['total'] = 0;
                                 foreach ($_SESSION['cart'] as $key=>$value){ $_SESSION['total'] += $_SESSION['cart'][$key]['price']*$_SESSION['cart'][$key]['amount-session']; }
-                                echo "= $".$_SESSION['total'];
-                                // echo "<pre>";
-                                // print_r($_SESSION['cart']);
                             ?>
                         </td>
                         <td class="">
-                            <div class="btn-pay"><a href="index.php?method=pay-now">Buy now</a></div>
+                            <div class="btn-pa">
+                                <!-- <a href="index.php?method=pay-now"> -->
+                                    <input type="submit" name="pay" value="Pay Now">
+                                <!-- </a> -->
+                            </div>
                         </td>
                     </tr>
+                    </form>
                     <?php
+                    if(isset($_POST['pay'])){ $_SESSION['cart'][$key]['amount-session']=$_POST['amount-session'.$key]; }
                     }
                     else{
                         echo "<h1>Giỏ hàng trống!</h1>";
@@ -205,6 +202,33 @@
 
         </div>
     </div>
+    
 </body>
-
+<script type="text/javascript">
+            var qty = document.getElementsByClassName("qty");
+            var price = document.getElementsByClassName("price");
+            var total = document.getElementsByClassName("total");
+            var subtotal = document.getElementById("subtotal");
+            // function subtotal(){
+            //     for (var i = 0; i<total.length; i++){
+            //         result += total.value;
+            //     }
+            // }
+            function show_subtotal(){
+                var result=0;
+                for (var i = 0; i<total.length; i++){
+                    result +=  +total[i].innerHTML;
+                }
+                subtotal.innerHTML = result;
+            }
+            a =
+            show_subtotal();
+            console.log(+total[0].innerHTML +1);
+            function show_total(i)
+            {   
+                total[i].innerHTML = (qty[i].value * price[i].innerHTML); 
+                show_subtotal();
+                
+            }     
+    </script>
 </html>

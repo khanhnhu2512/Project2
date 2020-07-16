@@ -139,7 +139,8 @@
                     <div class="product">
                     <?php if(isset($_SESSION['users'])){ ?>
                         <table border="1px" width="100%" cellpadding="0" cellspacing="0">
-                            <tr>
+                            
+                            <tr >
                                 <td style="width: 40px">STT</td>
                                 <td style="width: 100px">Username</td>
                                 <td style="width: 100px">Password</td>
@@ -149,8 +150,10 @@
                                 <td></td>
                             </tr>
                             
-                            <tr>
                             <?php  $i=0; foreach ($_SESSION['users'] as $key => $value){ $i++; ?>
+                            
+                            <tr>
+                                
                                 <td style="width: 40px">
                                     <?php echo $i; ?>
                                 </td>
@@ -173,6 +176,7 @@
                                     <div class="btn-del"><a href="index.php?method=edit-user&id=<?php echo $value['id'];?>">Edit</a></div>
                                     <div class="btn-del"><a href="index.php?method=delete-user&id=<?php echo $value['id'];?>">Delete</a></div>
                                 </td>
+                                
                             </tr>
                             
                             <?php } ?>

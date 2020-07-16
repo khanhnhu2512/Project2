@@ -73,7 +73,11 @@
                          
                 break;
                 case('list-cart'): 
-
+                    if(isset($_POST['pay'])){
+                        
+                        header('location:index.php?method=pay-now');
+                        // echo "ok";
+                    }
                     include_once 'views/list_cart.php';
                 break;
                 case('delete-cart'):
