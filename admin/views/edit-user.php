@@ -136,13 +136,13 @@
                 <form action="" method="post">   
                     <div class="product-display-detail">
                         <?php if(isset($_POST['update'])){echo "<h3>".$log."</h3>";} ?>
-                        <label for="fullname">Fullname</label><input type="text" id="fullname" name="fullname" value="<?php echo (isset($_POST['update'])) ? $_POST['fullname'] : $user['fullname']; ?>" ><br>
-                        <label for="username">Username</label><input type="text" id="username" name="username" value="<?php echo (isset($_POST['update'])) ? $_POST['username'] : $user['username']; ?>"><br>
-                        <label for="password" >Password</label><input type="text" id="password" name="password" value="<?php echo (isset($_POST['update'])) ? $_POST['password'] : $user['password']; ?>"><br>
-                        <label for="email">Email</label><input type="text" id="email" name="email" value="<?php echo (isset($_POST['update'])) ? $_POST['email'] : $user['email']; ?>" ><br>
+                        <label for="fullname">Fullname</label><input type="text" id="fullname" name="fullname" value="<?php echo (isset($_POST['update'])) ? $_POST['fullname'] : $user['0']['fullname']; ?>" ><br>
+                        <label for="username">Username</label><input type="text" id="username" name="username" value="<?php echo (isset($_POST['update'])) ? $_POST['username'] : $user['0']['username']; ?>"><br>
+                        <label for="password" >Password</label><input type="text" id="password" name="password" value="<?php echo (isset($_POST['update'])) ? $_POST['password'] : $user['0']['password']; ?>"><br>
+                        <label for="email">Email</label><input type="text" id="email" name="email" value="<?php echo (isset($_POST['update'])) ? $_POST['email'] : $user['0']['email']; ?>" ><br>
                         <label for="lv">Permission</label><select name="lv">
                             <option value=1>Admin</option>
-                            <option value=2 <?php echo ($user['lv']==2) ? 'selected' : ''; ?> >User</option>
+                            <option value=2 <?php if(isset($_POST['update'])){ echo ($_POST['lv']==2) ? 'selected' : ''; }else{ echo ($user['0']['lv']==2) ? 'selected' : '';  }  ?> >User</option>
                         </select>     
                         <br>
                         <input type="submit" name="update" value="Update">  

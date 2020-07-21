@@ -30,6 +30,18 @@
             return false;
         }
         
+        public function checkUser($object,$value)
+        {
+            $this->connect();
+            $sql = "SELECT * from 'user' WHERE $object = $value";
+            $query = mysqli_query($this->con, $sql);
+            $result = true;
+            if (mysqli_num_rows($query) > 0) {
+                $result = false; //check if $query exist $object = $value
+            }
+            return $result;
+        }
+
         public function getObject_id($id,$table)
         {
             $this->connect();

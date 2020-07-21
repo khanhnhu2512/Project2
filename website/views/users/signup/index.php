@@ -38,23 +38,23 @@
                     <div class="input"><?php if(isset($_POST['signup-btn'])){echo $log;} ?></div>
                     <div class="input">
                         <span><b>Full name*</b></span><br>
-                        <input type="text" placeholder="Họ và tên..." name="fullname">
+                        <input type="text" id="fullname" placeholder="Họ và tên..." name="fullname">
                     </div>
                     <div class="input">
                         <span><b>Username*</b></span><br>
-                        <input type="text" placeholder="Tên đăng nhập..." name="username">
+                        <input type="text" id="username" placeholder="Tên đăng nhập..." name="username">
                     </div>
                     <div class="input">
                         <span><b>Email*</b></span><br>
-                        <input type="text" placeholder="Email..." name="email">
+                        <input type="email" id="email" placeholder="Email..." name="email">
                     </div>
                     <div class="input">
                         <span><b>Password*</b></span><br>
-                        <input type="password" placeholder="Mật khẩu..." name="password">
+                        <input type="password" id="password" placeholder="Mật khẩu..." name="password">
                     </div>
                     <div class="input">
                         <span><b>Repassword*</b></span><br>
-                        <input type="password" placeholder="Nhập lại mật khẩu..." name="repassword">
+                        <input type="password" id="repassword" placeholder="Nhập lại mật khẩu..." name="repassword">
                     </div>
                     <div class="signup-btn">
                         <input type="submit" name="signup-btn" value="Sign up"><a href="index.php?method=signup"></a>
@@ -86,6 +86,22 @@
 
         </div>
     </div>
+    <!-- <script type="text/javascript">
+        console.log("<?php $sth =true; echo $sth; ?>");
+    </script> -->
+    
+    <script type="text/javascript">
+        function validate(){
+            var fullname = document.getElementById("fullname");
+            var username = document.getElementById("username");
+            var email = document.getElementById("email");
+            var password = document.getElementById("password");
+            var repassword = document.getElementById("repassword");
+            var log = 0;
+            var checkusername =  <?php echo $checkuser; ?>
+            if()
+        }
+    </script>
 </body>
 
 </html>

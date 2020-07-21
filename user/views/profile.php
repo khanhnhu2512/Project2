@@ -33,12 +33,6 @@
                         <a href="contact.php">Contact</a>
                     </li>
                 </ul>
-                <!-- <div class="input-search">
-                    <span class="icon-search">
-                        <a href=""><i class="fas fa-search"></i></a>
-                    </span>
-                    <input placeholder="Search..." type="search" name="search">
-                </div> -->
                 <div class="cart">
                     <span class="icon-cart">
                         <a href="index.php?method=list-cart"><i class="fas fa-shopping-cart"></i></a>
@@ -61,13 +55,7 @@
                     <h1 class="product-name"><?php echo $_SESSION['user']['fullname']; ?></h1>
                     <p class="product-content"><span>Username: </span><?php echo $_SESSION['user']['username']; ?></p>
                     <p class="product-content"><span>Password: </span><?php echo $_SESSION['user']['password']; ?></p>
-                    <p class="product-content"><span>Email: </span><?php echo $_SESSION['user']['email']; ?></p>
-                    <!-- <p class="product-price">Buy now $<span><?php echo $product['price']; ?></span></p> -->
-                    <!-- <div class="icon-add-cart">
-                        <span>
-                            <a href=""><i class="fas fa-cart-plus"></i></a>
-                        </span>
-                    </div> -->
+                    <p class="product-content"><span>Email: </span><?php echo $_SESSION['user']['email'];?></p>
                 </div>
             </div>
             
