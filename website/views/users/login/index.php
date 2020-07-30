@@ -5,7 +5,7 @@
 <head>
     <title></title>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="website/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/libs/">
     <!-- <script src="https://kit.fontawesome.com/b1d0494dab.js" crossorigin="anonymous"></script> -->
     <link href="fontawesome-free-5.13.0-web/css/all.css" rel="stylesheet">
 </head>

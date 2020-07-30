@@ -12,7 +12,6 @@
     <link rel="SHORTCUT ICON" href="images/image-bg/icon.ico">
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <!-- <script src="https://kit.fontawesome.com/b1d0494dab.js" crossorigin="anonymous"></script> -->
     <link href="libs/fontawesome-free-5.13.0-web/css/all.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="website/css/style.css">
 </head>

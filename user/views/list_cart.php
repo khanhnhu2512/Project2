@@ -217,11 +217,11 @@
             function show_subtotal(){
                 var result=0;
                 for (var i = 0; i<total.length; i++){
-                    result +=  +total[i].innerHTML;
+                    result +=  total[i].innerHTML;
                 }
                 subtotal.innerHTML = result;
             }
-            a =
+            
             show_subtotal();
             console.log(+total[0].innerHTML +1);
             function show_total(i)

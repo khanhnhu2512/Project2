@@ -140,7 +140,6 @@
                             <input type="submit" value="Upload Image" name="update-img">
                         </form><br>
                 <form action="" method="post">   
-                    
                         <?php if(isset($_POST['add'])){echo "<h3>".$log."</h3>";} ?>
                         <label for="name">Product Name</label><input type="text" id="name" name="name" value="<?php echo (isset($_POST['add'])) ? $_POST['name'] : ""; ?>" ><br>
                         

@@ -1,0 +1,85 @@
+.carousel-inner img {
+    width: 100%;
+    height: auto;
+}
+
+.w-25 {
+    width: 120px !important;
+}
+
+body {
+    /* background-color: #000000; */
+}
+
+.bg-dark {
+    background-color: #000000 !important;
+}
+
+.search-form {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.search-form-input {
+    /* opacity: 1; */
+    width: 300px !important;
+    border-radius: 0px !important;
+    /* transition: ease 0.2s; */
+    background-color: #000000 !important;
+    /* top: 400px; */
+    border: 0px;
+    border-bottom: 1px solid white !important;
+}
+
+.search-form-btn {
+    /* width: 30px !important; */
+    /* padding: 4px !important; */
+    /* background-color: blueviolet; */
+    /* border-radius: 30px; */
+    border-radius: 0px;
+    /* border-left: 1px solid #e1e1e1; */
+    position: absolute;
+    right: 0px;
+}
+
+.fa-search {
+    color: #ffffff;
+}
+
+.btn-link {
+    color: #000000;
+}
+
+.form-login a div:hover {
+    background-color: aqua !important;
+}
+
+.form-login {
+    padding-right: 0px;
+    /* background-color: cyan; */
+}
+
+.form-login-btn {
+    width: 90px;
+}
+
+.fa-search:hover {
+    color: cyan !important;
+}
+
+.btn-cart:hover {
+    color: cyan !important;
+}
+
+.carousel-inner {
+    height: 700px !important;
+}
+
+.products {
+    width: 25%;
+    height: 50px;
+    background-color: blue;
+}
