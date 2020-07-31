@@ -31,7 +31,7 @@
                     $product = $this->m_users->pagination($table,$start,$limit);
                     
                     //*page
-                    include_once 'website/views/home/index.html';
+                    include_once 'website/views/home/index.php';
                 break;
                 
                 case('detail-iphone'):
