@@ -81,7 +81,7 @@
 
 
     <!-- Carousel -->
-    <div id="slides " class="carousel slide" data-ride="carousel ">
+    <div id="slides " class="carousel slide" data-ride="carousel" data-interval="2500">
         <ul class="carousel-indicators ">
             <li data-target="#slides " data-slide-to="0 " class="active "></li>
             <li data-target="#slides " data-slide-to="1 "></li>
@@ -131,7 +131,7 @@
             <div class="container padding card-deck mt-2">
                 <?php foreach ($product as $key => $value): ?>
                 <div class="card border-0">
-                    <a href="index.php?method=detail-iphone&id=<?php echo $value['id'];?>">
+                    <a href="index.php?method=detail&id=<?php echo $value['id'];?>">
                         <img class="card-img-bottom w-auto h-285" src="./images/image-product/<?php echo $value['image'];?>" alt="Card image cap">
                     </a>
                     <div class="card-body">
@@ -142,7 +142,7 @@
                                 <i class="fa fa-cart-plus fa-2x"></i>
                             </a>
                         </div>
-                        <a class="card-link" href="index.php?method=detail-iphone&id=<?php echo $value['id'];?>">Learn more ></a>
+                        <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id'];?>">Learn more ></a>
                     </div>
                 </div>
                 <?php endforeach; ?>
@@ -277,7 +277,7 @@
     <script language="javascript">
         function redirectLogin() {
             alert("You need to login!");
-            window.location = "./website/views/users/login/index.php";
+            window.location = "index.php?method=login";
         }
 
         function btnSearch() {

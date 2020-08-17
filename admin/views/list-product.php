@@ -150,7 +150,7 @@
                             </tr>
                             
                             <tr>
-                            <?php  $i=0; foreach ($_SESSION['product-iphone'] as $key => $value){ $i++; ?>
+                            <?php  $i=0; foreach ($_SESSION['product'] as $key => $value){ $i++; ?>
                                 <a href="">
                                 <td style="width: 40px">
                                     <?php echo $i; ?>
@@ -162,7 +162,7 @@
                                     <?php echo ($value['name']); ?>
                                 </td>
                                 <td style="width: 100px">
-                                    <?php echo ($value['amount']); ?>
+                                    <?php echo ($value['qty']); ?>
                                 </td>
                                 <td>
                                     <p>$<?php echo $value['price']; ?></p>

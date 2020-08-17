@@ -93,17 +93,7 @@
                         <a href="contact.php">Contact</a>
                     </li>
                 </ul>
-                <!-- <div class="input-search">
-                    <span class="icon-search">
-                        <a href=""><i class="fas fa-search"></i></a>
-                    </span>
-                    <input placeholder="Search..." type="search" name="search">
-                </div> -->
-                <!-- <div class="cart">
-                    <span class="icon-cart">
-                        <a href="index.php?method=list-cart"><i class="fas fa-shopping-cart"></i></a>
-                    </span>
-                </div> -->
+               
                 <div class="header-profile">
                     <!-- <div><?php echo $_SESSION['user']['fullname']; ?></div> -->
                     <div>

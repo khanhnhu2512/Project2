@@ -1,5 +1,5 @@
 <?php
-    require_once "../admin/model/index.php";
+    include_once "../admin/model/index.php";
     class C_website extends M_admin
     {
         public $m_admin;
@@ -22,9 +22,7 @@
             
             switch ($method){
                 case('home'):
-                    // $product = $this->m_users->getProduct();
-                    //*page
-                    $table = 'product_iphone';
+                    $table = 'product';
                     $total_page = $this->getPagination($table,$limit);
                     if($page>$total_page) $page=$total_page;  
                     $start=($page-1)*$limit;
@@ -74,12 +72,12 @@
                     $table = 'order_detail';
                     $object = 'id_order';
                     $_SESSION['order-detail'] = $this->getEverything_id($table,$object,$id);
-                    $_SESSION['product-iphone'] = $this->getObject("product_iphone");
+                    $_SESSION['product-iphone'] = $this->getObject("product");
                     require_once ('views/detail-order.php');
                 break;
 
                 case('list-product'):
-                    $_SESSION['product-iphone'] = $this->getObject("product_iphone");
+                    $_SESSION['product'] = $this->getObject("product");
                     require_once ('views/list-product.php');
                 break;
 
@@ -113,7 +111,7 @@
                     if (isset($_GET['id'])){
                         $id = $_GET['id'];
                     }
-                    $table = 'product_iphone';
+                    $table = 'product';
                     $object = 'id';
                     $product = $this->getEverything_id($table,$object,$id);
                     
@@ -128,14 +126,14 @@
                         // $product['image'] = $_SESSION['image-upload']['name'];
                     }
                     if (isset($_POST['edit'])){
-                        if(!empty($_POST['name']) && !empty($_POST['price']) && !empty($_POST['amount']) && !empty($_POST['content'])){
-                            $table = 'product_iphone';
+                        if(!empty($_POST['name']) && !empty($_POST['price']) && !empty($_POST['qty']) && !empty($_POST['description'])){
+                            $table = 'product';
                             $name = $_POST['name'];
                             $image = (isset($_SESSION['image-upload'])) ? $_SESSION['image-upload']['name'] : $product['image'];
                             $price = $_POST['price'];
-                            $amount = $_POST['amount'];
-                            $content = $_POST['content'];
-                            $this->editProduct($table,$id,$name,$image,$price,$amount,$content);
+                            $qty = $_POST['qty'];
+                            $description = $_POST['description'];
+                            $this->editProduct($table,$id,$name,$image,$price,$qty,$content);
                             $log="<p>Succesful!</p>";
                             $product['image'] = $image; 
                         }
@@ -160,16 +158,16 @@
 
                     // if(isset($_SESSION['image-upload'])){echo " Test".$_SESSION['image-upload']['name'];}
                     if (isset($_POST['add'])){
-                        if(!empty($_POST['name']) && !empty($_POST['price']) && !empty($_POST['amount']) && !empty($_POST['content'])){
-                            $table = 'product_iphone';
+                        if(!empty($_POST['name']) && !empty($_POST['price']) && !empty($_POST['qty']) && !empty($_POST['description'])){
+                            $table = 'product';
                             $name = $_POST['name'];
                             $image = $_SESSION['image-upload']['name'];
                             // echo " Test2 ".$image2;
                             // $image = $_FILES["fileToUpload"]["name"];
                             $price = $_POST['price'];
-                            $amount = $_POST['amount'];
-                            $content = $_POST['content'];
-                            $this->addProduct($table,$name,$image,$price,$amount,$content);
+                            $qty = $_POST['qty'];
+                            $description = $_POST['description'];
+                            $this->addProduct($table,$name,$image,$price,$qty,$description);
                             $log="<p>Succesful!</p>";
                         }
                         else{
@@ -193,7 +191,7 @@
                     if (isset($_GET['id'])){
                         $id = $_GET['id'];
                     }
-                    $table ='product_iphone';
+                    $table ='product';
                     $object = 'id';
                     $this->delete($table,$object,$id);
                     $logDelete = true;

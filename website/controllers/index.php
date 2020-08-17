@@ -24,7 +24,7 @@
                 case('home'):
                     // $product = $this->m_users->getProduct();
                     //*page
-                    $table = 'product_iphone';
+                    $table = 'product';
                     $total_page = $this->m_users->getPagination($table,$limit);
                     if($page>$total_page) $page=$total_page;  
                     $start=($page-1)*$limit;
@@ -34,32 +34,36 @@
                     include_once 'website/views/home/index.php';
                 break;
                 
-                case('detail-iphone'):
-                    $table = 'product_iphone';
+                case('detail'):
+                    $table = 'product';
                     if (isset($_GET['id'])){
                         $id = $_GET['id'];
                     }
                     $product = $this->m_users->getObject_id($id,$table);
                     include_once 'website/views/home/product_details.php';
                 break;
-                case('login'):  
-                    if(!empty($_POST['username']) && !empty($_POST['password'])){
-                        $username = ($_POST['username']);
-                        $password = ($_POST['password']);
-                        // $log="";
-                        if ($this->m_users->login($username,$password)) {
-                            $user = $_SESSION['user'];
-                            if ($user['lv']==1){
-                            header('location:/Project1/admin/index.php');
+                case('login'): 
+                    if(isset($_POST['submit'])){
+                        if(!empty($_POST['username']) && !empty($_POST['password'])){
+                            $username = ($_POST['username']);
+                            $password = ($_POST['password']);
+                            // $log="";
+                            if ($this->m_users->login($username,$password)) {
+                                $user = $_SESSION['user'];
+                                if ($user['lv']==1){
+                                    $_SESSION['lv']=1;
+                                    header('location:/Project1/admin/index.php');
+                                }
+                                else{
+                                    $_SESSION['lv']=2;
+                                    header('location:/Project1/user/index.php');
+                                }
                             }
                             else{
-                                header('location:/Project1/user/index.php');
+                                $log = "Tên đăng nhập hoặc mật khẩu không đúng!";
                             }
                         }
-                        else{
-                            $log = "Tên đăng nhập hoặc mật khẩu không đúng!";
-                        }
-                    }
+                    } 
                     require_once 'website/views/users/login/index.php';
                 break;
 

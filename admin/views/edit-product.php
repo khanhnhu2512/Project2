@@ -157,8 +157,8 @@
                         <label for="name">Product Name</label><input type="text" id="name" name="name" value="<?php echo (isset($_POST['edit'])) ? $_POST['name'] : $product['name']; ?>" ><br>
                         
                         <label for="price">Price</label><input type="text" id="price" name="price" value="<?php echo (isset($_POST['edit'])) ? $_POST['price'] : $product['price']; ?>"><br>
-                        <label for="amount" >Quantity</label><input type="number" id="amount" name="amount" value="<?php echo (isset($_POST['edit'])) ? $_POST['amount'] : $product['amount']; ?>"><br>
-                        <label for="content">Content</label><input type="text" id="content" name="content" value="<?php echo (isset($_POST['edit'])) ? $_POST['content'] : $product['content']; ?>" ><br>
+                        <label for="qty" >Quantity</label><input type="number" id="qty" name="qty" value="<?php echo (isset($_POST['edit'])) ? $_POST['qty'] : $product['qty']; ?>"><br>
+                        <label for="description">Content</label><input type="text" id="description" name="description" value="<?php echo (isset($_POST['edit'])) ? $_POST['description'] : $product['description']; ?>" ><br>
                         <input type="submit" name="edit" value="Save">  
                     
                 </form>

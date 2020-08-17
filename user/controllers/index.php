@@ -106,10 +106,9 @@
                         $_SESSION['address']=$_POST['address'];
                         $add_order_list = $this->m_users->addOrderList('order_list',$_SESSION['user']['username'],$_SESSION['total-payment'],$_SESSION['address'],$_SESSION['payment-method']);
                         if($add_order_list){$log = "Successful!";}else{$log = "Error!";}
-                        $order_id = $this->m_users->getOrderId('order_list',$_SESSION['user']['username']);
+                        $order_id = $this->m_users->getOrderId('order_list');
                         $i = 0;
                         $count = count(array_keys($_SESSION['cart']));
-                        
                         foreach ($_SESSION['cart'] as $key => $value){  //giai phap la function addOrderList se tra ve gia tri cua $order_id luon
                             $add_order_detail=$this->m_users->addOrderDetail('order_detail',$order_id['id_order'],$key,$value['price'],$value['amount-session']);
                             // echo "i= ".$i;

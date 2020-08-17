@@ -1,18 +1,23 @@
 <?php
     // require_once 'libs/connect-db.php';
-    class M_users
+    include_once ('./libs/connect-db.php');
+    class M_users extends connect_db
     {
-        public function connect(){        
-            $this->serverName = "localhost:3306";
-            $this->userName = "root";
-            $this->password = "";
-            $this->databseName = "project1";
-            $this->con = mysqli_connect($this->serverName,$this->userName,$this->password,$this->databseName) or die("Couldn't connect to SQL Server on $this->serverName");
+        function __construct()
+		{
+            parent::__construct(); 
         }
+        // public function connect(){        
+        //     $this->serverName = "localhost:3306";
+        //     $this->userName = "root";
+        //     $this->password = "";
+        //     $this->databseName = "project1";
+        //     $this->con = mysqli_connect($this->serverName,$this->userName,$this->password,$this->databseName) or die("Couldn't connect to SQL Server on $this->serverName");
+        // }
         
         public function getObject_id($id,$table)
         {
-            $this->connect();
+            
             $sql = "SELECT * from $table WHERE id = $id";
             $query = mysqli_query($this->con, $sql);
             $result = array();
@@ -24,7 +29,7 @@
         }
 
         public function getObject($table){
-            $this->connect();
+            
             $sql = "SELECT * FROM $table";
             $query = mysqli_query($this->con,$sql);
             $result = array();
@@ -36,7 +41,7 @@
             return $result;
         }
         public function getPagination($table,$limit){
-            $this->connect();    
+            
             $sql = "SELECT * FROM $table";
             $query = mysqli_query($this->con,$sql);
             $total_record = mysqli_num_rows($query);//tính tổng số bản ghi có trong bảng        
@@ -45,7 +50,7 @@
             
         }
         public function pagination($table,$start,$limit){
-            $this->connect();
+           
             $sql="select * from $table limit $start,$limit";
             $query = mysqli_query($this->con,$sql);
             $result = array();
@@ -56,8 +61,8 @@
             }
             return $result;
         }
-        public function getOrderId($table,$username){
-            $this->connect();
+        public function getOrderId($table){
+            
             $sql = "SELECT * FROM $table ORDER BY id_order DESC";
             $query = mysqli_query($this->con,$sql);
             $result = array();
@@ -66,17 +71,17 @@
                 $result = $row;
             }
             return $result;
-            
         }
+        
         public function addOrderList($table,$username,$total_price,$address,$payment_method){
-            $this->connect();
+           
             $sql = "INSERT INTO $table (username,status,total_price,address,payment_method) VALUES ('$username',0,$total_price,'$address',$payment_method);";
             $query = mysqli_query($this->con,$sql);
             return $query;
         }
         
         public function addOrderDetail($table,$id_order,$id_product,$price,$amount){
-            $this->connect();
+            
             $sql = "INSERT INTO $table (id_order,id_product,price,amount) VALUES ($id_order,$id_product,$price,$amount)";
             $query = mysqli_query($this->con,$sql);
             return $query;
@@ -95,7 +100,7 @@
         // }
         public function getEverything_id($table,$object,$id)
         {
-            $this->connect();
+            
             $sql = "SELECT * from $table WHERE $object = '$id'";
             $query = mysqli_query($this->con, $sql);
             $result = array();
