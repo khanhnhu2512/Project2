@@ -121,7 +121,7 @@
         </div>
         <form action="" method="post">
             <div class="form-group">
-                <p id="logError">! Username and password not found</p>
+                <p id="logError"><?php echo (isset($log)) ? "$log" : ""; ?></p>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text">

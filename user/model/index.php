@@ -1,9 +1,9 @@
 <?php
     // require_once 'libs/connect-db.php';
-    include_once ('./libs/connect-db.php');
+    include_once ('../libs/connect-db.php');
     class M_users extends connect_db
     {
-        function __construct()
+        function conn()
 		{
             parent::__construct(); 
         }
@@ -17,7 +17,7 @@
         
         public function getObject_id($id,$table)
         {
-            
+            $this->conn();
             $sql = "SELECT * from $table WHERE id = $id";
             $query = mysqli_query($this->con, $sql);
             $result = array();
@@ -29,7 +29,7 @@
         }
 
         public function getObject($table){
-            
+            $this->conn();
             $sql = "SELECT * FROM $table";
             $query = mysqli_query($this->con,$sql);
             $result = array();
@@ -41,7 +41,7 @@
             return $result;
         }
         public function getPagination($table,$limit){
-            
+            $this->conn();
             $sql = "SELECT * FROM $table";
             $query = mysqli_query($this->con,$sql);
             $total_record = mysqli_num_rows($query);//tính tổng số bản ghi có trong bảng        
@@ -50,7 +50,7 @@
             
         }
         public function pagination($table,$start,$limit){
-           
+            $this->conn();
             $sql="select * from $table limit $start,$limit";
             $query = mysqli_query($this->con,$sql);
             $result = array();
@@ -62,7 +62,7 @@
             return $result;
         }
         public function getOrderId($table){
-            
+            $this->conn();
             $sql = "SELECT * FROM $table ORDER BY id_order DESC";
             $query = mysqli_query($this->con,$sql);
             $result = array();
@@ -74,14 +74,14 @@
         }
         
         public function addOrderList($table,$username,$total_price,$address,$payment_method){
-           
+            $this->conn();
             $sql = "INSERT INTO $table (username,status,total_price,address,payment_method) VALUES ('$username',0,$total_price,'$address',$payment_method);";
             $query = mysqli_query($this->con,$sql);
             return $query;
         }
         
         public function addOrderDetail($table,$id_order,$id_product,$price,$amount){
-            
+            $this->conn();
             $sql = "INSERT INTO $table (id_order,id_product,price,amount) VALUES ($id_order,$id_product,$price,$amount)";
             $query = mysqli_query($this->con,$sql);
             return $query;
@@ -100,7 +100,7 @@
         // }
         public function getEverything_id($table,$object,$id)
         {
-            
+            $this->conn();
             $sql = "SELECT * from $table WHERE $object = '$id'";
             $query = mysqli_query($this->con, $sql);
             $result = array();
@@ -110,9 +110,9 @@
             }
             return $result;
         }
-        // public function logout(){
+        // public function signout(){
         //     session_destroy();
-        //     header('location:../index.php'); 
+        //     header('location:index.php?method=home'); 
         // }
         
     }    

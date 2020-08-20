@@ -24,7 +24,7 @@
                 case('home'):
                     // $product = $this->m_users->getProduct();
                     //*page
-                    $table = 'product_iphone';
+                    $table = 'product';
                     $total_page = $this->m_users->getPagination($table,$limit);
                     if($page>$total_page) $page=$total_page;  
                     $start=($page-1)*$limit;
@@ -37,7 +37,7 @@
                     require_once 'views/profile.php';          
                 break;
 
-                case('logout'):
+                case('signout'):
                     session_unset();
                     header("location:../index.php");
                 break;
@@ -46,7 +46,7 @@
                 case('add-cart'):
                     $id = isset($_GET['id']) ? $_GET['id'] : "";
                     if(!isset($_SESSION['cart'][$id])){
-                        $table = 'product_iphone';
+                        $table = 'product';
                         $product=$this->getObject_id($id,$table);
                         $_SESSION['cart'][$id]=$product;
                     }
@@ -89,8 +89,8 @@
                     include_once 'views/list_cart.php';
                 break;
 
-                case('detail-iphone'):
-                    $table = 'product_iphone';
+                case('detail'):
+                    $table = 'product';
                     if (isset($_GET['id'])){
                         $id = $_GET['id'];
                     }

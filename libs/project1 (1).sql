@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 04, 2020 lúc 03:37 AM
+-- Thời gian đã tạo: Th8 20, 2020 lúc 04:20 AM
 -- Phiên bản máy phục vụ: 10.4.13-MariaDB
 -- Phiên bản PHP: 7.2.31
 
@@ -106,61 +106,53 @@ INSERT INTO `order_list` (`username`, `id_order`, `status`, `total_price`, `addr
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `product_airpod`
+-- Cấu trúc bảng cho bảng `product`
 --
 
-CREATE TABLE `product_airpod` (
-  `id` int(11) NOT NULL,
-  `name` varchar(256) NOT NULL,
-  `image` varchar(256) NOT NULL,
-  `price` float NOT NULL,
-  `content` varchar(256) NOT NULL,
-  `amount` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `product_ipad`
---
-
-CREATE TABLE `product_ipad` (
-  `id` int(11) NOT NULL,
-  `name` varchar(256) NOT NULL,
-  `image` varchar(256) NOT NULL,
-  `price` float NOT NULL,
-  `content` varchar(256) NOT NULL,
-  `amount` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `product_iphone`
---
-
-CREATE TABLE `product_iphone` (
+CREATE TABLE `product` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `type` int(11) NOT NULL COMMENT 'category',
   `image` varchar(255) NOT NULL,
   `price` float NOT NULL,
-  `amount` int(11) NOT NULL,
-  `content` text NOT NULL,
+  `qty` int(11) NOT NULL,
+  `description` varchar(1000) NOT NULL,
   `create_time` int(11) NOT NULL,
   `last_updated` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `product_iphone`
+-- Đang đổ dữ liệu cho bảng `product`
 --
 
-INSERT INTO `product_iphone` (`id`, `name`, `image`, `price`, `amount`, `content`, `create_time`, `last_updated`) VALUES
-(1, 'Iphone 11 Pro Max', 'ip12-1.jpg', 10999, 1, 'Triple-camera system (Ultra Wide, Wide, Telephoto)<br>    Up to 20 hours of video playback1    Water resistant to a depth of 4 meters for up to 30 minutes    5.8” or 6.5” Super Retina XDR display', 16062020, 16062020),
-(2, 'iPhone XS Max', 'ip12-2.jpg', 1249, 0, '\r\n    Dual-camera system (Ultra Wide, Wide)\r\n    Up to 17 hours of video playback1\r\n    Water resistant to a depth of 2 meters for up to 30 minutes\r\n    6.1” Liquid Retina HD display\r\n', 16062020, 16062020),
-(3, 'iPhone 11', 'ip12-3.jpg', 599, 0, '\r\n    \r\n    Dual-camera system (Ultra Wide, Wide)\r\n    Up to 17 hours of video playback1\r\n    Water resistant to a depth of 2 meters for up to 30 minutes\r\n    6.1” Liquid Retina HD display\r\n\r\n', 16062020, 16062020),
-(26, 'iPhone 11 Pro Max', 'iphone-11-pro-max-silver-select-2019.png', 1299, 10, 'Best', 0, 0),
-(27, 'a', '600_ip_X_white_800x800_3.jpg', 100, 10, 'abc', 0, 0),
-(28, '1', '600_ip_X_white_800x800_3.jpg', 10, 4, 'asdsdas', 0, 0);
+INSERT INTO `product` (`id`, `name`, `type`, `image`, `price`, `qty`, `description`, `create_time`, `last_updated`) VALUES
+(1, 'Iphone 11 Pro Max', 1, 'ip12-1.jpg', 1099, 1, 'Triple-camera system (Ultra Wide, Wide, Telephoto)<br>    Up to 20 hours of video playback1    Water resistant to a depth of 4 meters for up to 30 minutes    5.8” or 6.5” Super Retina XDR display', 16062020, 16062020),
+(2, 'iPhone XS Max', 1, 'ip12-2.jpg', 1249, 0, '\r\n    Dual-camera system (Ultra Wide, Wide)\r\n    Up to 17 hours of video playback1\r\n    Water resistant to a depth of 2 meters for up to 30 minutes\r\n    6.1” Liquid Retina HD display\r\n', 16062020, 16062020),
+(3, 'iPhone 11', 1, 'ip12-3.jpg', 599, 0, '\r\n    \r\n    Dual-camera system (Ultra Wide, Wide)\r\n    Up to 17 hours of video playback1\r\n    Water resistant to a depth of 2 meters for up to 30 minutes\r\n    6.1” Liquid Retina HD display\r\n\r\n', 16062020, 16062020),
+(26, 'iPhone 11 Pro Max', 1, 'iphone-11-pro-max-silver-select-2019.png', 1299, 10, 'Best', 0, 0),
+(27, 'a', 1, '600_ip_X_white_800x800_3.jpg', 100, 10, 'abc', 0, 0),
+(28, '1', 1, '600_ip_X_white_800x800_3.jpg', 10, 4, 'asdsdas', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `product_category`
+--
+
+CREATE TABLE `product_category` (
+  `id` int(11) NOT NULL,
+  `name` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `product_category`
+--
+
+INSERT INTO `product_category` (`id`, `name`) VALUES
+(1, 'iphone'),
+(2, 'ipad'),
+(3, 'macbook'),
+(4, 'airpods');
 
 -- --------------------------------------------------------
 
@@ -212,21 +204,15 @@ ALTER TABLE `order_list`
   ADD PRIMARY KEY (`id_order`);
 
 --
--- Chỉ mục cho bảng `product_airpod`
+-- Chỉ mục cho bảng `product`
 --
-ALTER TABLE `product_airpod`
+ALTER TABLE `product`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `product_ipad`
+-- Chỉ mục cho bảng `product_category`
 --
-ALTER TABLE `product_ipad`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `product_iphone`
---
-ALTER TABLE `product_iphone`
+ALTER TABLE `product_category`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -258,22 +244,16 @@ ALTER TABLE `order_list`
   MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
--- AUTO_INCREMENT cho bảng `product_airpod`
+-- AUTO_INCREMENT cho bảng `product`
 --
-ALTER TABLE `product_airpod`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT cho bảng `product_ipad`
---
-ALTER TABLE `product_ipad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT cho bảng `product_iphone`
---
-ALTER TABLE `product_iphone`
+ALTER TABLE `product`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT cho bảng `product_category`
+--
+ALTER TABLE `product_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `user`

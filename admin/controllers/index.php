@@ -75,7 +75,14 @@
                     $_SESSION['product-iphone'] = $this->getObject("product");
                     require_once ('views/detail-order.php');
                 break;
-
+                case('detail'):
+                    $table = 'product';
+                    if (isset($_GET['id'])){
+                        $id = $_GET['id'];
+                    }
+                    $product = $this->getObject_id($id,$table);
+                    include_once 'views/product_details.php';
+                break;
                 case('list-product'):
                     $_SESSION['product'] = $this->getObject("product");
                     require_once ('views/list-product.php');
@@ -129,13 +136,14 @@
                         if(!empty($_POST['name']) && !empty($_POST['price']) && !empty($_POST['qty']) && !empty($_POST['description'])){
                             $table = 'product';
                             $name = $_POST['name'];
-                            $image = (isset($_SESSION['image-upload'])) ? $_SESSION['image-upload']['name'] : $product['image'];
+                            $image = (isset($_SESSION['image-upload'])) ? $_SESSION['image-upload']['name'] : $product[0]['image'];
                             $price = $_POST['price'];
                             $qty = $_POST['qty'];
                             $description = $_POST['description'];
-                            $this->editProduct($table,$id,$name,$image,$price,$qty,$content);
+                            $this->editProduct($table,$id,$name,$image,$price,$qty,$description);
                             $log="<p>Succesful!</p>";
                             $product['image'] = $image; 
+                            // $log="<p>OK!</p>";
                         }
                         else{
                             $log="<p>Error!</p>";
