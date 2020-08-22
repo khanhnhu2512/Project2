@@ -1,6 +1,8 @@
 <?php
 if (!isset($_SESSION)) {
     session_start();
+    echo "<pre>";
+    print_r($product_iphone);
 }
 ?>
 <!DOCTYPE html>
@@ -19,25 +21,93 @@ if (!isset($_SESSION)) {
         .profile button:hover {
             background-color: #000 !important;
         }
-        .profile .dropdown-item{
+
+        .profile .dropdown-item {
             background-color: #000 !important;
             color: #fff !important;
         }
+
         /* .profile .dropdown-item:hover{
             background-color: #fff !important;
             color: #000 !important;
         } */
-        .profile .dropdown-item a{
+        .profile .dropdown-item a {
             text-decoration: none;
             color: #fff !important;
         }
-        .profile .dropdown-item a:hover{
+
+        .profile .dropdown-item a:hover {
             color: #fff !important;
             /* background-color: #fff !important; */
         }
-        .profile .btn-dark:hover{
-            background-color:  #000 !important;
+
+        .profile .btn-dark:hover {
+            background-color: #000 !important;
             color: #fff;
+        }
+
+        .cart .dropdown-menu {
+            /* left: -100%; */
+            width: 268px;
+            padding: 0.5rem 0 0 0;
+        }
+
+        .cart .dropdown-item img {
+            width: 20%;
+            height: auto;
+        }
+
+        .cart .dropdown-item {
+            display: flex;
+            flex-direction: row;
+            padding: 0.25rem 0.5rem !important;
+        }
+
+        .cartProduct {
+            width: 100%;
+            margin-left: 5px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cartProduct P {
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .cartProduct-price {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+        }
+
+        .cartProduct-price p:last-child input {
+            width: 50px;
+        }
+
+        .cart .btn {
+            /* border: 0; */
+            border-radius: 0;
+        }
+
+        .total {
+            padding: 0 0.25rem;
+            text-align: end;
+            margin-bottom: 0.5rem;
+        }
+
+        .total span {
+            font-weight: bold;
+        }
+
+        .cart .dropdown-item a {
+            text-decoration: none;
+            width: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
@@ -74,7 +144,7 @@ if (!isset($_SESSION)) {
                     </li>
                 </ul>
             </div>
-            <form method="get">
+            <form method="post">
                 <div class="search-form mr-3" id="test">
                     <input type="text" class="form-control form-control-sm search-form-input" id="search-form-input" placeholder="Search...">
                     <button type="submit" class="btn btn-sm search-form-btn" id="search-form-btn">
@@ -84,11 +154,37 @@ if (!isset($_SESSION)) {
                     </button>
                 </div>
             </form>
-            <div class="btn btn-sm mr-1">
-                <a href="">
-
-                </a>
-                <i class="fas fa-shopping-cart text-white fa-2x btn-cart"></i>
+            <div class=" dropdown cart mr-1">
+                <!-- <i class="fas fa-shopping-cart text-white fa-2x btn-cart"></i> -->
+                <button class="btn btn-dark dropdown-toggle border-0" type="button" id="dropdownCart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-shopping-cart text-white fa-2x btn-cart"></i>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownCart">
+                    <?php $i = 0;
+                    if (isset($_SESSION['cart'])) {
+                        foreach ($_SESSION['cart'] as $key => $value) {
+                            $i++; ?>
+                            <div class="dropdown-item">
+                                <img src="../images/image-product/<?php echo $value['image']; ?>" alt="">
+                                <div class="cartProduct">
+                                    <p><?php echo $value['name']; ?></p>
+                                    <div class="cartProduct-price">
+                                        <p><?php echo $value['price']; ?>$</p>
+                                        <p>x <span>1</span></p>
+                                    </div>
+                                </div>
+                                <a href="index.php?method=delete-cart&id=<?php echo $value['id']; ?>">
+                                    <i class="fas fa-times fa-1x"></i>
+                                </a>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                        <?php } ?>
+                        <p class="total">Total: <span><?php echo $total; ?>$</span></p>
+                    <?php } ?>
+                    <div class="btn btn-danger w-100">
+                        <a class="btn-link" href="index.php?method=checkout">Check out</a>
+                    </div>
+                </div>
 
             </div>
             <div class="dropdown profile">
@@ -100,7 +196,6 @@ if (!isset($_SESSION)) {
                         <i class="fa fa-user-circle" aria-hidden="true"></i>
                         <a class="link" href="#">Account</a>
                     </div>
-
                     <div class="dropdown-divider"></div>
                     <div class="dropdown-item">
                         <i class="fa fa-cog" aria-hidden="true"></i>
@@ -169,7 +264,7 @@ if (!isset($_SESSION)) {
                 <h3 class="m-2"><a href="">See all iPhone models></a></h3>
             </div>
             <div class="container padding card-deck mt-2">
-                <?php foreach ($product as $key => $value) : ?>
+                <?php foreach ($product_iphone as $key => $value) : ?>
                     <div class="card border-0">
                         <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
                             <img class="card-img-bottom w-auto h-285" src="../images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
@@ -178,7 +273,7 @@ if (!isset($_SESSION)) {
                             <h4 class="card-title"><?php echo $value['name']; ?></h4>
                             <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
                             <div class="card-title">
-                                <a class="card-link" onclick="redirectLogin()">
+                                <a href="index.php?method=add-cart&id=<?php echo $value['id']; ?>" class="card-link" onclick="addCart()">
                                     <i class="fa fa-cart-plus fa-2x"></i>
                                 </a>
                             </div>
@@ -320,22 +415,8 @@ if (!isset($_SESSION)) {
         //     window.location = "index.php?method=login";
         // }
 
-        function btnSearch() {
-            var searchInput = document.getElementById("search-form-input");
-            var btn = document.getElementById("search-form-btn");
-            if (searchInput.style.opacity == 1) {
-                searchInput.style.opacity = '0';
-                btn.style.color = 'white';
-
-            } else {
-                searchInput.style.opacity = '1';
-                btn.style.color = 'black';
-
-            }
-
-            // console.log(searchInput.style);
-            var test = document.getElementById("test");
-            console.log(searchInput.style.opacity);
+        function addCart() {
+            alert("Done!");
         }
     </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>

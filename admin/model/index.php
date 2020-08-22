@@ -83,9 +83,9 @@
             // return $result; 
         }
 
-        public function addProduct($table,$name,$image,$price,$amount,$content){
+        public function addProduct($table,$name,$type,$image,$price,$qty,$description){
             $this->conn();
-            $sql = "INSERT INTO $table (name,image,price,amount,content) VALUES ('$name','$image',$price,$amount,'$content');";
+            $sql = "INSERT INTO $table (name,image,type,price,qty,description) VALUES ('$name','$image',$type,$price,$qty,'$description');";
             $query = mysqli_query($this->con,$sql);
             return $query;
         }

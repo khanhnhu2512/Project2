@@ -1,5 +1,7 @@
 <?php 
-
+    // echo "<pre>";
+    // print_r($product);
+    // echo $product[0];
 ?>
 
 <!DOCTYPE html>
@@ -80,6 +82,15 @@
             width: 50%;
             text-align: right;
         }
+        .img {
+            width: 768px;
+            height: auto;
+            margin: auto;
+        }
+        .img img{
+            width: auto;
+            height: auto;
+        }
     </style>
 </head>
 
@@ -133,25 +144,29 @@
                 </ul>
             </div>    
             <div class="content-display-detail">
+                <div class="product-display-detail" style="text-align: left;" >
+                <div class="img">
+                    <img src="../images/image-product/<?php echo (isset($_POST['update-img'])) ? $_SESSION['image-upload']['name'] : $product[0]['image']; ?>" alt="">
+                </div>
+                <form action="" method="post" enctype="multipart/form-data">
+                            Select image to upload:
+                            <input type="file" name="fileToUpload" id="fileToUpload">
+                            <input type="submit" value="Upload Image" name="update-img">
+                        </form><br>
                 <form action="" method="post">   
-                    <div class="product-display-detail">
-                        <?php if(isset($_POST['update'])){echo "<h3>".$log."</h3>";} ?>
-                        <label for="fullname">Fullname</label><input type="text" id="fullname" name="fullname" value="<?php echo (isset($_POST['update'])) ? $_POST['fullname'] : $user['0']['fullname']; ?>" ><br>
-                        <label for="username">Username</label><input type="text" id="username" name="username" value="<?php echo (isset($_POST['update'])) ? $_POST['username'] : $user['0']['username']; ?>"><br>
-                        <label for="password" >Password</label><input type="text" id="password" name="password" value="<?php echo (isset($_POST['update'])) ? $_POST['password'] : $user['0']['password']; ?>"><br>
-                        <label for="email">Email</label><input type="text" id="email" name="email" value="<?php echo (isset($_POST['update'])) ? $_POST['email'] : $user['0']['email']; ?>" ><br>
-                        <label for="lv">Permission</label>
-                        <select name="lv">
-                            <option value=1>Admin</option>
-                            <option value=2 <?php if(isset($_POST['update'])){ echo ($_POST['lv']==2) ? 'selected' : ''; }else{ echo ($user['0']['lv']==2) ? 'selected' : '';  }  ?> >User</option>
-                        </select>     
-                        <br>
-                        <input type="submit" name="update" value="Update">  
-                    </div>
+                        <?php echo $log; ?>
+                        <?php if(isset($_POST['add'])){echo "<h3>".$log."</h3>";} ?>
+                        <label for="name">Product Name</label><input type="text" id="name" name="name" value="<?php echo (isset($_POST['edit'])) ? $_POST['name'] : $product[0]['name']; ?>" ><br>
+                        
+                        <label for="price">Price</label><input type="text" id="price" name="price" value="<?php echo (isset($_POST['edit'])) ? $_POST['price'] : $product[0]['price']; ?>"><br>
+                        <label for="qty" >Quantity</label><input type="number" id="qty" name="qty" value="<?php echo (isset($_POST['edit'])) ? $_POST['qty'] : $product[0]['qty']; ?>"><br>
+                        <label for="description">Content</label><input type="text" id="description" name="description" value="<?php echo (isset($_POST['edit'])) ? $_POST['description'] : $product[0]['description']; ?>" ><br>
+                        <input type="submit" name="edit" value="Save">  
+                    
                 </form>
+                </div>
                 <!-- <a href="#" name="update">Update</a> -->
             </div>
-            
         </div>
         <div class="footer-background">
             <div class="footer">

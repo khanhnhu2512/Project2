@@ -72,13 +72,16 @@
         .product-display-detail .btn-update a:hover{
             background-color: green;
         }
-        .product-display-detail label{
-            width: 50%;
-            text-align: left;
+        .img{
+            width: 100px;
         }
-        .product-display-detail input{
-            width: 50%;
-            text-align: right;
+        .product-display-detail .img {
+            width: 100px;
+            margin: auto;
+        }
+        .img img{
+            width: 95px;
+            margin: 5px;
         }
     </style>
 </head>
@@ -132,24 +135,56 @@
                     </li>
                 </ul>
             </div>    
-            <div class="content-display-detail">
-                <form action="" method="post">   
-                    <div class="product-display-detail">
-                        <?php if(isset($_POST['update'])){echo "<h3>".$log."</h3>";} ?>
-                        <label for="fullname">Fullname</label><input type="text" id="fullname" name="fullname" value="<?php echo (isset($_POST['update'])) ? $_POST['fullname'] : $user['0']['fullname']; ?>" ><br>
-                        <label for="username">Username</label><input type="text" id="username" name="username" value="<?php echo (isset($_POST['update'])) ? $_POST['username'] : $user['0']['username']; ?>"><br>
-                        <label for="password" >Password</label><input type="text" id="password" name="password" value="<?php echo (isset($_POST['update'])) ? $_POST['password'] : $user['0']['password']; ?>"><br>
-                        <label for="email">Email</label><input type="text" id="email" name="email" value="<?php echo (isset($_POST['update'])) ? $_POST['email'] : $user['0']['email']; ?>" ><br>
-                        <label for="lv">Permission</label>
-                        <select name="lv">
-                            <option value=1>Admin</option>
-                            <option value=2 <?php if(isset($_POST['update'])){ echo ($_POST['lv']==2) ? 'selected' : ''; }else{ echo ($user['0']['lv']==2) ? 'selected' : '';  }  ?> >User</option>
-                        </select>     
-                        <br>
-                        <input type="submit" name="update" value="Update">  
-                    </div>
-                </form>
-                <!-- <a href="#" name="update">Update</a> -->
+            <div class="content-display-detail">   
+                <div class="product-display-detail">
+                    <div class="product">
+                        <h3>Iphone</h3>
+                        <table border="1px" width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td style="width: 40px">STT</td>
+                                <td style="width: 100px">Image</td>
+                                <td style="width: 300px">Name</td>
+                                <td style="width: 100px">Amount</td>
+                                <td>Price</td>
+                                <td style="width: 100px"></td>
+                            </tr>
+                            
+                            <tr>
+                            <?php  $i=0; foreach ($_SESSION['product'] as $key => $value){ $i++; ?>
+                                <a href="">
+                                <td style="width: 40px">
+                                    <?php echo $i; ?>
+                                </td>
+                                <td class="img">
+                                    <img  src="../images/image-product/<?php echo $value['image'];?>">
+                                </td>
+                                <td style="width: 300px">
+                                    <?php echo ($value['name']); ?>
+                                </td>
+                                <td style="width: 100px">
+                                    <?php echo ($value['qty']); ?>
+                                </td>
+                                <td>
+                                    <p>$<?php echo $value['price']; ?></p>
+                                </td>
+                                </a>
+                                <td class="btn">
+                                    <div class="btn-list"><a href="index.php?method=edit-product&id=<?php echo $value['id'];?>">Edit</a></div>
+                                    <div class="btn-del"><a href="index.php?method=delete-product&id=<?php echo $value['id'];?>">Delete</a></div>
+                                </td>
+                            </tr>
+                            
+                            <?php } ?>
+                            
+                            <tr>
+                                <td class="" colspan="7">
+                                    <div class="btn-pay"><a href="index.php?method=add-product">Add product</a></div>
+                                </td>
+                            </tr>
+                            <?php echo (isset($logDelete)) ? "<script type='text/javascript'>alert('Deleted!');</script>" : ""; ?>
+                        </table>
+                    </div>                  
+                </div>
             </div>
             
         </div>
