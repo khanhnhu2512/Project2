@@ -187,10 +187,10 @@
         .display__body-btn{
             width: 150px;
             height: 100%;
-            display: flex;
+            /* display: flex; */
             justify-content: center;
             align-items: center;
-            border: 1px solid #000;
+            /* border: 1px solid #000; */
         }
     </style>
 </head>

@@ -10,6 +10,8 @@
     <link type="text/css" rel="stylesheet" href="../libs/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="../libs/css/style.css">
     <script src="../libs/jquery/jquery-3.5.1.min.js"></script>
+    <script src="../libs/jquery/jquery-3.5.1.slim.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
     <style>
         .container-fluid {
             width: 100%;
@@ -288,18 +290,17 @@
                         <p class="col-form-label">Description...</p>
                         <textarea name="description" id="description" cols="100" rows="5"><?php echo (isset($_POST['submit'])) ? $_POST['description'] : ""; ?></textarea>
                     </div>
-
-                
+                    
                     <legend class="col">Upload Image</legend>
                     <div class="img-upload">
-                        <img src="../images/image-product/<?php echo (isset($_POST['submit'])) ? $_SESSION['image-upload']['name'] : ""; ?>" alt="">
+                        <img src="../images/image-product/<?php echo (isset($image)) ? $image : ""; ?>" alt="">
                     </div>
                     <div class="form-group col">
                         <label for="fileToUpload">Chọn file</label>
                         <input id="fileToUpload" type="file" name="fileToUpload" required="" />
                     </div>
                     <!-- <div class="form-group col">
-                        <button id="upload" class="btn btn-primary">Upload</button>
+                        <button id="upload" type="button" class="btn btn-primary">Upload</button>
                     </div> -->
                     <div class="btn w-100">
                         <input class="btn btn-lg btn-danger" name="submit" type="submit" value="Submit">
@@ -315,7 +316,6 @@
 
     <script type="text/javascript">
         $('#upload').on('click', function() {
-
             var file_data = $('#fileToUpload').prop('files')[0];
             //lấy ra kiểu file
             var type = file_data.type;
@@ -331,26 +331,26 @@
                 console.log(file_data);
                 //sử dụng ajax post
                 $.ajax({
-                    url: 'index.php?method=add-product&action=uploadimg', // gửi đến file upload.php 
+                    url: '../admin/controllers/index.php', // gửi đến file upload.php 
                     dataType: 'text',
                     cache: false,
                     contentType: false,
                     processData: false,
                     data: form_data,
-                    type: 'post',
+                    method: 'post',
                     success: function(res) {
-                        console.log("ok");
+                        console.log("ok1");
                         $('#fileToUpload').val('');
                     }
                 });
             } else {
                 console.log(file_data.type);
-                $('#fileToUpload').val('');
+                // $('#fileToUpload').val('');
             }
             return false;
         })
     </script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
 </body>

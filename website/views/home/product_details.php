@@ -31,15 +31,15 @@ if (!isset($_SESSION)) {
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav nav-pills ml-auto mr-auto justify-content-center">
                     <li class="nav-item pr-5">
-                        <a class="nav-link text-light" href="#">Home</a>
+                        <a class="nav-link text-light" href="index.php?method=home">Home</a>
                     </li>
                     <li class="nav-item dropdown pr-5">
                         <a class="nav-link dropdown-toggle text-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Products</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">iPhone</a>
-                            <a class="dropdown-item" href="#">iPad</a>
-                            <a class="dropdown-item" href="#">Mac</a>
-                            <a class="dropdown-item" href="#">AirPods</a>
+                            <a href="index.php?method=list-product&type=1" class="dropdown-item" href="#">iPhone</a>
+                            <a href="index.php?method=list-product&type=2" class="dropdown-item" href="#">iPad</a>
+                            <a href="index.php?method=list-product&type=3" class="dropdown-item" href="#">Macbook</a>
+                            <a href="index.php?method=list-product&type=4" class="dropdown-item" href="#">AirPods</a>
                         </div>
                     </li>
                     <li class="nav-item pr-5 ">
@@ -90,17 +90,18 @@ if (!isset($_SESSION)) {
         </div>
         <div class="product-info">
             <div class="product-info__info">
-                <div class="product-info__cart">
-                    <div class="btn btn-dark">
-                        <a class="btn-link">Add to cart</a>
-                    </div>
-                </div>
+                
                 <h4>INFORMATION</h4>
                 <p class=""><?php echo $product['description']; ?></p>
                 <div class="product-info__info-price">
-                    <p class="product-info__info-price-sale">$<?php echo $product['price']; ?>
-                        <span class="product-info__info-price-sell">$800</span>
-                    </p>
+                    <!-- <p class="product-info__info-price-sale">$<?php echo $product['price']; ?> -->
+                        <span class="product-info__info-price-sell">$<?php echo $product['price']; ?></span>
+                    <!-- </p> -->
+                </div>
+                <div class="product-info__cart">
+                    <div class="btn btn-dark">
+                        <a onclick="redirectLogin()" class="btn-link">Add to cart</a>
+                    </div>
                 </div>
 
             </div>
@@ -142,7 +143,7 @@ if (!isset($_SESSION)) {
     <script language="javascript">
         function redirectLogin() {
             alert("You need to login!");
-            window.location = "./website/views/users/login/index.php";
+            window.location = "index.php?method=login";
         }
 
         function btnSearch() {

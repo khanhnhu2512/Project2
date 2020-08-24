@@ -88,6 +88,7 @@ class C_website extends M_admin
                 $type = $_GET['type'];
                 $_SESSION['category'] = $this->getEverything_id("product_category", "id", $type);
                 $_SESSION['product'] = $this->getEverything_id("product", "type", $type);
+                $_SESSION['type'] = $this->getObject("product_category");
                 require_once('views/list-product.php');
                 break;
 
@@ -124,6 +125,8 @@ class C_website extends M_admin
                 $table = 'product';
                 $object = 'id';
                 $product = $this->getEverything_id($table, $object, $id);
+                $_SESSION['type']= $this->getObject("product_category");
+                $_SESSION['image-upload']['name'] = $product[0]['image'];
 
                 // print_r($product);
                 if (isset($_POST['update-img'])) {
@@ -168,20 +171,14 @@ class C_website extends M_admin
 
             case ('add-product'):
                 $log = null;
-                if (isset($_GET['action'])) {
-                    $action = $_GET['action'];
-                }
-                $_SESSION['type'] = $this->getObject("product_category");
-
-                if (isset($action)) {
-                    if ($action == 'uploadimg') {
-                        echo "ok";
+                $image = null;
+                if (isset($_FILES["fileToUpload"])) {
                         $target_dir = "../images/image-product/";
                         $_SESSION['image-upload'] = $_FILES["fileToUpload"];
                         $target_file = $target_dir . basename($_FILES['fileToUpload']["name"]);
                         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
                         $progress = move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
-                    }
+                        $image = $_SESSION['image-upload']['name'];
                 }
 
                 // if(isset($_SESSION['image-upload'])){echo " Test".$_SESSION['image-upload']['name'];}

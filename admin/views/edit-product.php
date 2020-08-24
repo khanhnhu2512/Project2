@@ -292,7 +292,7 @@
                 
                     <legend class="col">Upload Image</legend>
                     <div class="img-upload">
-                        <img src="../images/image-product/<?php echo (isset($_POST['submit'])) ? $_SESSION['image-upload']['name'] : $_SESSION['image-upload']['name']; ?>" alt="">
+                        <img src="../images/image-product/<?php echo (isset($_POST['submit'])) ? $_SESSION['image-upload']['name'] : $product[0]['image']; ?>" alt="">
                     </div>
                     <div class="form-group col">
                         <label for="fileToUpload">Chọn file</label>

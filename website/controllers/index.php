@@ -24,16 +24,61 @@
                 case('home'):
                     // $product = $this->m_users->getProduct();
                     //*page
-                    $table = 'product';
-                    $total_page = $this->m_users->getPagination($table,$limit);
-                    if($page>$total_page) $page=$total_page;  
-                    $start=($page-1)*$limit;
-                    $product = $this->m_users->pagination($table,$start,$limit);
+                    // $table = 'product';
+                    // $total_page = $this->m_users->getPagination($table,$limit);
+                    // if($page>$total_page) $page=$total_page;  
+                    // $start=($page-1)*$limit;
+                    // $product = $this->m_users->pagination($table,$start,$limit);
+                    $_SESSION['type'] = $this->getObject("product_category");
+                    $product = array();
+                    // echo "<pre>";
+                    // print_r($_SESSION['type']);
+                    foreach ($_SESSION['type'] as $k =>$val){
+                        switch ($val['id']){
+                            case '1':
+                                $product[$val['id']] = $this->Random('product','type',$val['id'],4);       
+                            break;
+                            case '2':
+                                $product[$val['id']] = $this->Random('product','type',$val['id'],3);       
+                            break;
+                            case '3':
+                                $product[$val['id']] = $this->Random('product','type',$val['id'],2);       
+                            break;
+                            case '4':
+                                $product[$val['id']] = $this->Random('product','type',$val['id'],3);       
+                            break;
+                        }
+                    }
+                    // echo "<pre>";
+                    // print_r($product);
                     
                     //*page
                     include_once 'website/views/home/index.php';
                 break;
-                
+                case ('list-product'):
+                    $type = $_GET['type'];
+                    $_SESSION['category'] = $this->getEverything_id("product_category", "id", $type);
+                    // echo "<pre>";
+                    // print_r($_SESSION['category']['name']);
+                    $_SESSION['product'] = $this->getEverything_id("product", "type", $type);
+                    $product = $_SESSION['product'];
+                    switch ($_SESSION['category'][0]['id']){
+                        case '1':
+                            $col = 3;
+                        break;
+                        case '2':
+                            $col = 4;
+                        break;
+                        case '3':
+                            $col = 6;
+                        break;
+                        case '4':
+                            $col = 4;
+                        break;
+                    }
+                    $_SESSION['type'] = $this->getObject("product_category");
+                    require_once('website/views/home/list-product.php');
+                    break;
                 case('detail'):
                     $table = 'product';
                     if (isset($_GET['id'])){
@@ -113,4 +158,3 @@
     //     header('location:admin.php');
     //     }
     // }
-?>

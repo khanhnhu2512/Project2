@@ -109,6 +109,51 @@ if (!isset($_SESSION)) {
             align-items: center;
             justify-content: center;
         }
+        .body{
+            padding: 1rem;
+        }
+        .body h1{
+            text-align: center;
+        }
+        .cart-showtable{
+            width: 100%;
+            display: flex;
+        }
+        .cart-showtable .img {
+            width: 100px;
+
+        }
+
+        .cart-showtable .img img {
+            width: 100%;
+            height: auto;
+            padding: 0.5rem;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .cart-showtable table tr td{        
+            font-size: 1rem;
+            text-align: center;    
+        }
+        .cart-showtable table tr:first-child td{
+            background-color: #000;
+            line-height: 50px;
+            font-weight: bold;
+            font-size: 1.15rem !important;
+            text-align: center;
+            color: #be1010 ;
+        }
+        .cart-showtable-btn{
+            width: 150px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #000;
+        }
     </style>
 </head>
 
@@ -154,37 +199,6 @@ if (!isset($_SESSION)) {
                     </button>
                 </div>
             </form>
-            <div class=" dropdown cart mr-1">
-                <!-- <i class="fas fa-shopping-cart text-white fa-2x btn-cart"></i> -->
-                <button class="btn btn-dark dropdown-toggle border-0" type="button" id="dropdownCart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-shopping-cart text-white fa-2x btn-cart"></i>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownCart">
-                    <?php $i = 0;
-                    if (isset($_SESSION['cart'])) {
-                        foreach ($_SESSION['cart'] as $key => $value) {
-                            $i++; ?>
-                            <div class="dropdown-item">
-                                <img src="../images/image-product/<?php echo $value['image']; ?>" alt="">
-                                <div class="cartProduct">
-                                    <p><?php echo $value['name']; ?></p>
-                                    <div class="cartProduct-price">
-                                        <p><?php echo $value['price']; ?>$</p>
-                                        <p>x <span>1</span></p>
-                                    </div>
-                                </div>
-                                <a href="index.php?method=delete-cart&id=<?php echo $value['id']; ?>">
-                                    <i class="fas fa-times fa-1x"></i>
-                                </a>
-                            </div>
-                            <div class="dropdown-divider"></div>
-                        <?php } ?>
-                        <p class="total">Total: <span><?php echo $total; ?>$</span></p>
-                    <?php } ?>
-                    <div class="btn btn-danger w-100">Check out</div>
-                </div>
-
-            </div>
             <div class="dropdown profile">
                 <button class="btn btn-dark dropdown-toggle border-0" type="button" id="dropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <?php echo isset($_SESSION['user']) ? $_SESSION['user']['fullname'] : ""; ?>
@@ -207,85 +221,69 @@ if (!isset($_SESSION)) {
                 </div>
             </div>
         </div>
-
-
-        </div>
     </nav>
-    <div>
-        <?php if (isset($_SESSION['cart'])) { ?>
-            <table border="1px" width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td style="width: 40px">STT</td>
-                    <td style="width: 100px">Image</td>
-                    <td style="width: 300px">Name</td>
-                    <td style="width: 100px">Qty</td>
-                    <td>Price</td>
-                    <td style="width: 200px">Total</td>
-                    <td style="width: 100px"></td>
-                </tr>
-                <form action="" method="post">
+    <div class="body">
+        <h1>Check out</h1>
+        <h3>Your order</h3>
+        <div class="cart-showtable">
+            <?php if (isset($_SESSION['cart'])) { ?>
+                <table border="1px" width="100%" cellpadding="0" cellspacing="0">
                     <tr>
-                        <?php $i = 0;
-                        foreach ($_SESSION['cart'] as $key => $value) {
-                            $i++; ?>
-                            <td style="width: 40px">
-                                <?php echo $i; ?>
-                            </td>
-                            <td class="img">
-                                <img src="../images/image-product/<?php echo $value['image']; ?>">
-                            </td>
-                            <td style="width: 300px">
-                                <?php echo ($value['name']); ?>
-                            </td>
-                            <td style="width: 100px">
-                                <input class="qty" style="width: 40px; text-align:center; " type="number" name="qty"  value="<?php echo $value['qty']; ?>">
-                            </td>
-                            <td>
-                                <p class="price"><?php echo $value['price']; ?></p>
-                            </td>
-                            <td>
-                                <p class="total"><?php echo ($value['amount-session'] * $value['price']); ?></p>
-                            </td>
-                            <td class="btn">
-                                <div class="btn-del"><a href="index.php?method=delete-cart&id=<?php echo $value['id']; ?>">Delete</a></div>
-                            </td>
+                        <td style="width: 40px">STT</td>
+                        <td style="width: 100px">Image</td>
+                        <td style="width: 300px">Name</td>
+                        <td style="width: 100px">Qty</td>
+                        <td>Price</td>
+                        <td style="width: 200px">Total</td>
+                        <td style="width: 100px"></td>
                     </tr>
+                    <form action="" method="post">
+                        <tr>
+                            <?php $i = 0;
+                            foreach ($_SESSION['cart'] as $key => $value) {
+                                $i++; ?>
+                                <td style="width: 40px">
+                                    <?php echo $i; ?>
+                                </td>
+                                <td class="img">
+                                    <img src="../images/image-product/<?php echo $value['image']; ?>">
+                                </td>
+                                <td style="width: 300px">
+                                    <?php echo ($value['name']); ?>
+                                </td>
+                                <td style="width: 100px">
+                                    <input class="qty" style="width: 40px; text-align:center; " type="number" name="qty" value="<?php echo $value['qty']; ?>">
+                                </td>
+                                <td>
+                                    <p class="price"><?php echo $value['price']; ?></p>
+                                </td>
+                                <td>
+                                    <p><?php echo ($value['qty'] * $value['price']); ?></p>
+                                </td>
+                                <td class="btn-btn-group">
+                                    <div class="btn btn-danger">
+                                        <a href="index.php?method=delete-cart&id=<?php echo $value['id']; ?>">
+                                            Delete
+                                        </a>
+                                </div>
+                                </td>
+                        </tr>
 
-                <?php } ?>
-
-                <tr>
-                    <td colspan="5" ;>
-                    </td>
-                    <td>
-                        <p id="subtotal"></p>
-                        <?php
-                        // $total_final=0;
-                        $_SESSION['total'] = 0;
-                        foreach ($_SESSION['cart'] as $key => $value) {
-                            $_SESSION['total'] += $_SESSION['cart'][$key]['price'] * $_SESSION['cart'][$key]['amount-session'];
-                        }
-                        ?>
-                    </td>
-                    <td class="">
-                        <div class="btn-pa">
-                            <!-- <a href="index.php?method=pay-now"> -->
-                            <input type="submit" name="pay" value="Pay Now">
-                            <!-- </a> -->
-                        </div>
-                    </td>
-                </tr>
-                </form>
-            <?php
-            if (isset($_POST['pay'])) {
-                $_SESSION['cart'][$key]['amount-session'] = $_POST['amount-session' . $key];
+                    <?php } ?>
+                    </form>
+                <?php
+                if (isset($_POST['pay'])) {
+                    $_SESSION['cart'][$key]['amount-session'] = $_POST['amount-session' . $key];
+                }
+            } else {
+                echo "<h1>Giỏ hàng trống!</h1>";
             }
-        } else {
-            echo "<h1>Giỏ hàng trống!</h1>";
-        }
-            ?>
-            </table>
+                ?>
+                </table>
+        </div>
+        
     </div>
-    </div>
+
 
     <footer>
         <div class="container-fluid padding mt-4">

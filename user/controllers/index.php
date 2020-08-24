@@ -31,12 +31,16 @@ class C_website extends M_users
                 if ($page > $total_page) $page = $total_page;
                 $start = ($page - 1) * $limit;
                 $product_iphone = $this->m_users->pagination($table, $start, $limit);
-
+                if(!isset($_SESSION['cart-cout'])){
+                    $_SESSION['cart-count'] = 0;
+                }
                 if (isset($_SESSION['cart'])) {
                     $total = 0;
+                    $_SESSION['cart-count'] = count($_SESSION['cart']);
                     foreach ($_SESSION['cart'] as $key => $value) {
                         $total += $_SESSION['cart'][$key]['price'];
                     }
+
                 }
                 //                 echo "<pre>";
                 // print_r($_SESSION['cart']);
@@ -59,17 +63,26 @@ class C_website extends M_users
                 if (!isset($_SESSION['cart'][$id])) {
                     $table = 'product';
                     $product = $this->getObject_id($id, $table);
+
                     $_SESSION['cart'][$id] = $product;
                     $_SESSION['cart'][$id]['qty'] = 1;
+                    $product['cart-count'] = count($_SESSION['cart']);
                 }
-                $table = 'product';
-                // $product_iphone=$this->m_users->getEverything_id($table,"type",1);
-                $total_page = $this->m_users->getPagination($table, $limit);
-                if ($page > $total_page) $page = $total_page;
-                $start = ($page - 1) * $limit;
-                $product_iphone = $this->m_users->pagination($table, $start, $limit);
-
-                header('location:index.php?method=home');
+                // $data = array(
+                //     'name' => $_SESSION['cart'][$id]['name'];
+                //     'image' => $_SESSION['cart'][$id]['image'];
+                //     'price' => $_SESSION['cart'][$id]['price'];
+                //     'cart-count' => count($_SESSION['cart']);
+                // );
+                // die (json_encode($data));    
+                // $table = 'product';
+                // // $product_iphone=$this->m_users->getEverything_id($table,"type",1);
+                // $total_page = $this->m_users->getPagination($table, $limit);
+                // if ($page > $total_page) $page = $total_page;
+                // $start = ($page - 1) * $limit;
+                // $product_iphone = $this->m_users->pagination($table, $start, $limit);
+                // $_SESSION['cart-count'] ++;
+                // header('location:index.php?method=home');
                 // if(isset($_SESSION['cart'])){
 
                 //         if(isset($_SESSION['cart'][$id])){
@@ -85,10 +98,10 @@ class C_website extends M_users
                 //     }
                 // else{
                 //     // $_SESSION['cart'][$id]['amount-session']=1;
-                //     header('location:index.php');
+                    header('location:index.php');
                 //     exit();
                 // }
-                // include_once 'views/index.php';
+                include_once 'views/index.php';
 
                 break;
             case ('list-cart'):
@@ -103,6 +116,7 @@ class C_website extends M_users
                 $id = isset($_GET['id']) ? $_GET['id'] : "";
                 if (isset($_SESSION['cart'][$id])) {
                     unset($_SESSION['cart'][$id]);
+                    // $_SESSION['cart-count'] --;
                     // echo "xoa";
                 }
                 header('location:index.php?method=home');
