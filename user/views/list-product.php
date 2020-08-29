@@ -1,9 +1,7 @@
-<?php
-if (!isset($_SESSION)) {
-    session_start();
-    echo "<pre>";
-    print_r($product_iphone);
-}
+<?php 
+    if(!isset($_SESSION)){
+        session_start();
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,9 +14,7 @@ if (!isset($_SESSION)) {
     <link type="text/css" rel="stylesheet" href="../libs/fontawesome-free-5.13.0-web/css/all.css">
     <link type="text/css" rel="stylesheet" href="../libs/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="../libs/css/style.css">
-    <script type="text/javascript" src="../libs/jquery/jquery-3.5.1.slim.min.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
-    <!-- <script src="../libs/jquery/jquery-3.5.1.min.js"></script> -->
+    <script src="../libs/jquery/jquery-3.5.1.min.js"></script>
     <style>
         .profile button:hover {
             background-color: #000 !important;
@@ -145,7 +141,7 @@ if (!isset($_SESSION)) {
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav nav-pills ml-auto mr-auto justify-content-center">
                     <li class="nav-item pr-5">
-                        <a class="nav-link text-light" href="#">Home</a>
+                        <a class="nav-link text-light" href="index.php?method=home">Home</a>
                     </li>
                     <li class="nav-item dropdown pr-5">
                         <a class="nav-link dropdown-toggle text-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Products</a>
@@ -164,7 +160,7 @@ if (!isset($_SESSION)) {
                     </li>
                 </ul>
             </div>
-            <form method="post">
+            <form method="get">
                 <div class="search-form mr-3" id="test">
                     <input type="text" class="form-control form-control-sm search-form-input" id="search-form-input" placeholder="Search...">
                     <button type="submit" class="btn btn-sm search-form-btn" id="search-form-btn">
@@ -274,91 +270,12 @@ if (!isset($_SESSION)) {
     <!-- Body -->
     <div class="container-fluid padding">
         <div class="row welcome text-center pt-5 justify-content-center">
-            <div class="col-12">
-                <h1 class="display-2">We have have everything you need!</h1>
+            <div class="col-12 mt-5 mb-5 justify-content-center">
+                <h1 class="display-4"><?php echo $_SESSION['category'][0]['name']; ?></h1>
             </div>
-            <!-- Horizontal Rule -->
-            <hr>
-            <!-- Product iPhone-->
-            <div class="col-12 mt-5">
-                <h1 class="display-4">First, Choose an iPhone</h1>
-                <h3 class="m-2"><a href="index.php?method=list-product&type=1">See all iPhone models></a></h3>
-            </div>
-            <div class="container padding card-deck mt-2">
-                <?php foreach ($product[1] as $key => $value): ?>
-                <div class="card border-0">
-                    <a href="index.php?method=detail&id=<?php echo $value['id'];?>">
-                        <img class="card-img-bottom w-auto h-285" src="../images/image-product/<?php echo $value['image'];?>" alt="Card image cap">
-                    </a>
-                    <div class="card-body">
-                        <h4 class="card-title"><?php echo $value['name']; ?></h4>
-                        <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
-                        <div class="card-title">
-                        <a href="index.php?method=add-cart&id=<?php echo $value['id']; ?>" class="card-link" ">
-                                <i class="fa fa-cart-plus fa-2x"></i>
-                            </a>
-                        </div>
-                        <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id'];?>">Learn more ></a>
-                    </div>
-                </div>
-                <?php endforeach; ?>
-            </div>
-            <!-- Product Mac-->
-            <div class="col-12 mt-5">
-                <h1 class="display-4">And an iPad</h1>
-                <h3 class="m-2"><a href="index.php?method=list-product&type=2">See all iPad models></a></h3>
-            </div>
-            <div class="container padding card-deck mt-2">
-            <?php foreach ($product[2] as $key => $value): ?>
-                <div class="card border-0">
-                    <a href="index.php?method=detail&id=<?php echo $value['id'];?>">
-                        <img class="card-img-bottom w-auto h-285" src="../images/image-product/<?php echo $value['image'];?>" alt="Card image cap">
-                    </a>
-                    <div class="card-body">
-                        <h4 class="card-title"><?php echo $value['name']; ?></h4>
-                        <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
-                        <div class="card-title">
-                        <a href="index.php?method=add-cart&id=<?php echo $value['id']; ?>" class="card-link" ">
-                                <i class="fa fa-cart-plus fa-2x"></i>
-                            </a>
-                        </div>
-                        <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id'];?>">Learn more ></a>
-                    </div>
-                </div>
-                <?php endforeach; ?>
-            </div>
-            <div class="col-12 mt-5">
-                <h1 class="display-4">And, What about a Macbook for work?</h1>
-                <h3 class="m-2"><a href="index.php?method=list-product&type=3">See all Macbook models></a></h3>
-            </div>
-            <div class="container padding card-deck mt-2">
-            <?php foreach ($product[3] as $key => $value): ?>
-                <div class="card border-0">
-                    <a href="index.php?method=detail&id=<?php echo $value['id'];?>">
-                        <img class="card-img-bottom w-auto h-285" src="../images/image-product/<?php echo $value['image'];?>" alt="Card image cap">
-                    </a>
-                    <div class="card-body">
-                        <h4 class="card-title"><?php echo $value['name']; ?></h4>
-                        <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
-                        <div class="card-title">
-                        <a href="index.php?method=add-cart&id=<?php echo $value['id']; ?>" class="card-link" ">
-                                <i class="fa fa-cart-plus fa-2x"></i>
-                            </a>
-                        </div>
-                        <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id'];?>">Learn more ></a>
-                    </div>
-                </div>
-                <?php endforeach; ?>
-                
-            </div>
-            <!-- Product Mac-->
-            <div class="col-12 mt-5">
-                <h1 class="display-4">It'll perfect with an AirPods</h1>
-                <h3 class="m-2"><a href="index.php?method=list-product&type=4">See all AirPods models></a></h3>
-            </div>
-            <div class="container padding card-deck mt-2">
-            <?php foreach ($product[4] as $key => $value): ?>
-                <div class="card border-0">
+            <div class="container padding card-deck fl mt-2">
+                <?php foreach ($product as $key => $value): ?>
+                <div class="col-<?php echo $col; ?> border-0">
                     <a href="index.php?method=detail&id=<?php echo $value['id'];?>">
                         <img class="card-img-bottom w-auto h-285" src="../images/image-product/<?php echo $value['image'];?>" alt="Card image cap">
                     </a>
@@ -374,39 +291,9 @@ if (!isset($_SESSION)) {
                     </div>
                 </div>
                 <?php endforeach; ?>
-                
             </div>
         </div>
     </div>
-    <footer>
-        <div class="container-fluid padding mt-4">
-            <div class="row text-center">
-                <div class="col-md-4">
-                    <hr class="light">
-                    <p>111-222-3333</p>
-                    <p>mymail@gmail.com</p>
-                    <p>Bach Mai street, Hanoi, Vietnam</p>
-                </div>
-                <div class="col-md-4">
-                    <hr class="light">
-                    <h5>Working hours</h5>
-                    <p>Monday-Friday: 8am - 5pm</p>
-                    <p>Weekend: 8am - 12am</p>
-                </div>
-                <div class="col-md-4">
-                    <hr class="light">
-                    <h5>Services</h5>
-                    <p>Outsourcing</p>
-                    <p>Website development</p>
-                    <p>Mobile applications</p>
-                </div>
-                <div class="col-12 ">
-                    <hr class="light-100">
-                    <p>Designed with all the love in the world by KhanhNhu2512.</p>
-                    <p>Copyright © 2020 KhanhNhu's N-BUY. All rights reserved.</p>
-                </div>
-            </div>
-        </div>
     <footer>
         <div class="container-fluid padding mt-4">
             <div class="row text-center">
@@ -441,39 +328,25 @@ if (!isset($_SESSION)) {
 
 
     <script language="javascript">
-        // function redirectLogin() {
-        //     alert("You need to login!");
-        //     window.location = "index.php?method=login";
-        // }
-        function reload() {
-            location.reload();
+        function btnSearch() {
+            var searchInput = document.getElementById("search-form-input");
+            var btn = document.getElementById("search-form-btn");
+            if (searchInput.style.opacity == 1) {
+                searchInput.style.opacity = '0';
+                btn.style.color = 'white';
 
-        }
-        function addCart() { ///function addCart(id) {
-            // console.log(id);
-            // var url = 'index.php?method=add-cart&id=' + id;
-            // var cartCount = document.getElementById('cart-count').innerHTML;
-            // //sử dụng ajax post
-            // $.ajax({
-            //     url: url, // gửi đến file upload.php 
-            //     dataType: 'json',
-            //     cache: false,
-            //     contentType: false,
-            //     processData: false,
-            //     data: {},
-            //     method: 'post',
-            //     success: function(res) {
-            //         if ($.trim(result.image) != '') {
-            //             $('#image').append(result.image);
-            //         }
-            //         console.log(url);
-            //         // $('#fileToUpload').val('');
-            //     }
-            // });
-            alert ("Done!");
+            } else {
+                searchInput.style.opacity = '1';
+                btn.style.color = 'black';
+
+            }
+
+            // console.log(searchInput.style);
+            var test = document.getElementById("test");
+            console.log(searchInput.style.opacity);
         }
     </script>
-    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script> -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
 </body>

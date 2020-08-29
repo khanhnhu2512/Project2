@@ -73,7 +73,7 @@ class C_website extends M_admin
                 $table = 'order_detail';
                 $object = 'id_order';
                 $_SESSION['order-detail'] = $this->getEverything_id($table, $object, $id);
-                $_SESSION['product-iphone'] = $this->getObject("product");
+                $_SESSION['product'] = $this->getObject("product");
                 require_once('views/detail-order.php');
                 break;
             case ('detail'):
@@ -105,10 +105,10 @@ class C_website extends M_admin
                 if (isset($_POST['update'])) {
                     $fullname = $_POST['fullname'];
                     $username = $_POST['username'];
-                    $password = $_POST['password'];
+                    // $password = $_POST['password'];
                     $email = $_POST['email'];
                     $lv = $_POST['lv'];
-                    $this->editUser($table, $id, $username, $password, $fullname, $email, $lv);
+                    $this->editUser($table, $id, $username, $fullname, $email, $lv);
                     $log = "Done!";
                     $user['lv'] = $lv;
                 }

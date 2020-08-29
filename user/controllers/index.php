@@ -23,24 +23,34 @@ class C_website extends M_users
 
         switch ($method) {
             case ('home'):
-                // $product = $this->m_users->getProduct();
-                //*page
-                $table = 'product';
-                // $product_iphone=$this->m_users->getEverything_id($table,"type",1);
-                $total_page = $this->m_users->getPagination($table, $limit);
-                if ($page > $total_page) $page = $total_page;
-                $start = ($page - 1) * $limit;
-                $product_iphone = $this->m_users->pagination($table, $start, $limit);
-                if(!isset($_SESSION['cart-cout'])){
+                $_SESSION['type'] = $this->getObject("product_category");
+                $product = array();
+                foreach ($_SESSION['type'] as $k => $val) {
+                    switch ($val['id']) {
+                        case '1':
+                            $product[$val['id']] = $this->Random('product', 'type', $val['id'], 4);
+                            break;
+                        case '2':
+                            $product[$val['id']] = $this->Random('product', 'type', $val['id'], 3);
+                            break;
+                        case '3':
+                            $product[$val['id']] = $this->Random('product', 'type', $val['id'], 2);
+                            break;
+                        case '4':
+                            $product[$val['id']] = $this->Random('product', 'type', $val['id'], 3);
+                            break;
+                    }
+                }
+                if (!isset($_SESSION['cart-cout'])) {
                     $_SESSION['cart-count'] = 0;
                 }
                 if (isset($_SESSION['cart'])) {
-                    $total = 0;
+                    $_SESSION['cart-total'] = 0;
                     $_SESSION['cart-count'] = count($_SESSION['cart']);
                     foreach ($_SESSION['cart'] as $key => $value) {
-                        $total += $_SESSION['cart'][$key]['price'];
+                        $_SESSION['cart-total'] += $_SESSION['cart'][$key]['price'];
                     }
-
+                    $total = $_SESSION['cart-total'];
                 }
                 //                 echo "<pre>";
                 // print_r($_SESSION['cart']);
@@ -57,6 +67,43 @@ class C_website extends M_users
                 header("location:../index.php");
                 break;
 
+            case ('list-product'):
+                $type = $_GET['type'];
+                $_SESSION['category'] = $this->getEverything_id("product_category", "id", $type);
+                // echo "<pre>";
+                // print_r($_SESSION['category']);
+                $_SESSION['product'] = $this->getEverything_id("product", "type", $type);
+                $product = $_SESSION['product'];
+
+                // echo "<pre>";
+                // print_r($product);+
+
+                $_SESSION['type'] = $this->getObject("product_category");
+
+                switch ($_SESSION['category'][0]['id']) {
+                    case '1':
+                        $col = 3;
+                        break;
+                    case '2':
+                        $col = 4;
+                        break;
+                    case '3':
+                        $col = 6;
+                        break;
+                    case '4':
+                        $col = 4;
+                        break;
+                }
+                if (isset($_SESSION['cart'])) {
+                    $total = 0;
+                    $_SESSION['cart-count'] = count($_SESSION['cart']);
+                    foreach ($_SESSION['cart'] as $key => $value) {
+                        $total += $_SESSION['cart'][$key]['price'];
+                    }
+                }
+
+                require_once('views/list-product.php');
+                break;
 
             case ('add-cart'):
                 $id = isset($_GET['id']) ? $_GET['id'] : "";
@@ -68,37 +115,8 @@ class C_website extends M_users
                     $_SESSION['cart'][$id]['qty'] = 1;
                     $product['cart-count'] = count($_SESSION['cart']);
                 }
-                // $data = array(
-                //     'name' => $_SESSION['cart'][$id]['name'];
-                //     'image' => $_SESSION['cart'][$id]['image'];
-                //     'price' => $_SESSION['cart'][$id]['price'];
-                //     'cart-count' => count($_SESSION['cart']);
-                // );
-                // die (json_encode($data));    
-                // $table = 'product';
-                // // $product_iphone=$this->m_users->getEverything_id($table,"type",1);
-                // $total_page = $this->m_users->getPagination($table, $limit);
-                // if ($page > $total_page) $page = $total_page;
-                // $start = ($page - 1) * $limit;
-                // $product_iphone = $this->m_users->pagination($table, $start, $limit);
-                // $_SESSION['cart-count'] ++;
-                // header('location:index.php?method=home');
-                // if(isset($_SESSION['cart'])){
 
-                //         if(isset($_SESSION['cart'][$id])){
-
-                //             $_SESSION['cart'][$id]['amount-session']++;
-
-                //         }
-                //         else{
-                //             $_SESSION['cart'][$id]['amount-session']=1;
-
-                //         }
-                //         header('location:index.php');
-                //     }
-                // else{
-                //     // $_SESSION['cart'][$id]['amount-session']=1;
-                    header('location:index.php');
+                header('location:index.php');
                 //     exit();
                 // }
                 include_once 'views/index.php';
@@ -133,24 +151,62 @@ class C_website extends M_users
                 break;
 
 
-
-            case ('checkout'):
-                if (isset($_POST['payment'])) {
-                    $_SESSION['payment-method'] = $_POST['payment-method'];
-                    $_SESSION['address'] = $_POST['address'];
-                    $add_order_list = $this->m_users->addOrderList('order_list', $_SESSION['user']['username'], $_SESSION['total-payment'], $_SESSION['address'], $_SESSION['payment-method']);
-                    if ($add_order_list) {
-                        $log = "Successful!";
-                    } else {
-                        $log = "Error!";
-                    }
-                    $order_id = $this->m_users->getOrderId('order_list');
-                    $i = 0;
-                    $count = count(array_keys($_SESSION['cart']));
-                    foreach ($_SESSION['cart'] as $key => $value) {  //giai phap la function addOrderList se tra ve gia tri cua $order_id luon
-                        $add_order_detail = $this->m_users->addOrderDetail('order_detail', $order_id['id_order'], $key, $value['price'], $value['qty']);
-                    }
+            case ('change-qty'):
+                if (isset($_GET['id'])) {
+                    $id = $_GET['id'];
                 }
+                if (isset($_POST['qty'])){
+                    $_SESSION['cart'][$id]['qty'] = $_POST['qty'];
+                }
+                $_SESSION['cart-total'] = 0;
+                foreach ($_SESSION['cart'] as $key => $value) {
+                    $_SESSION['cart-total'] += $_SESSION['cart'][$key]['price'];
+                }
+                $result = array(
+                    'total' => $_SESSION['cart-total']
+                );
+                die (json_encode($result));
+
+                break;
+            case ('checkout'):
+                // if (isset($_POST['payment'])) {
+                //     $_SESSION['payment-method'] = $_POST['payment-method'];
+                //     $_SESSION['address'] = $_POST['address'];
+                //     $add_order_list = $this->m_users->addOrderList('order_list', $_SESSION['user']['username'], $_SESSION['total-payment'], $_SESSION['address'], $_SESSION['payment-method']);
+                //     if ($add_order_list) {
+                //         $log = "Successful!";
+                //     } else {
+                //         $log = "Error!";
+                //     }
+                //     $order_id = $this->m_users->getOrderId('order_list');
+                //     $i = 0;
+                //     $count = count(array_keys($_SESSION['cart']));
+                //     foreach ($_SESSION['cart'] as $key => $value) {  //giai phap la function addOrderList se tra ve gia tri cua $order_id luon
+                //         $add_order_detail = $this->m_users->addOrderDetail('order_detail', $order_id['id_order'], $key, $value['price'], $value['qty']);
+                //     }
+                // }
+                
+                $_SESSION['cart-total'] = 0;
+                foreach ($_SESSION['cart'] as $key => $value) {
+                    $_SESSION['cart-total'] += $_SESSION['cart'][$key]['price'];
+                }
+                $total = $_SESSION['cart-total'];    
+                if(isset($_POST['submit'])){
+                    $name = $_POST['name'];
+                    $email = $_POST['email'];
+                    $number = $_POST['number'];
+                    $address = $_POST['address'];
+                    $method = $_POST['method'];
+
+                    $add_order_list = $this->m_users->addOrderList('order_list', $_SESSION['user']['username'], $_SESSION['cart-total'], $address, $method);
+                    $order_id = $this->m_users->getOrderId('order_list');
+                    // echo "<pre>";
+                    // print_r($order_id['id_order']);
+                    foreach ($_SESSION['cart'] as $key => $value) {  //giai phap la function addOrderList se tra ve gia tri cua $order_id luon
+                                $add_order_detail = $this->m_users->addOrderDetail('order_detail', $order_id['id_order'], $key, $value['price'], $value['qty']);
+                            }
+                }    
+                $log = "Done!";        
                 include_once 'views/checkout.php';
                 break;
             case ('payment'):

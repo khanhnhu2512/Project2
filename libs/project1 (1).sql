@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 20, 2020 lúc 04:20 AM
+-- Thời gian đã tạo: Th8 25, 2020 lúc 02:54 AM
 -- Phiên bản máy phục vụ: 10.4.13-MariaDB
 -- Phiên bản PHP: 7.2.31
 
@@ -46,33 +46,28 @@ CREATE TABLE `order_detail` (
   `id_order` int(11) NOT NULL,
   `id_product` int(11) NOT NULL,
   `price` float NOT NULL,
-  `amount` int(11) NOT NULL
+  `qty` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `order_detail`
 --
 
-INSERT INTO `order_detail` (`id`, `id_order`, `id_product`, `price`, `amount`) VALUES
-(48, 104, 1, 10999, 1),
-(49, 104, 2, 1249, 1),
-(50, 104, 3, 599, 1),
-(51, 105, 1, 10999, 1),
-(52, 105, 2, 1249, 1),
-(53, 105, 3, 599, 1),
-(54, 106, 1, 10999, 1),
-(55, 106, 2, 1249, 1),
-(56, 106, 3, 599, 1),
+INSERT INTO `order_detail` (`id`, `id_order`, `id_product`, `price`, `qty`) VALUES
 (57, 107, 1, 10999, 1),
 (58, 107, 2, 1249, 1),
 (59, 108, 1, 10999, 1),
 (60, 108, 2, 1249, 1),
-(61, 109, 1, 10999, 2),
-(62, 109, 2, 1249, 1),
 (63, 110, 1, 10999, 5),
 (64, 110, 2, 1249, 4),
 (65, 111, 3, 599, 2),
-(66, 111, 26, 1299, 1);
+(66, 111, 26, 1299, 1),
+(67, 112, 2, 1249, 1),
+(68, 112, 1, 1099, 1),
+(69, 113, 2, 1249, 1),
+(70, 113, 1, 1099, 1),
+(71, 114, 2, 1249, 1),
+(72, 114, 1, 1099, 1);
 
 -- --------------------------------------------------------
 
@@ -94,14 +89,13 @@ CREATE TABLE `order_list` (
 --
 
 INSERT INTO `order_list` (`username`, `id_order`, `status`, `total_price`, `address`, `payment_method`) VALUES
-('khanhnhu2', 104, 1, 12847, '', 0),
-('khanhnhu2', 105, 1, 12847, '', 0),
-('khanhnhu2', 106, 1, 12847, '', 0),
 ('khanhnhu', 107, 1, 12248, 'nhu3', 0),
 ('khanhnhu', 108, 0, 12248, 'nhu3', 0),
-('khanhnhu', 109, 0, 23247, '', 0),
-('khanhnhu', 110, 0, 59991, 'test', 0),
-('khanhnhu', 111, 0, 2497, 'test', 1);
+('khanhnhu', 110, 1, 59991, 'test', 0),
+('khanhnhu', 111, 1, 2497, 'test', 1),
+('khanhnhu', 112, 0, 2348, 'Ha Noi', 0),
+('khanhnhu', 113, 0, 2348, 'abc', 1),
+('khanhnhu', 114, 0, 2348, '12', 0);
 
 -- --------------------------------------------------------
 
@@ -126,12 +120,14 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `name`, `type`, `image`, `price`, `qty`, `description`, `create_time`, `last_updated`) VALUES
-(1, 'Iphone 11 Pro Max', 1, 'ip12-1.jpg', 1099, 1, 'Triple-camera system (Ultra Wide, Wide, Telephoto)<br>    Up to 20 hours of video playback1    Water resistant to a depth of 4 meters for up to 30 minutes    5.8” or 6.5” Super Retina XDR display', 16062020, 16062020),
+(1, 'Iphone 11 Pro Max', 1, 'ip12-1.jpg', 1099, 7, 'Triple-camera system (Ultra Wide, Wide, Telephoto)<br>    Up to 20 hours of video playback1    Water resistant to a depth of 4 meters for up to 30 minutes    5.8” or 6.5” Super Retina XDR display', 16062020, 16062020),
 (2, 'iPhone XS Max', 1, 'ip12-2.jpg', 1249, 0, '\r\n    Dual-camera system (Ultra Wide, Wide)\r\n    Up to 17 hours of video playback1\r\n    Water resistant to a depth of 2 meters for up to 30 minutes\r\n    6.1” Liquid Retina HD display\r\n', 16062020, 16062020),
 (3, 'iPhone 11', 1, 'ip12-3.jpg', 599, 0, '\r\n    \r\n    Dual-camera system (Ultra Wide, Wide)\r\n    Up to 17 hours of video playback1\r\n    Water resistant to a depth of 2 meters for up to 30 minutes\r\n    6.1” Liquid Retina HD display\r\n\r\n', 16062020, 16062020),
-(26, 'iPhone 11 Pro Max', 1, 'iphone-11-pro-max-silver-select-2019.png', 1299, 10, 'Best', 0, 0),
-(27, 'a', 1, '600_ip_X_white_800x800_3.jpg', 100, 10, 'abc', 0, 0),
-(28, '1', 1, '600_ip_X_white_800x800_3.jpg', 10, 4, 'asdsdas', 0, 0);
+(29, 'Macbook', 3, 'macbook-pro-2018-2.jpeg', 2099, 100, 'abc', 0, 0),
+(30, 'Iphone 11 Pro Max', 1, 'ip12-3.jpg', 999, 20, 'abc', 0, 0),
+(31, 'iPhone 11', 1, 'ip12-4.jpg', 999, 11, 'abc', 0, 0),
+(32, 'iPhone 11', 2, 'ip12-4.jpg', 999, 11, 'abc', 0, 0),
+(33, 'Macbook 2', 3, '4477207_tinhte_tren_tay_apple_macbook_air_2018_2.jpg', 1499, 10, 'abc', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -149,10 +145,10 @@ CREATE TABLE `product_category` (
 --
 
 INSERT INTO `product_category` (`id`, `name`) VALUES
-(1, 'iphone'),
-(2, 'ipad'),
-(3, 'macbook'),
-(4, 'airpods');
+(1, 'iPhone'),
+(2, 'iPad'),
+(3, 'Macbook'),
+(4, 'Airpods');
 
 -- --------------------------------------------------------
 
@@ -178,7 +174,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `username`, `fullname`, `email`, `password`, `lv`, `birthday`, `create_time`, `last_updated`) VALUES
 (1, 'admin', 'Luong Van Nhu', 'luongvannhu@gmail.com', '1', 1, '0000-00-00', '0000-00-00', '0000-00-00'),
-(2, 'khanhnhu', 'Luong Khanh Nhu', 'khanhnhu@gmail.com', '1', 2, '0000-00-00', '0000-00-00', '0000-00-00'),
+(2, 'khanhnhu', 'Luong Khanh Nhu', 'khanhnhu@gmail.com', '', 2, '0000-00-00', '0000-00-00', '0000-00-00'),
 (5, 'thinhu123', 'Lương Thị Như', 'luongthinhu@gmail.com', '789', 2, '0000-00-00', '0000-00-00', '0000-00-00');
 
 --
@@ -235,19 +231,19 @@ ALTER TABLE `image_library`
 -- AUTO_INCREMENT cho bảng `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT cho bảng `order_list`
 --
 ALTER TABLE `order_list`
-  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
+  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- AUTO_INCREMENT cho bảng `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT cho bảng `product_category`

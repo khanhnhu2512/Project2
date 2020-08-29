@@ -109,10 +109,10 @@
             $sql = "DELETE FROM $table WHERE $object = $id";
 			return mysqli_query($this->con, $sql);
         }
-        public function editUser($table,$id,$username,$password,$fullname,$email,$lv)
+        public function editUser($table,$id,$username,$fullname,$email,$lv)
         {
             $this->conn();
-            $sql = "UPDATE $table SET username = '$username', fullname = '$fullname', password = '$password', email = '$email', lv = $lv WHERE id = $id";
+            $sql = "UPDATE $table SET username = '$username', fullname = '$fullname', email = '$email', lv = $lv WHERE id = $id";
             $query = mysqli_query($this->con, $sql);
             return $query;
         }

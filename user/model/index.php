@@ -7,13 +7,6 @@
 		{
             parent::__construct(); 
         }
-        // public function connect(){        
-        //     $this->serverName = "localhost:3306";
-        //     $this->userName = "root";
-        //     $this->password = "";
-        //     $this->databseName = "project1";
-        //     $this->con = mysqli_connect($this->serverName,$this->userName,$this->password,$this->databseName) or die("Couldn't connect to SQL Server on $this->serverName");
-        // }
         
         public function getObject_id($id,$table)
         {
@@ -27,7 +20,19 @@
             }
             return $result;
         }
-
+        public function Random($table,$object,$id,$limit)
+        {
+            $this->conn();
+            $sql = "SELECT * from $table WHERE $object = $id ORDER BY RAND () limit $limit";
+            $query = mysqli_query($this->con, $sql);
+            $result = array();
+            if ($query){ 
+                while($row = mysqli_fetch_assoc($query)){
+                $result[] = $row;
+                }
+            }
+            return $result;
+        }
         public function getObject($table){
             $this->conn();
             $sql = "SELECT * FROM $table";
@@ -104,9 +109,10 @@
             $sql = "SELECT * from $table WHERE $object = '$id'";
             $query = mysqli_query($this->con, $sql);
             $result = array();
-            if (mysqli_num_rows($query) > 0) {
-                $row = mysqli_fetch_assoc($query);
-                $result = $row;
+            if ($query){ 
+                while($row = mysqli_fetch_assoc($query)){
+                $result[] = $row;
+                }
             }
             return $result;
         }

@@ -22,13 +22,7 @@
             
             switch ($method){
                 case('home'):
-                    // $product = $this->m_users->getProduct();
-                    //*page
-                    // $table = 'product';
-                    // $total_page = $this->m_users->getPagination($table,$limit);
-                    // if($page>$total_page) $page=$total_page;  
-                    // $start=($page-1)*$limit;
-                    // $product = $this->m_users->pagination($table,$start,$limit);
+                    
                     $_SESSION['type'] = $this->getObject("product_category");
                     $product = array();
                     // echo "<pre>";

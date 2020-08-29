@@ -212,3 +212,21 @@
         font-weight: bold;
         text-align: center;
     }
+    
+    .cart button {
+        position: relative;
+        display: flex;
+    }
+    
+    .cart button i {
+        position: relative;
+    }
+    
+    .cart button p {
+        border-radius: 50%;
+        background-color: red;
+        width: 26px;
+        position: absolute;
+        top: -2px;
+        right: 7px;
+    }
