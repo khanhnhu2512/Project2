@@ -10,68 +10,12 @@
     <link rel="SHORTCUT ICON" href="../images/image-bg/icon.ico">
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="../public/css/admin/profile.css">
     <!-- <script src="https://kit.fontawesome.com/b1d0494dab.js" crossorigin="anonymous"></script> -->
     <link href="../libs/fontawesome-free-5.13.0-web/css/all.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <style>
-        .content-home{
-            display: flex;
-        }
-        .content-home .control{
-            /* height: 200px; */
-            width: 256px;
-            margin-top: 20px;
-            
-            /* height: 200px; */
-            
-        }
-        .product-display-detail{
-            width: 768px;
-            background-color: #f5f5f7;
-        }
-        .control ul{
-            margin: 0px;
-            background: #000000;
-            width: 100%;
-            padding: 0;
-            list-style-type: none;
-            text-align: left;
-        }
-        .control li{
-            width: auto;
-            height: 40px;
-            line-height: 40px;
-            border-bottom: 1px solid #e8e8e8;
-            padding: 0 1em;
-        }
-        .control li a{
-            text-decoration: none;
-            color: #ffffff;
-            font-weight: bold;
-            display: block;
-        }
-        .control li:hover{
-            background: #286090;
-        }
-        .product-content{
-
-            text-align: left;
-        }
-        .product-display-detail .btn-update a{
-            padding: 3px;
-            text-decoration: none;
-            border: 1px solid black;
-            border-radius: 2px;
-            background-color: black;
-            color: white;
-            line-height: 30px;
-        }
-        .product-display-detail .btn-update{
-            padding-bottom: 20px;
-        }
-        .product-display-detail .btn-update a:hover{
-            background-color: green;
-        }
+        
     </style>
 </head>
 

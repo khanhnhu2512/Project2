@@ -10,11 +10,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>My store</title>
-    <link rel="SHORTCUT ICON" href="./images/image-bg/LogoN-Black.png">
-    <link type="text/css" rel="stylesheet" href="./libs/fontawesome-free-5.13.0-web/css/all.css">
-    <link type="text/css" rel="stylesheet" href="./libs/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
-    <link type="text/css" rel="stylesheet" href="./libs/css/style.css">
-    <script src="./libs/jquery/jquery-3.5.1.min.js"></script>
+    <link rel="SHORTCUT ICON" href="./library/images/image-bg/LogoN-Black.png">
+    <link type="text/css" rel="stylesheet" href="./public/fontawesome-free-5.13.0-web/css/all.css">
+    <link type="text/css" rel="stylesheet" href="./public/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="./public/css/style.css">
+    <script src="./public/jquery/jquery-3.5.1.min.js"></script>
 
 </head>
 
@@ -23,7 +23,7 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
             <a href="" class="navbar-brand">
-                <img src="./images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
+                <img src="./library/images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                 <span class="navbar-toggler-icon"></span>
@@ -90,19 +90,19 @@
         </ul>
         <div class="carousel-inner ">
             <div class="carousel-item active ">
-                <img class="d-block w-100 " src="./images/image-bg/bg5.jpg ">
+                <img class="d-block w-100 " src="./library/images/image-bg/bg5.jpg ">
 
             </div>
             <div class="carousel-item ">
-                <img class="d-block w-100 " src="./images/image-bg/bg1.jpg ">
+                <img class="d-block w-100 " src="./library/images/image-bg/bg1.jpg ">
 
             </div>
             <div class="carousel-item ">
-                <img class="d-block w-100 " src="./images/image-bg/bg3.jpg ">
+                <img class="d-block w-100 " src="./library/images/image-bg/bg3.jpg ">
 
             </div>
             <div class="carousel-item ">
-                <img class="d-block w-100 " src="./images/image-bg/bg2.jpg ">
+                <img class="d-block w-100 " src="./library/images/image-bg/bg2.jpg ">
 
             </div>
             <a class="carousel-control-prev " href="#slides " role="button " data-slide="prev">
@@ -132,7 +132,7 @@
                 <?php foreach ($product[1] as $key => $value): ?>
                 <div class="card border-0">
                     <a href="index.php?method=detail&id=<?php echo $value['id'];?>">
-                        <img class="card-img-bottom w-auto h-285" src="./images/image-product/<?php echo $value['image'];?>" alt="Card image cap">
+                        <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image'];?>" alt="Card image cap">
                     </a>
                     <div class="card-body">
                         <h4 class="card-title"><?php echo $value['name']; ?></h4>
@@ -156,7 +156,7 @@
             <?php foreach ($product[2] as $key => $value): ?>
                 <div class="card border-0">
                     <a href="index.php?method=detail&id=<?php echo $value['id'];?>">
-                        <img class="card-img-bottom w-auto h-285" src="./images/image-product/<?php echo $value['image'];?>" alt="Card image cap">
+                        <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image'];?>" alt="Card image cap">
                     </a>
                     <div class="card-body">
                         <h4 class="card-title"><?php echo $value['name']; ?></h4>
@@ -179,7 +179,7 @@
             <?php foreach ($product[3] as $key => $value): ?>
                 <div class="card border-0">
                     <a href="index.php?method=detail&id=<?php echo $value['id'];?>">
-                        <img class="card-img-bottom w-auto h-285" src="./images/image-product/<?php echo $value['image'];?>" alt="Card image cap">
+                        <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image'];?>" alt="Card image cap">
                     </a>
                     <div class="card-body">
                         <h4 class="card-title"><?php echo $value['name']; ?></h4>
@@ -204,7 +204,7 @@
             <?php foreach ($product[4] as $key => $value): ?>
                 <div class="card border-0">
                     <a href="index.php?method=detail&id=<?php echo $value['id'];?>">
-                        <img class="card-img-bottom w-auto h-285" src="./images/image-product/<?php echo $value['image'];?>" alt="Card image cap">
+                        <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image'];?>" alt="Card image cap">
                     </a>
                     <div class="card-body">
                         <h4 class="card-title"><?php echo $value['name']; ?></h4>

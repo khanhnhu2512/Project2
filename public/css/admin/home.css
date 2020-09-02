@@ -1,0 +1,136 @@
+.container-fluid {
+    width: 100%;
+    margin: 0;
+    padding: 0
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+.paddingLR {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.header {
+    color: #fff;
+    display: flex;
+    background-color: #000;
+    justify-content: space-between;
+    align-items: center;
+    height: 7vh;
+}
+
+.profile button:hover {
+    background-color: #000 !important;
+}
+
+.profile .dropdown-item {
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+
+/* .profile .dropdown-item:hover{
+    background-color: #fff !important;
+    color: #000 !important;
+} */
+
+.profile .dropdown-item a {
+    text-decoration: none;
+    color: #fff !important;
+}
+
+.profile .dropdown-item a:hover {
+    color: #fff !important;
+    /* background-color: #fff !important; */
+}
+
+.profile .btn-dark:hover {
+    background-color: #000 !important;
+    color: #fff;
+}
+
+.menu {
+    /* height: 100px; */
+    background-color: #000;
+    height: 93vh;
+    width: 15%;
+}
+
+.display {
+    background-color: #fff;
+    width: 85%;
+}
+
+.body {
+    display: flex;
+    width: 100%;
+    background-color: #000;
+}
+
+.menu ul {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    /* display: flex;
+    position: relative; */
+    list-style-type: none;
+    text-align: left;
+}
+
+.menu ul li {
+    width: 100%;
+    /* position: absolute; */
+    line-height: 60px;
+    padding: 0 1em;
+    border-bottom: 1px solid #535353;
+}
+
+.menu ul li:first-child {
+    border-top: 1px solid #535353;
+}
+
+.menu ul li a {
+    font-size: 1.25rem;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    /* background-color: yellowgreen; */
+}
+
+.menu li:hover {
+    background: #232323;
+}
+
+.collapse li {
+    line-height: 40px !important;
+}
+
+.collapse li a {
+    font-size: 1rem !important;
+    padding-left: 1rem;
+}
+
+.collapsing li a {
+    font-size: 1rem !important;
+    padding-left: 1rem;
+}
+
+.collapsing li {
+    line-height: 40px !important;
+}
+
+.collapse li:first-child {
+    border-top: 0px solid #535353 !important;
+}
+
+.collapsing li:first-child {
+    border-top: 0px solid #535353 !important;
+}
+
+</style>

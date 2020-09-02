@@ -1,13 +1,40 @@
 <?php
     // require_once 'libs/connect-db.php';
-    include_once ('../libs/connect-db.php');
+    include_once ('public/connect-db.php');
     class M_users extends connect_db
     {
         function conn()
 		{
             parent::__construct(); 
         }
-        
+        public function checkUser($object,$value)
+        {
+            $this->conn();
+            $sql = "SELECT * from 'user' WHERE $object = $value";
+            $query = mysqli_query($this->con, $sql);
+            $result = true;
+            if (mysqli_num_rows($query) > 0) {
+                $result = false; //check if $query exist $object = $value
+            }
+            return $result;
+        }
+
+        public function login($username,$password) {
+            $this->conn();
+            $sql = "SELECT * FROM user WHERE username='$username' AND password='$password' LIMIT 0,1";
+            $query = mysqli_query($this->con,$sql);
+            if (mysqli_num_rows($query)>0) {
+                $_SESSION["user"] = mysqli_fetch_assoc($query);
+                return true;
+            }
+            return false;
+        }
+        public function signup($username,$fullname,$email,$password){
+            $this->conn();
+            $sql = "INSERT INTO user (username,fullname,email,password,lv) VALUES ('$username','$fullname','$email','$password',2);";
+            $query = mysqli_query($this->con,$sql);
+            return $query;
+        }
         public function getObject_id($id,$table)
         {
             $this->conn();

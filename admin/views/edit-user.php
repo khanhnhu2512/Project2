@@ -7,6 +7,7 @@
     <title>Dashboard</title>
     <link rel="SHORTCUT ICON" href="../images/image-bg/LogoN-Black.png">
     <link type="text/css" rel="stylesheet" href="../libs/fontawesome-free-5.13.0-web/css/all.css">
+    <link rel="stylesheet" href="../public/css/admin/edit-user.css">
     <link type="text/css" rel="stylesheet" href="../libs/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="../libs/css/style.css">
     <script src="../libs/jquery/jquery-3.5.1.min.js"></script>

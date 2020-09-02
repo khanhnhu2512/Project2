@@ -12,166 +12,16 @@ if (!isset($_SESSION)) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>My store</title>
-    <link rel="SHORTCUT ICON" href="../images/image-bg/LogoN-Black.png">
-    <link type="text/css" rel="stylesheet" href="../libs/fontawesome-free-5.13.0-web/css/all.css">
-    <link type="text/css" rel="stylesheet" href="../libs/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
-    <link type="text/css" rel="stylesheet" href="../libs/css/style.css">
-    <script type="text/javascript" src="../libs/jquery/jquery-3.5.1.slim.min.js"></script>
+    <link rel="SHORTCUT ICON" href="../library/images/image-bg/LogoN-Black.png">
+    <link rel="stylesheet" href="../public/css/user/checkout.css">
+    <link type="text/css" rel="stylesheet" href="../public/fontawesome-free-5.13.0-web/css/all.css">
+    <link type="text/css" rel="stylesheet" href="../public/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="../public/css/style.css">
+    <script type="text/javascript" src="../public/jquery/jquery-3.5.1.slim.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
     <!-- <script src="../libs/jquery/jquery-3.5.1.min.js"></script> -->
     <style>
-        .profile button:hover {
-            background-color: #000 !important;
-        }
-
-        .profile .dropdown-item {
-            background-color: #000 !important;
-            color: #fff !important;
-        }
-
-        /* .profile .dropdown-item:hover{
-            background-color: #fff !important;
-            color: #000 !important;
-        } */
-        .profile .dropdown-item a {
-            text-decoration: none;
-            color: #fff !important;
-        }
-
-        .profile .dropdown-item a:hover {
-            color: #fff !important;
-            /* background-color: #fff !important; */
-        }
-
-        .profile .btn-dark:hover {
-            background-color: #000 !important;
-            color: #fff;
-        }
-
-        .cart .dropdown-menu {
-            /* left: -100%; */
-            width: 268px;
-            padding: 0.5rem 0 0 0;
-        }
-
-        .cart .dropdown-item img {
-            width: 20%;
-            height: auto;
-        }
-
-        .cart .dropdown-item {
-            display: flex;
-            flex-direction: row;
-            padding: 0.25rem 0.5rem !important;
-        }
-
-        .cartProduct {
-            width: 100%;
-            margin-left: 5px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .cartProduct P {
-            font-weight: bold;
-            margin: 0;
-        }
-
-        .cartProduct-price {
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-
-        }
-
-        .cartProduct-price p:last-child input {
-            width: 50px;
-        }
-
-        .cart .btn {
-            /* border: 0; */
-            border-radius: 0;
-        }
-
-        .total {
-            padding: 0 0.25rem;
-            text-align: end;
-            margin-bottom: 0.5rem;
-        }
-
-        .total span {
-            font-weight: bold;
-        }
-
-        .cart .dropdown-item a {
-            text-decoration: none;
-            width: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .body {
-            padding: 1rem;
-        }
-
-        .body h1 {
-            text-align: center;
-        }
-
-        .cart-showtable {
-            width: 100%;
-            display: flex;
-        }
-
-        .cart-showtable .img {
-            width: 100px;
-
-        }
-
-        .cart-showtable .img img {
-            width: 100%;
-            height: auto;
-            padding: 0.5rem;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        .cart-showtable table tr td {
-            font-size: 1rem;
-            text-align: center;
-        }
-
-        .cart-showtable table tr:first-child td {
-            background-color: #000;
-            line-height: 50px;
-            font-weight: bold;
-            font-size: 1.15rem !important;
-            text-align: center;
-            color: #be1010;
-        }
-
-        .cart-showtable-btn {
-            width: 150px;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid #000;
-        }
-
-        .total {
-            font-size: 1.75rem;
-            margin-right: 11rem;
-            margin-top: 1.5rem;
-        }
-
-        .total span {
-            margin-left: 5rem;
-        }
+        
     </style>
 </head>
 
@@ -266,7 +116,7 @@ if (!isset($_SESSION)) {
                                     <?php echo $i; ?>
                                 </td>
                                 <td class="img">
-                                    <img src="../images/image-product/<?php echo $value['image']; ?>">
+                                    <img src="../library/images/image-product/<?php echo $value['image']; ?>">
                                 </td>
                                 <td style="width: 300px">
                                     <?php echo ($value['name']); ?>

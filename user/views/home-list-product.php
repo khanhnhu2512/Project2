@@ -11,120 +11,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>My store</title>
     <link rel="SHORTCUT ICON" href="../images/image-bg/LogoN-Black.png">
+    <link rel="stylesheet" href="../public/css/user/home-list-product.css">
     <link type="text/css" rel="stylesheet" href="../libs/fontawesome-free-5.13.0-web/css/all.css">
     <link type="text/css" rel="stylesheet" href="../libs/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="../libs/css/style.css">
     <script src="../libs/jquery/jquery-3.5.1.min.js"></script>
     <style>
-        .profile button:hover {
-            background-color: #000 !important;
-        }
-
-        .profile .dropdown-item {
-            background-color: #000 !important;
-            color: #fff !important;
-        }
-
-        /* .profile .dropdown-item:hover{
-            background-color: #fff !important;
-            color: #000 !important;
-        } */
-        .profile .dropdown-item a {
-            text-decoration: none;
-            color: #fff !important;
-        }
-
-        .profile .dropdown-item a:hover {
-            color: #fff !important;
-            /* background-color: #fff !important; */
-        }
-
-        .profile .btn-dark:hover {
-            background-color: #000 !important;
-            color: #fff;
-        }
-
-        .cart .dropdown-menu {
-            /* left: -100%; */
-            width: 268px;
-            padding: 0.5rem 0 0 0;
-        }
-
-        .cart .dropdown-item img {
-            width: 20%;
-            height: auto;
-        }
-
-        .cart .dropdown-item {
-            display: flex;
-            flex-direction: row;
-            padding: 0.25rem 0.5rem !important;
-        }
-
-        .cartProduct {
-            width: 100%;
-            margin-left: 5px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .cartProduct P {
-            font-weight: bold;
-            margin: 0;
-        }
-
-        .cartProduct-price {
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-
-        }
-
-        .cartProduct-price p:last-child input {
-            width: 50px;
-        }
-
-        .cart .btn {
-            /* border: 0; */
-            border-radius: 0;
-        }
-
-        .total {
-            padding: 0 0.25rem;
-            text-align: end;
-            margin-bottom: 0.5rem;
-        }
-
-        .total span {
-            font-weight: bold;
-        }
-
-        .cart .dropdown-item a {
-            text-decoration: none;
-            width: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .cart button {
-            position: relative;
-            display: flex;
-        }
-
-        .cart button i {
-            position: relative;
-        }
-
-        .cart button p {
-            border-radius: 50%;
-            background-color: red;
-            width: 26px;
-            position: absolute;
-            top: -2px;
-            right: 7px;
-        }
+        
     </style>
 </head>
 
