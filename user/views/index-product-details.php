@@ -10,11 +10,11 @@ if (!isset($_SESSION)) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>My store</title>
-    <link rel="SHORTCUT ICON" href="./images/image-bg/LogoN-Black.png">
-    <link type="text/css" rel="stylesheet" href="./libs/fontawesome-free-5.13.0-web/css/all.css">
-    <link type="text/css" rel="stylesheet" href="./libs/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
-    <link type="text/css" rel="stylesheet" href="./libs/css/style.css">
-    <script src="./libs/jquery/jquery-3.5.1.min.js"></script>
+    <link rel="SHORTCUT ICON" href="./library/images/image-bg/LogoN-Black.png">
+    <link type="text/css" rel="stylesheet" href="./public/fontawesome-free-5.13.0-web/css/all.css">
+    <link type="text/css" rel="stylesheet" href="./public/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="./public/css/style.css">
+    <script src="./public/jquery/jquery-3.5.1.min.js"></script>
 
 </head>
 
@@ -23,7 +23,7 @@ if (!isset($_SESSION)) {
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
             <a href="" class="navbar-brand">
-                <img src="./images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
+                <img src="./library/images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                 <span class="navbar-toggler-icon"></span>
@@ -85,7 +85,7 @@ if (!isset($_SESSION)) {
         <div class="product-img">
             <h2><?php echo $product['name']; ?></h2>
             <div class="product-img__img">
-                <img src="./images/image-product/<?php echo $product['image']; ?>" alt="">
+                <img src="./library/images/image-product/<?php echo $product['image']; ?>" alt="">
             </div>
         </div>
         <div class="product-info">

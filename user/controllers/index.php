@@ -23,11 +23,12 @@ class C_website extends M_users
                     $_SESSION['type'] = $this->getObject("product_category");
                     $product = array();
                     // echo "<pre>";
+                    $limit = 4;
                     // print_r($_SESSION['type']);
                     foreach ($_SESSION['type'] as $k => $val) {
                         switch ($val['id']) {
                             case '1':
-                                $product[$val['id']] = $this->Random('product', 'type', $val['id'], 4);
+                                $product[$val['id']] = $this->Random('product', 'type', $val['id'], 10);
                                 break;
                             case '2':
                                 $product[$val['id']] = $this->Random('product', 'type', $val['id'], 3);
@@ -40,6 +41,7 @@ class C_website extends M_users
                                 break;
                         }
                     }
+
                     // echo "<pre>";
                     // print_r($product);
 
