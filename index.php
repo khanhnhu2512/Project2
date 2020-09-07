@@ -1,4 +1,5 @@
-<?php 
+<?php
+ //test 
     if(!isset($_SESSION)){
         session_start();
     }
