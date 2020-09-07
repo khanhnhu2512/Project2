@@ -1,5 +1,6 @@
 <?php
  //test 
+ // nhu test may nhu
     if(!isset($_SESSION)){
         session_start();
     }
