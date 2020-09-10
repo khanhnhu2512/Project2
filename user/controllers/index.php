@@ -28,16 +28,16 @@ class C_website extends M_users
                     foreach ($_SESSION['type'] as $k => $val) {
                         switch ($val['id']) {
                             case '1':
-                                $product[$val['id']] = $this->Random('product', 'type', $val['id'], 10);
+                                $product[$val['id']] = $this->Random('product', 'type', $val['id'], 8);
                                 break;
                             case '2':
-                                $product[$val['id']] = $this->Random('product', 'type', $val['id'], 3);
+                                $product[$val['id']] = $this->Random('product', 'type', $val['id'], 9);
                                 break;
                             case '3':
-                                $product[$val['id']] = $this->Random('product', 'type', $val['id'], 2);
+                                $product[$val['id']] = $this->Random('product', 'type', $val['id'], 10);
                                 break;
                             case '4':
-                                $product[$val['id']] = $this->Random('product', 'type', $val['id'], 3);
+                                $product[$val['id']] = $this->Random('product', 'type', $val['id'], 9);
                                 break;
                         }
                     }
