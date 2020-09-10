@@ -59,9 +59,9 @@ if (!isset($_SESSION)) {
             </div>
             <form method="post">
                 <div class="search-form mr-3" id="test">
-                    <input type="text" class="form-control form-control-sm search-form-input" id="search-form-input" placeholder="Search...">
+                    <input type="text" class="form-control form-control-sm search-form-input" name="search" id="search-form-input" placeholder="Search...">
                     <button type="submit" class="btn btn-sm search-form-btn" id="search-form-btn">
-                        <a href="" class="btn-link ">
+                        <a href="index.php?method=search" class="btn-link ">
                             <i class="fa fa-search "></i>
                         </a>
                     </button>

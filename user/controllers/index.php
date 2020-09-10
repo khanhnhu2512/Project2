@@ -215,6 +215,15 @@ class C_website extends M_users
                         require_once('user/views/home-list-product.php');
                         break;
 
+                    case ('search'):
+                        $keyword = $_POST['search'];
+                        $value = $this->search('product','name',$keyword);
+                        echo "ok";
+                        require_once('user/views/')
+                    break;
+
+
+
                     case ('add-cart'):
                         $id = isset($_GET['id']) ? $_GET['id'] : "";
                         if (!isset($_SESSION['cart'][$id])) {

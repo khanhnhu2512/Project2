@@ -47,6 +47,18 @@
             }
             return $result;
         }
+        public function search($table,$object,$value)
+        {
+            $this->conn();
+            $sql = "SELECT * from $table WHERE $object LIKE $value"; 
+            $query = mysqli_query($this->con, $sql);
+            $result = array();
+            if (mysqli_num_rows($query) > 0) {
+                $row = mysqli_fetch_assoc($query);
+                $result = $row;
+            }
+            return $result;
+        }
         public function Random($table,$object,$id,$limit)
         {
             $this->conn();
