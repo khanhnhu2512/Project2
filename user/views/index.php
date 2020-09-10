@@ -134,7 +134,7 @@ if (!isset($_SESSION)) {
                     <div class="carousel-item active">
                         <div class="container-fluid card-deck justify-content-between mt-2">
                             <?php $i = 1;
-                            foreach ($product[1] as $key => $value) :
+                            foreach ($product['1'] as $key => $value) :
 
                             ?>
 
