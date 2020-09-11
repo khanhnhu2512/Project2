@@ -8,4 +8,5 @@
     include_once 'user/controllers/index.php';
     $website = new C_website();
     $website->control();
-?>thuan
+?>
+<!-- test -->
