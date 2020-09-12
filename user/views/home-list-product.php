@@ -10,21 +10,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>My store</title>
-<<<<<<< HEAD
     <link rel="SHORTCUT ICON" href="./library/images/image-bg/LogoN-Black.png">
     <link rel="stylesheet" href="./public/css/user/home-list-product.css">
     <link type="text/css" rel="stylesheet" href="./public/fontawesome-free-5.13.0-web/css/all.css">
     <link type="text/css" rel="stylesheet" href="./public/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="./public/css/style.css">
     <script src="./public/jquery/jquery-3.5.1.min.js"></script>
-=======
-    <link rel="SHORTCUT ICON" href="../images/image-bg/LogoN-Black.png">
-    <link rel="stylesheet" href="../public/css/user/home-list-product.css">
-    <link type="text/css" rel="stylesheet" href="../public/fontawesome-free-5.13.0-web/css/all.css">
-    <link type="text/css" rel="stylesheet" href="../public/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
-    <link type="text/css" rel="stylesheet" href="../public/css/style.css">
-    <script src="../libs/jquery/jquery-3.5.1.min.js"></script>
->>>>>>> 79713f9ee5d93cb58df318e5fa1160102774f968
     <style>
         
     </style>
