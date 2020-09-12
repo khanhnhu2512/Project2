@@ -53,16 +53,19 @@
                     </li>
                 </ul>
             </div>
-            <form method="get">
+            <!-- search -->
+            <form method="get" action="">
                 <div class="search-form mr-3" id="test">
-                    <input type="text" class="form-control form-control-sm search-form-input" id="search-form-input" placeholder="Search...">
+                    <input type="text" class="form-control form-control-sm search-form-input" value="<?php echo $keyword; ?>" name="keyword" id="search-form-input" placeholder="Search...">
                     <button type="submit" class="btn btn-sm search-form-btn" id="search-form-btn">
                         <a href="" class="btn-link ">
                             <i class="fa fa-search "></i>
                         </a>
                     </button>
+                    <input type="hidden" name="method" value="search">
                 </div>
             </form>
+            <!-- cart -->
             <div class=" dropdown cart mr-1">
                 <!-- <i class="fas fa-shopping-cart text-white fa-2x btn-cart"></i> -->
                 <button class="btn btn-dark dropdown-toggle border-0" type="button" id="dropdownCart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -95,8 +98,8 @@
                         <a class="btn-link" href="index.php?method=checkout">Check out</a>
                     </div>
                 </div>
-
             </div>
+            <!-- profile -->
             <div class="dropdown profile">
                 <button class="btn btn-dark dropdown-toggle border-0" type="button" id="dropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <?php echo isset($_SESSION['user']) ? $_SESSION['user']['fullname'] : ""; ?>

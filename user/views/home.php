@@ -21,7 +21,7 @@ if (!isset($_SESSION)) {
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
     <!-- <script src="../libs/jquery/jquery-3.5.1.min.js"></script> -->
     <style>
-        
+
     </style>
 </head>
 
@@ -57,16 +57,19 @@ if (!isset($_SESSION)) {
                     </li>
                 </ul>
             </div>
-            <form method="post">
+            <!-- search -->
+            <form method="get" action="">
                 <div class="search-form mr-3" id="test">
-                    <input type="text" class="form-control form-control-sm search-form-input" name="search" id="search-form-input" placeholder="Search...">
+                    <input type="text" class="form-control form-control-sm search-form-input" name="keyword" id="search-form-input" placeholder="Search...">
                     <button type="submit" class="btn btn-sm search-form-btn" id="search-form-btn">
-                        <a href="index.php?method=search" class="btn-link ">
+                        <a href="" class="btn-link ">
                             <i class="fa fa-search "></i>
                         </a>
                     </button>
+                    <input type="hidden" name="method" value="search">
                 </div>
             </form>
+            <!-- cart -->
             <div class=" dropdown cart mr-1">
                 <!-- <i class="fas fa-shopping-cart text-white fa-2x btn-cart"></i> -->
                 <button class="btn btn-dark dropdown-toggle border-0" type="button" id="dropdownCart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -99,8 +102,8 @@ if (!isset($_SESSION)) {
                         <a class="btn-link" href="index.php?method=checkout">Check out</a>
                     </div>
                 </div>
-
             </div>
+            <!-- profile -->
             <div class="dropdown profile">
                 <button class="btn btn-dark dropdown-toggle border-0" type="button" id="dropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <?php echo isset($_SESSION['user']) ? $_SESSION['user']['fullname'] : ""; ?>
@@ -178,22 +181,22 @@ if (!isset($_SESSION)) {
                 <h3 class="m-2"><a href="index.php?method=list-product&type=1">See all iPhone models></a></h3>
             </div>
             <div class="container padding card-deck mt-2">
-                <?php foreach ($product[1] as $key => $value): ?>
-                <div class="card border-0">
-                    <a href="index.php?method=detail&id=<?php echo $value['id'];?>">
-                        <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image'];?>" alt="Card image cap">
-                    </a>
-                    <div class="card-body">
-                        <h4 class="card-title"><?php echo $value['name']; ?></h4>
-                        <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
-                        <div class="card-title">
-                        <a href="index.php?method=add-cart&id=<?php echo $value['id']; ?>" class="card-link" ">
-                                <i class="fa fa-cart-plus fa-2x"></i>
-                            </a>
+                <?php foreach ($product[1] as $key => $value) : ?>
+                    <div class="card border-0">
+                        <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
+                            <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
+                        </a>
+                        <div class="card-body">
+                            <h4 class="card-title"><?php echo $value['name']; ?></h4>
+                            <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
+                            <div class="card-title">
+                                <a href="index.php?method=add-cart&id=<?php echo $value['id']; ?>" class="card-link" ">
+                                <i class=" fa fa-cart-plus fa-2x"></i>
+                                </a>
+                            </div>
+                            <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id']; ?>">Learn more ></a>
                         </div>
-                        <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id'];?>">Learn more ></a>
                     </div>
-                </div>
                 <?php endforeach; ?>
             </div>
             <!-- Product Mac-->
@@ -202,22 +205,22 @@ if (!isset($_SESSION)) {
                 <h3 class="m-2"><a href="index.php?method=list-product&type=2">See all iPad models></a></h3>
             </div>
             <div class="container padding card-deck mt-2">
-            <?php foreach ($product[2] as $key => $value): ?>
-                <div class="card border-0">
-                    <a href="index.php?method=detail&id=<?php echo $value['id'];?>">
-                        <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image'];?>" alt="Card image cap">
-                    </a>
-                    <div class="card-body">
-                        <h4 class="card-title"><?php echo $value['name']; ?></h4>
-                        <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
-                        <div class="card-title">
-                        <a href="index.php?method=add-cart&id=<?php echo $value['id']; ?>" class="card-link" ">
-                                <i class="fa fa-cart-plus fa-2x"></i>
-                            </a>
+                <?php foreach ($product[2] as $key => $value) : ?>
+                    <div class="card border-0">
+                        <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
+                            <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
+                        </a>
+                        <div class="card-body">
+                            <h4 class="card-title"><?php echo $value['name']; ?></h4>
+                            <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
+                            <div class="card-title">
+                                <a href="index.php?method=add-cart&id=<?php echo $value['id']; ?>" class="card-link" ">
+                                <i class=" fa fa-cart-plus fa-2x"></i>
+                                </a>
+                            </div>
+                            <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id']; ?>">Learn more ></a>
                         </div>
-                        <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id'];?>">Learn more ></a>
                     </div>
-                </div>
                 <?php endforeach; ?>
             </div>
             <div class="col-12 mt-5">
@@ -225,24 +228,24 @@ if (!isset($_SESSION)) {
                 <h3 class="m-2"><a href="index.php?method=list-product&type=3">See all Macbook models></a></h3>
             </div>
             <div class="container padding card-deck mt-2">
-            <?php foreach ($product[3] as $key => $value): ?>
-                <div class="card border-0">
-                    <a href="index.php?method=detail&id=<?php echo $value['id'];?>">
-                        <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image'];?>" alt="Card image cap">
-                    </a>
-                    <div class="card-body">
-                        <h4 class="card-title"><?php echo $value['name']; ?></h4>
-                        <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
-                        <div class="card-title">
-                        <a href="index.php?method=add-cart&id=<?php echo $value['id']; ?>" class="card-link" ">
-                                <i class="fa fa-cart-plus fa-2x"></i>
-                            </a>
+                <?php foreach ($product[3] as $key => $value) : ?>
+                    <div class="card border-0">
+                        <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
+                            <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
+                        </a>
+                        <div class="card-body">
+                            <h4 class="card-title"><?php echo $value['name']; ?></h4>
+                            <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
+                            <div class="card-title">
+                                <a href="index.php?method=add-cart&id=<?php echo $value['id']; ?>" class="card-link" ">
+                                <i class=" fa fa-cart-plus fa-2x"></i>
+                                </a>
+                            </div>
+                            <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id']; ?>">Learn more ></a>
                         </div>
-                        <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id'];?>">Learn more ></a>
                     </div>
-                </div>
                 <?php endforeach; ?>
-                
+
             </div>
             <!-- Product Mac-->
             <div class="col-12 mt-5">
@@ -250,24 +253,24 @@ if (!isset($_SESSION)) {
                 <h3 class="m-2"><a href="index.php?method=list-product&type=4">See all AirPods models></a></h3>
             </div>
             <div class="container padding card-deck mt-2">
-            <?php foreach ($product[4] as $key => $value): ?>
-                <div class="card border-0">
-                    <a href="index.php?method=detail&id=<?php echo $value['id'];?>">
-                        <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image'];?>" alt="Card image cap">
-                    </a>
-                    <div class="card-body">
-                        <h4 class="card-title"><?php echo $value['name']; ?></h4>
-                        <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
-                        <div class="card-title">
-                            <a href="index.php?method=add-cart&id=<?php echo $value['id']; ?>" class="card-link" ">
-                                <i class="fa fa-cart-plus fa-2x"></i>
-                            </a>
+                <?php foreach ($product[4] as $key => $value) : ?>
+                    <div class="card border-0">
+                        <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
+                            <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
+                        </a>
+                        <div class="card-body">
+                            <h4 class="card-title"><?php echo $value['name']; ?></h4>
+                            <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
+                            <div class="card-title">
+                                <a href="index.php?method=add-cart&id=<?php echo $value['id']; ?>" class="card-link" ">
+                                <i class=" fa fa-cart-plus fa-2x"></i>
+                                </a>
+                            </div>
+                            <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id']; ?>">Learn more ></a>
                         </div>
-                        <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id'];?>">Learn more ></a>
                     </div>
-                </div>
                 <?php endforeach; ?>
-                
+
             </div>
         </div>
     </div>
@@ -300,75 +303,76 @@ if (!isset($_SESSION)) {
                 </div>
             </div>
         </div>
-    <footer>
-        <div class="container-fluid padding mt-4">
-            <div class="row text-center">
-                <div class="col-md-4">
-                    <hr class="light">
-                    <p>111-222-3333</p>
-                    <p>mymail@gmail.com</p>
-                    <p>Bach Mai street, Hanoi, Vietnam</p>
-                </div>
-                <div class="col-md-4">
-                    <hr class="light">
-                    <h5>Working hours</h5>
-                    <p>Monday-Friday: 8am - 5pm</p>
-                    <p>Weekend: 8am - 12am</p>
-                </div>
-                <div class="col-md-4">
-                    <hr class="light">
-                    <h5>Services</h5>
-                    <p>Outsourcing</p>
-                    <p>Website development</p>
-                    <p>Mobile applications</p>
-                </div>
-                <div class="col-12 ">
-                    <hr class="light-100">
-                    <p>Designed with all the love in the world by KhanhNhu2512.</p>
-                    <p>Copyright © 2020 KhanhNhu's N-BUY. All rights reserved.</p>
+        <footer>
+            <div class="container-fluid padding mt-4">
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <hr class="light">
+                        <p>111-222-3333</p>
+                        <p>mymail@gmail.com</p>
+                        <p>Bach Mai street, Hanoi, Vietnam</p>
+                    </div>
+                    <div class="col-md-4">
+                        <hr class="light">
+                        <h5>Working hours</h5>
+                        <p>Monday-Friday: 8am - 5pm</p>
+                        <p>Weekend: 8am - 12am</p>
+                    </div>
+                    <div class="col-md-4">
+                        <hr class="light">
+                        <h5>Services</h5>
+                        <p>Outsourcing</p>
+                        <p>Website development</p>
+                        <p>Mobile applications</p>
+                    </div>
+                    <div class="col-12 ">
+                        <hr class="light-100">
+                        <p>Designed with all the love in the world by KhanhNhu2512.</p>
+                        <p>Copyright © 2020 KhanhNhu's N-BUY. All rights reserved.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </footer>
+        </footer>
 
 
 
-    <script language="javascript">
-        // function redirectLogin() {
-        //     alert("You need to login!");
-        //     window.location = "index.php?method=login";
-        // }
-        function reload() {
-            location.reload();
+        <script language="javascript">
+            // function redirectLogin() {
+            //     alert("You need to login!");
+            //     window.location = "index.php?method=login";
+            // }
+            function reload() {
+                location.reload();
 
-        }
-        function addCart() { ///function addCart(id) {
-            // console.log(id);
-            // var url = 'index.php?method=add-cart&id=' + id;
-            // var cartCount = document.getElementById('cart-count').innerHTML;
-            // //sử dụng ajax post
-            // $.ajax({
-            //     url: url, // gửi đến file upload.php 
-            //     dataType: 'json',
-            //     cache: false,
-            //     contentType: false,
-            //     processData: false,
-            //     data: {},
-            //     method: 'post',
-            //     success: function(res) {
-            //         if ($.trim(result.image) != '') {
-            //             $('#image').append(result.image);
-            //         }
-            //         console.log(url);
-            //         // $('#fileToUpload').val('');
-            //     }
-            // });
-            alert ("Done!");
-        }
-    </script>
-    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
+            }
+
+            function addCart() { ///function addCart(id) {
+                // console.log(id);
+                // var url = 'index.php?method=add-cart&id=' + id;
+                // var cartCount = document.getElementById('cart-count').innerHTML;
+                // //sử dụng ajax post
+                // $.ajax({
+                //     url: url, // gửi đến file upload.php 
+                //     dataType: 'json',
+                //     cache: false,
+                //     contentType: false,
+                //     processData: false,
+                //     data: {},
+                //     method: 'post',
+                //     success: function(res) {
+                //         if ($.trim(result.image) != '') {
+                //             $('#image').append(result.image);
+                //         }
+                //         console.log(url);
+                //         // $('#fileToUpload').val('');
+                //     }
+                // });
+                alert("Done!");
+            }
+        </script>
+        <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
 </body>
 
 </html>

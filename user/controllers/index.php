@@ -48,6 +48,13 @@ class C_website extends M_users
                     //*page
                     include_once 'user/views/index.php';
                     break;
+                case ('search'):
+                    $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
+                    $product = $this->search('product', 'name', $keyword);
+                    // echo "<pre>";
+                    // print_r($search);
+                    include_once('user/views/index-list-search.php');
+                    break;
                 case ('list-product'):
                     $type = $_GET['type'];
                     $_SESSION['category'] = $this->getEverything_id("product_category", "id", $type);
@@ -124,7 +131,7 @@ class C_website extends M_users
 
 
 
-                
+
                 default:
                     header('location:index.php');
                     break;
@@ -172,6 +179,13 @@ class C_website extends M_users
                         require_once 'views/profile.php';
                         break;
 
+                    case ('search'):
+                        $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
+                        $product = $this->search('product', 'name', $keyword);
+                        // echo "<pre>";
+                        // print_r($search);
+                        include_once('user/views/home-list-search.php');
+                        break;
                     case ('signout'):
                         session_unset();
                         header("location:index.php");
@@ -215,12 +229,7 @@ class C_website extends M_users
                         require_once('user/views/home-list-product.php');
                         break;
 
-                    case ('search'):
-                        $keyword = isset($_GET['search']) ? $_GET['search'] : "";
-                        $product = $this->search('product','name',$keyword);
-                        echo "ok";
-                        require_once('user/views/index-list-search.php');
-                    break;
+
 
 
                     case ('add-cart'):

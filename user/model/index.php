@@ -50,12 +50,13 @@
         public function search($table,$object,$value)
         {
             $this->conn();
-            $sql = "SELECT * from $table WHERE $object LIKE $value"; 
+            $sql = "SELECT * FROM $table WHERE $object LIKE '%$value%'"; 
             $query = mysqli_query($this->con, $sql);
             $result = array();
-            if (mysqli_num_rows($query) > 0) {
-                $row = mysqli_fetch_assoc($query);
-                $result = $row;
+            if ($query){ 
+                while($row = mysqli_fetch_assoc($query)){
+                $result[] = $row;
+                }
             }
             return $result;
         }

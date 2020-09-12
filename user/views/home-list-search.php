@@ -51,7 +51,7 @@ if (!isset($_SESSION)) {
                 </ul>
             </div>
             <!-- search -->
-            <form method="get" action="" >
+            <form method="get" action="">
                 <div class="search-form mr-3" id="test">
                     <input type="text" class="form-control form-control-sm search-form-input" value="<?php echo $keyword; ?>" name="keyword" id="search-form-input" placeholder="Search...">
                     <button type="submit" class="btn btn-sm search-form-btn" id="search-form-btn">
@@ -62,18 +62,61 @@ if (!isset($_SESSION)) {
                     <input type="hidden" name="method" value="search">
                 </div>
             </form>
-            <div class="btn btn-sm mr-1">
-                <a class="" onclick="redirectLogin()">
+            <!-- cart -->
+            <div class=" dropdown cart mr-1">
+                <!-- <i class="fas fa-shopping-cart text-white fa-2x btn-cart"></i> -->
+                <button class="btn btn-dark dropdown-toggle border-0" type="button" id="dropdownCart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-shopping-cart text-white fa-2x btn-cart"></i>
-                </a>
+                    <p id="cart-count"><?php echo $_SESSION['cart-count']; ?></p>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownCart">
+                    <?php $i = 0;
+                    if (isset($_SESSION['cart'])) {
+                        foreach ($_SESSION['cart'] as $key => $value) {
+                            $i++; ?>
+                            <div class="dropdown-item">
+                                <img class="cart-img" src="../images/image-product/<?php echo $value['image']; ?>" alt="">
+                                <div class="cartProduct">
+                                    <p class="cart-name"><?php echo $value['name']; ?></p>
+                                    <div class="cartProduct-price">
+                                        <p class="cart-price"><?php echo $value['price']; ?>$</p>
+                                        <p>x <span>1</span></p>
+                                    </div>
+                                </div>
+                                <a href="index.php?method=delete-cart&id=<?php echo $value['id']; ?>">
+                                    <i class="fas fa-times fa-1x"></i>
+                                </a>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                        <?php } ?>
+                        <p class="total">Total: <span><?php echo $total; ?>$</span></p>
+                    <?php } ?>
+                    <div class="btn btn-danger w-100">
+                        <a class="btn-link" href="index.php?method=checkout">Check out</a>
+                    </div>
+                </div>
             </div>
-            <div class="btn btn-group btn-group-toggle ml-auto form-login " id="form-login ">
-                <a class="btn-link" href="index.php?method=login">
-                    <div class="btn bg-light mr-2 rounded form-login-btn">Log In</div>
-                </a>
-                <a class="btn-link" href="index.php?method=signup">
-                    <div class="btn btn-light rounded form-login-btn">Sign Up</div>
-                </a>
+            <!-- profile -->
+            <div class="dropdown profile">
+                <button class="btn btn-dark dropdown-toggle border-0" type="button" id="dropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <?php echo isset($_SESSION['user']) ? $_SESSION['user']['fullname'] : ""; ?>
+                </button>
+                <div class="dropdown-menu btn-dark w-100 text-light" aria-labelledby="dropdownProfile">
+                    <div class="dropdown-item">
+                        <i class="fa fa-user-circle" aria-hidden="true"></i>
+                        <a class="link" href="#">Account</a>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-item">
+                        <i class="fa fa-cog" aria-hidden="true"></i>
+                        <a class="link" href="#">Setting</a>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-item">
+                        <i class="fa fa-sign-out-alt" aria-hidden="true"></i>
+                        <a class="link" href="index.php?method=signout">Sign out</a>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -85,7 +128,7 @@ if (!isset($_SESSION)) {
 
     <!-- Body -->
     <div class="container-fluid padding">
-    <h1>Results for "<?php echo $keyword; ?>"</h1>
+        <h1>Results for "<?php echo $keyword; ?>"</h1>
 
         <div class="row welcome text-center pt-5 justify-content-center">
             <div class="container padding card-deck fl mt-2">

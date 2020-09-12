@@ -76,14 +76,15 @@ if (!isset($_SESSION)) {
                 </ul>
             </div>
             <!-- search -->
-            <form method="get">
+            <form method="get" action="" >
                 <div class="search-form mr-3" id="test">
-                    <input type="text" class="form-control form-control-sm search-form-input" id="search-form-input" placeholder="Search...">
+                    <input type="text" class="form-control form-control-sm search-form-input" name="keyword" id="search-form-input" placeholder="Search...">
                     <button type="submit" class="btn btn-sm search-form-btn" id="search-form-btn">
                         <a href="" class="btn-link ">
                             <i class="fa fa-search "></i>
                         </a>
                     </button>
+                    <input type="hidden" name="method" value="search">
                 </div>
             </form>
             <!-- login form -->
