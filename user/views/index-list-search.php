@@ -90,7 +90,7 @@ if (!isset($_SESSION)) {
         <div class="row welcome text-center pt-5 justify-content-center">
             <div class="container padding card-deck fl mt-2">
                 <?php foreach ($product as $key => $value) : ?>
-                    <div class="col-<?php echo $col; ?> border-0">
+                    <div class="col-3 border-0">
                         <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
                             <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
                         </a>

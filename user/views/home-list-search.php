@@ -128,26 +128,26 @@ if (!isset($_SESSION)) {
 
     <!-- Body -->
     <div class="container-fluid padding">
-        <h1>Results for "<?php echo $keyword; ?>"</h1>
-
         <div class="row welcome text-center pt-5 justify-content-center">
+            <div class="col-12 mt-5 mb-5 justify-content-center">
+            </div>
             <div class="container padding card-deck fl mt-2">
-                <?php foreach ($product as $key => $value) : ?>
-                    <div class="col-<?php echo $col; ?> border-0">
-                        <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
-                            <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title"><?php echo $value['name']; ?></h4>
-                            <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
-                            <div class="card-title">
-                                <a class="card-link" onclick="redirectLogin()">
-                                    <i class="fa fa-cart-plus fa-2x"></i>
-                                </a>
-                            </div>
-                            <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id']; ?>">Learn more ></a>
+                <?php foreach ($product as $key => $value): ?>
+                <div class="col-3 border-0">
+                    <a href="index.php?method=detail&id=<?php echo $value['id'];?>">
+                        <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image'];?>" alt="Card image cap">
+                    </a>
+                    <div class="card-body">
+                        <h4 class="card-title"><?php echo $value['name']; ?></h4>
+                        <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
+                        <div class="card-title">
+                            <a href="index.php?method=add-cart&id=<?php echo $value['id']; ?>" class="card-link" ">
+                                <i class="fa fa-cart-plus fa-2x"></i>
+                            </a>
                         </div>
+                        <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id'];?>">Learn more ></a>
                     </div>
+                </div>
                 <?php endforeach; ?>
             </div>
         </div>
