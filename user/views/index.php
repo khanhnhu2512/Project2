@@ -205,25 +205,6 @@ if (!isset($_SESSION)) {
                 </div>
             </div>
 
-            <!-- <div class="container padding card-deck mt-2">
-                <?php foreach ($product[1] as $key => $value) : ?>
-                    <div class="card border-0">
-                        <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
-                            <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title"><?php echo $value['name']; ?></h4>
-                            <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
-                            <div class="card-title">
-                                <a class="card-link" onclick="redirectLogin()">
-                                    <i class="fa fa-cart-plus fa-2x"></i>
-                                </a>
-                            </div>
-                            <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id']; ?>">Learn more ></a>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div> -->
             <!-- Product iPad-->
             <div class="col-12 mt-5">
                 <h1 class="display-4">And an iPad</h1>
@@ -267,7 +248,6 @@ if (!isset($_SESSION)) {
                             <?php endforeach; ?>
                         </div>
                     </div>
-
                     <a class="carousel-control-prev " href="#slides " role="button " data-slide="prev">
                         <span class="carousel-control-prev-icon " aria-hidden="true "></span>
                         <span class="sr-only ">Previous</span>
@@ -278,26 +258,7 @@ if (!isset($_SESSION)) {
                     </a>
                 </div>
             </div>
-
-            <!-- <div class="container padding card-deck mt-2">
-                <?php foreach ($product[2] as $key => $value) : ?>
-                    <div class="card border-0">
-                        <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
-                            <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title"><?php echo $value['name']; ?></h4>
-                            <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
-                            <div class="card-title">
-                                <a class="card-link" onclick="redirectLogin()">
-                                    <i class="fa fa-cart-plus fa-2x"></i>
-                                </a>
-                            </div>
-                            <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id']; ?>">Learn more ></a>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div> -->
+            <!-- Mac -->
             <div class="col-12 mt-5">
                 <h1 class="display-4">And, What about a Macbook for work?</h1>
                 <h3 class="m-2"><a href="index.php?method=list-product&type=3">See all Macbook models></a></h3>
@@ -351,27 +312,6 @@ if (!isset($_SESSION)) {
                     </a>
                 </div>
             </div>
-
-            <!-- <div class="container padding card-deck mt-2">
-                <?php foreach ($product[3] as $key => $value) : ?>
-                    <div class="card border-0">
-                        <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
-                            <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title"><?php echo $value['name']; ?></h4>
-                            <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
-                            <div class="card-title">
-                                <a class="card-link" onclick="redirectLogin()">
-                                    <i class="fa fa-cart-plus fa-2x"></i>
-                                </a>
-                            </div>
-                            <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id']; ?>">Learn more ></a>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-
-            </div> -->
             <!-- Product Airpods-->
             <div class="col-12 mt-5">
                 <h1 class="display-4">It'll perfect with an AirPods</h1>
@@ -425,26 +365,6 @@ if (!isset($_SESSION)) {
                     </a>
                 </div>
             </div>
-            <!-- <div class="container padding card-deck mt-2">
-                <?php foreach ($product[4] as $key => $value) : ?>
-                    <div class="card border-0">
-                        <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
-                            <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title"><?php echo $value['name']; ?></h4>
-                            <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
-                            <div class="card-title">
-                                <a class="card-link" onclick="redirectLogin()">
-                                    <i class="fa fa-cart-plus fa-2x"></i>
-                                </a>
-                            </div>
-                            <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id']; ?>">Learn more ></a>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-
-            </div> -->
         </div>
     </div>
     <footer>
