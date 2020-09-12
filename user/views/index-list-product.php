@@ -1,7 +1,7 @@
-<?php 
-    if(!isset($_SESSION)){
-        session_start();
-    }
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -50,29 +50,33 @@
                     </li>
                 </ul>
             </div>
-            <form method="get">
+            <!-- search -->
+             <form method="get" action="">
                 <div class="search-form mr-3" id="test">
-                    <input type="text" class="form-control form-control-sm search-form-input" id="search-form-input" placeholder="Search...">
+                    <input type="text" class="form-control form-control-sm search-form-input" name="keyword" id="search-form-input" placeholder="Search...">
                     <button type="submit" class="btn btn-sm search-form-btn" id="search-form-btn">
                         <a href="" class="btn-link ">
                             <i class="fa fa-search "></i>
                         </a>
                     </button>
+                    <input type="hidden" name="method" value="search">
                 </div>
-            </form>
-            <div class="btn btn-sm mr-1">
-                <a class="" onclick="redirectLogin()">
-                    <i class="fas fa-shopping-cart text-white fa-2x btn-cart"></i>
-                </a>
-            </div>
-            <div class="btn btn-group btn-group-toggle ml-auto form-login " id="form-login ">
-                <a class="btn-link" href="index.php?method=login">
-                    <div class="btn bg-light mr-2 rounded form-login-btn">Log In</div>
-                </a>
-                <a class="btn-link" href="index.php?method=signup">
-                    <div class="btn btn-light rounded form-login-btn">Sign Up</div>
-                </a>
-            </div>
+                </form>
+                <!-- cart -->
+                <div class="btn btn-sm mr-1">
+                    <a class="" onclick="redirectLogin()">
+                        <i class="fas fa-shopping-cart text-white fa-2x btn-cart"></i>
+                    </a>
+                </div>
+                <!-- login form -->
+                <div class="btn btn-group btn-group-toggle ml-auto form-login " id="form-login ">
+                    <a class="btn-link" href="index.php?method=login">
+                        <div class="btn bg-light mr-2 rounded form-login-btn">Log In</div>
+                    </a>
+                    <a class="btn-link" href="index.php?method=signup">
+                        <div class="btn btn-light rounded form-login-btn">Sign Up</div>
+                    </a>
+                </div>
         </div>
 
 
@@ -122,22 +126,22 @@
                 <h1 class="display-4"><?php echo $_SESSION['category'][0]['name']; ?></h1>
             </div>
             <div class="container padding card-deck fl mt-2">
-                <?php foreach ($product as $key => $value): ?>
-                <div class="col-<?php echo $col; ?> border-0">
-                    <a href="index.php?method=detail&id=<?php echo $value['id'];?>">
-                        <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image'];?>" alt="Card image cap">
-                    </a>
-                    <div class="card-body">
-                        <h4 class="card-title"><?php echo $value['name']; ?></h4>
-                        <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
-                        <div class="card-title">
-                            <a class="card-link" onclick="redirectLogin()">
-                                <i class="fa fa-cart-plus fa-2x"></i>
-                            </a>
+                <?php foreach ($product as $key => $value) : ?>
+                    <div class="col-<?php echo $col; ?> border-0">
+                        <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
+                            <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
+                        </a>
+                        <div class="card-body">
+                            <h4 class="card-title"><?php echo $value['name']; ?></h4>
+                            <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
+                            <div class="card-title">
+                                <a class="card-link" onclick="redirectLogin()">
+                                    <i class="fa fa-cart-plus fa-2x"></i>
+                                </a>
+                            </div>
+                            <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id']; ?>">Learn more ></a>
                         </div>
-                        <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id'];?>">Learn more ></a>
                     </div>
-                </div>
                 <?php endforeach; ?>
             </div>
         </div>
