@@ -216,12 +216,11 @@ class C_website extends M_users
                         break;
 
                     case ('search'):
-                        $keyword = $_POST['search'];
-                        $value = $this->search('product','name',$keyword);
+                        $keyword = isset($_GET['search']) ? $_GET['search'] : "";
+                        $product = $this->search('product','name',$keyword);
                         echo "ok";
-                        require_once('user/views/')
+                        require_once('user/views/index-list-search.php');
                     break;
-
 
 
                     case ('add-cart'):

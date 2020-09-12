@@ -21,6 +21,7 @@ if (!isset($_SESSION)) {
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+        <!-- nav -->
         <div class="container-fluid">
             <a href="" class="navbar-brand">
                 <img src="./library/images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
@@ -50,6 +51,7 @@ if (!isset($_SESSION)) {
                     </li>
                 </ul>
             </div>
+            <!-- search -->
             <form method="get">
                 <div class="search-form mr-3" id="test">
                     <input type="text" class="form-control form-control-sm search-form-input" id="search-form-input" placeholder="Search...">
