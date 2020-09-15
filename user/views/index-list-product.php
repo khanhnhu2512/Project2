@@ -51,7 +51,7 @@ if (!isset($_SESSION)) {
                 </ul>
             </div>
             <!-- search -->
-             <form method="get" action="">
+            <form method="get" action="">
                 <div class="search-form mr-3" id="test">
                     <input type="text" class="form-control form-control-sm search-form-input" name="keyword" id="search-form-input" placeholder="Search...">
                     <button type="submit" class="btn btn-sm search-form-btn" id="search-form-btn">
@@ -61,22 +61,22 @@ if (!isset($_SESSION)) {
                     </button>
                     <input type="hidden" name="method" value="search">
                 </div>
-                </form>
-                <!-- cart -->
-                <div class="btn btn-sm mr-1">
-                    <a class="" onclick="redirectLogin()">
-                        <i class="fas fa-shopping-cart text-white fa-2x btn-cart"></i>
-                    </a>
-                </div>
-                <!-- login form -->
-                <div class="btn btn-group btn-group-toggle ml-auto form-login " id="form-login ">
-                    <a class="btn-link" href="index.php?method=login">
-                        <div class="btn bg-light mr-2 rounded form-login-btn">Log In</div>
-                    </a>
-                    <a class="btn-link" href="index.php?method=signup">
-                        <div class="btn btn-light rounded form-login-btn">Sign Up</div>
-                    </a>
-                </div>
+            </form>
+            <!-- cart -->
+            <div class="btn btn-sm mr-1">
+                <a class="" onclick="redirectLogin()">
+                    <i class="fas fa-shopping-cart text-white fa-2x btn-cart"></i>
+                </a>
+            </div>
+            <!-- login form -->
+            <div class="btn btn-group btn-group-toggle ml-auto form-login " id="form-login ">
+                <a class="btn-link" href="index.php?method=login">
+                    <div class="btn bg-light mr-2 rounded form-login-btn">Log In</div>
+                </a>
+                <a class="btn-link" href="index.php?method=signup">
+                    <div class="btn btn-light rounded form-login-btn">Sign Up</div>
+                </a>
+            </div>
         </div>
 
 
@@ -84,16 +84,26 @@ if (!isset($_SESSION)) {
     </nav>
 
 
-    
+
     <!-- Body -->
     <div class="container-fluid padding">
-        <div class="row welcome text-center pt-5 justify-content-center">
+        <nav aria-label="breadcrumb ">
+            <ol class="breadcrumb bg-white">
+                <li class="breadcrumb-item"><a href="index.php?method=home">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Product</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><?php echo $_SESSION['category'][0]['name']; ?></li>
+            </ol>
+        </nav>
+        <div class="row welcome text-center pt-2 justify-content-center">
             <div class="col-12 mt-5 mb-5 justify-content-center">
                 <h1 class="display-4"><?php echo $_SESSION['category'][0]['name']; ?></h1>
             </div>
             <div class="container padding card-deck fl mt-2">
                 <?php foreach ($product as $key => $value) : ?>
                     <div class="col-<?php echo $col; ?> border-0">
+                        <div class="noticed">
+                            <p>Out of stock</p>
+                        </div>
                         <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
                             <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
                         </a>

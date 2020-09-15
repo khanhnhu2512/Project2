@@ -82,12 +82,12 @@ if (!isset($_SESSION)) {
                         foreach ($_SESSION['cart'] as $key => $value) {
                             $i++; ?>
                             <div class="dropdown-item">
-                                <img class="cart-img" src="../images/image-product/<?php echo $value['image']; ?>" alt="">
+                                <img class="cart-img" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="">
                                 <div class="cartProduct">
                                     <p class="cart-name"><?php echo $value['name']; ?></p>
                                     <div class="cartProduct-price">
                                         <p class="cart-price"><?php echo $value['price']; ?>$</p>
-                                        <p>x <span>1</span></p>
+                                        <p>x <span><?php echo $value['qty']; ?></span></p>
                                     </div>
                                 </div>
                                 <a href="index.php?method=delete-cart&id=<?php echo $value['id']; ?>">
@@ -342,7 +342,7 @@ if (!isset($_SESSION)) {
                 <h3 class="m-2"><a href="index.php?method=detail&id=<?php echo $value['id']; ?>">See all AirPods models></a></h3>
             </div>
             <!-- Carousel product -->
-            <div id="slides " class="carousel slide w-100 pr-5 pl-5" data-ride="carousel" data-interval="1500">
+            <div id="slides " class="carousel slide w-100 pr-5 pl-5" data-ride="carousel" data-interval="2000">
                 <div class="carousel-inner container-fluid">
                     <div class="carousel-item active">
                         <div class="container-fluid card-deck justify-content-between mt-2">
@@ -420,37 +420,7 @@ if (!isset($_SESSION)) {
                 </div>
             </div>
         </div>
-        <footer>
-            <div class="container-fluid padding mt-4">
-                <div class="row text-center">
-                    <div class="col-md-4">
-                        <hr class="light">
-                        <p>111-222-3333</p>
-                        <p>mymail@gmail.com</p>
-                        <p>Bach Mai street, Hanoi, Vietnam</p>
-                    </div>
-                    <div class="col-md-4">
-                        <hr class="light">
-                        <h5>Working hours</h5>
-                        <p>Monday-Friday: 8am - 5pm</p>
-                        <p>Weekend: 8am - 12am</p>
-                    </div>
-                    <div class="col-md-4">
-                        <hr class="light">
-                        <h5>Services</h5>
-                        <p>Outsourcing</p>
-                        <p>Website development</p>
-                        <p>Mobile applications</p>
-                    </div>
-                    <div class="col-12 ">
-                        <hr class="light-100">
-                        <p>Designed with all the love in the world by KhanhNhu2512.</p>
-                        <p>Copyright © 2020 KhanhNhu's N-BUY. All rights reserved.</p>
-                    </div>
-                </div>
-            </div>
-        </footer>
-
+    </footer>
 
 
         <script language="javascript">

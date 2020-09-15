@@ -59,33 +59,10 @@
             }
             return $result;
         }
-        public function addOrder($username,$table){
-            $this->conn();
-            $sql = "INSERT INTO $table (username,status) VALUES ('$username',0);";
-            $query = mysqli_query($this->con,$sql);
-            // $result = array();
-            // if (mysqli_num_rows($query) > 0) {
-            //     $row = mysqli_fetch_assoc($query);
-            //     $result = $row;
-            // }
-            // return $result;
-        }
-        
-        public function addOrderDetail($table,$id_order,$price_total,$address,$payment_method){
-            $this->conn();
-            $sql = "INSERT INTO $table (id_order,id_product,price_total,address,payment_method) VALUES ($id_order,$id_order,$price_total,'$address',$payment_method);";
-            $query = mysqli_query($this->con,$sql);
-            // $result = array();
-            // if (mysqli_num_rows($query) > 0) {
-            //     $row = mysqli_fetch_assoc($query);
-            //     $result = $row;
-            // }
-            // return $result; 
-        }
 
         public function addProduct($table,$name,$type,$image,$price,$qty,$description){
             $this->conn();
-            $sql = "INSERT INTO $table (name,image,type,price,qty,description) VALUES ('$name','$image',$type,$price,$qty,'$description');";
+            $sql = "INSERT INTO $table (name,image,type,price,qty,description,create_time) VALUES ('$name','$image',$type,$price,$qty,'$description',NOW());";
             $query = mysqli_query($this->con,$sql);
             return $query;
         }
@@ -112,14 +89,14 @@
         public function editUser($table,$id,$username,$fullname,$email,$lv)
         {
             $this->conn();
-            $sql = "UPDATE $table SET username = '$username', fullname = '$fullname', email = '$email', lv = $lv WHERE id = $id";
+            $sql = "UPDATE $table SET username = '$username', fullname = '$fullname', email = '$email', lv = $lv, last_updated = now()  WHERE id = $id";
             $query = mysqli_query($this->con, $sql);
             return $query;
         }
         public function editProduct($table,$id,$name,$image,$price,$qty,$description)
         {
             $this->conn();
-            $sql = "UPDATE $table SET name = '$name', image = '$image', price = $price, qty = $qty, description = '$description' WHERE id = $id";
+            $sql = "UPDATE $table SET name = '$name', image = '$image', price = $price, qty = $qty, description = '$description' last_updated = now() WHERE id = $id";
             $query = mysqli_query($this->con, $sql);
             return $query;
         }

@@ -23,6 +23,28 @@
         position: relative;
     }
     
+    .noticed {
+        background-color: red;
+        border-radius: 50%;
+        height: 70px;
+        width: 70px;
+        position: absolute;
+        top: -28px;
+        right: 1px;
+        align-items: center;
+        display: flex;
+        justify-items: center;
+    }
+    
+    .bg-white {
+        background-color: #fff;
+    }
+    
+    .noticed p {
+        margin: 0px;
+        font-weight: bold;
+    }
+    
     .search-form-input {
         /* opacity: 1; */
         width: 300px !important;

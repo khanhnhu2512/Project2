@@ -31,7 +31,7 @@
         }
         public function signup($username,$fullname,$email,$password){
             $this->conn();
-            $sql = "INSERT INTO user (username,fullname,email,password,lv) VALUES ('$username','$fullname','$email','$password',2);";
+            $sql = "INSERT INTO user (username,fullname,email,password,lv,create_time) VALUES ('$username','$fullname','$email','$password',2,now());";
             $query = mysqli_query($this->con,$sql);
             return $query;
         }
@@ -46,6 +46,23 @@
                 $result = $row;
             }
             return $result;
+        }
+        public function getViews($id){
+            $this->conn();
+            $sql = "SELECT view from product WHERE id = $id";
+            $query = mysqli_query($this->con, $sql);
+            if (mysqli_num_rows($query) > 0) {
+                $row = mysqli_fetch_assoc($query);
+                $result = $row;
+            }
+            return $result;
+        }
+        public function updateViews($id,$views)
+        {
+            $this->conn();
+            $sql = "UPDATE product SET view = '$views' WHERE id = $id";
+            $query = mysqli_query($this->con, $sql);
+            return $query;
         }
         public function search($table,$object,$value)
         {
@@ -120,14 +137,14 @@
         
         public function addOrderList($table,$username,$total_price,$address,$payment_method){
             $this->conn();
-            $sql = "INSERT INTO $table (username,status,total_price,address,payment_method) VALUES ('$username',0,$total_price,'$address',$payment_method);";
+            $sql = "INSERT INTO $table (username,status,total_price,address,payment_method,create_time) VALUES ('$username',0,$total_price,'$address',$payment_method,NOW());";
             $query = mysqli_query($this->con,$sql);
             return $query;
         }
         
-        public function addOrderDetail($table,$id_order,$id_product,$price,$amount){
+        public function addOrderDetail($table,$id_order,$id_product,$price,$qty){
             $this->conn();
-            $sql = "INSERT INTO $table (id_order,id_product,price,amount) VALUES ($id_order,$id_product,$price,$amount)";
+            $sql = "INSERT INTO $table (id_order,id_product,price,qty) VALUES ($id_order,$id_product,$price,$qty)";
             $query = mysqli_query($this->con,$sql);
             return $query;
         }
@@ -161,5 +178,4 @@
         //     header('location:index.php?method=home'); 
         // }
         
-    }    
-?>
+    }

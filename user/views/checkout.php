@@ -12,12 +12,12 @@ if (!isset($_SESSION)) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>My store</title>
-    <link rel="SHORTCUT ICON" href="../library/images/image-bg/LogoN-Black.png">
-    <link rel="stylesheet" href="../public/css/user/checkout.css">
-    <link type="text/css" rel="stylesheet" href="../public/fontawesome-free-5.13.0-web/css/all.css">
-    <link type="text/css" rel="stylesheet" href="../public/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
-    <link type="text/css" rel="stylesheet" href="../public/css/style.css">
-    <script type="text/javascript" src="../public/jquery/jquery-3.5.1.slim.min.js"></script>
+    <link rel="SHORTCUT ICON" href="./library/images/image-bg/LogoN-Black.png">
+    <link rel="stylesheet" href="./public/css/user/checkout.css">
+    <link type="text/css" rel="stylesheet" href="./public/fontawesome-free-5.13.0-web/css/all.css">
+    <link type="text/css" rel="stylesheet" href="./public/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="./public/css/style.css">
+    <script type="text/javascript" src="./public/jquery/jquery-3.5.1.slim.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
     <!-- <script src="../libs/jquery/jquery-3.5.1.min.js"></script> -->
     <style>
@@ -30,7 +30,7 @@ if (!isset($_SESSION)) {
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
             <a href="" class="navbar-brand">
-                <img src="../images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
+                <img src="./library/images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                 <span class="navbar-toggler-icon"></span>
@@ -111,24 +111,24 @@ if (!isset($_SESSION)) {
                         <tr>
                             <?php $i = 0;
                             foreach ($_SESSION['cart'] as $key => $value) {
-                                $i++; ?>
+                                 ?>
                                 <td style="width: 40px">
                                     <?php echo $i; ?>
                                 </td>
                                 <td class="img">
-                                    <img src="../library/images/image-product/<?php echo $value['image']; ?>">
+                                    <img src="./library/images/image-product/<?php echo $value['image']; ?>">
                                 </td>
                                 <td style="width: 300px">
                                     <?php echo ($value['name']); ?>
                                 </td>
                                 <td style="width: 100px">
-                                    <input id="qty" name="qty" class="qty" onchange="changeQty(<?php echo $value['id']; ?>)" style="width: 40px; text-align:center; " type="number" name="qty" value="<?php echo $value['qty']; ?>">
+                                    <input id="qty" name="qty" class="qty" onchange="changeQty(<?php echo $i.','.$value['id']; ?>)" style="width: 40px; text-align:center; " min="1" type="number" name="qty" value="<?php echo $value['qty']; ?>">
                                 </td>
                                 <td>
                                     <p class="price"><?php echo $value['price']; ?></p>
                                 </td>
                                 <td>
-                                    <p><?php echo ($value['qty'] * $value['price']); ?></p>
+                                    <p class="totalperproduct"><?php echo ($value['qty'] * $value['price']); ?></p>
                                 </td>
                                 <td class="btn-btn-group">
                                     <div class="btn btn-danger">
@@ -139,7 +139,7 @@ if (!isset($_SESSION)) {
                                 </td>
                         </tr>
 
-                    <?php } ?>
+                    <?php $i++; } ?>
                 <?php
                 } else {
                     echo "<h1>Giỏ hàng trống!</h1>";
@@ -243,27 +243,37 @@ if (!isset($_SESSION)) {
         function submit(){
             alert("Done!");
         }
-        function changeQty(id) {
-            // var qty = document.getElementById('qty').value;
-            // var subtotal = document.getElementById('total-value').innerHTML;
-            // var url = 'index.php?method=change-qty&id=' + id;
-            // console.log(qty);
-            // $.ajax({
-            //     url: url,
-            //     dataType: 'json',
-            //     cache: false,
-            //     contentType: false,
-            //     processData: false,
-            //     data: {},
-            //     method: 'post',
-            //     success: function(result) {
-            //         if ($.trim(result.total) != '') {
-            //             subtotal = result.total;
-            //             console.log(result.total);
-            //             document.getElementById('total-value').innerHTML = subtotal;
-            //         }
-            //     }
-            // });
+        function changeQty(id,id_product) {
+            var qty = document.getElementsByClassName('qty');
+            var price = document.getElementsByClassName('price');
+            // document.getElementById('total-value').innerHTML
+            var subtotal = 0;
+            var total = 0;
+            var totalperproduct = document.getElementsByClassName('totalperproduct');
+            var url = 'index.php?method=change-qty&id=' + id_product + '&qty='+ qty[id].value;
+            if (qty[id].value > 0){
+                for(var i=0;i<qty.length;i++){
+                    total =  +(qty[i].value * price[i].innerHTML);
+                    totalperproduct[i].innerHTML =  total ;
+                    subtotal += total;
+                    // console.log(totalperproduct[i].innerHTML);
+                    // console.log(subtotal);
+                }
+                document.getElementById('total-value').innerHTML = subtotal;
+            }
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                cache: false,
+                contentType: false,
+                processData: false, 
+                data: {},
+                method: 'get',
+                success: function(result) {
+                   
+                }
+            });
+
         }
 
         function addCart() {

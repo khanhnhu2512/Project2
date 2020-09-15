@@ -84,6 +84,9 @@ class C_website extends M_users
                     if (isset($_GET['id'])) {
                         $id = $_GET['id'];
                     }
+                    $views = $this->m_users->getViews($id);
+                    $views['view']++;
+                    $updateViews = $this->m_users->updateViews($id, $views['view']);
                     $product = $this->m_users->getObject_id($id, $table);
                     include_once 'user/views/index-product-details.php';
                     break;
@@ -145,16 +148,16 @@ class C_website extends M_users
                         foreach ($_SESSION['type'] as $k => $val) {
                             switch ($val['id']) {
                                 case '1':
-                                    $product[$val['id']] = $this->Random('product', 'type', $val['id'], 4);
+                                    $product[$val['id']] = $this->Random('product', 'type', $val['id'], 8);
                                     break;
                                 case '2':
-                                    $product[$val['id']] = $this->Random('product', 'type', $val['id'], 3);
+                                    $product[$val['id']] = $this->Random('product', 'type', $val['id'], 9);
                                     break;
                                 case '3':
-                                    $product[$val['id']] = $this->Random('product', 'type', $val['id'], 2);
+                                    $product[$val['id']] = $this->Random('product', 'type', $val['id'], 10);
                                     break;
                                 case '4':
-                                    $product[$val['id']] = $this->Random('product', 'type', $val['id'], 3);
+                                    $product[$val['id']] = $this->Random('product', 'type', $val['id'], 9);
                                     break;
                             }
                         }
@@ -266,6 +269,9 @@ class C_website extends M_users
                         if (isset($_GET['id'])) {
                             $id = $_GET['id'];
                         }
+                        $views = $this->m_users->getViews($id);
+                        $views['view']++;
+                        $updateViews = $this->m_users->updateViews($id, $views['view']);
                         $product = $this->m_users->getObject_id($id, $table);
                         include_once 'user/views/home-product-details.php';
                         break;
@@ -275,24 +281,23 @@ class C_website extends M_users
                         if (isset($_GET['id'])) {
                             $id = $_GET['id'];
                         }
-                        if (isset($_POST['qty'])) {
-                            $_SESSION['cart'][$id]['qty'] = $_POST['qty'];
+                        if (isset($_GET['qty'])) {
+                            $_SESSION['cart'][$id]['qty'] = $_GET['qty'];
                         }
                         $_SESSION['cart-total'] = 0;
                         foreach ($_SESSION['cart'] as $key => $value) {
-                            $_SESSION['cart-total'] += $_SESSION['cart'][$key]['price'];
+                            $_SESSION['cart-total'] += $_SESSION['cart'][$key]['qty'] * $_SESSION['cart'][$key]['price'];
                         }
-                        $result = array(
-                            'total' => $_SESSION['cart-total']
-                        );
-                        die(json_encode($result));
+                        
 
                         break;
                     case ('checkout'):
-                        $_SESSION['cart-total'] = 0;
-                        foreach ($_SESSION['cart'] as $key => $value) {
-                            $_SESSION['cart-total'] += $_SESSION['cart'][$key]['price'];
-                        }
+                        // echo "<pre>";
+                        // print_r($_SESSION['cart']);
+                        // $_SESSION['cart-total'] = 0;
+                        // foreach ($_SESSION['cart'] as $key => $value) {
+                        //     $_SESSION['cart-total'] += $_SESSION['cart'][$key]['price'];
+                        // }
                         $total = $_SESSION['cart-total'];
                         if (isset($_POST['submit'])) {
                             $name = $_POST['name'];
@@ -308,8 +313,8 @@ class C_website extends M_users
                             foreach ($_SESSION['cart'] as $key => $value) {  //giai phap la function addOrderList se tra ve gia tri cua $order_id luon
                                 $add_order_detail = $this->m_users->addOrderDetail('order_detail', $order_id['id_order'], $key, $value['price'], $value['qty']);
                             }
+                            $log = "Done!";
                         }
-                        $log = "Done!";
                         include_once 'user/views/checkout.php';
                         break;
                         // case ('payment'):
