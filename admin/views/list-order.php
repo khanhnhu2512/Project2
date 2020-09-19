@@ -5,12 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Dashboard</title>
-    <link rel="SHORTCUT ICON" href="../images/image-bg/LogoN-Black.png">
+    <link rel="SHORTCUT ICON" href="../library/images/image-bg/LogoN-Black.png">
     <link rel="stylesheet" href="../public/css/admin/list-order.css">
-    <link type="text/css" rel="stylesheet" href="../libs/fontawesome-free-5.13.0-web/css/all.css">
-    <link type="text/css" rel="stylesheet" href="../libs/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
-    <link type="text/css" rel="stylesheet" href="../libs/css/style.css">
-    <script src="../libs/jquery/jquery-3.5.1.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="../public/libs/fontawesome-free-5.13.0-web/css/all.css">
+    <link type="text/css" rel="stylesheet" href="../public/libs/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="../public/libs/css/style.css">
+    <script src="../public/libs/jquery/jquery-3.5.1.min.js"></script>
     <style>
         
     </style>
