@@ -7,12 +7,12 @@
 
 <head>
     <title>N-Buy iPhone</title>
-    <link rel="SHORTCUT ICON" href="../images/image-bg/icon.ico">
+    <link rel="SHORTCUT ICON" href="../library/images/image-bg/icon.ico">
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="../public/css/admin/profile.css">
     <!-- <script src="https://kit.fontawesome.com/b1d0494dab.js" crossorigin="anonymous"></script> -->
-    <link href="../libs/fontawesome-free-5.13.0-web/css/all.css" rel="stylesheet">
+    <link href="../public/libs/fontawesome-free-5.13.0-web/css/all.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <style>
         

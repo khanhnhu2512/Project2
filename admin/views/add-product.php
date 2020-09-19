@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Dashboard</title>
-    <link rel="SHORTCUT ICON" href="../images/image-bg/LogoN-Black.png">
-    <link type="text/css" rel="stylesheet" href="../libs/fontawesome-free-5.13.0-web/css/all.css">
-    <link type="text/css" rel="stylesheet" href="../libs/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
-    <link type="text/css" rel="stylesheet" href="../libs/css/style.css">
+    <link rel="SHORTCUT ICON" href="../library/images/image-bg/LogoN-Black.png">
+    <link type="text/css" rel="stylesheet" href="../public/fontawesome-free-5.13.0-web/css/all.css">
+    <link type="text/css" rel="stylesheet" href="../public/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="../public/css/style.css">
     <link rel="stylesheet" href="../public/css/admin/add-product.css">
-    <script src="../libs/jquery/jquery-3.5.1.min.js"></script>
-    <script src="../libs/jquery/jquery-3.5.1.slim.min.js"></script>
+    <script src="../public/jquery/jquery-3.5.1.min.js"></script>
+    <script src="../public/jquery/jquery-3.5.1.slim.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
     <style>
         
@@ -22,7 +22,7 @@
     <div class="container-fluid">
         <div class="header paddingLR">
             <div class="navbar-brand">
-                <img src="../images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
+                <img src="../library/images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
             </div>
             <div class="dropdown profile">
                 <button class="btn btn-dark dropdown-toggle border-0" type="button" id="dropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -103,7 +103,7 @@
                     
                     <legend class="col">Upload Image</legend>
                     <div class="img-upload">
-                        <img src="../images/image-product/<?php echo (isset($image)) ? $image : ""; ?>" alt="">
+                        <img src="../library/images/image-product/<?php echo (isset($image)) ? $image : ""; ?>" alt="">
                     </div>
                     <div class="form-group col">
                         <label for="fileToUpload">Chọn file</label>
