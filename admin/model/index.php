@@ -1,6 +1,6 @@
 <?php
     // require_once 'libs/connect-db.php';
-    include_once '../libs/connect-db.php';
+    include_once '../public/connect-db.php';
     class M_admin extends connect_db
     {
         // public $conn;

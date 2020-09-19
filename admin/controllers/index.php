@@ -30,7 +30,7 @@ class C_website extends M_admin
                 // $product = $this->pagination($table,$start,$limit);
 
                 //*page
-                require_once 'views/index.php';
+                require_once 'views/home.php';
                 break;
 
 
