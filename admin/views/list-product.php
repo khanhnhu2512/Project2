@@ -7,11 +7,14 @@
     <title>Dashboard</title>
     <link rel="SHORTCUT ICON" href="../library/images/image-bg/LogoN-Black.png">
     <link type="text/css" rel="stylesheet" href="../public/css/admin/list-product.css">
+    <link rel="stylesheet" href="../public/css/admin/list-product.css">
     <link type="text/css" rel="stylesheet" href="../public/fontawesome-free-5.13.0-web/css/all.css">
     <link type="text/css" rel="stylesheet" href="../public/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="../public/css/style.css">
     <script src="../public/jquery/jquery-3.5.1.min.js"></script>
-
+    <style>
+       
+    </style>
 </head>
 
 <body>
