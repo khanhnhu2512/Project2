@@ -50,7 +50,7 @@
                     <li>
                         <a href="index.php?method=home">Dashboard</a>
                     </li>
-                    <li style="background-color: #484848;">
+                    <li ">
                         <a data-toggle="collapse" href="#products" role="button" aria-expanded="false" aria-controls="products">Products</a>
                     </li>
                     <ul class="collapse" id="products">
@@ -68,7 +68,7 @@
                         </li>
                     </ul>
                     <li><a href="index.php?method=list-order">Order</a></li>
-                    <li><a href="index.php?method=list-user">Users</a></li>
+                    <li style="background-color: #484848;"><a href="index.php?method=list-user">Users</a></li>
                 </ul>
             </div>
             <div class="display">

@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="../public/css/admin/list-order.css">
     <link type="text/css" rel="stylesheet" href="../public/fontawesome-free-5.13.0-web/css/all.css">
     <link type="text/css" rel="stylesheet" href="../public//bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
-    <link type="text/css" rel="stylesheet" href="../public/libs/css/style.css">
+    <link type="text/css" rel="stylesheet" href="../public/css/style.css">
     <link type="text/css" rel="stylesheet" href="../public/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="../public/css/style.css">
-    <script src="../public/libs/jquery/jquery-3.5.1.min.js"></script>
+    <script src="../public/jquery/jquery-3.5.1.min.js"></script>
     <style>
         
     </style>
@@ -22,7 +22,7 @@
     <div class="container-fluid p-0">
         <div class="header paddingLR">
             <div class="navbar-brand">
-                <img src="../images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
+                <img src="../library/images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
             </div>
             <div class="dropdown profile">
                 <button class="btn btn-dark dropdown-toggle border-0" type="button" id="dropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -52,7 +52,7 @@
                     <li>
                         <a href="index.php?method=home">Dashboard</a>
                     </li>
-                    <li style="background-color: #484848;">
+                    <li >
                         <a data-toggle="collapse" href="#products" role="button" aria-expanded="false" aria-controls="products">Products</a>
                     </li>
                     <ul class="collapse" id="products">
@@ -69,7 +69,7 @@
                                 <a href="index.php?method=list-product&type=4">Airpods</a>
                             </li>
                     </ul>
-                    <li><a href="index.php?method=list-order">Order</a></li>
+                    <li style="background-color: #484848;"><a href="index.php?method=list-order">Order</a></li>
                     <li><a href="index.php?method=list-user">Users</a></li>
                 </ul>
             </div>
