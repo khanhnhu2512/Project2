@@ -97,6 +97,8 @@
                     <div class="btn btn-danger w-100">
                         <a class="btn-link" href="index.php?method=checkout">Check out</a>
                     </div>
+                     <div class="btn btn-dark dropdown-toggle border-0" type="button" id="dropdownProfile" da toggle="dropdown" aria-hanspopup="true"> 
+                    </div>
                 </div>
             </div>
             <!-- profile -->
@@ -108,6 +110,12 @@
                     <div class="dropdown-item">
                         <i class="fa fa-user-circle" aria-hidden="true"></i>
                         <a class="link" href="#">Account</a>
+
+
+                        <div class="drop-menu"> 
+                        
+                        </div>
+
                     </div>
                     <div class="dropdown-divider"></div>
                     <div class="dropdown-item">
