@@ -298,6 +298,7 @@ class C_website extends M_users
                         // foreach ($_SESSION['cart'] as $key => $value) {
                         //     $_SESSION['cart-total'] += $_SESSION['cart'][$key]['price'];
                         // }
+                        include_once './plugin/mail.php';
                         $total = $_SESSION['cart-total'];
                         if (isset($_POST['submit'])) {
                             $name = $_POST['name'];
@@ -313,6 +314,10 @@ class C_website extends M_users
                             foreach ($_SESSION['cart'] as $key => $value) {  //giai phap la function addOrderList se tra ve gia tri cua $order_id luon
                                 $add_order_detail = $this->m_users->addOrderDetail('order_detail', $order_id['id_order'], $key, $value['price'], $value['qty']);
                             }
+                            // send mail
+                            $sendTo = $email;
+                            $mailTitle = 'Order Confirmation';
+                            mailOrder($sendTo, $mailTitle, $_SESSION['cart']);
                             $log = "Done!";
                         }
                         include_once 'user/views/checkout.php';
