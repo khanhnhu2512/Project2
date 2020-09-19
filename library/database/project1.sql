@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th9 19, 2020 lúc 05:15 AM
+-- Thời gian đã tạo: Th9 19, 2020 lúc 03:09 PM
 -- Phiên bản máy phục vụ: 10.4.13-MariaDB
 -- Phiên bản PHP: 7.2.31
 
@@ -72,6 +72,29 @@ CREATE TABLE `order_detail` (
   `qty` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Đang đổ dữ liệu cho bảng `order_detail`
+--
+
+INSERT INTO `order_detail` (`id`, `id_order`, `id_product`, `price`, `qty`) VALUES
+(83, 131, 37, 899, 2),
+(84, 131, 37, 899, 2),
+(85, 131, 39, 1299, 3),
+(86, 131, 40, 499, 2),
+(87, 131, 39, 1299, 3),
+(88, 131, 40, 499, 2),
+(89, 131, 39, 1299, 3),
+(90, 139, 40, 499, 2),
+(91, 139, 39, 1299, 3),
+(92, 140, 47, 699, 3),
+(93, 140, 41, 1599, 4),
+(94, 141, 47, 699, 3),
+(95, 141, 41, 1599, 4),
+(96, 142, 47, 699, 3),
+(97, 142, 41, 1599, 4),
+(98, 143, 47, 699, 3),
+(99, 143, 41, 1599, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -87,6 +110,19 @@ CREATE TABLE `order_list` (
   `payment_method` int(11) NOT NULL,
   `create_time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `order_list`
+--
+
+INSERT INTO `order_list` (`username`, `id_order`, `status`, `total_price`, `address`, `payment_method`, `create_time`) VALUES
+('khanhnhu', 131, 0, 1798, 'test', 0, '2020-09-19 11:19:52'),
+('khanhnhu', 138, 0, 999, 'aaa', 0, '2020-09-19 11:32:51'),
+('khanhnhu', 139, 0, 4895, 'abc', 0, '2020-09-19 11:33:03'),
+('khanhnhu', 140, 0, 8493, 'aaaaaaaaa', 0, '2020-09-19 11:35:21'),
+('khanhnhu', 141, 0, 8493, 'aaaaaaaaa', 0, '2020-09-19 11:35:49'),
+('khanhnhu', 142, 0, 8493, 'aaaaaaaaa', 0, '2020-09-19 11:36:51'),
+('khanhnhu', 143, 0, 8493, 'aaaaaaaaa', 0, '2020-09-19 11:37:51');
 
 -- --------------------------------------------------------
 
@@ -156,6 +192,35 @@ INSERT INTO `product_category` (`id`, `name`) VALUES
 (2, 'iPad'),
 (3, 'Macbook'),
 (4, 'Airpods');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `product_information`
+--
+
+CREATE TABLE `product_information` (
+  `id_product` int(11) NOT NULL,
+  `display` varchar(256) NOT NULL COMMENT 'Màn hình',
+  `operating_system` varchar(256) NOT NULL COMMENT 'Hệ điều hành',
+  `front_camera` varchar(256) NOT NULL COMMENT 'Cam trước',
+  `rear_camera` varchar(256) NOT NULL COMMENT 'Cam sau',
+  `cpu` varchar(256) NOT NULL COMMENT 'CPU',
+  `ram` varchar(256) NOT NULL COMMENT 'RAM',
+  `rom` varchar(256) NOT NULL COMMENT 'ROM',
+  `battery` varchar(256) NOT NULL COMMENT 'Pin',
+  `security` varchar(256) NOT NULL COMMENT 'Bảo mật',
+  `charging_port` varchar(256) NOT NULL COMMENT 'Cổng sạc',
+  `compatible` varchar(256) NOT NULL COMMENT 'Tương thích',
+  `sound_technology` varchar(256) NOT NULL COMMENT 'Công nghệ âm thnah',
+  `used_time` varchar(256) NOT NULL COMMENT 'Thời gian sử dụng',
+  `connect` varchar(256) NOT NULL COMMENT 'Kết nối',
+  `weight` varchar(256) NOT NULL COMMENT 'Trọng lượng',
+  `brand` varchar(256) NOT NULL COMMENT 'Thương hiệu',
+  `made_in` varchar(256) NOT NULL COMMENT 'Sản xuất tại',
+  `hard_drive` varchar(256) NOT NULL COMMENT 'Ổ cứng',
+  `graphic_card` varchar(256) NOT NULL COMMENT 'Card đồ hoạ'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -253,9 +318,7 @@ ALTER TABLE `order_detail`
 -- Chỉ mục cho bảng `order_list`
 --
 ALTER TABLE `order_list`
-  ADD PRIMARY KEY (`id_order`),
-  ADD UNIQUE KEY `username` (`username`),
-  ADD UNIQUE KEY `username_2` (`username`);
+  ADD PRIMARY KEY (`id_order`);
 
 --
 -- Chỉ mục cho bảng `product`
@@ -269,6 +332,12 @@ ALTER TABLE `product`
 --
 ALTER TABLE `product_category`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `product_information`
+--
+ALTER TABLE `product_information`
+  ADD PRIMARY KEY (`id_product`);
 
 --
 -- Chỉ mục cho bảng `user`
@@ -311,13 +380,13 @@ ALTER TABLE `notifications`
 -- AUTO_INCREMENT cho bảng `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT cho bảng `order_list`
 --
 ALTER TABLE `order_list`
-  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
+  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 
 --
 -- AUTO_INCREMENT cho bảng `product`
@@ -361,16 +430,16 @@ ALTER TABLE `order_detail`
   ADD CONSTRAINT `order_detail_ibfk_2` FOREIGN KEY (`id_product`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Các ràng buộc cho bảng `order_list`
---
-ALTER TABLE `order_list`
-  ADD CONSTRAINT `order_list_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Các ràng buộc cho bảng `product`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`type`) REFERENCES `product_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `product_information`
+--
+ALTER TABLE `product_information`
+  ADD CONSTRAINT `product_information_ibfk_1` FOREIGN KEY (`id_product`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `user`
