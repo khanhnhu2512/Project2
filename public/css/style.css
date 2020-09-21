@@ -3,6 +3,11 @@
         height: auto;
     }
     
+    .card-img-bottom {
+        width: 100% !important;
+        object-fit: contain !important;
+    }
+    
     .w-25 {
         width: 120px !important;
     }

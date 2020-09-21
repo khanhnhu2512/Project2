@@ -110,7 +110,7 @@ if (!isset($_SESSION)) {
 
 
     <!-- Carousel -->
-    <div id="slides " class="carousel slide carousel-fade" data-ride="carousel" data-interval="2000">
+    <div id="slides " class="carousel slide carousel-fade" data-ride="carousel" data-interval="3000">
         <ul class="carousel-indicators ">
             <li data-target="#slides " data-slide-to="0 " class=""></li>
             <li data-target="#slides " data-slide-to="1 "></li>
@@ -158,7 +158,7 @@ if (!isset($_SESSION)) {
                 <h3 class="m-2"><a href="index.php?method=list-product&type=1">See all iPhone models></a></h3>
             </div>
             <!-- Carousel product -->
-            <div id="slides " class="carousel slide w-100 pr-5 pl-5" data-ride="carousel" data-interval="1500">
+            <div id="slides " class="carousel slide w-100 pr-5 pl-5" data-ride="carousel" data-interval="3000">
                 <div class="carousel-inner container-fluid">
                     <div class="carousel-item active">
                         <div class="container-fluid card-deck justify-content-between mt-2">
@@ -169,7 +169,7 @@ if (!isset($_SESSION)) {
 
                                 <div class="card border-0">
                                     <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
-                                        <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
+                                        <img class="card-img-bottom h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
                                     </a>
                                     <div class="card-body">
                                         <h4 class="card-title"><?php echo $value['name']; ?></h4>
@@ -213,7 +213,7 @@ if (!isset($_SESSION)) {
             </div>
 
             <!-- Carousel product -->
-            <div id="slides " class="carousel slide w-100 pr-5 pl-5" data-ride="carousel" data-interval="1500">
+            <div id="slides " class="carousel slide w-100 pr-5 pl-5" data-ride="carousel" data-interval="3000">
                 <div class="carousel-inner container-fluid">
                     <div class="carousel-item active">
                         <div class="container-fluid card-deck justify-content-between mt-2">
@@ -224,7 +224,7 @@ if (!isset($_SESSION)) {
 
                                 <div class="card border-0">
                                     <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
-                                        <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
+                                        <img class="card-img-bottom h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
                                     </a>
                                     <div class="card-body">
                                         <h4 class="card-title"><?php echo $value['name']; ?></h4>
@@ -266,7 +266,7 @@ if (!isset($_SESSION)) {
             </div>
 
             <!-- Carousel product -->
-            <div id="slides " class="carousel slide w-100 pr-5 pl-5" data-ride="carousel" data-interval="1500">
+            <div id="slides " class="carousel slide w-100 pr-5 pl-5" data-ride="carousel" data-interval="3000">
                 <div class="carousel-inner container-fluid">
                     <div class="carousel-item active">
                         <div class="container-fluid card-deck justify-content-between mt-2">
@@ -277,7 +277,7 @@ if (!isset($_SESSION)) {
 
                                 <div class="card border-0">
                                     <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
-                                        <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
+                                        <img class="card-img-bottom h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
                                     </a>
                                     <div class="card-body">
                                         <h4 class="card-title"><?php echo $value['name']; ?></h4>
@@ -330,7 +330,7 @@ if (!isset($_SESSION)) {
 
                                 <div class="card border-0">
                                     <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
-                                        <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
+                                        <img class="card-img-bottom h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
                                     </a>
                                     <div class="card-body">
                                         <h4 class="card-title"><?php echo $value['name']; ?></h4>

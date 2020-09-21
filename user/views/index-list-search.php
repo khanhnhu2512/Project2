@@ -110,12 +110,23 @@ if (!isset($_SESSION)) {
 
     <!-- Body -->
     <div class="container-fluid padding">
-        <h1>Results for "<?php echo $keyword; ?>"</h1>
+        <h1><?php if (count($product) < 1) {
+                echo "No results for ";
+            } else {
+                echo "Results for";
+            } ?> "<?php echo $keyword; ?>"</h1>
 
-        <div class="row welcome text-center pt-5 justify-content-center">
+        <div <?php if (count($product) < 1) {
+                    echo "style='height: 50vh;'";
+                } ?> class="row welcome text-center pt-5 justify-content-center">
             <div class="container padding card-deck fl mt-2">
                 <?php foreach ($product as $key => $value) : ?>
                     <div class="col-3 border-0">
+                        <?php if ($value['qty'] == 0) {
+                            echo "<div class='noticed'>
+                            <p>Out of stock</p>
+                        </div>";
+                        } ?>
                         <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
                             <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
                         </a>

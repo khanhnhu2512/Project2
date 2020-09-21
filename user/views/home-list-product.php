@@ -171,6 +171,11 @@ if (!isset($_SESSION)) {
             <div class="container padding card-deck fl mt-2">
                 <?php foreach ($product as $key => $value) : ?>
                     <div class="col-<?php echo $col; ?> border-0">
+                        <?php if ($value['qty'] == 0) {
+                            echo "<div class='noticed'>
+                            <p>Out of stock</p>
+                        </div>";
+                        } ?>
                         <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
                             <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
                         </a>
