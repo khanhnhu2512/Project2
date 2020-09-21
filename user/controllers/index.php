@@ -169,7 +169,7 @@ class C_website extends M_users
                             $_SESSION['cart-total'] = 0;
                             $_SESSION['cart-count'] = count($_SESSION['cart']);
                             foreach ($_SESSION['cart'] as $key => $value) {
-                                $_SESSION['cart-total'] += $value['price']*$value['qty'];
+                                $_SESSION['cart-total'] += $value['price'] * $value['qty'];
                             }
                             $total = $_SESSION['cart-total'];
                         }

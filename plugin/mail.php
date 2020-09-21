@@ -24,7 +24,7 @@ function sendmail($sendTo, $mailTitle, $mailBody)
     $mail->Port = 587; // TCP port lớn connect to
     //Recipients
     $mail->CharSet = 'UTF-8';
-    $mail->setFrom('luongkhanhnhu2512@gmail.com', 'Admin');
+    $mail->setFrom('luongkhanhnhu2512@gmail.com', 'N-Shop');
     $mail->addAddress($sendTo); // Name is optional
     $mail->addReplyTo('luongkhanhnhu2512@gmail.com', 'Reply');
     //Attachments
