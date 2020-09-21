@@ -1,7 +1,7 @@
-<?php 
-    if(!isset($_SESSION)){
-        session_start();
-    }
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,11 +17,35 @@
     <link type="text/css" rel="stylesheet" href="./public/css/style.css">
     <script src="./public/jquery/jquery-3.5.1.min.js"></script>
     <style>
-        
+
     </style>
 </head>
 
 <body>
+    <!-- messenger -->
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                xfbml: true,
+                version: 'v8.0'
+            });
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <!-- Your Chat Plugin code -->
+    <div class="fb-customerchat" attribution=setup_tool page_id="115832540259102">
+    </div>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
@@ -43,6 +67,7 @@
                             <a href="index.php?method=list-product&type=2" class="dropdown-item" href="#">iPad</a>
                             <a href="index.php?method=list-product&type=3" class="dropdown-item" href="#">Macbook</a>
                             <a href="index.php?method=list-product&type=4" class="dropdown-item" href="#">AirPods</a>
+                            <a href="index.php?method=list-product&type=0" class="dropdown-item" href="#">See all</a>
                         </div>
                     </li>
                     <li class="nav-item pr-5 ">
@@ -97,7 +122,7 @@
                     <div class="btn btn-danger w-100">
                         <a class="btn-link" href="index.php?method=checkout">Check out</a>
                     </div>
-                     <div class="btn btn-dark dropdown-toggle border-0" type="button" id="dropdownProfile" da toggle="dropdown" aria-hanspopup="true"> 
+                    <div class="btn btn-dark dropdown-toggle border-0" type="button" id="dropdownProfile" da toggle="dropdown" aria-hanspopup="true">
                     </div>
                 </div>
             </div>
@@ -112,8 +137,8 @@
                         <a class="link" href="#">Account</a>
 
 
-                        <div class="drop-menu"> 
-                        
+                        <div class="drop-menu">
+
                         </div>
 
                     </div>
@@ -136,7 +161,7 @@
     </nav>
 
 
-    
+
     <!-- Body -->
     <div class="container-fluid padding">
         <div class="row welcome text-center pt-5 justify-content-center">
@@ -144,22 +169,22 @@
                 <h1 class="display-4"><?php echo $_SESSION['category'][0]['name']; ?></h1>
             </div>
             <div class="container padding card-deck fl mt-2">
-                <?php foreach ($product as $key => $value): ?>
-                <div class="col-<?php echo $col; ?> border-0">
-                    <a href="index.php?method=detail&id=<?php echo $value['id'];?>">
-                        <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image'];?>" alt="Card image cap">
-                    </a>
-                    <div class="card-body">
-                        <h4 class="card-title"><?php echo $value['name']; ?></h4>
-                        <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
-                        <div class="card-title">
-                            <a href="index.php?method=add-cart&id=<?php echo $value['id']; ?>" class="card-link" ">
-                                <i class="fa fa-cart-plus fa-2x"></i>
-                            </a>
+                <?php foreach ($product as $key => $value) : ?>
+                    <div class="col-<?php echo $col; ?> border-0">
+                        <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
+                            <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
+                        </a>
+                        <div class="card-body">
+                            <h4 class="card-title"><?php echo $value['name']; ?></h4>
+                            <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
+                            <div class="card-title">
+                                <a href="index.php?method=add-cart&id=<?php echo $value['id']; ?>" class="card-link" ">
+                                <i class=" fa fa-cart-plus fa-2x"></i>
+                                </a>
+                            </div>
+                            <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id']; ?>">Learn more ></a>
                         </div>
-                        <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id'];?>">Learn more ></a>
                     </div>
-                </div>
                 <?php endforeach; ?>
             </div>
         </div>

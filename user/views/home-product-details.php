@@ -10,23 +10,47 @@ if (!isset($_SESSION)) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>My store</title>
-    <link rel="SHORTCUT ICON" href="../images/image-bg/LogoN-Black.png">
+    <link rel="SHORTCUT ICON" href="../library/images/image-bg/LogoN-Black.png">
     <link rel="stylesheet" href="../public/css/user/home-product-details.css">
     <link type="text/css" rel="stylesheet" href="../public/fontawesome-free-5.13.0-web/css/all.css">
     <link type="text/css" rel="stylesheet" href="../public/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="../public/css/style.css">
     <script src="../libs/jquery/jquery-3.5.1.min.js"></script>
     <style>
-        
+
     </style>
 </head>
 
 <body>
+    <!-- messenger -->
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                xfbml: true,
+                version: 'v8.0'
+            });
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <!-- Your Chat Plugin code -->
+    <div class="fb-customerchat" attribution=setup_tool page_id="115832540259102">
+    </div>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
             <a href="" class="navbar-brand">
-                <img src="../images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
+                <img src="../library/images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                 <span class="navbar-toggler-icon"></span>
@@ -34,7 +58,7 @@ if (!isset($_SESSION)) {
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav nav-pills ml-auto mr-auto justify-content-center">
                     <li class="nav-item pr-5">
-                        <a class="nav-link text-light" href="#">Home</a>
+                        <a class="nav-link text-light" href="index.php?method=home">Home</a>
                     </li>
                     <li class="nav-item dropdown pr-5">
                         <a class="nav-link dropdown-toggle text-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Products</a>
@@ -43,6 +67,7 @@ if (!isset($_SESSION)) {
                             <a href="index.php?method=list-product&type=2" class="dropdown-item" href="#">iPad</a>
                             <a href="index.php?method=list-product&type=3" class="dropdown-item" href="#">Macbook</a>
                             <a href="index.php?method=list-product&type=4" class="dropdown-item" href="#">AirPods</a>
+                            <a href="index.php?method=list-product&type=0" class="dropdown-item" href="#">See all</a>
                         </div>
                     </li>
                     <li class="nav-item pr-5 ">
@@ -133,17 +158,17 @@ if (!isset($_SESSION)) {
         <div class="product-img">
             <h2><?php echo $product['name']; ?></h2>
             <div class="product-img__img">
-                <img src="../images/image-product/<?php echo $product['image']; ?>" alt="">
+                <img src="..//library/images/image-product/<?php echo $product['image']; ?>" alt="">
             </div>
         </div>
         <div class="product-info">
             <div class="product-info__info">
-                
+
                 <h4>INFORMATION</h4>
                 <p class=""><?php echo $product['description']; ?></p>
                 <div class="product-info__info-price">
                     <!-- <p class="product-info__info-price-sale">$<?php echo $product['price']; ?> -->
-                        <span class="product-info__info-price-sell">$<?php echo $product['price']; ?></span>
+                    <span class="product-info__info-price-sell">$<?php echo $product['price']; ?></span>
                     <!-- </p> -->
                 </div>
                 <div class="product-info__cart">

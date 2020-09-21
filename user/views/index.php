@@ -65,6 +65,7 @@ if (!isset($_SESSION)) {
                             <a href="index.php?method=list-product&type=2" class="dropdown-item" href="#">iPad</a>
                             <a href="index.php?method=list-product&type=3" class="dropdown-item" href="#">Macbook</a>
                             <a href="index.php?method=list-product&type=4" class="dropdown-item" href="#">AirPods</a>
+                            <a href="index.php?method=list-product&type=0" class="dropdown-item" href="#">See all</a>
                         </div>
                     </li>
                     <li class="nav-item pr-5 ">

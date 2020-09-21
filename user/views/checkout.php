@@ -21,11 +21,35 @@ if (!isset($_SESSION)) {
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
     <!-- <script src="../libs/jquery/jquery-3.5.1.min.js"></script> -->
     <style>
-        
+
     </style>
 </head>
 
 <body>
+    <!-- messenger -->
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                xfbml: true,
+                version: 'v8.0'
+            });
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <!-- Your Chat Plugin code -->
+    <div class="fb-customerchat" attribution=setup_tool page_id="115832540259102">
+    </div>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
@@ -43,10 +67,11 @@ if (!isset($_SESSION)) {
                     <li class="nav-item dropdown pr-5">
                         <a class="nav-link dropdown-toggle text-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Products</a>
                         <div class="dropdown-menu">
-                            <a href="index.php?method=list-product&type=1" class="dropdown-item">iPhone</a>
-                            <a href="index.php?method=list-product&type=2" class="dropdown-item">iPad</a>
-                            <a href="index.php?method=list-product&type=3" class="dropdown-item">Macbook</a>
-                            <a href="index.php?method=list-product&type=4" class="dropdown-item">AirPods</a>
+                            <a href="index.php?method=list-product&type=1" class="dropdown-item" href="#">iPhone</a>
+                            <a href="index.php?method=list-product&type=2" class="dropdown-item" href="#">iPad</a>
+                            <a href="index.php?method=list-product&type=3" class="dropdown-item" href="#">Macbook</a>
+                            <a href="index.php?method=list-product&type=4" class="dropdown-item" href="#">AirPods</a>
+                            <a href="index.php?method=list-product&type=0" class="dropdown-item" href="#">See all</a>
                         </div>
                     </li>
                     <li class="nav-item pr-5 ">
@@ -92,8 +117,14 @@ if (!isset($_SESSION)) {
     </nav>
     <div class="body">
         <form action="" method="post" enctype="multipart/form-data">
-            <h1 class="mt-4">Check out</h1>
-            <h3><?php if(isset($log)){echo $log;} ?></h3>
+            <h1 class="mt-4"><?php if (isset($log)) {
+                                    echo $log;
+                                } else {
+                                    echo "Check out";
+                                } ?></h1>
+            <h3><?php if (isset($log)) {
+                    echo $log;
+                } ?></h3>
             <h3 class="mt-5">Your order</h3>
             <div class="cart-showtable ">
                 <?php if (isset($_SESSION['cart'])) { ?>
@@ -111,7 +142,7 @@ if (!isset($_SESSION)) {
                         <tr>
                             <?php $i = 0;
                             foreach ($_SESSION['cart'] as $key => $value) {
-                                 ?>
+                            ?>
                                 <td style="width: 40px">
                                     <?php echo $i; ?>
                                 </td>
@@ -122,7 +153,7 @@ if (!isset($_SESSION)) {
                                     <?php echo ($value['name']); ?>
                                 </td>
                                 <td style="width: 100px">
-                                    <input id="qty" name="qty" class="qty" onchange="changeQty(<?php echo $i.','.$value['id']; ?>)" style="width: 40px; text-align:center; " min="1" type="number" name="qty" value="<?php echo $value['qty']; ?>">
+                                    <input id="qty" name="qty" class="qty" onchange="changeQty(<?php echo $i . ',' . $value['id']; ?>)" style="width: 40px; text-align:center; " min="1" type="number" name="qty" value="<?php echo $value['qty']; ?>">
                                 </td>
                                 <td>
                                     <p class="price"><?php echo $value['price']; ?></p>
@@ -139,7 +170,8 @@ if (!isset($_SESSION)) {
                                 </td>
                         </tr>
 
-                    <?php $i++; } ?>
+                    <?php $i++;
+                            } ?>
                 <?php
                 } else {
                     echo "<h1>Giỏ hàng trống!</h1>";
@@ -181,7 +213,7 @@ if (!isset($_SESSION)) {
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="method" id="visa" value="1" <?php echo (isset($_POST['submit']) && $_POST['method']==1) ? "checked" : ""; ?>>
+                            <input class="form-check-input" type="radio" name="method" id="visa" value="1" <?php echo (isset($_POST['submit']) && $_POST['method'] == 1) ? "checked" : ""; ?>>
                             <label class="form-check-label" for="visa">
                                 Visa
                             </label>
@@ -190,7 +222,7 @@ if (!isset($_SESSION)) {
                 </div>
 
                 <div class="btn w-100">
-                    <input class="btn btn-lg btn-danger" onclick="submit()" name="submit" type="submit" value="Submit">
+                    <input class="btn btn-lg btn-danger" onclick="submit()" name="submit" type="<?php echo isset($log) ? 'hidden' : 'submit'; ?>" value="Submit">
                 </div>
             </div>
 
@@ -240,21 +272,23 @@ if (!isset($_SESSION)) {
             location.reload();
 
         }
-        function submit(){
+
+        function submit() {
             alert("Done!");
         }
-        function changeQty(id,id_product) {
+
+        function changeQty(id, id_product) {
             var qty = document.getElementsByClassName('qty');
             var price = document.getElementsByClassName('price');
             // document.getElementById('total-value').innerHTML
             var subtotal = 0;
             var total = 0;
             var totalperproduct = document.getElementsByClassName('totalperproduct');
-            var url = 'index.php?method=change-qty&id=' + id_product + '&qty='+ qty[id].value;
-            if (qty[id].value > 0){
-                for(var i=0;i<qty.length;i++){
-                    total =  +(qty[i].value * price[i].innerHTML);
-                    totalperproduct[i].innerHTML =  total ;
+            var url = 'index.php?method=change-qty&id=' + id_product + '&qty=' + qty[id].value;
+            if (qty[id].value > 0) {
+                for (var i = 0; i < qty.length; i++) {
+                    total = +(qty[i].value * price[i].innerHTML);
+                    totalperproduct[i].innerHTML = total;
                     subtotal += total;
                     // console.log(totalperproduct[i].innerHTML);
                     // console.log(subtotal);
@@ -266,11 +300,11 @@ if (!isset($_SESSION)) {
                 dataType: 'json',
                 cache: false,
                 contentType: false,
-                processData: false, 
+                processData: false,
                 data: {},
                 method: 'get',
                 success: function(result) {
-                   
+
                 }
             });
 

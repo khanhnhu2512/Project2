@@ -19,6 +19,30 @@ if (!isset($_SESSION)) {
 </head>
 
 <body>
+    <!-- messenger -->
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                xfbml: true,
+                version: 'v8.0'
+            });
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <!-- Your Chat Plugin code -->
+    <div class="fb-customerchat" attribution=setup_tool page_id="115832540259102">
+    </div>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
@@ -40,6 +64,7 @@ if (!isset($_SESSION)) {
                             <a href="index.php?method=list-product&type=2" class="dropdown-item" href="#">iPad</a>
                             <a href="index.php?method=list-product&type=3" class="dropdown-item" href="#">Macbook</a>
                             <a href="index.php?method=list-product&type=4" class="dropdown-item" href="#">AirPods</a>
+                            <a href="index.php?method=list-product&type=0" class="dropdown-item" href="#">See all</a>
                         </div>
                     </li>
                     <li class="nav-item pr-5 ">
@@ -51,7 +76,7 @@ if (!isset($_SESSION)) {
                 </ul>
             </div>
             <!-- search -->
-            <form method="get" action="" >
+            <form method="get" action="">
                 <div class="search-form mr-3" id="test">
                     <input type="text" class="form-control form-control-sm search-form-input" name="keyword" id="search-form-input" placeholder="Search...">
                     <button type="submit" class="btn btn-sm search-form-btn" id="search-form-btn">
@@ -92,12 +117,12 @@ if (!isset($_SESSION)) {
         </div>
         <div class="product-info">
             <div class="product-info__info">
-                
+
                 <h4>INFORMATION</h4>
                 <p class=""><?php echo $product['description']; ?></p>
                 <div class="product-info__info-price">
                     <!-- <p class="product-info__info-price-sale">$<?php echo $product['price']; ?> -->
-                        <span class="product-info__info-price-sell">$<?php echo $product['price']; ?></span>
+                    <span class="product-info__info-price-sell">$<?php echo $product['price']; ?></span>
                     <!-- </p> -->
                 </div>
                 <div class="product-info__cart">

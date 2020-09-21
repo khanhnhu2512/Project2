@@ -47,9 +47,9 @@
             }
             return $result;
         }
-        public function getViews($id){
+        public function getSth($col,$id){
             $this->conn();
-            $sql = "SELECT view from product WHERE id = $id";
+            $sql = "SELECT $col from product WHERE id = $id";
             $query = mysqli_query($this->con, $sql);
             if (mysqli_num_rows($query) > 0) {
                 $row = mysqli_fetch_assoc($query);
@@ -57,10 +57,10 @@
             }
             return $result;
         }
-        public function updateViews($id,$views)
+        public function updateSth($col,$value,$id)
         {
             $this->conn();
-            $sql = "UPDATE product SET view = '$views' WHERE id = $id";
+            $sql = "UPDATE product SET $col = '$value' WHERE id = $id";
             $query = mysqli_query($this->con, $sql);
             return $query;
         }

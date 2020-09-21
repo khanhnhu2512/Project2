@@ -84,9 +84,10 @@ class C_website extends M_users
                     if (isset($_GET['id'])) {
                         $id = $_GET['id'];
                     }
-                    $views = $this->m_users->getViews($id);
+                    // view
+                    $views = $this->m_users->getSth('view', $id);
                     $views['view']++;
-                    $updateViews = $this->m_users->updateViews($id, $views['view']);
+                    $updateViews = $this->m_users->updateSth('view', $views['view'], $id);
                     $product = $this->m_users->getObject_id($id, $table);
                     include_once 'user/views/index-product-details.php';
                     break;
@@ -100,10 +101,10 @@ class C_website extends M_users
                                 $user = $_SESSION['user'];
                                 if ($user['lv'] == 1) {
                                     $_SESSION['lv'] = 1;
-                                    header('location:/Project1/admin/index.php');
+                                    header('location:/admin/index.php');
                                 } else {
                                     $_SESSION['lv'] = 2;
-                                    header('location:/Project1/index.php');
+                                    header('location:/index.php');
                                 }
                             } else {
                                 $log = "Tên đăng nhập hoặc mật khẩu không đúng!";
@@ -168,12 +169,12 @@ class C_website extends M_users
                             $_SESSION['cart-total'] = 0;
                             $_SESSION['cart-count'] = count($_SESSION['cart']);
                             foreach ($_SESSION['cart'] as $key => $value) {
-                                $_SESSION['cart-total'] += $_SESSION['cart'][$key]['price'];
+                                $_SESSION['cart-total'] += $value['price']*$value['qty'];
                             }
                             $total = $_SESSION['cart-total'];
                         }
                         //                 echo "<pre>";
-                        // print_r($_SESSION['cart']);
+                        // print_r($_SESSION['cart-total']);
 
                         //*page
                         include_once 'user/views/home.php';
@@ -269,9 +270,10 @@ class C_website extends M_users
                         if (isset($_GET['id'])) {
                             $id = $_GET['id'];
                         }
-                        $views = $this->m_users->getViews($id);
+                        // view
+                        $views = $this->m_users->getSth('view', $id);
                         $views['view']++;
-                        $updateViews = $this->m_users->updateViews($id, $views['view']);
+                        $updateViews = $this->m_users->updateSth('view', $views['view'], $id);
                         $product = $this->m_users->getObject_id($id, $table);
                         include_once 'user/views/home-product-details.php';
                         break;
@@ -288,16 +290,13 @@ class C_website extends M_users
                         foreach ($_SESSION['cart'] as $key => $value) {
                             $_SESSION['cart-total'] += $_SESSION['cart'][$key]['qty'] * $_SESSION['cart'][$key]['price'];
                         }
-                        
+
 
                         break;
                     case ('checkout'):
                         // echo "<pre>";
                         // print_r($_SESSION['cart']);
-                        // $_SESSION['cart-total'] = 0;
-                        // foreach ($_SESSION['cart'] as $key => $value) {
-                        //     $_SESSION['cart-total'] += $_SESSION['cart'][$key]['price'];
-                        // }
+
                         include_once './plugin/mail.php';
                         $total = $_SESSION['cart-total'];
                         if (isset($_POST['submit'])) {
@@ -307,18 +306,40 @@ class C_website extends M_users
                             $address = $_POST['address'];
                             $method = $_POST['method'];
 
-                            $add_order_list = $this->m_users->addOrderList('order_list', $_SESSION['user']['username'], $_SESSION['cart-total'], $address, $method);
-                            $order_id = $this->m_users->getOrderId('order_list');
-                            // echo "<pre>";
-                            // print_r($order_id['id_order']);
-                            foreach ($_SESSION['cart'] as $key => $value) {  //giai phap la function addOrderList se tra ve gia tri cua $order_id luon
-                                $add_order_detail = $this->m_users->addOrderDetail('order_detail', $order_id['id_order'], $key, $value['price'], $value['qty']);
+                            // check qty
+                            $outofstock = 0;
+                            foreach ($_SESSION['cart'] as $key => $value) {
+                                $qty = $this->m_users->getSth('qty', $value['id']);
+                                if ($value > $qty['qty']) {
+                                    $outofstock++;
+                                }
                             }
-                            // send mail
-                            $sendTo = $email;
-                            $mailTitle = 'Order Confirmation';
-                            mailOrder($sendTo, $mailTitle, $_SESSION['cart']);
-                            $log = "Done!";
+                            if ($outofstock == 0) {
+                                $add_order_list = $this->m_users->addOrderList('order_list', $_SESSION['user']['username'], $_SESSION['cart-total'], $address, $method);
+                                $order_id = $this->m_users->getOrderId('order_list');
+                                // echo "<pre>";
+                                // print_r($order_id['id_order']);
+                                foreach ($_SESSION['cart'] as $key => $value) {  //giai phap la function addOrderList se tra ve gia tri cua $order_id luon
+                                    $add_order_detail = $this->m_users->addOrderDetail('order_detail', $order_id['id_order'], $key, $value['price'], $value['qty']);
+                                    // update qty
+                                    $qty = $this->m_users->getSth('qty', $value['id']);
+                                    $qty['qty'] -= $value['qty'];
+                                    $updateQty = $this->m_users->updateSth('qty', $qty['qty'], $value['id']);
+                                    // update sold
+                                    $sold = $this->m_users->getSth('sold', $value['id']);
+                                    $sold['sold'] += $value['qty'];
+                                    $updateSold = $this->m_users->updateSth('sold', $sold['sold'], $value['id']);
+                                }
+
+                                // send mail
+                                $sendTo = $email;
+                                mailOrder($sendTo, $_SESSION['cart'], $name, $email, $number, $address, $total);
+
+                                // log
+                                $log = "Done!";
+                            }else{
+                                $log = "Out of Stock!";
+                            }
                         }
                         include_once 'user/views/checkout.php';
                         break;

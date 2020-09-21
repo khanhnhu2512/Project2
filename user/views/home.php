@@ -26,6 +26,30 @@ if (!isset($_SESSION)) {
 </head>
 
 <body>
+    <!-- messenger -->
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                xfbml: true,
+                version: 'v8.0'
+            });
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <!-- Your Chat Plugin code -->
+    <div class="fb-customerchat" attribution=setup_tool page_id="115832540259102">
+    </div>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
@@ -47,6 +71,7 @@ if (!isset($_SESSION)) {
                             <a href="index.php?method=list-product&type=2" class="dropdown-item" href="#">iPad</a>
                             <a href="index.php?method=list-product&type=3" class="dropdown-item" href="#">Macbook</a>
                             <a href="index.php?method=list-product&type=4" class="dropdown-item" href="#">AirPods</a>
+                            <a href="index.php?method=list-product&type=0" class="dropdown-item" href="#">See all</a>
                         </div>
                     </li>
                     <li class="nav-item pr-5 ">
@@ -423,43 +448,43 @@ if (!isset($_SESSION)) {
     </footer>
 
 
-        <script language="javascript">
-            // function redirectLogin() {
-            //     alert("You need to login!");
-            //     window.location = "index.php?method=login";
-            // }
-            function reload() {
-                location.reload();
+    <script language="javascript">
+        // function redirectLogin() {
+        //     alert("You need to login!");
+        //     window.location = "index.php?method=login";
+        // }
+        function reload() {
+            location.reload();
 
-            }
+        }
 
-            function addCart() { ///function addCart(id) {
-                // console.log(id);
-                // var url = 'index.php?method=add-cart&id=' + id;
-                // var cartCount = document.getElementById('cart-count').innerHTML;
-                // //sử dụng ajax post
-                // $.ajax({
-                //     url: url, // gửi đến file upload.php 
-                //     dataType: 'json',
-                //     cache: false,
-                //     contentType: false,
-                //     processData: false,
-                //     data: {},
-                //     method: 'post',
-                //     success: function(res) {
-                //         if ($.trim(result.image) != '') {
-                //             $('#image').append(result.image);
-                //         }
-                //         console.log(url);
-                //         // $('#fileToUpload').val('');
-                //     }
-                // });
-                alert("Done!");
-            }
-        </script>
-        <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script> -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
+        function addCart() { ///function addCart(id) {
+            // console.log(id);
+            // var url = 'index.php?method=add-cart&id=' + id;
+            // var cartCount = document.getElementById('cart-count').innerHTML;
+            // //sử dụng ajax post
+            // $.ajax({
+            //     url: url, // gửi đến file upload.php 
+            //     dataType: 'json',
+            //     cache: false,
+            //     contentType: false,
+            //     processData: false,
+            //     data: {},
+            //     method: 'post',
+            //     success: function(res) {
+            //         if ($.trim(result.image) != '') {
+            //             $('#image').append(result.image);
+            //         }
+            //         console.log(url);
+            //         // $('#fileToUpload').val('');
+            //     }
+            // });
+            alert("Done!");
+        }
+    </script>
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
 </body>
 
 </html>
