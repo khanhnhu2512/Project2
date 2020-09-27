@@ -18,15 +18,15 @@ function sendmail($sendTo, $mailTitle, $mailBody)
     $mail->isSMTP(); // Set mailer to use SMTP
     $mail->Host = 'smtp.gmail.com'; // Specify main and backup SMTP servers
     $mail->SMTPAuth = true; // Enable SMTP authentication
-    $mail->Username = 'luongkhanhnhu2512@gmail.com'; // SMTP username
-    $mail->Password = 'Khanhnhu2512'; // SMTP password
+    $mail->Username = '[your email]'; // SMTP username
+    $mail->Password = '[your email password]'; // SMTP password
     $mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 587; // TCP port lớn connect to
     //Recipients
     $mail->CharSet = 'UTF-8';
-    $mail->setFrom('luongkhanhnhu2512@gmail.com', 'N-Shop');
+    $mail->setFrom($mail->Username, 'N-Shop');
     $mail->addAddress($sendTo); // Name is optional
-    $mail->addReplyTo('luongkhanhnhu2512@gmail.com', 'Reply');
+    $mail->addReplyTo($mail->Username, 'Reply');
     //Attachments
     //$mail->addAttachment('/var/tmp/file.tar.gz'); // Add attachments
     //$mail->addAttachment('/tmp/image.jpg', 'new.jpg'); // Optional name
