@@ -20,32 +20,31 @@ class C_website extends M_users
         if (!isset($_SESSION['lv'])) { //chua dang nhap
             switch ($method) {
                 case ('home'):
-                    $_SESSION['type'] = $this->getObject("product_category");
-                    $product = array();
+                    // $_SESSION['type'] = $this->getObject("product_category");
+                    // $product = array();
                     // echo "<pre>";
-                    $limit = 4;
+                    // $limit = 4;
                     // print_r($_SESSION['type']);
-                    foreach ($_SESSION['type'] as $k => $val) {
-                        switch ($val['id']) {
-                            case '1':
-                                $product[$val['id']] = $this->Random('product', 'type', $val['id'], 8);
-                                break;
-                            case '2':
-                                $product[$val['id']] = $this->Random('product', 'type', $val['id'], 9);
-                                break;
-                            case '3':
-                                $product[$val['id']] = $this->Random('product', 'type', $val['id'], 10);
-                                break;
-                            case '4':
-                                $product[$val['id']] = $this->Random('product', 'type', $val['id'], 9);
-                                break;
-                        }
-                    }
-
-                    // echo "<pre>";
-                    // print_r($product);
-
-                    //*page
+                    // foreach ($_SESSION['type'] as $k => $val) {
+                    //     switch ($val['id']) {
+                    //         case '1':
+                    //             $product['most-view'] = $this->Random('product', 'type', $val['id'], 8);
+                    //             break;
+                    //         case '2':
+                    //             $product[$val['id']] = $this->Random('product', 'type', $val['id'], 9);
+                    //             break;
+                    //         case '3':
+                    //             $product[$val['id']] = $this->Random('product', 'type', $val['id'], 10);
+                    //             break;
+                    //         case '4':
+                    //             $product[$val['id']] = $this->Random('product', 'type', $val['id'], 9);
+                    //             break;
+                    //     }
+                    // }
+                    // $product['mostview'] = $this->OrderBy('product','view','DESC');
+                    $product['bestseller'] = $this->OrderBy('product','sold','DESC');
+                    $product['new'] = $this->OrderBy('product','create_time','DESC');
+                    // echo count($product['mostview']);
                     include_once 'user/views/index.php';
                     break;
                 case ('search'):
@@ -56,27 +55,12 @@ class C_website extends M_users
                     include_once('user/views/index-list-search.php');
                     break;
                 case ('list-product'):
-                    $type = $_GET['type'];
-                    $_SESSION['category'] = $this->getEverything_id("product_category", "id", $type);
+                    // $type = $_GET['type'];
+                    // $_SESSION['category'] = $this->getEverything_id("product_category", "id", $type);
                     // echo "<pre>";
                     // print_r($_SESSION['category']['name']);
-                    $_SESSION['product'] = $this->getEverything_id("product", "type", $type);
+                    $_SESSION['product'] = $this->getObject("product");
                     $product = $_SESSION['product'];
-                    switch ($_SESSION['category'][0]['id']) {
-                        case '1':
-                            $col = 3;
-                            break;
-                        case '2':
-                            $col = 4;
-                            break;
-                        case '3':
-                            $col = 6;
-                            break;
-                        case '4':
-                            $col = 4;
-                            break;
-                    }
-                    $_SESSION['type'] = $this->getObject("product_category");
                     require_once('user/views/index-list-product.php');
                     break;
                 case ('detail'):
@@ -113,7 +97,50 @@ class C_website extends M_users
                     }
                     require_once 'user/views/account/login.php';
                     break;
+                case ('checkmail'):
+                    if (isset($_POST['email'])) {
+                        $email = $_POST['email'];
+                        $rs = $this->m_users->checkUser('email', $email);
+                        $error = array(
+                            'error' => 'success',
+                            'username' => '',
+                            'email' => ''
+                        );
+                        if ($rs == 1) {
+                            $error['error'] = 'false';
+                            $error['email'] = 'Email already exists';
+                        }
+                        // if($rs<1){
+                        //     echo json_encode("true");
+                        // }else{
+                        //     echo json_encode("false");
+                        // }
+                        die(json_encode($error));
+                    }
 
+                    break;
+                case ('checkusername'):
+                    if (isset($_POST['username'])) {
+                        $username = $_POST['username'];
+                        $rs = $this->m_users->checkUser('username', $username);
+                        $error = array(
+                            'error' => 'success',
+                            'username' => '',
+                            'email' => ''
+                        );
+                        if ($rs == 1) {
+                            $error['error'] = 'false';
+                            $error['username'] = 'Username already exists';
+                        }
+                        // if($rs<1){
+                        //     echo json_encode("true");
+                        // }else{
+                        //     echo json_encode("false");
+                        // }
+                        die(json_encode($error));
+                    }
+
+                    break;
                 case ('signup'):
                     $this->log = "";
                     if (!empty($_POST['fullname']) && !empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['repassword'])) {
@@ -124,6 +151,7 @@ class C_website extends M_users
                             $password = $_POST['password'];
                             $this->m_users->signup($username, $fullname, $email, $password);
                             $log = "Đăng ký thành công!";
+                            header('location:index.php');
                         } else {
                             $log = "Nhập lại mật khẩu không khớp!";
                         }
@@ -144,24 +172,28 @@ class C_website extends M_users
             if ($_SESSION['lv'] == 2) {
                 switch ($method) {
                     case ('home'):
-                        $_SESSION['type'] = $this->getObject("product_category");
-                        $product = array();
-                        foreach ($_SESSION['type'] as $k => $val) {
-                            switch ($val['id']) {
-                                case '1':
-                                    $product[$val['id']] = $this->Random('product', 'type', $val['id'], 8);
-                                    break;
-                                case '2':
-                                    $product[$val['id']] = $this->Random('product', 'type', $val['id'], 9);
-                                    break;
-                                case '3':
-                                    $product[$val['id']] = $this->Random('product', 'type', $val['id'], 10);
-                                    break;
-                                case '4':
-                                    $product[$val['id']] = $this->Random('product', 'type', $val['id'], 9);
-                                    break;
-                            }
-                        }
+                        // $_SESSION['type'] = $this->getObject("product_category");
+                        // $product = array();
+                        // foreach ($_SESSION['type'] as $k => $val) {
+                        //     switch ($val['id']) {
+                        //         case '1':
+                        //             $product[$val['id']] = $this->Random('product', 'type', $val['id'], 8);
+                        //             break;
+                        //         case '2':
+                        //             $product[$val['id']] = $this->Random('product', 'type', $val['id'], 9);
+                        //             break;
+                        //         case '3':
+                        //             $product[$val['id']] = $this->Random('product', 'type', $val['id'], 10);
+                        //             break;
+                        //         case '4':
+                        //             $product[$val['id']] = $this->Random('product', 'type', $val['id'], 9);
+                        //             break;
+                        //     }
+                        // }
+                        $product['mostview'] = $this->OrderBy('product','view','DESC');
+                        $product['bestseller'] = $this->OrderBy('product','sold','DESC');
+                        $product['new'] = $this->OrderBy('product','create_time','DESC');
+                        
                         if (!isset($_SESSION['cart-count'])) {
                             $_SESSION['cart-count'] = 0;
                         }
@@ -182,6 +214,8 @@ class C_website extends M_users
                     case ('profile'):
                         require_once 'views/profile.php';
                         break;
+
+
 
                     case ('search'):
                         $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
@@ -310,10 +344,12 @@ class C_website extends M_users
                             $outofstock = 0;
                             foreach ($_SESSION['cart'] as $key => $value) {
                                 $qty = $this->m_users->getSth('qty', $value['id']);
-                                if ($value > $qty['qty']) {
+                                if ($value['qty'] > $qty['qty']) {
+
                                     $outofstock++;
                                 }
                             }
+
                             if ($outofstock == 0) {
                                 $add_order_list = $this->m_users->addOrderList('order_list', $_SESSION['user']['username'], $_SESSION['cart-total'], $address, $method);
                                 $order_id = $this->m_users->getOrderId('order_list');
@@ -337,44 +373,13 @@ class C_website extends M_users
 
                                 // log
                                 $log = "Done!";
-                            }else{
+                            } else {
                                 $log = "Out of Stock!";
                             }
                         }
                         include_once 'user/views/checkout.php';
                         break;
-                        // case ('payment'):
-                        //     echo "<h1>Done</h1>";
-                        //     echo "<pre>";
-                        //     print_r($_SESSION['cart']);
-                        //     $rows = array_count_keys($_SESSION['cart']);
-                        //     echo $rows;
-                        //     if (isset($_POST['payment'])) {
 
-
-                        //         $_SESSION['address'] = $_POST['address'];
-
-                        //         echo $_SESSION['user']['username'];
-                        //         $add_order = $this->m_users->getEverything_id('order_list', 'username', $_SESSION['user']['username']);
-
-                        //         $this->m_users->addOrder($_SESSION['user']['username'], 'order_list');
-                        //         $add_order_detail = $this->m_users->addOrderDetail('order_detail', $add_order['id_order'], $_SESSION['total-payment'], $_SESSION['address'], $_SESSION['payment-method']);
-                        //         echo "done";
-                        //         echo "<pre>";
-                        //         print_r($add_order);
-                        //         print_r($this->m_users->addOrder($_SESSION['user']['username'], 'order_list'));
-                        //     }
-                        //     include_once 'views/pay.php';
-                        //     break;
-                        // case ('delete'):
-                        //     if (isset($_GET['id'])) {
-                        //         $id = $_GET['id'];
-                        //     } else {
-                        //         header("localtion:View/list-nv.php");
-                        //     }
-                        //     $this->model->deleteMember($id);
-                        //     echo "<p>Succesful!</p>";
-                        //     break;
                     default:
                         header('location:index.php');
                         break;

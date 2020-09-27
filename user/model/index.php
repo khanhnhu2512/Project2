@@ -10,13 +10,17 @@
         public function checkUser($object,$value)
         {
             $this->conn();
-            $sql = "SELECT * from 'user' WHERE $object = $value";
+            $sql = "SELECT count(*) as count from user WHERE $object = '$value'";
             $query = mysqli_query($this->con, $sql);
-            $result = true;
-            if (mysqli_num_rows($query) > 0) {
-                $result = false; //check if $query exist $object = $value
+            $error = 0;
+            if ($query){
+                $row = mysqli_fetch_array($query, MYSQLI_ASSOC);
+                if ((int)$row['count'] > 0){
+                    $error = 1;
+                }
             }
-            return $result;
+            
+            return $error;
         }
 
         public function login($username,$password) {
@@ -77,6 +81,21 @@
             }
             return $result;
         }
+
+        public function OrderBy($table,$object,$value)
+        {
+            $this->conn();
+            $sql = "SELECT * from $table ORDER BY $object $value LIMIT 8";
+            $query = mysqli_query($this->con, $sql);
+            $result = array();
+            if ($query){ 
+                while($row = mysqli_fetch_assoc($query)){
+                $result[] = $row;
+                }
+            }
+            return $result;
+        }
+
         public function Random($table,$object,$id,$limit)
         {
             $this->conn();

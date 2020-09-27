@@ -60,7 +60,10 @@ if (!isset($_SESSION)) {
                     <li class="nav-item pr-5">
                         <a class="nav-link text-light" href="index.php?method=home">Home</a>
                     </li>
-                    <li class="nav-item dropdown pr-5">
+                    <li class="nav-item pr-5">
+                        <a class="nav-link text-light" href="index.php?method=list-product">Product</a>
+                    </li>
+                    <!-- <li class="nav-item dropdown pr-5">
                         <a class="nav-link dropdown-toggle text-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Products</a>
                         <div class="dropdown-menu">
                             <a href="index.php?method=list-product&type=1" class="dropdown-item" href="#">iPhone</a>
@@ -69,7 +72,7 @@ if (!isset($_SESSION)) {
                             <a href="index.php?method=list-product&type=4" class="dropdown-item" href="#">AirPods</a>
                             <a href="index.php?method=list-product&type=0" class="dropdown-item" href="#">See all</a>
                         </div>
-                    </li>
+                    </li> -->
                     <li class="nav-item pr-5 ">
                         <a class="nav-link text-light" href="#">About Us</a>
                     </li>

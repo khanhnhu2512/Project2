@@ -57,7 +57,10 @@ if (!isset($_SESSION)) {
                     <li class="nav-item pr-5">
                         <a class="nav-link text-light" href="index.php?method=home">Home</a>
                     </li>
-                    <li class="nav-item dropdown pr-5">
+                    <li class="nav-item pr-5">
+                        <a class="nav-link text-light" href="index.php?method=list-product">Product</a>
+                    </li>
+                    <!-- <li class="nav-item dropdown pr-5">
                         <a class="nav-link dropdown-toggle text-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Products</a>
                         <div class="dropdown-menu">
                             <a href="index.php?method=list-product&type=1" class="dropdown-item" href="#">iPhone</a>
@@ -66,7 +69,7 @@ if (!isset($_SESSION)) {
                             <a href="index.php?method=list-product&type=4" class="dropdown-item" href="#">AirPods</a>
                             <a href="index.php?method=list-product&type=0" class="dropdown-item" href="#">See all</a>
                         </div>
-                    </li>
+                    </li> -->
                     <li class="nav-item pr-5 ">
                         <a class="nav-link text-light" href="#">About Us</a>
                     </li>
@@ -115,17 +118,16 @@ if (!isset($_SESSION)) {
         <nav aria-label="breadcrumb ">
             <ol class="breadcrumb bg-white">
                 <li class="breadcrumb-item"><a href="index.php?method=home">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Product</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><?php echo $_SESSION['category'][0]['name']; ?></li>
+                <li class="breadcrumb-item active"><a href="index.php?method=list-product">Product</a></li>
             </ol>
         </nav>
         <div class="row welcome text-center pt-2 justify-content-center">
             <div class="col-12 mt-5 mb-5 justify-content-center">
-                <h1 class="display-4"><?php echo $_SESSION['category'][0]['name']; ?></h1>
+                <h1 class="display-4">Products</h1>
             </div>
             <div class="container padding card-deck fl mt-2">
                 <?php foreach ($product as $key => $value) : ?>
-                    <div class="col-<?php echo $col; ?> border-0">
+                    <div class="col-3 border-0">
                         <?php if($value['qty']==0){
                             echo "<div class='noticed'>
                             <p>Out of stock</p>

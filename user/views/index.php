@@ -58,7 +58,10 @@ if (!isset($_SESSION)) {
                     <li class="nav-item pr-5">
                         <a class="nav-link text-light" href="index.php?method=home">Home</a>
                     </li>
-                    <li class="nav-item dropdown pr-5">
+                    <li class="nav-item pr-5">
+                        <a class="nav-link text-light" href="index.php?method=list-product">Product</a>
+                    </li>
+                    <!-- <li class="nav-item dropdown pr-5">
                         <a class="nav-link dropdown-toggle text-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Products</a>
                         <div class="dropdown-menu">
                             <a href="index.php?method=list-product&type=1" class="dropdown-item" href="#">iPhone</a>
@@ -67,7 +70,7 @@ if (!isset($_SESSION)) {
                             <a href="index.php?method=list-product&type=4" class="dropdown-item" href="#">AirPods</a>
                             <a href="index.php?method=list-product&type=0" class="dropdown-item" href="#">See all</a>
                         </div>
-                    </li>
+                    </li> -->
                     <li class="nav-item pr-5 ">
                         <a class="nav-link text-light" href="#">About Us</a>
                     </li>
@@ -77,7 +80,7 @@ if (!isset($_SESSION)) {
                 </ul>
             </div>
             <!-- search -->
-            <form method="get" action="" >
+            <form method="get" action="">
                 <div class="search-form mr-3" id="test">
                     <input type="text" class="form-control form-control-sm search-form-input" name="keyword" id="search-form-input" placeholder="Search...">
                     <button type="submit" class="btn btn-sm search-form-btn" id="search-form-btn">
@@ -120,19 +123,15 @@ if (!isset($_SESSION)) {
         <div class="carousel-inner ">
             <div class="carousel-item active ">
                 <img class="d-block w-100 " src="./library/images/image-bg/bg5.jpg ">
-
             </div>
             <div class="carousel-item ">
                 <img class="d-block w-100 " src="./library/images/image-bg/bg1.jpg ">
-
             </div>
             <div class="carousel-item ">
                 <img class="d-block w-100 " src="./library/images/image-bg/bg3.jpg ">
-
             </div>
             <div class="carousel-item ">
                 <img class="d-block w-100 " src="./library/images/image-bg/bg2.jpg ">
-
             </div>
             <a class="carousel-control-prev " href="#slides " role="button " data-slide="prev">
                 <span class="carousel-control-prev-icon " aria-hidden="true "></span>
@@ -154,8 +153,8 @@ if (!isset($_SESSION)) {
             <hr>
             <!-- Product iPhone-->
             <div class="col-12 mt-5">
-                <h1 class="display-4">First, Choose an iPhone</h1>
-                <h3 class="m-2"><a href="index.php?method=list-product&type=1">See all iPhone models></a></h3>
+                <h1 class="display-4">New Products</h1>
+                <h3 class="m-2"><a href="index.php?method=list-product">See all Products></a></h3>
             </div>
             <!-- Carousel product -->
             <div id="slides " class="carousel slide w-100 pr-5 pl-5" data-ride="carousel" data-interval="3000">
@@ -163,7 +162,168 @@ if (!isset($_SESSION)) {
                     <div class="carousel-item active">
                         <div class="container-fluid card-deck justify-content-between mt-2">
                             <?php $i = 1;
-                            foreach ($product['1'] as $key => $value) :
+                            foreach ($product['new'] as $key => $value) :
+
+                            ?>
+
+                                <div class="card border-0">
+                                    <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
+                                        <img class="card-img-bottom h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
+                                    </a>
+                                    <div class="card-body">
+                                        <h4 class="card-title"><?php echo $value['name']; ?></h4>
+                                        <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
+                                        <div class="card-title">
+                                            <a class="card-link" onclick="redirectLogin()">
+                                                <i class="fa fa-cart-plus fa-2x"></i>
+                                            </a>
+                                        </div>
+                                        <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id']; ?>">Learn more ></a>
+                                    </div>
+                                </div>
+                                <?php if (($i % 4 == 0) && ($i != count($product['new']))) {
+                                    echo "</div>";
+                                    echo "</div>";
+                                    echo "<div class='carousel-item'>";
+                                    echo "<div class='container-fluid card-deck justify-content-between mt-2'>";
+                                }
+                                $i++;
+                                ?>
+
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+
+                    <a class="carousel-control-prev " href="#slides " role="button " data-slide="prev">
+                        <span class="carousel-control-prev-icon " aria-hidden="true "></span>
+                        <span class="sr-only ">Previous</span>
+                    </a>
+                    <a class="carousel-control-next " href="#slides " role="button " data-slide="next">
+                        <span class="carousel-control-next-icon " aria-hidden="true "></span>
+                        <span class="sr-only ">Next</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Product iPad-->
+            <div class="col-12 mt-5">
+                <h1 class="display-4">Best seller</h1>
+                <h3 class="m-2"><a href="index.php?method=list-product">See all Products></a></h3>
+            </div>
+
+            <!-- Carousel product -->
+            <div id="slides " class="carousel slide w-100 pr-5 pl-5" data-ride="carousel" data-interval="3000">
+                <div class="carousel-inner container-fluid">
+                    <div class="carousel-item active">
+                        <div class="container-fluid card-deck justify-content-between mt-2">
+                            <?php $i = 1;
+                            foreach ($product['bestseller'] as $key => $value) :
+
+                            ?>
+
+                                <div class="card border-0">
+                                    <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
+                                        <img class="card-img-bottom h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
+                                    </a>
+                                    <div class="card-body">
+                                        <h4 class="card-title"><?php echo $value['name']; ?></h4>
+                                        <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
+                                        <div class="card-title">
+                                            <a class="card-link" onclick="redirectLogin()">
+                                                <i class="fa fa-cart-plus fa-2x"></i>
+                                            </a>
+                                        </div>
+                                        <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id']; ?>">Learn more ></a>
+                                    </div>
+                                </div>
+                                <?php if (($i % 4 == 0) && ($i != count($product['bestseller']))) {
+                                    echo "</div>";
+                                    echo "</div>";
+                                    echo "<div class='carousel-item'>";
+                                    echo "<div class='container-fluid card-deck justify-content-between mt-2'>";
+                                }
+                                $i++;
+                                ?>
+
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev " href="#slides " role="button " data-slide="prev">
+                        <span class="carousel-control-prev-icon " aria-hidden="true "></span>
+                        <span class="sr-only ">Previous</span>
+                    </a>
+                    <a class="carousel-control-next " href="#slides " role="button " data-slide="next">
+                        <span class="carousel-control-next-icon " aria-hidden="true "></span>
+                        <span class="sr-only ">Next</span>
+                    </a>
+                </div>
+            </div>
+            <!-- Mac -->
+            <!-- <div class="col-12 mt-5">
+                <h1 class="display-4">New Products</h1>
+                <h3 class="m-2"><a href="index.php?method=list-product">See all Products></a></h3>
+            </div> -->
+
+            <!-- Carousel product -->
+            <!-- <div id="slides " class="carousel slide w-100 pr-5 pl-5" data-ride="carousel" data-interval="3000">
+                <div class="carousel-inner container-fluid">
+                    <div class="carousel-item active">
+                        <div class="container-fluid card-deck justify-content-between mt-2">
+                            <?php $i = 1;
+                            foreach ($product['new'] as $key => $value) :
+
+                            ?>
+
+                                <div class="card border-0">
+                                    <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
+                                        <img class="card-img-bottom h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
+                                    </a>
+                                    <div class="card-body">
+                                        <h4 class="card-title"><?php echo $value['name']; ?></h4>
+                                        <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
+                                        <div class="card-title">
+                                            <a class="card-link" onclick="redirectLogin()">
+                                                <i class="fa fa-cart-plus fa-2x"></i>
+                                            </a>
+                                        </div>
+                                        <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id']; ?>">Learn more ></a>
+                                    </div>
+                                </div>
+                                <?php if (($i % 4 == 0) && ($i != count($product['new']))) {
+                                    echo "</div>";
+                                    echo "</div>";
+                                    echo "<div class='carousel-item'>";
+                                    echo "<div class='container-fluid card-deck justify-content-between mt-2'>";
+                                }
+                                $i++;
+                                ?>
+
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+
+                    <a class="carousel-control-prev " href="#slides " role="button " data-slide="prev">
+                        <span class="carousel-control-prev-icon " aria-hidden="true "></span>
+                        <span class="sr-only ">Previous</span>
+                    </a>
+                    <a class="carousel-control-next " href="#slides " role="button " data-slide="next">
+                        <span class="carousel-control-next-icon " aria-hidden="true "></span>
+                        <span class="sr-only ">Next</span>
+                    </a>
+                </div>
+            </div> -->
+            <!-- Product Airpods-->
+            <!-- <div class="col-12 mt-5">
+                <h1 class="display-4">It'll perfect with an AirPods</h1>
+                <h3 class="m-2"><a href="index.php?method=list-product&type=4">See all AirPods models></a></h3>
+            </div> -->
+            <!-- Carousel product -->
+            <!-- <div id="slides " class="carousel slide w-100 pr-5 pl-5" data-ride="carousel" data-interval="1500">
+                <div class="carousel-inner container-fluid">
+                    <div class="carousel-item active">
+                        <div class="container-fluid card-deck justify-content-between mt-2">
+                            <?php $i = 1;
+                            foreach ($product[4] as $key => $value) :
 
                             ?>
 
@@ -204,168 +364,7 @@ if (!isset($_SESSION)) {
                         <span class="sr-only ">Next</span>
                     </a>
                 </div>
-            </div>
-
-            <!-- Product iPad-->
-            <div class="col-12 mt-5">
-                <h1 class="display-4">And an iPad</h1>
-                <h3 class="m-2"><a href="index.php?method=list-product&type=2">See all iPad models></a></h3>
-            </div>
-
-            <!-- Carousel product -->
-            <div id="slides " class="carousel slide w-100 pr-5 pl-5" data-ride="carousel" data-interval="3000">
-                <div class="carousel-inner container-fluid">
-                    <div class="carousel-item active">
-                        <div class="container-fluid card-deck justify-content-between mt-2">
-                            <?php $i = 1;
-                            foreach ($product[2] as $key => $value) :
-
-                            ?>
-
-                                <div class="card border-0">
-                                    <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
-                                        <img class="card-img-bottom h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
-                                    </a>
-                                    <div class="card-body">
-                                        <h4 class="card-title"><?php echo $value['name']; ?></h4>
-                                        <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
-                                        <div class="card-title">
-                                            <a class="card-link" onclick="redirectLogin()">
-                                                <i class="fa fa-cart-plus fa-2x"></i>
-                                            </a>
-                                        </div>
-                                        <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id']; ?>">Learn more ></a>
-                                    </div>
-                                </div>
-                                <?php if ($i % 3 == 0) {
-                                    echo "</div>";
-                                    echo "</div>";
-                                    echo "<div class='carousel-item'>";
-                                    echo "<div class='container-fluid card-deck justify-content-between mt-2'>";
-                                }
-                                $i++;
-                                ?>
-
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev " href="#slides " role="button " data-slide="prev">
-                        <span class="carousel-control-prev-icon " aria-hidden="true "></span>
-                        <span class="sr-only ">Previous</span>
-                    </a>
-                    <a class="carousel-control-next " href="#slides " role="button " data-slide="next">
-                        <span class="carousel-control-next-icon " aria-hidden="true "></span>
-                        <span class="sr-only ">Next</span>
-                    </a>
-                </div>
-            </div>
-            <!-- Mac -->
-            <div class="col-12 mt-5">
-                <h1 class="display-4">And, What about a Macbook for work?</h1>
-                <h3 class="m-2"><a href="index.php?method=list-product&type=3">See all Macbook models></a></h3>
-            </div>
-
-            <!-- Carousel product -->
-            <div id="slides " class="carousel slide w-100 pr-5 pl-5" data-ride="carousel" data-interval="3000">
-                <div class="carousel-inner container-fluid">
-                    <div class="carousel-item active">
-                        <div class="container-fluid card-deck justify-content-between mt-2">
-                            <?php $i = 1;
-                            foreach ($product[3] as $key => $value) :
-
-                            ?>
-
-                                <div class="card border-0">
-                                    <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
-                                        <img class="card-img-bottom h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
-                                    </a>
-                                    <div class="card-body">
-                                        <h4 class="card-title"><?php echo $value['name']; ?></h4>
-                                        <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
-                                        <div class="card-title">
-                                            <a class="card-link" onclick="redirectLogin()">
-                                                <i class="fa fa-cart-plus fa-2x"></i>
-                                            </a>
-                                        </div>
-                                        <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id']; ?>">Learn more ></a>
-                                    </div>
-                                </div>
-                                <?php if ($i % 2 == 0) {
-                                    echo "</div>";
-                                    echo "</div>";
-                                    echo "<div class='carousel-item'>";
-                                    echo "<div class='container-fluid card-deck justify-content-between mt-2'>";
-                                }
-                                $i++;
-                                ?>
-
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-
-                    <a class="carousel-control-prev " href="#slides " role="button " data-slide="prev">
-                        <span class="carousel-control-prev-icon " aria-hidden="true "></span>
-                        <span class="sr-only ">Previous</span>
-                    </a>
-                    <a class="carousel-control-next " href="#slides " role="button " data-slide="next">
-                        <span class="carousel-control-next-icon " aria-hidden="true "></span>
-                        <span class="sr-only ">Next</span>
-                    </a>
-                </div>
-            </div>
-            <!-- Product Airpods-->
-            <div class="col-12 mt-5">
-                <h1 class="display-4">It'll perfect with an AirPods</h1>
-                <h3 class="m-2"><a href="index.php?method=list-product&type=4">See all AirPods models></a></h3>
-            </div>
-            <!-- Carousel product -->
-            <div id="slides " class="carousel slide w-100 pr-5 pl-5" data-ride="carousel" data-interval="1500">
-                <div class="carousel-inner container-fluid">
-                    <div class="carousel-item active">
-                        <div class="container-fluid card-deck justify-content-between mt-2">
-                            <?php $i = 1;
-                            foreach ($product[4] as $key => $value) :
-
-                            ?>
-
-                                <div class="card border-0">
-                                    <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
-                                        <img class="card-img-bottom h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
-                                    </a>
-                                    <div class="card-body">
-                                        <h4 class="card-title"><?php echo $value['name']; ?></h4>
-                                        <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
-                                        <div class="card-title">
-                                            <a class="card-link" onclick="redirectLogin()">
-                                                <i class="fa fa-cart-plus fa-2x"></i>
-                                            </a>
-                                        </div>
-                                        <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id']; ?>">Learn more ></a>
-                                    </div>
-                                </div>
-                                <?php if ($i % 3 == 0) {
-                                    echo "</div>";
-                                    echo "</div>";
-                                    echo "<div class='carousel-item'>";
-                                    echo "<div class='container-fluid card-deck justify-content-between mt-2'>";
-                                }
-                                $i++;
-                                ?>
-
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-
-                    <a class="carousel-control-prev " href="#slides " role="button " data-slide="prev">
-                        <span class="carousel-control-prev-icon " aria-hidden="true "></span>
-                        <span class="sr-only ">Previous</span>
-                    </a>
-                    <a class="carousel-control-next " href="#slides " role="button " data-slide="next">
-                        <span class="carousel-control-next-icon " aria-hidden="true "></span>
-                        <span class="sr-only ">Next</span>
-                    </a>
-                </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <footer>
