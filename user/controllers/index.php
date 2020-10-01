@@ -42,25 +42,100 @@ class C_website extends M_users
                     //     }
                     // }
                     // $product['mostview'] = $this->OrderBy('product','view','DESC');
-                    $product['bestseller'] = $this->OrderBy('product','sold','DESC');
-                    $product['new'] = $this->OrderBy('product','create_time','DESC');
+                    $product['bestseller'] = $this->OrderBy('product', 'sold', 'DESC');
+                    $product['new'] = $this->OrderBy('product', 'create_time', 'DESC');
                     // echo count($product['mostview']);
                     include_once 'user/views/index.php';
                     break;
                 case ('search'):
                     $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
                     $product = $this->search('product', 'name', $keyword);
-                    // echo "<pre>";
-                    // print_r($search);
+                    $category = $this->getObject("product_category");
+                    if (isset($_GET['type'])) {
+                        $type = $_GET['type'];
+                        $product = $this->getEverything_id('product', 'type', $type);
+                    } else {
+                        $type = 0;
+                    }
+                    if (isset($_GET['sort'])) {
+                        $sort = $_GET['sort'];
+                        switch ($sort) {
+                            case 'new':
+                                if ($type == 0) {
+                                    $product = $this->sort('product', 'create_time', 'DESC');
+                                } else {
+                                    $product = $this->sortWhere('product', 'type', $type, 'create_time', 'DESC');
+                                }
+                                break;
+                            case 'view':
+                                if ($type == 0) {
+                                    $product = $this->sort('product', 'view', 'DESC');
+                                } else {
+                                    $product = $this->sortWhere('product', 'type', $type, 'view', 'DESC');
+                                }
+                                break;
+                            case 'price-desc':
+                                if ($type == 0) {
+                                    $product = $this->sort('product', 'price', 'DESC');
+                                } else {
+                                    $product = $this->sortWhere('product', 'type', $type, 'price', 'DESC');
+                                }
+                                break;
+                            case 'price-asc':
+                                if ($type == 0) {
+                                    $product = $this->sort('product', 'price', 'ASC');
+                                } else {
+                                    $product = $this->sortWhere('product', 'type', $type, 'price', 'ASC');
+                                }
+                                break;
+                        }
+                    }
                     include_once('user/views/index-list-search.php');
                     break;
                 case ('list-product'):
-                    // $type = $_GET['type'];
-                    // $_SESSION['category'] = $this->getEverything_id("product_category", "id", $type);
-                    // echo "<pre>";
-                    // print_r($_SESSION['category']['name']);
                     $_SESSION['product'] = $this->getObject("product");
                     $product = $_SESSION['product'];
+                    $category = $this->getObject("product_category");
+                    if (isset($_GET['type'])) {
+                        $type = $_GET['type'];
+                        $product = $this->getEverything_id('product', 'type', $type);
+                    } else {
+                        $type = 0;
+                    }
+                    if (isset($_GET['sort'])) {
+                        $sort = $_GET['sort'];
+                        switch ($sort) {
+                            case 'new':
+                                if ($type == 0) {
+                                    $product = $this->sort('product', 'create_time', 'DESC');
+                                } else {
+                                    $product = $this->sortWhere('product', 'type', $type, 'create_time', 'DESC');
+                                }
+                                break;
+                            case 'view':
+                                if ($type == 0) {
+                                    $product = $this->sort('product', 'view', 'DESC');
+                                } else {
+                                    $product = $this->sortWhere('product', 'type', $type, 'view', 'DESC');
+                                }
+                                break;
+                            case 'price-desc':
+                                if ($type == 0) {
+                                    $product = $this->sort('product', 'price', 'DESC');
+                                } else {
+                                    $product = $this->sortWhere('product', 'type', $type, 'price', 'DESC');
+                                }
+                                break;
+                            case 'price-asc':
+                                if ($type == 0) {
+                                    $product = $this->sort('product', 'price', 'ASC');
+                                } else {
+                                    $product = $this->sortWhere('product', 'type', $type, 'price', 'ASC');
+                                }
+                                break;
+                        }
+                    }
+
                     require_once('user/views/index-list-product.php');
                     break;
                 case ('detail'):
@@ -73,7 +148,43 @@ class C_website extends M_users
                     $views['view']++;
                     $updateViews = $this->m_users->updateSth('view', $views['view'], $id);
                     $product = $this->m_users->getObject_id($id, $table);
+                    // echo "<pre>";
+                    // print_r($product);
                     include_once 'user/views/index-product-details.php';
+                    break;
+                case ('form-reset'):
+                    if (isset($_POST['submit'])) {
+                        echo $_SESSION['code'];
+                        if ($_POST['code'] == $_SESSION['code']) {
+                            $newpass = $_POST['newpass'];
+                            $_SESSION['email'];
+                            $test = $this->m_users->resetPass($_SESSION['email'], $newpass);
+                            echo $test;
+                            $log = "Successfull";
+                        } else {
+                            $log = "Verify code is incorrect!";
+                        }
+                    }
+                    include_once 'user/views/account/resetform.php';
+                    break;
+                case ('forget-password'):
+                    include_once './plugin/mail.php';
+
+                    if (isset($_POST['submit'])) {
+                        $mail = $_POST['email'];
+                        $_SESSION['email'] = $mail;
+                        $check = $this->m_users->checkUser('email', $mail);
+                        if ($check == true) {
+                            $_SESSION['code'] = rand(100000, 999999);
+                            $code = $_SESSION['code'];
+                            $sendTo = $mail;
+                            mailResetpass($sendTo, $code);
+                            header('location:index.php?method=form-reset');
+                        } else {
+                            $log = "Email does not exist";
+                        }
+                    }
+                    require_once 'user/views/account/forget-pass.php';
                     break;
                 case ('login'):
                     if (isset($_POST['submit'])) {
@@ -110,11 +221,7 @@ class C_website extends M_users
                             $error['error'] = 'false';
                             $error['email'] = 'Email already exists';
                         }
-                        // if($rs<1){
-                        //     echo json_encode("true");
-                        // }else{
-                        //     echo json_encode("false");
-                        // }
+
                         die(json_encode($error));
                     }
 
@@ -132,11 +239,7 @@ class C_website extends M_users
                             $error['error'] = 'false';
                             $error['username'] = 'Username already exists';
                         }
-                        // if($rs<1){
-                        //     echo json_encode("true");
-                        // }else{
-                        //     echo json_encode("false");
-                        // }
+
                         die(json_encode($error));
                     }
 
@@ -172,28 +275,11 @@ class C_website extends M_users
             if ($_SESSION['lv'] == 2) {
                 switch ($method) {
                     case ('home'):
-                        // $_SESSION['type'] = $this->getObject("product_category");
-                        // $product = array();
-                        // foreach ($_SESSION['type'] as $k => $val) {
-                        //     switch ($val['id']) {
-                        //         case '1':
-                        //             $product[$val['id']] = $this->Random('product', 'type', $val['id'], 8);
-                        //             break;
-                        //         case '2':
-                        //             $product[$val['id']] = $this->Random('product', 'type', $val['id'], 9);
-                        //             break;
-                        //         case '3':
-                        //             $product[$val['id']] = $this->Random('product', 'type', $val['id'], 10);
-                        //             break;
-                        //         case '4':
-                        //             $product[$val['id']] = $this->Random('product', 'type', $val['id'], 9);
-                        //             break;
-                        //     }
-                        // }
-                        $product['mostview'] = $this->OrderBy('product','view','DESC');
-                        $product['bestseller'] = $this->OrderBy('product','sold','DESC');
-                        $product['new'] = $this->OrderBy('product','create_time','DESC');
-                        
+                        $product['mostview'] = $this->OrderBy('product', 'view', 'DESC');
+                        $product['bestseller'] = $this->OrderBy('product', 'sold', 'DESC');
+                        $product['new'] = $this->OrderBy('product', 'create_time', 'DESC');
+
+
                         if (!isset($_SESSION['cart-count'])) {
                             $_SESSION['cart-count'] = 0;
                         }
@@ -205,6 +291,9 @@ class C_website extends M_users
                             }
                             $total = $_SESSION['cart-total'];
                         }
+
+                        // echo "<pre>";
+                        // print_r($_SESSION['cart']);
                         //                 echo "<pre>";
                         // print_r($_SESSION['cart-total']);
 
@@ -220,9 +309,47 @@ class C_website extends M_users
                     case ('search'):
                         $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
                         $product = $this->search('product', 'name', $keyword);
-                        // echo "<pre>";
-                        // print_r($search);
-                        include_once('user/views/home-list-search.php');
+                        $category = $this->getObject("product_category");
+                        if (isset($_GET['type'])) {
+                            $type = $_GET['type'];
+                            $product = $this->getEverything_id('product', 'type', $type);
+                        } else {
+                            $type = 0;
+                        }
+                        if (isset($_GET['sort'])) {
+                            $sort = $_GET['sort'];
+                            switch ($sort) {
+                                case 'new':
+                                    if ($type == 0) {
+                                        $product = $this->sort('product', 'create_time', 'DESC');
+                                    } else {
+                                        $product = $this->sortWhere('product', 'type', $type, 'create_time', 'DESC');
+                                    }
+                                    break;
+                                case 'view':
+                                    if ($type == 0) {
+                                        $product = $this->sort('product', 'view', 'DESC');
+                                    } else {
+                                        $product = $this->sortWhere('product', 'type', $type, 'view', 'DESC');
+                                    }
+                                    break;
+                                case 'price-desc':
+                                    if ($type == 0) {
+                                        $product = $this->sort('product', 'price', 'DESC');
+                                    } else {
+                                        $product = $this->sortWhere('product', 'type', $type, 'price', 'DESC');
+                                    }
+                                    break;
+                                case 'price-asc':
+                                    if ($type == 0) {
+                                        $product = $this->sort('product', 'price', 'ASC');
+                                    } else {
+                                        $product = $this->sortWhere('product', 'type', $type, 'price', 'ASC');
+                                    }
+                                    break;
+                            }
+                        }
+                        include_once('user/views/index-list-search.php');
                         break;
                     case ('signout'):
                         session_unset();
@@ -230,41 +357,50 @@ class C_website extends M_users
                         break;
 
                     case ('list-product'):
-                        $type = $_GET['type'];
-                        $_SESSION['category'] = $this->getEverything_id("product_category", "id", $type);
-                        // echo "<pre>";
-                        // print_r($_SESSION['category']);
-                        $_SESSION['product'] = $this->getEverything_id("product", "type", $type);
+                        $_SESSION['product'] = $this->getObject("product");
                         $product = $_SESSION['product'];
-
-                        // echo "<pre>";
-                        // print_r($product);+
-
-                        $_SESSION['type'] = $this->getObject("product_category");
-
-                        switch ($_SESSION['category'][0]['id']) {
-                            case '1':
-                                $col = 3;
-                                break;
-                            case '2':
-                                $col = 4;
-                                break;
-                            case '3':
-                                $col = 6;
-                                break;
-                            case '4':
-                                $col = 4;
-                                break;
+                        $category = $this->getObject("product_category");
+                        if (isset($_GET['type'])) {
+                            $type = $_GET['type'];
+                            $product = $this->getEverything_id('product', 'type', $type);
+                        } else {
+                            $type = 0;
                         }
-                        if (isset($_SESSION['cart'])) {
-                            $total = 0;
-                            $_SESSION['cart-count'] = count($_SESSION['cart']);
-                            foreach ($_SESSION['cart'] as $key => $value) {
-                                $total += $_SESSION['cart'][$key]['price'];
+                        if (isset($_GET['sort'])) {
+                            $sort = $_GET['sort'];
+                            switch ($sort) {
+                                case 'new':
+                                    if ($type == 0) {
+                                        $product = $this->sort('product', 'create_time', 'DESC');
+                                    } else {
+                                        $product = $this->sortWhere('product', 'type', $type, 'create_time', 'DESC');
+                                    }
+                                    break;
+                                case 'view':
+                                    if ($type == 0) {
+                                        $product = $this->sort('product', 'view', 'DESC');
+                                    } else {
+                                        $product = $this->sortWhere('product', 'type', $type, 'view', 'DESC');
+                                    }
+                                    break;
+                                case 'price-desc':
+                                    if ($type == 0) {
+                                        $product = $this->sort('product', 'price', 'DESC');
+                                    } else {
+                                        $product = $this->sortWhere('product', 'type', $type, 'price', 'DESC');
+                                    }
+                                    break;
+                                case 'price-asc':
+                                    if ($type == 0) {
+                                        $product = $this->sort('product', 'price', 'ASC');
+                                    } else {
+                                        $product = $this->sortWhere('product', 'type', $type, 'price', 'ASC');
+                                    }
+                                    break;
                             }
                         }
 
-                        require_once('user/views/home-list-product.php');
+                        require_once('user/views/index-list-product.php');
                         break;
 
 
@@ -274,6 +410,7 @@ class C_website extends M_users
                         $id = isset($_GET['id']) ? $_GET['id'] : "";
                         if (!isset($_SESSION['cart'][$id])) {
                             $table = 'product';
+                            // echo $id;
                             $product = $this->getObject_id($id, $table);
 
                             $_SESSION['cart'][$id] = $product;
@@ -366,7 +503,6 @@ class C_website extends M_users
                                     $sold['sold'] += $value['qty'];
                                     $updateSold = $this->m_users->updateSth('sold', $sold['sold'], $value['id']);
                                 }
-
                                 // send mail
                                 $sendTo = $email;
                                 mailOrder($sendTo, $_SESSION['cart'], $name, $email, $number, $address, $total);

@@ -28,8 +28,43 @@ class C_website extends M_admin
                 // if($page>$total_page) $page=$total_page;  
                 // $start=($page-1)*$limit;
                 // $product = $this->pagination($table,$start,$limit);
-
+                // SELECT * FROM `order_list` WHERE month(create_time) = '7';
                 //*page
+                $product = $this->getEverything_id('product', 'month(create_time)', "date('m')");
+                $user = $this->getObject('user');
+                $order = $this->getEverything_id('order_list', 'month(create_time)', "date('m')");
+                $total_order = count($order);
+                $total_revenue = 0;
+                // echo "<pre>";
+                // echo 
+                // print_r($order);
+                foreach ($order as $k => $v) {
+                    $total_revenue += $v['total_price'];
+                }
+                // tong sp da ban
+                $total_product = 0;
+                foreach ($order as $k => $v) {
+                    $detail_order = $this->getEverything_id('order_detail', 'id_order', $v['id_order']);
+                    foreach ($detail_order as $k => $v) {
+                        $total_product += $v['qty'];
+                    }
+                }
+                // profit
+                $pre_month = date('m') - 1;
+                $total_revenue_preMonth = 0;
+                $preMonth_order = $this->getEverything_id('order_list', 'month(create_time)', $pre_month);
+                foreach ($preMonth_order as $k => $v) {
+                    $total_revenue_preMonth += $v['total_price'];
+                }
+                $profit = $total_revenue - $total_revenue_preMonth;
+
+                // best selled
+                $best_selled = $this->OrderByLimit('product', 'sold', 'DESC', '10');
+                // mostview
+                $most_view = $this->OrderByLimit('product', 'view', 'DESC', '10');
+                // customers
+                // $customers = 
+                // echo $total_product;
                 require_once 'views/home.php';
                 break;
 
@@ -55,6 +90,10 @@ class C_website extends M_admin
                     $id = $_GET['id'];
                     if ($action == 'accept-order') {
                         $this->acceptOrder($id);
+                        // update sold
+                        // $sold = $this->getSth('sold', $id);
+                        // $sold['sold'] += $view['view'];
+                        // $updateSold = $this->m_users->updateSth('sold', $sold['sold'], $id);
                         header('location:index.php?method=list-order');
                     }
                     if ($action == 'delete-order') {
@@ -81,14 +120,58 @@ class C_website extends M_admin
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
                 }
-                $product = $this->getObject_id($id, $table);
+                $product = $this->getObject_id($table, 'id', $id);
                 include_once 'views/product_details.php';
                 break;
+
             case ('list-product'):
-                $type = $_GET['type'];
-                $_SESSION['category'] = $this->getEverything_id("product_category", "id", $type);
-                $_SESSION['product'] = $this->getEverything_id("product", "type", $type);
-                $_SESSION['type'] = $this->getObject("product_category");
+                $product = $this->getObject('product');
+                $category = $this->getObject('product_category');
+
+                if (isset($_GET['type'])) {
+                    $type = $_GET['type'];
+                    $product = $this->getEverything_id('product', 'type', $type);
+                    if ($type == 0) {
+                        $product = $this->getObject('product');
+                    }
+                } else {
+                    $type = 0;
+                }
+                if (isset($_GET['sort'])) {
+                    $sort = $_GET['sort'];
+                    switch ($sort) {
+                        case 'new':
+                            if ($type == 0) {
+                                $product = $this->sort('product', 'create_time', 'DESC');
+                            } else {
+                                $product = $this->sortWhere('product', 'type', $type, 'create_time', 'DESC');
+                            }
+                            break;
+                        case 'view':
+                            if ($type == 0) {
+                                $product = $this->sort('product', 'view', 'DESC');
+                            } else {
+                                $product = $this->sortWhere('product', 'type', $type, 'view', 'DESC');
+                            }
+                            break;
+                        case 'price-desc':
+                            if ($type == 0) {
+                                $product = $this->sort('product', 'price', 'DESC');
+                            } else {
+                                $product = $this->sortWhere('product', 'type', $type, 'price', 'DESC');
+                            }
+                            break;
+                        case 'price-asc':
+                            if ($type == 0) {
+                                $product = $this->sort('product', 'price', 'ASC');
+                            } else {
+                                $product = $this->sortWhere('product', 'type', $type, 'price', 'ASC');
+                            }
+                            break;
+                    }
+                }
+
+
                 require_once('views/list-product.php');
                 break;
 
@@ -116,7 +199,19 @@ class C_website extends M_admin
 
                 include_once 'views/edit-user.php';
                 break;
+            case ('add-role'):
+                include_once 'views/add-role.php';
+                break;
+            case ('role'):
+                $permission = $this->getObject('user_permissions');
+                $role = $this->getObject('user_level');
 
+                // echo "<pre>";
+                // print_r($permission);
+                // echo "<pre>";
+                // print_r($role);
+                include_once 'views/role.php';
+                break;
             case ('edit-product'):
                 $log = null;
                 if (isset($_GET['id'])) {
@@ -124,10 +219,10 @@ class C_website extends M_admin
                 }
                 $table = 'product';
                 $object = 'id';
-                $product = $this->getEverything_id($table, $object, $id);
-                $_SESSION['type']= $this->getObject("product_category");
-                $_SESSION['image-upload']['name'] = $product[0]['image'];
-
+                $product = $this->getobject_id($table, $object, $id);
+                $category = $this->getObject("product_category");
+                $_SESSION['image-upload']['name'] = $product['image'];
+                // echo "<pre>";
                 // print_r($product);
                 if (isset($_POST['update-img'])) {
                     $target_dir = "../images/image-product/";
@@ -144,7 +239,7 @@ class C_website extends M_admin
                         $name = $_POST['name'];
                         // echo $_FILES['fileToUpload']["name"];
                         // echo "a ".$_SESSION['image-upload']['name'];
-                        if(($_FILES['fileToUpload']["name"])!=$_SESSION['image-upload']['name']){
+                        if (($_FILES['fileToUpload']["name"]) != $_SESSION['image-upload']['name']) {
                             $target_dir = "../images/image-product/";
                             $_SESSION['image-upload'] = $_FILES["fileToUpload"];
                             $target_file = $target_dir . basename($_FILES['fileToUpload']["name"]);
@@ -152,7 +247,7 @@ class C_website extends M_admin
                             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
                             $progress = move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
                         }
-                        
+
 
                         $image = $_SESSION['image-upload']['name'];
                         $price = $_POST['price'];
@@ -173,12 +268,12 @@ class C_website extends M_admin
                 $log = null;
                 $image = null;
                 if (isset($_FILES["fileToUpload"])) {
-                        $target_dir = "../images/image-product/";
-                        $_SESSION['image-upload'] = $_FILES["fileToUpload"];
-                        $target_file = $target_dir . basename($_FILES['fileToUpload']["name"]);
-                        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-                        $progress = move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
-                        $image = $_SESSION['image-upload']['name'];
+                    $target_dir = "../images/image-product/";
+                    $_SESSION['image-upload'] = $_FILES["fileToUpload"];
+                    $target_file = $target_dir . basename($_FILES['fileToUpload']["name"]);
+                    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+                    $progress = move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
+                    $image = $_SESSION['image-upload']['name'];
                 }
 
                 // if(isset($_SESSION['image-upload'])){echo " Test".$_SESSION['image-upload']['name'];}

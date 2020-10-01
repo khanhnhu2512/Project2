@@ -18,8 +18,8 @@ function sendmail($sendTo, $mailTitle, $mailBody)
     $mail->isSMTP(); // Set mailer to use SMTP
     $mail->Host = 'smtp.gmail.com'; // Specify main and backup SMTP servers
     $mail->SMTPAuth = true; // Enable SMTP authentication
-    $mail->Username = '[your email]'; // SMTP username
-    $mail->Password = '[your email password]'; // SMTP password
+    $mail->Username = 'luongkhanhnhu2512@gmail.com'; // SMTP username
+    $mail->Password = 'Khanhnhu2512'; // SMTP password
     $mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 587; // TCP port lớn connect to
     //Recipients
@@ -100,7 +100,21 @@ function mailOrder($sendTo, $cart, $name, $email, $number, $address,$total)
     $mailBody .= "</div>";
     sendmail($sendTo, $mailTitle, $mailBody);
 }
-
+function mailResetpass($sendTo,$code)
+{   
+    $mailTitle = "Reset Password";
+    $mailBody = "<div style='border: 0px solid; font-size: 1rem; width: 50%; margin: auto;'>";
+    $mailBody .=  "<h2 style='color: #000; text-align: center;margin: 0px; font-size: 1.5rem; border-bottom: 1px solid #000;'>Order Confirmation</h2> <br>";
+    $mailBody .=  "Dear";
+    $mailBody .= "<br>We have received a request to re-issue your account password.";
+    $mailBody .= "<br>Your verify code:";
+    $mailBody .= "<br><h2>$code</h2>";
+    $mailBody .= "</div>";
+    sendmail($sendTo, $mailTitle, $mailBody);
+}
+function test(){
+    echo "ok";
+}
 // $mailBody =  "<table border='1px' width='100%' cellpadding='0' cellspacing='0'>
 //                 <tr>
 //                     <td style='width: 40px'>STT</td>

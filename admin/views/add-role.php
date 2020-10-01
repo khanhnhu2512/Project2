@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Dashboard</title>
     <link rel="SHORTCUT ICON" href="../library/images/image-bg/LogoN-Black.png">
-    <link rel="stylesheet" href="../public/css/admin/list-user.css">
+    <link rel="stylesheet" href="../public/css/admin/home.css">
     <link type="text/css" rel="stylesheet" href="../public/fontawesome-free-5.13.0-web/css/all.css">
     <link type="text/css" rel="stylesheet" href="../public/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/admin/home.css">
     <script src="../public/jquery/jquery-3.5.1.min.js"></script>
     <style>
 
@@ -17,7 +18,7 @@
 </head>
 
 <body>
-    <div class="container-fluid p-0">
+    <div class="container-fluid padding">
         <div class="header paddingLR">
             <div class=" col-9 navbar-brand p-0">
                 <img src="../library/images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
@@ -76,7 +77,7 @@
             </div>
         </div>
         <div class="row col">
-            <div class="menu col-2 p-0">
+            <div class="menu col-2 p-0 h-auto">
                 <ul>
                     <li style="background-color: #484848;">
                         <a href="index.php?method=home">Dashboard</a>
@@ -87,61 +88,80 @@
                     <li><a href="index.php?method=category">Category</a></li>
                     <li><a href="index.php?method=list-order">Order</a></li>
                     <li><a href="index.php?method=list-user">Users</a></li>
+                    <li><a href="index.php?method=role">Permission</a></li>
                     <li><a href="index.php?method=notification">Notification</a></li>
                     <li><a href="index.php?method=custom">Custom</a></li>
                 </ul>
             </div>
-            <div class="col-10 pt-3 text-center">
-                <div class="row justify-content-between col pr-0 ml-0 pl-0">
-                    <h4>User</h4>
-                    <!-- <div>
-                        <a href="index.php?method=add-role" class="btn m-0 btn-danger">Add role</a>
-                    </div> -->
-                </div>
-                
-                <table border="1px" width="100%" cellpadding="0" cellspacing="0">
-                    <tr>
-                        <td style="width: 40px">STT</td>
-                        <td style="width: 100px">Username</td>
-                        <td style="width: 300px">FullName</td>
-                        <td style="width: 100px">Email</td>
-                        <td style="width: 100px">Permission</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <?php $i = 0;
-                        foreach ($_SESSION['users'] as $key => $value) {
-                            $i++; ?>
-
-                            <td style="width: 40px">
-                                <?php echo $i; ?>
-                            </td>
-                            <td style="width: 300px">
-                                <?php echo ($value['username']); ?>
-                            </td>
-                            <td style="">
-                                <?php echo ($value['fullname']); ?>
-                            </td>
-                            <td style="">
-                                <?php echo ($value['email']); ?>
-                            </td>
-                            <td>
-                                <?php echo ($value['lv'] == 1) ? 'Admin' : 'User'; ?>
-                            </td>
-                            <td class="display__body-btn">
-                                <div class="btn btn-outline-danger mr-1"><a class="btn-link" href="index.php?method=edit-user&id=<?php echo $value['id']; ?>">Edit</a></div>
-                                <div class="btn btn-outline-danger"><a class="btn-link" href="index.php?method=delete-user&id=<?php echo $value['id']; ?>">Delete</a></div>
-                            </td>
-                    </tr>
-
-                <?php } ?>
-                <?php echo (isset($logDelete)) ? "<script type='text/javascript'>alert('Deleted!');</script>" : ""; ?>
-                </table>
+            <div class="col-10">
+                <h3 class="col">Add Role</h3>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="form-group col">
+                        <label for="name" class="col-form-label">Role's Name</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Name..." value="<?php echo (isset($_POST['submit'])) ? $_POST['name'] : ""; ?>">
+                    </div>
+                    <legend class="col">Permission</legend>
+                    <div class="form-group col">
+                        <p class="font-weight-bold mb-0">Dashboard </p>
+                        <input type="radio" id="dashboard-1" name="dashboard" value="1">
+                        <label for="dashboard-1" class="col-form-label">Allow</label><br>
+                        <input type="radio" id="dashboard-0" name="dashboard" value="0">
+                        <label for="dashboard-0" class="col-form-label">Dont Allow</label>
+                    </div>
+                    <div class="form-group col">
+                        <p class="font-weight-bold mb-0">Product </p>
+                        <input type="checkbox" id="product-1" name="product-see" value="1">
+                        <label for="product-1" class="col-form-label">See</label><br>
+                        <input type="checkbox" id="product-2" name="product-add" value="1">
+                        <label for="product-2" class="col-form-label">Add</label><br>
+                        <input type="checkbox" id="product-3" name="product-edit" value="1">
+                        <label for="product-3" class="col-form-label">Edit</label><br>
+                        <input type="checkbox" id="product-4" name="product-delete" value="1">
+                        <label for="product-4" class="col-form-label">Delete</label><br>
+                    </div>
+                    <div class="form-group col">
+                        <p class="font-weight-bold mb-0">Order </p>
+                        <input type="checkbox" id="order-1" name="order-see" value="1">
+                        <label for="order-1" class="col-form-label">See</label><br>
+                        <input type="checkbox" id="order-2" name="order-confirm" value="1">
+                        <label for="order-2" class="col-form-label">Confirm</label><br>
+                        <input type="checkbox" id="order-3" name="order-delete" value="1">
+                        <label for="order-3" class="col-form-label">Delete</label><br>
+                    </div>
+                    <div class="form-group col">
+                        <p class="font-weight-bold mb-0">User </p>
+                        <input type="checkbox" id="user-1" name="user-see" value="1">
+                        <label for="user-1" class="col-form-label">See</label><br>
+                        <input type="checkbox" id="user-2" name="user-confirm" value="1">
+                        <label for="user-2" class="col-form-label">Edit</label><br>
+                    </div>
+                    <div class="form-group col">
+                        <p class="font-weight-bold mb-0">Permission </p>
+                        <input type="radio" id="permission-1" name="permission" value="1">
+                        <label for="permission-1" class="col-form-label">Allow</label><br>
+                        <input type="radio" id="permission-0" name="permission" value="0">
+                        <label for="permission-0" class="col-form-label">Dont Allow</label>
+                    </div>
+                    <div class="form-group col">
+                        <p class="font-weight-bold mb-0">Notigication </p>
+                        <input type="radio" id="notigication-1" name="notigication" value="1">
+                        <label for="notigication-1" class="col-form-label">Allow</label><br>
+                        <input type="radio" id="notigication-0" name="notigication" value="0">
+                        <label for="notigication-0" class="col-form-label">Dont Allow</label>
+                    </div>
+                    <div class="form-group col">
+                        <p class="font-weight-bold mb-0">Custom </p>
+                        <input type="radio" id="custom-1" name="custom" value="1">
+                        <label for="custom-1" class="col-form-label">Allow</label><br>
+                        <input type="radio" id="custom-0" name="custom" value="0">
+                        <label for="custom-0" class="col-form-label">Dont Allow</label>
+                    </div>
+                    <div class="btn w-100">
+                        <input class="btn btn-lg btn-danger" name="submit" type="submit" value="Submit">
+                    </div>
+                </form>
             </div>
-
         </div>
-        
-    </div>
     </div>
 
 

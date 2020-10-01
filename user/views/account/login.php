@@ -54,6 +54,9 @@
         <div class="btn">
             <span>Or </span><a href="index.php?method=signup" class="btn-link">Register</a>
         </div>
+        <div class="btn">
+            <a href="index.php?method=forget-password" class="btn-link mb-2"><p>Forget Password</p></a>
+        </div>
     </div>
 
 

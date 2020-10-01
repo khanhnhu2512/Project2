@@ -81,7 +81,39 @@
             }
             return $result;
         }
-
+        public function sort($table,$object,$value)
+        {
+            $this->conn();
+            $sql = "SELECT * from $table ORDER BY $object $value";
+            $query = mysqli_query($this->con, $sql);
+            $result = array();
+            if ($query){ 
+                while($row = mysqli_fetch_assoc($query)){
+                $result[] = $row;
+                }
+            }
+            return $result;
+        }
+        public function resetPass($email,$newpass)
+        {
+            $this->conn();
+            $sql = "UPDATE user SET password = '$newpass', last_updated = now()  WHERE email = '$email'";
+            $query = mysqli_query($this->con, $sql);
+            return $query;
+        }
+        public function sortWhere($table,$where,$whereVal,$object,$value)
+        {
+            $this->conn();
+            $sql = "SELECT * from $table WHERE $where = $whereVal ORDER BY $object $value LIMIT 8";
+            $query = mysqli_query($this->con, $sql);
+            $result = array();
+            if ($query){ 
+                while($row = mysqli_fetch_assoc($query)){
+                $result[] = $row;
+                }
+            }
+            return $result;
+        }
         public function OrderBy($table,$object,$value)
         {
             $this->conn();

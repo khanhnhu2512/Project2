@@ -1,0 +1,2 @@
+Phan mua hàng:
++ client ấn đặt hàng là update lượt mua, trừ trong kho, nhưng khi accept trong adminsite thì vẫn chưa có cách xử lý khi mà xoá đơn hàng sẽ trừ số lượng cập nhật khi đặt hàng

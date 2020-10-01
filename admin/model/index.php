@@ -14,19 +14,59 @@
             
         }   
         
-        public function getObject_id($id,$table)
+        // public function getObject_id($table,$id)
+        // {
+        //     $this->conn();
+        //     $sql = "SELECT * from $table WHERE id = $id";
+        //     $query = mysqli_query($this->con,$sql);
+        //     $result = array();
+        //     if (mysqli_num_rows($query) > 0) {
+        //         $row = mysqli_fetch_assoc($query);
+        //         $result = $row;
+        //     }
+        //     return $result;
+        // }
+
+        public function sort($table,$object,$value)
         {
             $this->conn();
-            $sql = "SELECT * from $table WHERE id = $id";
-            $query = mysqli_query($this->con,$sql);
+            $sql = "SELECT * from $table ORDER BY $object $value";
+            $query = mysqli_query($this->con, $sql);
             $result = array();
-            if (mysqli_num_rows($query) > 0) {
-                $row = mysqli_fetch_assoc($query);
-                $result = $row;
+            if ($query){ 
+                while($row = mysqli_fetch_assoc($query)){
+                $result[] = $row;
+                }
+            }
+            return $result;
+        }
+        public function sortWhere($table,$where,$whereVal,$object,$value)
+        {
+            $this->conn();
+            $sql = "SELECT * from $table WHERE $where = $whereVal ORDER BY $object $value LIMIT 8";
+            $query = mysqli_query($this->con, $sql);
+            $result = array();
+            if ($query){ 
+                while($row = mysqli_fetch_assoc($query)){
+                $result[] = $row;
+                }
             }
             return $result;
         }
 
+        public function OrderByLimit($table,$object,$value,$limit)
+        {
+            $this->conn();
+            $sql = "SELECT * from $table ORDER BY $object $value LIMIT $limit";
+            $query = mysqli_query($this->con, $sql);
+            $result = array();
+            if ($query){ 
+                while($row = mysqli_fetch_assoc($query)){
+                $result[] = $row;
+                }
+            }
+            return $result;
+        }
         public function getObject($table){
             $this->conn();
             $sql = "SELECT * FROM $table";
@@ -80,6 +120,18 @@
             }
             return $result;
         }
+        public function getObject_id($table,$object,$id)
+        {
+            $this->conn();
+            $sql = "SELECT * from $table WHERE $object = $id";
+            $query = mysqli_query($this->con, $sql);
+            $result = array();
+            if (mysqli_num_rows($query) > 0) {
+                        $row = mysqli_fetch_assoc($query);
+                        $result = $row;
+                    }
+            return $result;
+        }
         public function delete($table,$object,$id)
         {
             $this->conn();
@@ -112,5 +164,4 @@
         //     header('location:../index.php'); 
         // }
         
-    }    
-?> 
+    }

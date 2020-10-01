@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Dashboard</title>
     <link rel="SHORTCUT ICON" href="../library/images/image-bg/LogoN-Black.png">
-    <link rel="stylesheet" href="../public/css/admin/list-user.css">
+    <link rel="stylesheet" href="../public/css/admin/home.css">
     <link type="text/css" rel="stylesheet" href="../public/fontawesome-free-5.13.0-web/css/all.css">
     <link type="text/css" rel="stylesheet" href="../public/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/admin/home.css">
     <script src="../public/jquery/jquery-3.5.1.min.js"></script>
     <style>
 
@@ -17,7 +18,7 @@
 </head>
 
 <body>
-    <div class="container-fluid p-0">
+    <div class="container-fluid padding">
         <div class="header paddingLR">
             <div class=" col-9 navbar-brand p-0">
                 <img src="../library/images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
@@ -91,46 +92,68 @@
                     <li><a href="index.php?method=custom">Custom</a></li>
                 </ul>
             </div>
-            <div class="col-10 pt-3 text-center">
-                <div class="row justify-content-between col pr-0 ml-0 pl-0">
-                    <h4>User</h4>
-                    <!-- <div>
+            <div class="col-10">
+                <div class="row justify-content-between pt-3 col pr-0 ml-0 pl-0">
+                    <h4>Role</h4>
+                    <div>
                         <a href="index.php?method=add-role" class="btn m-0 btn-danger">Add role</a>
-                    </div> -->
+                    </div>
                 </div>
-                
-                <table border="1px" width="100%" cellpadding="0" cellspacing="0">
-                    <tr>
-                        <td style="width: 40px">STT</td>
-                        <td style="width: 100px">Username</td>
-                        <td style="width: 300px">FullName</td>
-                        <td style="width: 100px">Email</td>
-                        <td style="width: 100px">Permission</td>
-                        <td></td>
+                <table class="text-center" border="1px" width="100%" cellpadding="0" cellspacing="0">
+                    <tr class="font-weight-bold">
+                        <td class="p-1" style="width:">ID</td>
+                        <td class="p-1" style="">Name</td>
+                        <td class="p-1">Dashboard</td>
+                        <td class="p-1">Products</td>
+                        <td class="p-1">Order</td>
+                        <td class="p-1" style="">User</td>
+                        <td class="p-1">Permission</td>
+                        <td class="p-1">Notifications</td>
+                        <td class="p-1">Custom</td>
+                        <td class="p-1" style="width: 150px"></td>
                     </tr>
                     <tr>
-                        <?php $i = 0;
-                        foreach ($_SESSION['users'] as $key => $value) {
-                            $i++; ?>
+                        <?php ;
+                        foreach ($permission as $key => $value) {
+                             ?>
 
-                            <td style="width: 40px">
-                                <?php echo $i; ?>
-                            </td>
-                            <td style="width: 300px">
-                                <?php echo ($value['username']); ?>
+                            
+                            <td class="">
+                                <?php echo $value['id_lv']; ?>
                             </td>
                             <td style="">
-                                <?php echo ($value['fullname']); ?>
-                            </td>
-                            <td style="">
-                                <?php echo ($value['email']); ?>
+                                <?php echo ($role[$value['id_lv']-1]['name']); ?>
                             </td>
                             <td>
-                                <?php echo ($value['lv'] == 1) ? 'Admin' : 'User'; ?>
+                                <?php echo ($value['dashboard'] == 1) ? "See" : ""; ?>
                             </td>
-                            <td class="display__body-btn">
-                                <div class="btn btn-outline-danger mr-1"><a class="btn-link" href="index.php?method=edit-user&id=<?php echo $value['id']; ?>">Edit</a></div>
-                                <div class="btn btn-outline-danger"><a class="btn-link" href="index.php?method=delete-user&id=<?php echo $value['id']; ?>">Delete</a></div>
+                            <td>
+                                <?php echo ($value['product_see'] == 1) ? "See, " : ""; ?>
+                                <?php echo ($value['product_add'] == 1) ? "Add, " : ""; ?>
+                                <?php echo ($value['product_edit'] == 1) ? "Edit, " : ""; ?>
+                                <?php echo ($value['product_delete'] == 1) ? "Delete" : ""; ?>
+                            </td>
+                            <td style="width: 100px">
+                                <?php echo ($value['order_see'] == 1) ? "See, " : ""; ?>
+                                <?php echo ($value['order_confirm'] == 1) ? "Confirm, " : ""; ?>
+                                <?php echo ($value['order_delete'] == 1) ? "Delete" : ""; ?>
+                            </td>
+                            <td>
+                                <?php echo ($value['user_see'] == 1) ? "See, " : ""; ?>
+                                <?php echo ($value['user_edit'] == 1) ? "Edit, Delete" : ""; ?>
+                            </td>
+                            <td>
+                                <?php echo ($value['permission'] == 1) ? "Allow" : ""; ?>
+                            </td>
+                            <td>
+                                <?php echo ($value['notifications'] == 1) ? "Allow" : ""; ?>
+                            </td>
+                            <td>
+                                <?php echo ($value['custom'] == 1) ? "Allow" : ""; ?>
+                            </td>
+                            <td class="display__body-btn text-center">
+                                <div class="btn btn-outline-danger mr-1"><a class="btn-link" href="index.php?method=edit-role&id=<?php echo $value['id_lv']; ?>">Edit</a></div>
+                                <div class="btn btn-outline-danger"><a class="btn-link" href="index.php?method=delete-role&id=<?php echo $value['id_lv']; ?>">Delete</a></div>
                             </td>
                     </tr>
 
@@ -138,10 +161,7 @@
                 <?php echo (isset($logDelete)) ? "<script type='text/javascript'>alert('Deleted!');</script>" : ""; ?>
                 </table>
             </div>
-
         </div>
-        
-    </div>
     </div>
 
 

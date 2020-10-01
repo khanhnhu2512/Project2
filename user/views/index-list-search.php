@@ -110,42 +110,88 @@ if (!isset($_SESSION)) {
     </nav>
 
 
-
     <!-- Body -->
-    <div class="container-fluid padding">
-        <h1><?php if (count($product) < 1) {
+    <div class="container-fluid padding pad-l-6 pad-r-6">
+        <nav aria-label="breadcrumb ">
+            <ol class="breadcrumb bg-white pl-0 mb-0">
+                <li class="breadcrumb-item"><a href="index.php?method=home">Home</a></li>
+                <li class="breadcrumb-item active"><a href="index.php?method=list-product">Product</a></li>
+            </ol>
+        </nav>
+        <h3><?php if (count($product) < 1) {
                 echo "No results for ";
             } else {
                 echo "Results for";
-            } ?> "<?php echo $keyword; ?>"</h1>
-
+            } ?> "<?php echo $keyword; ?>"</h3>
         <div <?php if (count($product) < 1) {
                     echo "style='height: 50vh;'";
-                } ?> class="row welcome text-center pt-5 justify-content-center">
-            <div class="container padding card-deck fl mt-2">
-                <?php foreach ($product as $key => $value) : ?>
-                    <div class="col-3 border-0">
-                        <?php if ($value['qty'] == 0) {
-                            echo "<div class='noticed'>
-                            <p>Out of stock</p>
-                        </div>";
-                        } ?>
-                        <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
-                            <img class="card-img-bottom w-auto h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title"><?php echo $value['name']; ?></h4>
-                            <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
-                            <div class="card-title">
-                                <a class="card-link" onclick="redirectLogin()">
-                                    <i class="fa fa-cart-plus fa-2x"></i>
-                                </a>
-                            </div>
-                            <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id']; ?>">Learn more ></a>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
+                } ?> class="row welcome text-center pt-2 justify-content-center">
+            <div class="col-3 text-left">
+                <h3>Category</h3>
+                <ul>
+                    <?php foreach ($category as $key => $value) { ?>
+                        <li class="list-style-type-none ">
+                            <a class="text-decoration-none a-block-light pl-1" href="index.php?method=list-product&type=<?php echo $value['id']; ?>">> <?php echo $value['name']; ?></a>
+                        </li>
+                    <?php } ?>
+                </ul>
+                <h3>Filter</h3>
+                <ul>
+                    <li>
+                        <a href=""></a>
+                    </li>
+                </ul>
             </div>
+            <div class="col-9">
+                <div class="row pb-2 text-left justify-content-between">
+                    <div class="col text-right">
+                        <label for="sort">Sort by </label>
+                        <select onchange="location.href=this.value" class="" name="" id="sort">
+                            <option value="index.php?method=list-product<?php if (isset($type)) {
+                                                                            echo "&type=$type";
+                                                                        } ?>&sort=new" <?php if (isset($_GET['sort'])) {
+                                                                                            echo ($_GET['sort'] == 'new') ? "selected" : "";
+                                                                                        } ?>>New</option>
+                            <option value="index.php?method=list-product<?php if (isset($type)) {
+                                                                            echo "&type=$type";
+                                                                        } ?>&sort=view" <?php if (isset($_GET['sort'])) {
+                                                                                            echo ($_GET['sort'] == 'view') ? "selected" : "";
+                                                                                        } ?>>View</option>
+                            <option value="index.php?method=list-product<?php if (isset($type)) {
+                                                                            echo "&type=$type";
+                                                                        } ?>&sort=price-desc" <?php if (isset($_GET['sort'])) {
+                                                                                                    echo ($_GET['sort'] == 'price-desc') ? "selected" : "";
+                                                                                                } ?>>Price (Desc)</option>
+                            <option value="index.php?method=list-product<?php if (isset($type)) {
+                                                                            echo "&type=$type";
+                                                                        } ?>&sort=price-asc" <?php if (isset($_GET['sort'])) {
+                                                                                                    echo ($_GET['sort'] == 'price-asc') ? "selected" : "";
+                                                                                                } ?>>Price (Asc)</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="container padding card-deck fl m-0 p-0">
+                    <?php foreach ($product as $key => $value) : ?>
+                        <div class="col-4">
+                            <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
+                                <img class="card-img-bottom w-auto h-285 bg-light p-2" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
+                            </a>
+                            <div class="card-body">
+                                <h4 class="card-title"><?php echo $value['name']; ?></h4>
+                                <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
+                                <div class="card-title">
+                                    <a class="card-link" onclick="redirectLogin()">
+                                        <i class="fa fa-cart-plus fa-2x"></i>
+                                    </a>
+                                </div>
+                                <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id']; ?>">Learn more ></a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
         </div>
     </div>
     <footer>

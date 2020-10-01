@@ -47,8 +47,8 @@ if (!isset($_SESSION)) {
     <div class="fb-customerchat" attribution=setup_tool page_id="115832540259102">
     </div>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top pad-r-6 pad-l-6">
+        <div class="container-fluid p-0">
             <a href="" class="navbar-brand">
                 <img src="../library/images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
             </a>
@@ -63,16 +63,6 @@ if (!isset($_SESSION)) {
                     <li class="nav-item pr-5">
                         <a class="nav-link text-light" href="index.php?method=list-product">Product</a>
                     </li>
-                    <!-- <li class="nav-item dropdown pr-5">
-                        <a class="nav-link dropdown-toggle text-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Products</a>
-                        <div class="dropdown-menu">
-                            <a href="index.php?method=list-product&type=1" class="dropdown-item" href="#">iPhone</a>
-                            <a href="index.php?method=list-product&type=2" class="dropdown-item" href="#">iPad</a>
-                            <a href="index.php?method=list-product&type=3" class="dropdown-item" href="#">Macbook</a>
-                            <a href="index.php?method=list-product&type=4" class="dropdown-item" href="#">AirPods</a>
-                            <a href="index.php?method=list-product&type=0" class="dropdown-item" href="#">See all</a>
-                        </div>
-                    </li> -->
                     <li class="nav-item pr-5 ">
                         <a class="nav-link text-light" href="#">About Us</a>
                     </li>
@@ -157,29 +147,62 @@ if (!isset($_SESSION)) {
 
 
     <!-- Body -->
-    <div class="container-fluid padding product-detail-body">
-        <div class="product-img">
-            <h2><?php echo $product['name']; ?></h2>
-            <div class="product-img__img">
-                <img src="..//library/images/image-product/<?php echo $product['image']; ?>" alt="">
-            </div>
-        </div>
-        <div class="product-info">
-            <div class="product-info__info">
-
-                <h4>INFORMATION</h4>
-                <p class=""><?php echo $product['description']; ?></p>
-                <div class="product-info__info-price">
-                    <!-- <p class="product-info__info-price-sale">$<?php echo $product['price']; ?> -->
-                    <span class="product-info__info-price-sell">$<?php echo $product['price']; ?></span>
-                    <!-- </p> -->
+    <div class="container-fluid padding pad-r-6 pad-l-6">
+        <nav class="" aria-label="breadcrumb">
+            <ol class="breadcrumb bg-white pl-0 mb-0">
+                <li class="breadcrumb-item"><a href="index.php?method=home">Home</a></li>
+                <li class="breadcrumb-item"><a href="index.php?method=list-product">Product</a></li>
+                <li class="breadcrumb-item active aria-current="><a><?php echo $product['name']; ?></a></li>
+            </ol>
+        </nav>
+        <div class="row pt-3">
+            <div class="col-7 pb-5 pt-5">
+                <div class="row w-100 justify-content-center">
+                    <img class="w-50 h-auto" src="./library/images/image-product/<?php echo $product['image']; ?>" alt="">
                 </div>
-                <div class="product-info__cart">
-                    <div class="btn btn-dark">
-                        <a href="index.php?method=add-cart&id=<?php echo $product['id']; ?>" class="">Add to cart</a>
+                <div class="row w-100 border-top border-bottom border-grey-bold mt-3">
+                    <div class="col-1 border border-grey bg-light rounded p-0 m-3">
+                        <img class=" p-2 w-100 h-auto" src="./library/images/image-product/<?php echo $product['image']; ?>" alt="">
+                    </div>
+                    <div class="col-1 border border-grey bg-light rounded p-0 m-3">
+                        <img class=" p-2 w-100 h-auto" src="./library/images/image-product/<?php echo $product['image']; ?>" alt="">
+                    </div>
+                    <div class="col-1 border border-grey bg-light rounded p-0 m-3">
+                        <img class=" p-2 w-100 h-auto" src="./library/images/image-product/<?php echo $product['image']; ?>" alt="">
+                    </div>
+                    <div class="col-1 border border-grey bg-light rounded p-0 m-3">
+                        <img class=" p-2 w-100 h-auto" src="./library/images/image-product/<?php echo $product['image']; ?>" alt="">
+                    </div>
+                    <div class="col-1 border border-grey bg-light rounded p-0 m-3">
+                        <img class=" p-2 w-100 h-auto" src="./library/images/image-product/<?php echo $product['image']; ?>" alt="">
                     </div>
                 </div>
-
+            </div>
+            <div class="col-5">
+                <h3 class="text-center font-weight-bold"><?php echo $product['name']; ?></h3>
+                <table class="table">
+                    <div>
+                        <p class="font-weight-light"><?php echo $product['description']; ?></p>
+                    </div>
+                    <p class="font-weight-bold">Technical specifications</p>
+                    <tbody>
+                        <tr>
+                            <th scope="col">#</th>
+                            <td scope="col">First</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">#</th>
+                            <td scope="col">First</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">#</th>
+                            <td scope="col">First</th>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" onclick="redirectLogin()" class=" mt-3 btn btn-secondary btn-danger btn-lg btn-block" <?php if ($product['qty'] == 0) {
+                                        echo "disabled>Out of stock</button>";
+                                    }else{echo ">Add to cart</button>";} ?>
             </div>
         </div>
     </div>

@@ -143,7 +143,7 @@ if (!isset($_SESSION)) {
                         </tr>
 
                         <tr>
-                            <?php $i = 0;
+                            <?php $i = 1;
                             foreach ($_SESSION['cart'] as $key => $value) {
                             ?>
                                 <td style="width: 40px">
