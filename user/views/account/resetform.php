@@ -75,36 +75,7 @@
                 setTimeout(function() {
                     alert("Back to Homepage!");
                 }, 1000);
-                window.location='index.php?method=home'
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                ;
+                window.location = 'index.php?method=home';
             }
         }
         test();

@@ -14,7 +14,7 @@
     <script src="../public/jquery/jquery-3.5.1.slim.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
     <style>
-
+        
     </style>
 </head>
 
@@ -84,7 +84,7 @@
                         <label for="type" class="col-form-label">Category</label>
                         <select name="type" id="type">
                             <?php foreach ($_SESSION['type'] as $key => $value) { ?>
-                                <option value="<?php echo $value['id']; ?>" <?php echo (isset($_POST['submit']) && $_POST['type'] == $value['id']) ? "selected" : ""; ?>><?php echo $value['name']; ?></option>
+                                <option value="<?php echo $value['id']; ?>" <?php echo (isset($_POST['submit']) && $_POST['type'] == $value['id']) ? "selected" : ""; ?>><?php echo $value['name'];?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -100,7 +100,7 @@
                         <p class="col-form-label">Description...</p>
                         <textarea name="description" id="description" cols="100" rows="5"><?php echo (isset($_POST['submit'])) ? $_POST['description'] : ""; ?></textarea>
                     </div>
-
+                    
                     <legend class="col">Upload Image</legend>
                     <div class="img-upload">
                         <img src="../library/images/image-product/<?php echo (isset($image)) ? $image : ""; ?>" alt="">
@@ -134,7 +134,7 @@
             //kiểm tra kiểu file
             if (type == match[0] || type == match[1] || type == match[2]) {
                 //khởi tạo đối tượng form data
-
+               
                 var form_data = new FormData();
                 //thêm files vào trong form data
                 form_data.append('file', file_data);

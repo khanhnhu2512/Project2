@@ -96,19 +96,19 @@
             <div class="col-10">
                 <!-- row1 -->
                 <div class="row p-3 pt-5 justify-content-between text-center">
-                    <div class="col-2 bg-success rounded p-2">
+                    <div class="col-2 rounded p-2">
                         <h5 class="m-2">Total Order</h5>
                         <p><?php echo $total_order; ?></p>
                     </div>
-                    <div class="col-2 bg-success rounded p-2">
+                    <div class="col-2 rounded p-2">
                         <h5 class="m-2">Total revenue</h5>
                         <p><?php echo $total_revenue; ?> USD</p>
                     </div>
-                    <div class="col-2 bg-success rounded p-2">
+                    <div class="col-2 rounded p-2">
                         <h6 class="m-2">Total products sold</h6>
                         <p><?php echo $total_product; ?></p>
                     </div>
-                    <div class="col-2 bg-success rounded p-2">
+                    <div class="col-2 rounded p-2">
                         <h6 class="m-2">Difference compared to the previous month</h6>
                         <p><?php echo $profit; ?></p>
                     </div>
