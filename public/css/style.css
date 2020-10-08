@@ -350,3 +350,53 @@
         top: -2px;
         right: 7px;
     }
+    
+    .menu-item.product {
+        position: relative;
+    }
+    
+    .child-menu {
+        left: 30px;
+        /* background: white; */
+        display: none;
+        color: #fff;
+        transition-delay: linear 10s;
+    }
+    
+    .child-menu--active {
+        display: block;
+    }
+    
+    .profile {
+        text-align: center;
+    }
+    
+    .nav-right {
+        display: flex;
+        align-items: center;
+    }
+    
+    .notice-icon {
+        position: relative;
+    }
+    
+    .nav-notice {
+        position: absolute;
+        top: 41px;
+        left: -65px;
+        width: 200px;
+        min-height: 50px;
+        background: white;
+        z-index: 100;
+        border-radius: 3px;
+        border: 1px solid rgba(179, 170, 170, 0.603);
+    }
+    
+    .nav-notice::before {
+        content: "";
+        position: absolute;
+        border: 9px transparent solid;
+        border-bottom-color: white;
+        top: -18px;
+        left: 94px;
+    }

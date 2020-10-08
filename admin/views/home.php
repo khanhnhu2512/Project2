@@ -20,15 +20,15 @@
 <body>
     <div class="container-fluid padding">
         <div class="header paddingLR">
-            <div class=" col-9 navbar-brand p-0">
+            <div class="navbar-brand p-0 page_brand">
                 <img src="../library/images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
             </div>
-            <div class="col-3 row">
-                <div class="col-4 text-right dropdown mr-1 p-0">
-                    <button class="btn btn-dark dropdown-toggle border-0" type="button" id="dropdownNoti" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="nav-right">
+                <div class="col-4 text-right mr-1 p-0">
+                    <button class="btn btn-dark border-0 notice-icon" type="button" id="dropdownNoti" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-bell text-white fa-1x btn-cart"></i>
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownNoti">
+                    <div class="nav-notice" aria-labelledby="dropdownNoti">
                         <?php $i = 0;
                         if (isset($_SESSION['noti'])) {
                             foreach ($_SESSION['noti'] as $key => $value) {
@@ -53,7 +53,7 @@
 
                     </div>
                 </div>
-                <div class="col-7 dropdown profile text-right pt-1 pr-0">
+                <div class=>
                     <button class="p-0 btn btn-dark dropdown-toggle border-0" type="button" id="dropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <?php echo isset($_SESSION['user']) ? $_SESSION['user']['fullname'] : ""; ?>
                     </button>
@@ -83,7 +83,23 @@
                         <a href="index.php?method=home">Dashboard</a>
                     </li>
                     <li>
-                        <a href="index.php?method=list-product">Product</a>
+                        <a class='menu-item product'>Product</a>
+                        <ul class="child-menu">
+                            <li class='child-menu-item'>
+                                > labc
+                            </li>
+                            <li class='child-menu-item'>
+                                > labc
+                                
+                            </li>
+                            <li class='child-menu-item'>
+                                > labc
+                                
+                            </li>
+                            <li class='child-menu-item'>
+                                > labc
+                            </li>
+                        </ul>
                     </li>
                     <li><a href="index.php?method=category">Category</a></li>
                     <li><a href="index.php?method=list-order">Order</a></li>
@@ -197,7 +213,24 @@
             </div>
         </div>
     </div>
+    <script>
+        const childMenu = document.querySelector('.child-menu');
+        const product = document.querySelector('.menu-item.product');
+            
+        var isProductOpened = false;
 
+        product.addEventListener('click', () => {
+            if(!isProductOpened){
+                childMenu.classList.add('child-menu--active');
+                isProductOpened = true;
+            }
+            else if(isProductOpened){
+                childMenu.classList.remove('child-menu--active');
+                isProductOpened = false;
+            }
+        });
+
+    </script>
 
 
 
