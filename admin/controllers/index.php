@@ -30,10 +30,13 @@ class C_website extends M_admin
                 // $product = $this->pagination($table,$start,$limit);
                 // SELECT * FROM `order_list` WHERE month(create_time) = '7';
                 //*page
+
                 $product = $this->getEverything_id('product', 'month(create_time)', "date('m')");
                 $user = $this->getObject('user');
                 $order = $this->getEverything_id('order_list', 'month(create_time)', "date('m')");
                 $total_order = count($order);
+
+                // revenue
                 $total_revenue = 0;
                 // echo "<pre>";
                 // echo 
@@ -49,19 +52,51 @@ class C_website extends M_admin
                         $total_product += $v['qty'];
                     }
                 }
-                // profit
+                // echo $total_product;
+                // change
                 $pre_month = date('m') - 1;
                 $total_revenue_preMonth = 0;
+                $total_product_preMonth = 0;
                 $preMonth_order = $this->getEverything_id('order_list', 'month(create_time)', $pre_month);
+                $preMonth_product = $this->getEverything_id('order_detail', 'month(create_time)', $pre_month);
+                // product
+                foreach ($preMonth_order as $k => $v) {
+                    $detail_order = $this->getEverything_id('order_detail', 'id_order', $v['id_order']);
+                    foreach ($detail_order as $k => $v) {
+                        $total_product_preMonth += $v['qty'];
+                    }
+                }
+                $changeProduct = $total_product - $total_product_preMonth;
+
+                // order
+                $total_order_Premonth = count($preMonth_order);
+                $changeOrder = $total_order - $total_order_Premonth;
+
                 foreach ($preMonth_order as $k => $v) {
                     $total_revenue_preMonth += $v['total_price'];
                 }
-                $profit = $total_revenue - $total_revenue_preMonth;
+                $profit = ($total_revenue / $total_revenue_preMonth) * 100;
+                $profit = $profit - 100;
+                $profit = number_format($profit, 1);
+                // echo $profit;
+                // lifetime income
+                $totalProduct = $this->getObject('order_list');
+                $lifeTime_income = 0;
+                foreach ($totalProduct as $k => $v) {
+                    $lifeTime_income += $v['total_price'];
+                }
+                $lifeTime_income = number_format($lifeTime_income);
+                $total_revenue = number_format($total_revenue);
+
+                // echo $lifeTime_income;
+                // lifetime order
+                $totalOrder = $this->getObject('order_list');
+                $lifeTime_order = count($totalOrder);
 
                 // best selled
-                $best_selled = $this->OrderByLimit('product', 'sold', 'DESC', '10');
+                $best_selled = $this->OrderByLimit('product', 'sold', 'DESC', '5');
                 // mostview
-                $most_view = $this->OrderByLimit('product', 'view', 'DESC', '10');
+                $most_view = $this->OrderByLimit('product', 'view', 'DESC', '5');
                 // customers
                 // $customers = 
                 // echo $total_product;
@@ -74,6 +109,73 @@ class C_website extends M_admin
                 header("location:../index.php");
                 break;
 
+            case 'category':
+                $category = $this->getObject('product_category');
+                if (isset($_GET['action'])) {
+                    if ($_GET['action'] == 'delete') {
+                        $id = $_GET['id'];
+                        $this->delete('product_category', 'id', $id);
+                        header('location:index.php?method=category');
+                    }
+                }
+                include_once 'views/category.php';
+                break;
+            case 'add-category':
+                $category_name = $this->getObject('product_category_name');
+                $category_infomation = $category_name[0];
+                // echo "<pre>";
+                // print_r($category_infomation);
+                if (isset($_POST['submit'])) {
+                    $name = $_POST['name'];
+                    $this->addCategory($name);
+                    $id_category = $this->getId('product_category', 'id');
+                    $this->addCategory_information($id_category['id']);
+
+                    foreach ($category_information as $k => $v) {
+                        if (isset($_POST[$k])) {
+                            $category_information[$k] = $_POST[$k];
+                        } else {
+                            $category_information[$k] = 0;
+                        }
+                    }
+                    foreach ($category_information as $k => $v) {
+                        $this->editCategory_information($id_category['id'], $k, $v);
+                    }
+
+                    header('location:index.php?method=category');
+                }
+                include_once 'views/add-category.php';
+                break;
+            case 'edit-category':
+                if (isset($_GET['id'])) {
+                    $id = $_GET['id'];
+                }
+                $category = $this->getObject_id('product_category', 'id', $id);
+                $category_information = $this->getObject_id('product_category_information', 'id_category', $category['id']);
+                $category_information_name = $this->getObject('product_category_name');
+                $category_information_name = $category_information_name[0];
+                // echo "<pre>";
+                // print_r($category_information_name);
+                if (isset($_POST['submit'])) {
+                    if (isset($_POST['name'])) {
+                        $name = $_POST['name'];
+                        $this->editCategory($id, $name);
+                    }
+                    foreach ($category_information as $k => $v) {
+                        if (isset($_POST[$k])) {
+                            $category_information[$k] = $_POST[$k];
+                        } else {
+                            $category_information[$k] = 0;
+                        }
+                    }
+                    foreach ($category_information as $k => $v) {
+                        $this->editCategory_information($id, $k, $v);
+                    }
+                    header('location:index.php?method=category');
+                }
+
+                include_once 'views/edit-category.php';
+                break;
             case ('profile'):
                 require_once 'views/profile.php';
                 break;
@@ -267,6 +369,14 @@ class C_website extends M_admin
             case ('add-product'):
                 $log = null;
                 $image = null;
+                $category = $this->getObject('product_category');
+                if (isset($_GET['type'])) {
+                    $type = $_GET['type'];
+                    $category_information = $this->getObject_id('product_category_information', 'id_category', $type);
+                    $category_information_name = $this->getObject('product_category_name');
+                    $category_information_name = $category_information_name[0];
+                }
+
                 if (isset($_FILES["fileToUpload"])) {
                     $target_dir = "../images/image-product/";
                     $_SESSION['image-upload'] = $_FILES["fileToUpload"];
@@ -278,7 +388,6 @@ class C_website extends M_admin
 
                 // if(isset($_SESSION['image-upload'])){echo " Test".$_SESSION['image-upload']['name'];}
                 if (isset($_POST['submit'])) {
-                    if (!empty($_POST['name']) && !empty($_POST['type']) && !empty($_POST['price']) && !empty($_POST['qty']) && !empty($_POST['description'])) {
                         $table = 'product';
                         // upfile
                         $target_dir = "../images/image-product/";
@@ -289,17 +398,11 @@ class C_website extends M_admin
                         ///
                         $name = $_POST['name'];
                         $image = $_SESSION['image-upload']['name'];
-                        $type = $_POST['type'];
-                        // echo " Test2 ".$image2;
-                        // $image = $_FILES["fileToUpload"]["name"];
                         $price = $_POST['price'];
                         $qty = $_POST['qty'];
                         $description = $_POST['description'];
-                        $this->addProduct($table, $name, $type, $image, $price, $qty, $description);
+                        $this->addProduct($table, $name, $type, $image, $price, $qty, $description,);
                         $log = "<p>Succesful!</p>";
-                    } else {
-                        $log = "<p>Error!</p>";
-                    }
                 }
                 include_once 'views/add-product.php';
 
@@ -326,6 +429,9 @@ class C_website extends M_admin
                 // echo "<script> alert('Deleted!'); </script>";
                 include_once 'views/list-product.php';
 
+                break;
+            case 'error404':
+                include_once 'views/404.php';
                 break;
             default:
                 break;

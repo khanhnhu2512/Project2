@@ -26,7 +26,17 @@
         //     }
         //     return $result;
         // }
-
+        public function getId($table,$id){
+            $this->conn();
+            $sql = "SELECT $id FROM $table ORDER BY $id DESC";
+            $query = mysqli_query($this->con,$sql);
+            $result = array();
+            if (mysqli_num_rows($query) > 0) {
+                $row = mysqli_fetch_assoc($query);
+                $result = $row;
+            }
+            return $result;
+        }
         public function sort($table,$object,$value)
         {
             $this->conn();
@@ -104,6 +114,32 @@
             $this->conn();
             $sql = "INSERT INTO $table (name,image,type,price,qty,description,create_time) VALUES ('$name','$image',$type,$price,$qty,'$description',NOW());";
             $query = mysqli_query($this->con,$sql);
+            return $query;
+        }
+        public function addCategory($name){
+            $this->conn();
+            $sql = "INSERT INTO product_category (name) VALUES ('$name');";
+            $query = mysqli_query($this->con,$sql);
+            return $query;
+        }
+        public function addCategory_information($id){
+            $this->conn();
+            $sql = "INSERT INTO product_category_information (id_category) VALUES ($id);";
+            $query = mysqli_query($this->con,$sql);
+            return $query;
+        }
+        public function editCategory_information($id,$key,$value)
+        {
+            $this->conn();
+            $sql = "UPDATE product_category_information SET $key = $value  WHERE id_category = $id";
+            $query = mysqli_query($this->con, $sql);
+            return $query;
+        }
+        public function editCategory($id,$name)
+        {
+            $this->conn();
+            $sql = "UPDATE product_category SET name = $name  WHERE id = $id";
+            $query = mysqli_query($this->con, $sql);
             return $query;
         }
 

@@ -441,3 +441,33 @@
         color: #fff !important;
         cursor: pointer !important;
     }
+    
+    .cart .dropdown-menu {
+        left: -93px !important;
+    }
+    
+    .btn-block {
+        display: block;
+        width: 100%;
+        text-decoration: none !important;
+    }
+    
+    .w-15 {
+        width: 15% !important;
+    }
+    
+    .font-size-1 {
+        font-size: 1rem !important;
+    }
+    
+    .font-size-2 {
+        font-size: 2rem !important;
+    }
+    
+    .font-size-3 {
+        font-size: 3rem !important;
+    }
+    
+    .font-size-8 {
+        font-size: 8rem !important;
+    }

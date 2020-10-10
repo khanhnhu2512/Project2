@@ -138,6 +138,9 @@ class C_website extends M_users
 
                     require_once('user/views/index-list-product.php');
                     break;
+                case 'error404':
+                    include_once 'user/views/404.php';
+                    break;
                 case ('detail'):
                     $table = 'product';
                     if (isset($_GET['id'])) {

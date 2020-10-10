@@ -65,11 +65,6 @@
                             </div>
                             <div class="dropdown-divider"></div>
                             <div class="dropdown-item">
-                                <i class="fa fa-cog" aria-hidden="true"></i>
-                                <a class="link" href="#">Setting</a>
-                            </div>
-                            <div class="dropdown-divider"></div>
-                            <div class="dropdown-item">
                                 <i class="fa fa-sign-out-alt" aria-hidden="true"></i>
                                 <a class="link" href="index.php?method=signout">Sign out</a>
                             </div>
@@ -81,50 +76,104 @@
         <div class="row col">
             <div class="menu col-2 p-0 h-auto">
                 <ul>
-                    <li style="background-color: #484848;">
-                        <a href="index.php?method=home">Dashboard</a>
+                    <li>
+                        <a onclick="collapse(0)" class='menu-item product'><i class="text-white w-15 text-center fas fa-tachometer-alt"></i> Dashboard</a>
+                        <ul class="child-menu">
+                            <li class='child-menu-item'>
+                                <a href="index.php?method=home">> Analytics</a>
+                            </li>
+
+                        </ul>
                     </li>
                     <li>
-                        <a class='menu-item product'>Product</a>
+                        <a onclick="collapse(1)" class='menu-item product'><i class="text-white w-15 text-center fas fa-box-open"></i> Catalogs</a>
                         <ul class="child-menu">
                             <li class='child-menu-item'>
                                 <a href="index.php?method=list-product">> List Products</a>
                             </li>
                             <li class='child-menu-item'>
-                                <a href="index.php?method=category">> Category</a> </li>
+                                <a href="index.php?method=category">> Category</a>
+                            </li>
                         </ul>
                     </li>
-                    <li><a href="index.php?method=list-order">Order</a></li>
-                    <li><a href="index.php?method=list-user">Users</a></li>
-                    <li><a href="index.php?method=role">Permission</a></li>
-                    <li><a href="index.php?method=notification">Notification</a></li>
-                    <li><a href="index.php?method=custom">Custom</a></li>
+                    <li>
+                        <a onclick="collapse(2)" class='menu-item product'><i class=" text-white w-15 text-center fas fa-dollar-sign"></i> Sales</a>
+                        <ul class="child-menu">
+                            <li class='child-menu-item'>
+                                <a href="index.php?method=list-order">> Order</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a onclick="collapse(3)" class='menu-item product'><i class=" text-white w-15 text-center fas fa-male"></i> Customers</a>
+                        <ul class="child-menu">
+                            <li class='child-menu-item'>
+                                <a href="index.php?method=list-user">> Users</a>
+                            </li>
+                            <li class='child-menu-item'>
+                                <a href="index.php?method=role">> Permissions</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a onclick="collapse(4)" class='menu-item product'><i class="w-15 text-center text-white fas fa-pager"></i> Content</a>
+                        <ul class="child-menu">
+                            <li class='child-menu-item'>
+                                <a href="index.php?method=notification">> Notification</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a onclick="collapse(5)" class='menu-item product'><i class="w-15 text-center text-white fas fa-sliders-h"></i> Website management</a>
+                        <ul class="child-menu">
+                            <li class='child-menu-item'>
+                                <a href="index.php?method=custom">> Settings</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
-            <div class="col-10">
+            <div class="col-10" style="height: 93vh;">
                 <!-- row1 -->
-                <div class="row p-3 pt-5 justify-content-between text-center">
-                    <div class="col-2 rounded p-2">
-                        <h5 class="m-2">Total Order</h5>
-                        <p><?php echo $total_order; ?></p>
+                <div class="ml-3">
+                    <div class="row p-3 pt-3">
+                        <h4 class="text-center w-100">Monthly overview</h4>
                     </div>
-                    <div class="col-2 rounded p-2">
-                        <h5 class="m-2">Total revenue</h5>
-                        <p><?php echo $total_revenue; ?> USD</p>
-                    </div>
-                    <div class="col-2 rounded p-2">
-                        <h6 class="m-2">Total products sold</h6>
-                        <p><?php echo $total_product; ?></p>
-                    </div>
-                    <div class="col-2 rounded p-2">
-                        <h6 class="m-2">Difference compared to the previous month</h6>
-                        <p><?php echo $profit; ?></p>
+                    <div class="row p-3 pt-2 justify-content-between text-center bg-primary">
+                        <div class="col-4 p-2 border-right">
+                            <h5 class="m-2">Total Order</h5>
+                            <p><?php echo $total_order; ?></p>
+                            <p class="text-danger"><?php echo($changeOrder > 0) ? '+'.$changeOrder : $changeOrder; ?></p>
+                        </div>
+                        <div class="col-4 border-right p-2">
+                            <h5 class="m-2">Revenue</h5>
+                            <p><?php echo $total_revenue; ?> USD</p>
+                            <p class="text-danger"><?php echo($profit > 0) ? '+'.$profit : $profit; ?></p>
+                        </div>
+                        <div class="col-4 p-2">
+                            <h5 class="m-2">Total products sold</h5>
+                            <p><?php echo $total_product; ?></p>
+                            <p class="text-danger"><?php echo($changeProduct > 0) ? '+'.$changeProduct : $changeProduct; ?></p>
+                        </div>
                     </div>
                 </div>
+
                 <!-- table -->
-                <div class="row p-3 pad-t-3 justify-content-between text-center">
+                <div class="row p-3 mar-t-3 justify-content-between text-center border-top border-grey">
+                    <!-- sth -->
+                    <div class="col-3 text-left">
+                        <div class="col">
+                            <h4 class="pl-0 pt-3 pb-1">Lifetime Sales</h4>
+                            <p class="text-danger"><?php if(isset($lifeTime_income)){echo $lifeTime_income;} ?> USD</p>
+                        </div>
+                        <div class="col">
+                            <h4 class="pl-0 pt-3 pb-1">Lifetime Order</h4>
+                            <p class="text-danger"><?php if(isset($lifeTime_order)){echo $lifeTime_order;} ?></p>
+                        </div>
+                    </div>
                     <!-- tb1 -->
-                    <div class="col-3 p-0">
+                    <div class="col-4 p-0">
                         <h4 class="p-3">Best selled Products</h4>
                         <table class="table table-striped">
                             <thead>
@@ -148,7 +197,7 @@
                         </table>
                     </div>
                     <!-- tb2 -->
-                    <div class="col-3 p-0">
+                    <div class="col-4 p-0">
                         <h4 class="p-3">Most view Products</h4>
                         <table class="table table-striped">
                             <thead>
@@ -171,73 +220,40 @@
                             </tbody>
                         </table>
                     </div>
-                    <!-- tb3 -->
-                    <div class="col-5 p-0">
-                        <h4 class="p-3">Customers</h4>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr class="">
-                                    <th scope="col">No</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Total amount purchased</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Otto</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>Otto</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
     <script>
-        function collapse() {
-            const childMenu = document.querySelector('.child-menu');
-            const product = document.querySelector('.menu-item.product');
+        var isProductOpened = false;
 
-            var isProductOpened = false;
+        function collapse(i) {
+            const childMenu = document.querySelectorAll('.child-menu');
+            if (!isProductOpened) {
+                childMenu[i].classList.add('child-menu--active');
+                isProductOpened = true;
+            } else if (isProductOpened) {
+                childMenu[i].classList.remove('child-menu--active');
+                isProductOpened = false;
+            }
 
-            product.addEventListener('click', () => {
-                if (!isProductOpened) {
-                    childMenu.classList.add('child-menu--active');
-                    isProductOpened = true;
-                } else if (isProductOpened) {
-                    childMenu.classList.remove('child-menu--active');
-                    isProductOpened = false;
-                }
-            });
 
         }
-        collapse();
         var isProductOpenedNotice = false;
+
         function collapseNotice() {
             // notice bell
-            
+
             console.log(isProductOpenedNotice);
             const notice_icon = document.querySelector('.notic-icon');
             const nav_notice = document.querySelector('.nav-notice');
-                if (!isProductOpenedNotice) {
-                    nav_notice.classList.add('nav-notice-active');
-                    isProductOpenedNotice = true;
-                } else if (isProductOpenedNotice) {
-                    nav_notice.classList.remove('nav-notice-active');
-                    isProductOpenedNotice = false;
-                }
+            if (!isProductOpenedNotice) {
+                nav_notice.classList.add('nav-notice-active');
+                isProductOpenedNotice = true;
+            } else if (isProductOpenedNotice) {
+                nav_notice.classList.remove('nav-notice-active');
+                isProductOpenedNotice = false;
+            }
         }
     </script>
 

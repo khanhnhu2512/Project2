@@ -117,7 +117,7 @@ if (!isset($_SESSION)) {
                         <p class="total">Total: <span><?php echo $total; ?>$</span></p>
                     <?php } ?>
                     <div class="btn btn-danger w-100">
-                        <a class="btn-link" href="index.php?method=checkout">Check out</a>
+                        <a class="btn-link btn-block" href="index.php?method=checkout">Check out</a>
                     </div>
                 </div>
             </div>

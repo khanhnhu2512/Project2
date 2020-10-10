@@ -6,11 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Dashboard</title>
     <link rel="SHORTCUT ICON" href="../library/images/image-bg/LogoN-Black.png">
-    <link rel="stylesheet" href="../public/css/admin/home.css">
+    <link rel="stylesheet" href="../public/css/admin/edit-product.css">
     <link type="text/css" rel="stylesheet" href="../public/fontawesome-free-5.13.0-web/css/all.css">
     <link type="text/css" rel="stylesheet" href="../public/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="../public/css/style.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/admin/home.css">
     <script src="../public/jquery/jquery-3.5.1.min.js"></script>
     <style>
 
@@ -18,8 +17,8 @@
 </head>
 
 <body>
-    <div class="container-fluid padding">
-    <div class="header paddingLR">
+    <div class="container-fluid p-0">
+        <div class="header paddingLR">
             <div class="navbar-brand p-0 page_brand">
                 <img src="../library/images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
             </div>
@@ -134,77 +133,38 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-10" style=>
-                <h3 class="col">Add Role</h3>
+            <div class="col-10" style="height: 93vh;">
+                <h3 class="col pt-3">Edit category</h3>
                 <form method="post" enctype="multipart/form-data">
                     <div class="form-group col">
-                        <label for="name" class="col-form-label">Role's Name</label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Name..." value="<?php echo (isset($_POST['submit'])) ? $_POST['name'] : ""; ?>">
+                        <label for="name" class="col-form-label">Category's Name</label>
+                        <input type="text" id="name" name="name" class="form-control w-50" placeholder="Name..." value="<?php echo (isset($_POST['submit'])) ? $_POST['name'] : $category['name']; ?>"" required="">
                     </div>
-                    <legend class="col">Permission</legend>
-                    <div class="form-group col">
-                        <p class="font-weight-bold mb-0">Dashboard </p>
-                        <input type="radio" id="dashboard-1" name="dashboard" value="1">
-                        <label for="dashboard-1" class="col-form-label">Allow</label><br>
-                        <input type="radio" id="dashboard-0" name="dashboard" value="0">
-                        <label for="dashboard-0" class="col-form-label">Dont Allow</label>
-                    </div>
-                    <div class="form-group col">
-                        <p class="font-weight-bold mb-0">Product </p>
-                        <input type="checkbox" id="product-1" name="product-see" value="1">
-                        <label for="product-1" class="col-form-label">See</label><br>
-                        <input type="checkbox" id="product-2" name="product-add" value="1">
-                        <label for="product-2" class="col-form-label">Add</label><br>
-                        <input type="checkbox" id="product-3" name="product-edit" value="1">
-                        <label for="product-3" class="col-form-label">Edit</label><br>
-                        <input type="checkbox" id="product-4" name="product-delete" value="1">
-                        <label for="product-4" class="col-form-label">Delete</label><br>
-                    </div>
-                    <div class="form-group col">
-                        <p class="font-weight-bold mb-0">Order </p>
-                        <input type="checkbox" id="order-1" name="order-see" value="1">
-                        <label for="order-1" class="col-form-label">See</label><br>
-                        <input type="checkbox" id="order-2" name="order-confirm" value="1">
-                        <label for="order-2" class="col-form-label">Confirm</label><br>
-                        <input type="checkbox" id="order-3" name="order-delete" value="1">
-                        <label for="order-3" class="col-form-label">Delete</label><br>
-                    </div>
-                    <div class="form-group col">
-                        <p class="font-weight-bold mb-0">User </p>
-                        <input type="checkbox" id="user-1" name="user-see" value="1">
-                        <label for="user-1" class="col-form-label">See</label><br>
-                        <input type="checkbox" id="user-2" name="user-confirm" value="1">
-                        <label for="user-2" class="col-form-label">Edit</label><br>
-                    </div>
-                    <div class="form-group col">
-                        <p class="font-weight-bold mb-0">Permission </p>
-                        <input type="radio" id="permission-1" name="permission" value="1">
-                        <label for="permission-1" class="col-form-label">Allow</label><br>
-                        <input type="radio" id="permission-0" name="permission" value="0">
-                        <label for="permission-0" class="col-form-label">Dont Allow</label>
-                    </div>
-                    <div class="form-group col">
-                        <p class="font-weight-bold mb-0">Notigication </p>
-                        <input type="radio" id="notigication-1" name="notigication" value="1">
-                        <label for="notigication-1" class="col-form-label">Allow</label><br>
-                        <input type="radio" id="notigication-0" name="notigication" value="0">
-                        <label for="notigication-0" class="col-form-label">Dont Allow</label>
-                    </div>
-                    <div class="form-group col">
-                        <p class="font-weight-bold mb-0">Custom </p>
-                        <input type="radio" id="custom-1" name="custom" value="1">
-                        <label for="custom-1" class="col-form-label">Allow</label><br>
-                        <input type="radio" id="custom-0" name="custom" value="0">
-                        <label for="custom-0" class="col-form-label">Dont Allow</label>
-                    </div>
-                    <div class="btn w-100">
-                        <input class="btn btn-lg btn-danger" name="submit" type="submit" value="Submit">
-                    </div>
+                    <legend class=" col">Infomations</legend>
+                        <table class="text-center" border="1px" width="100%" cellpadding="0" cellspacing="0">
+                            <tr class="font-weight-bold">
+                                <?php foreach ($category_information_name as $v) { ?>
+                                    <td class="p-1"><?php echo $v; ?></td>
+                                <?php } ?>
+                            </tr>
+                            <tr>
+                                <?php foreach ($category_information as $k => $v) { ?>
+                                    <?php if($k!='id_category'){ ?>
+                                    <td class="p-1">
+                                        <input type="checkbox" name="<?php echo $k; ?>" value="1" <?php if($v==1){ echo "checked";} ?>>
+                                    </td>
+                                <?php } } ?>
+                            </tr>
+                        </table>
+                        <div class="btn w-100">
+                            <input class="btn btn-lg btn-danger" name="submit" type="submit" value="Submit">
+                        </div>
                 </form>
+
             </div>
+
         </div>
     </div>
-
 
 
 
@@ -239,6 +199,43 @@
                 isProductOpenedNotice = false;
             }
         }
+    </script>
+    <script type="text/javascript">
+        $('#upload').on('click', function() {
+
+            var file_data = $('#fileToUpload').prop('files')[0];
+            //lấy ra kiểu file
+            var type = file_data.type;
+            //Xét kiểu file được upload
+            var match = ["image/jpeg", "image/png", "image/jpg", ];
+            //kiểm tra kiểu file
+            if (type == match[0] || type == match[1] || type == match[2]) {
+                //khởi tạo đối tượng form data
+
+                var form_data = new FormData();
+                //thêm files vào trong form data
+                form_data.append('file', file_data);
+                console.log(file_data);
+                //sử dụng ajax post
+                $.ajax({
+                    url: 'index.php?method=add-product&action=uploadimg', // gửi đến file upload.php 
+                    dataType: 'text',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: form_data,
+                    type: 'post',
+                    success: function(res) {
+                        console.log("ok");
+                        $('#fileToUpload').val('');
+                    }
+                });
+            } else {
+                console.log(file_data.type);
+                $('#fileToUpload').val('');
+            }
+            return false;
+        })
     </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
