@@ -25,15 +25,15 @@
             </div>
             <div class="nav-right">
                 <div class="col-4 text-right mr-1 p-0">
-                    <button class="btn btn-dark border-0 notice-icon" type="button" id="dropdownNoti" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-dark border-0 notice-icon" onclick="collapseNotice()" type="button" id="dropdownNoti">
                         <i class="fas fa-bell text-white fa-1x btn-cart"></i>
                     </button>
-                    <div class="nav-notice" aria-labelledby="dropdownNoti">
+                    <div class="nav-notice">
                         <?php $i = 0;
                         if (isset($_SESSION['noti'])) {
                             foreach ($_SESSION['noti'] as $key => $value) {
                                 $i++; ?>
-                                <div class="dropdown-item">
+                                <div class=" dropdown-item">
                                     <img class="cart-img" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="">
                                     <div class="cartProduct">
                                         <p class="cart-name"><?php echo $value['name']; ?></p>
@@ -53,24 +53,26 @@
 
                     </div>
                 </div>
-                <div class=>
-                    <button class="p-0 btn btn-dark dropdown-toggle border-0" type="button" id="dropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <?php echo isset($_SESSION['user']) ? $_SESSION['user']['fullname'] : ""; ?>
-                    </button>
-                    <div class="dropdown-menu btn-dark w-100 text-light" aria-labelledby="dropdownProfile">
-                        <div class="dropdown-item">
-                            <i class="fa fa-user-circle" aria-hidden="true"></i>
-                            <a class="link" href="#">Account</a>
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <div class="dropdown-item">
-                            <i class="fa fa-cog" aria-hidden="true"></i>
-                            <a class="link" href="#">Setting</a>
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <div class="dropdown-item">
-                            <i class="fa fa-sign-out-alt" aria-hidden="true"></i>
-                            <a class="link" href="index.php?method=signout">Sign out</a>
+                <div class="">
+                    <div class="dropdown profile">
+                        <button class="btn btn-dark dropdown-toggle border-0" type="button" id="dropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <?php echo isset($_SESSION['user']) ? $_SESSION['user']['fullname'] : ""; ?>
+                        </button>
+                        <div class="dropdown-menu btn-dark w-100 text-light" aria-labelledby="dropdownProfile">
+                            <div class="dropdown-item">
+                                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                <a class="link" href="#">Account</a>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-item">
+                                <i class="fa fa-cog" aria-hidden="true"></i>
+                                <a class="link" href="#">Setting</a>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-item">
+                                <i class="fa fa-sign-out-alt" aria-hidden="true"></i>
+                                <a class="link" href="index.php?method=signout">Sign out</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -86,22 +88,12 @@
                         <a class='menu-item product'>Product</a>
                         <ul class="child-menu">
                             <li class='child-menu-item'>
-                                > labc
+                                <a href="index.php?method=list-product">> List Products</a>
                             </li>
                             <li class='child-menu-item'>
-                                > labc
-                                
-                            </li>
-                            <li class='child-menu-item'>
-                                > labc
-                                
-                            </li>
-                            <li class='child-menu-item'>
-                                > labc
-                            </li>
+                                <a href="index.php?method=category">> Category</a> </li>
                         </ul>
                     </li>
-                    <li><a href="index.php?method=category">Category</a></li>
                     <li><a href="index.php?method=list-order">Order</a></li>
                     <li><a href="index.php?method=list-user">Users</a></li>
                     <li><a href="index.php?method=role">Permission</a></li>
@@ -214,22 +206,39 @@
         </div>
     </div>
     <script>
-        const childMenu = document.querySelector('.child-menu');
-        const product = document.querySelector('.menu-item.product');
+        function collapse() {
+            const childMenu = document.querySelector('.child-menu');
+            const product = document.querySelector('.menu-item.product');
+
+            var isProductOpened = false;
+
+            product.addEventListener('click', () => {
+                if (!isProductOpened) {
+                    childMenu.classList.add('child-menu--active');
+                    isProductOpened = true;
+                } else if (isProductOpened) {
+                    childMenu.classList.remove('child-menu--active');
+                    isProductOpened = false;
+                }
+            });
+
+        }
+        collapse();
+        var isProductOpenedNotice = false;
+        function collapseNotice() {
+            // notice bell
             
-        var isProductOpened = false;
-
-        product.addEventListener('click', () => {
-            if(!isProductOpened){
-                childMenu.classList.add('child-menu--active');
-                isProductOpened = true;
-            }
-            else if(isProductOpened){
-                childMenu.classList.remove('child-menu--active');
-                isProductOpened = false;
-            }
-        });
-
+            console.log(isProductOpenedNotice);
+            const notice_icon = document.querySelector('.notic-icon');
+            const nav_notice = document.querySelector('.nav-notice');
+                if (!isProductOpenedNotice) {
+                    nav_notice.classList.add('nav-notice-active');
+                    isProductOpenedNotice = true;
+                } else if (isProductOpenedNotice) {
+                    nav_notice.classList.remove('nav-notice-active');
+                    isProductOpenedNotice = false;
+                }
+        }
     </script>
 
 
