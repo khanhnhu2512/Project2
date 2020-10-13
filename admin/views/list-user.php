@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Dashboard</title>
-    <link rel="SHORTCUT ICON" href="../library/images/image-bg/LogoN-Black.png">
+    <title><?php echo $_SESSION['management_site']['title_website']; ?></title>
+    <link rel="SHORTCUT ICON" href="/library/images/image-bg/<?php echo $_SESSION['management_site']['logo_website']; ?>">
     <link rel="stylesheet" href="../public/css/admin/list-user.css">
     <link type="text/css" rel="stylesheet" href="../public/fontawesome-free-5.13.0-web/css/all.css">
     <link type="text/css" rel="stylesheet" href="../public/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
@@ -18,9 +18,9 @@
 
 <body>
     <div class="container-fluid p-0">
-    <div class="header paddingLR">
+        <div class="header paddingLR">
             <div class="navbar-brand p-0 page_brand">
-                <img src="../library/images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
+            <img src="/library/images/image-bg/<?php echo $_SESSION['management_site']['logo_brand']; ?>" height="35" alt="" class="d-inline-block align-top"> <?php echo $_SESSION['management_site']['name_brand']; ?>
             </div>
             <div class="nav-right">
                 <div class="col-4 text-right mr-1 p-0">
@@ -31,25 +31,19 @@
                         <?php $i = 0;
                         if (isset($_SESSION['noti'])) {
                             foreach ($_SESSION['noti'] as $key => $value) {
-                                $i++; ?>
-                                <div class=" dropdown-item">
-                                    <img class="cart-img" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="">
-                                    <div class="cartProduct">
-                                        <p class="cart-name"><?php echo $value['name']; ?></p>
-                                        <div class="cartProduct-price">
-                                            <p class="cart-price"><?php echo $value['price']; ?>$</p>
-                                            <p>x <span><?php echo $value['qty']; ?></span></p>
-                                        </div>
+                        ?>
+                                <div class="m-0 dropdown-divider"></div>
+                                <div class="row m-0 text-left align-content-center p-0">
+                                    <div class="text-dark col-10">
+                                        <p class="cart-name mt-2 mb-2 "><?php echo $value['content']; ?></p>
                                     </div>
-                                    <a href="index.php?method=delete-cart&id=<?php echo $value['id']; ?>">
+                                    <a class="col p-0 m-0 flex-center text-decoration-none" href="index.php?method=delete-notification&methodB=<?php echo $method; ?>&id=<?php echo $value['id']; ?>">
                                         <i class="fas fa-times fa-1x"></i>
                                     </a>
                                 </div>
-                                <div class="dropdown-divider"></div>
+                                <div class="m-0 dropdown-divider"></div>
                             <?php } ?>
-                            <p class="total">Total: <span><?php echo $total; ?>$</span></p>
                         <?php } ?>
-
                     </div>
                 </div>
                 <div class="">
@@ -73,64 +67,79 @@
             </div>
         </div>
         <div class="row col">
-            <div class="menu col-2 p-0 h-auto">
+        <div class="menu col-2 p-0 h-auto">
                 <ul>
-                    <li>
-                        <a onclick="collapse(0)" class='menu-item product'><i class="text-white w-15 text-center fas fa-tachometer-alt"></i> Dashboard</a>
-                        <ul class="child-menu">
-                            <li class='child-menu-item'>
-                                <a href="index.php?method=home">> Analytics</a>
-                            </li>
+                    <?php $i=0; if ($_SESSION['permission']['dashboard'] == 1) { ?>
+                        <li>
+                            <a onclick="collapse(<?php echo $i; $i++ ?>)" class='menu-item product'><i class="text-white w-15 text-center fas fa-tachometer-alt"></i> Dashboard</a>
+                            <ul class="child-menu">
+                                <li class='child-menu-item'>
+                                    <a href="index.php?method=home">> Analytics</a>
+                                </li>
 
-                        </ul>
-                    </li>
-                    <li>
-                        <a onclick="collapse(1)" class='menu-item product'><i class="text-white w-15 text-center fas fa-box-open"></i> Catalogs</a>
-                        <ul class="child-menu">
-                            <li class='child-menu-item'>
-                                <a href="index.php?method=list-product">> List Products</a>
-                            </li>
-                            <li class='child-menu-item'>
-                                <a href="index.php?method=category">> Category</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a onclick="collapse(2)" class='menu-item product'><i class=" text-white w-15 text-center fas fa-dollar-sign"></i> Sales</a>
-                        <ul class="child-menu">
-                            <li class='child-menu-item'>
-                                <a href="index.php?method=list-order">> Order</a>
-                            </li>
-
-                        </ul>
-                    </li>
-                    <li>
-                        <a onclick="collapse(3)" class='menu-item product'><i class=" text-white w-15 text-center fas fa-male"></i> Customers</a>
-                        <ul class="child-menu">
-                            <li class='child-menu-item'>
-                                <a href="index.php?method=list-user">> Users</a>
-                            </li>
-                            <li class='child-menu-item'>
-                                <a href="index.php?method=role">> Permissions</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a onclick="collapse(4)" class='menu-item product'><i class="w-15 text-center text-white fas fa-pager"></i> Content</a>
-                        <ul class="child-menu">
-                            <li class='child-menu-item'>
-                                <a href="index.php?method=notification">> Notification</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a onclick="collapse(5)" class='menu-item product'><i class="w-15 text-center text-white fas fa-sliders-h"></i> Website management</a>
-                        <ul class="child-menu">
-                            <li class='child-menu-item'>
-                                <a href="index.php?method=custom">> Settings</a>
-                            </li>
-                        </ul>
-                    </li>
+                            </ul>
+                        </li>
+                    <?php } ?>
+                    <?php if ($_SESSION['permission']['product_see'] == 1) { ?>
+                        <li>
+                            <a onclick="collapse(<?php echo $i; $i++ ?>)" class='menu-item product'><i class="text-white w-15 text-center fas fa-box-open"></i> Catalogs</a>
+                            <ul class="child-menu">
+                                <li class='child-menu-item'>
+                                    <a href="index.php?method=list-product">> List Products</a>
+                                </li>
+                                <li class='child-menu-item'>
+                                    <a href="index.php?method=category">> Category</a>
+                                </li>
+                            </ul>
+                        </li>
+                    <?php } ?>
+                    <?php if ($_SESSION['permission']['order_see'] == 1) { ?>
+                        <li>
+                            <a onclick="collapse(<?php echo $i; $i++ ?>)" class='menu-item product'><i class=" text-white w-15 text-center fas fa-dollar-sign"></i> Sales</a>
+                            <ul class="child-menu">
+                                <li class='child-menu-item'>
+                                    <a href="index.php?method=list-order">> Order</a>
+                                </li>
+                            </ul>
+                        </li>
+                    <?php } ?>
+                    <?php if (($_SESSION['permission']['user_see'] == 1) && ($_SESSION['permission']['permission'] == 1)) { ?>
+                        <li>
+                            <a onclick="collapse(<?php echo $i; $i++ ?>)" class='menu-item product'><i class=" text-white w-15 text-center fas fa-male"></i> Customers</a>
+                            <ul class="child-menu">
+                                <?php if ($_SESSION['permission']['user_see'] == 1) { ?>
+                                    <li class='child-menu-item'>
+                                        <a href="index.php?method=list-user">> Users</a>
+                                    </li>
+                                <?php } ?>
+                                <?php if ($_SESSION['permission']['permission'] == 1) { ?>
+                                    <li class='child-menu-item'>
+                                        <a href="index.php?method=role">> Permissions</a>
+                                    </li>
+                                <?php } ?>
+                            </ul>
+                        </li>
+                    <?php } ?>
+                    <?php if ($_SESSION['permission']['notifications'] == 1) { ?>
+                        <li>
+                            <a onclick="collapse(<?php echo $i; $i++ ?>)" class='menu-item product'><i class="w-15 text-center text-white fas fa-pager"></i> Content</a>
+                            <ul class="child-menu">
+                                <li class='child-menu-item'>
+                                    <a href="index.php?method=notification">> Notification</a>
+                                </li>
+                            </ul>
+                        </li>
+                    <?php } ?>
+                    <?php if ($_SESSION['permission']['management'] == 1) { ?>
+                        <li>
+                            <a onclick="collapse(<?php echo $i; $i++ ?>)" class='menu-item product'><i class="w-15 text-center text-white fas fa-sliders-h"></i> Website management</a>
+                            <ul class="child-menu">
+                                <li class='child-menu-item'>
+                                    <a href="index.php?method=custom">> Settings</a>
+                                </li>
+                            </ul>
+                        </li>
+                    <?php } ?>
                 </ul>
             </div>
             <div class="col-10" style="height: 93vh;">
@@ -140,21 +149,20 @@
                         <a href="index.php?method=add-role" class="btn m-0 btn-danger">Add role</a>
                     </div> -->
                 </div>
-                
-                <table border="1px" width="100%" cellpadding="0" cellspacing="0">
+
+                <table border="1px" width="100%" cellpadding="0" cellspacing="0" class="text-center">
                     <tr>
                         <td style="width: 40px">STT</td>
                         <td style="width: 100px">Username</td>
                         <td style="width: 300px">FullName</td>
                         <td style="width: 100px">Email</td>
-                        <td style="width: 100px">Permission</td>
+                        <td style="width: 100px">Level</td>
                         <td></td>
                     </tr>
                     <tr>
                         <?php $i = 0;
-                        foreach ($_SESSION['users'] as $key => $value) {
+                        foreach ($users as $key => $value) {
                             $i++; ?>
-
                             <td style="width: 40px">
                                 <?php echo $i; ?>
                             </td>
@@ -168,7 +176,11 @@
                                 <?php echo ($value['email']); ?>
                             </td>
                             <td>
-                                <?php echo ($value['lv'] == 1) ? 'Admin' : 'User'; ?>
+                                <?php foreach ($role as $k => $v) {
+                                    if ($v['id_lv'] == $value['lv']) {
+                                        echo $v['name'];
+                                    }
+                                } ?>
                             </td>
                             <td class="display__body-btn">
                                 <div class="btn btn-outline-danger mr-1"><a class="btn-link" href="index.php?method=edit-user&id=<?php echo $value['id']; ?>">Edit</a></div>
@@ -182,7 +194,7 @@
             </div>
 
         </div>
-        
+
     </div>
     </div>
 

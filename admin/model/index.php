@@ -112,7 +112,7 @@
 
         public function addProduct($table,$name,$type,$image,$price,$qty,$description){
             $this->conn();
-            $sql = "INSERT INTO $table (name,image,type,price,qty,description,create_time) VALUES ('$name','$image',$type,$price,$qty,'$description',NOW());";
+            $sql = "INSERT INTO $table (name,image,status,type,price,qty,description,create_time) VALUES ('$name','$image',1,$type,$price,$qty,'$description',NOW());";
             $query = mysqli_query($this->con,$sql);
             return $query;
         }
@@ -132,6 +132,77 @@
         {
             $this->conn();
             $sql = "UPDATE product_category_information SET $key = $value  WHERE id_category = $id";
+            $query = mysqli_query($this->con, $sql);
+            return $query;
+        }
+        public function addProduct_information($id){
+            $this->conn();
+            $sql = "INSERT INTO product_information (id_product) VALUES ($id);";
+            $query = mysqli_query($this->con,$sql);
+            return $query;
+        }
+        public function addPermission_name($name){
+            $this->conn();
+            $sql = "INSERT INTO user_level (name) VALUES ('$name');";
+            $query = mysqli_query($this->con,$sql);
+            return $query;
+        }
+        public function addPermission_id($id){
+            $this->conn();
+            $sql = "INSERT INTO user_permissions (id_lv) VALUES ('$id');";
+            $query = mysqli_query($this->con,$sql);
+            return $query;
+        }
+        public function editPermission($id,$key,$value)
+        {
+            $this->conn();
+            $sql = "UPDATE user_permissions SET $key = '$value'  WHERE id_lv = $id";
+            $query = mysqli_query($this->con, $sql);
+            return $query;
+        }
+        public function editProduct_information($id,$key,$value)
+        {
+            $this->conn();
+            $sql = "UPDATE product_information SET $key = '$value'  WHERE id_product = $id";
+            $query = mysqli_query($this->con, $sql);
+            return $query;
+        }
+        public function addProduct_images($id,$image_name){
+            $this->conn();
+            $sql = "INSERT INTO product_images (id_product,url) VALUES ($id,'$image_name');";
+            $query = mysqli_query($this->con,$sql);
+            return $query;
+        }
+        public function addNotifications($lv,$content){
+            $this->conn();
+            $sql = "INSERT INTO notifications (content,lv,create_time) VALUES ('$content',$lv,now());";
+            $query = mysqli_query($this->con,$sql);
+            return $query;
+        }
+        public function dropTable($table){
+            $this->conn();
+            $sql = "TRUNCATE $table";
+            $query = mysqli_query($this->con,$sql);
+            return $query;
+        }
+
+        public function editEverything($table,$key,$value,$id,$id_value)
+        {
+            $this->conn();
+            $sql = "UPDATE $table SET $key = $value  WHERE $id = $id_value";
+            $query = mysqli_query($this->con, $sql);
+            return $query;
+        }
+        public function addBanner_img($url){
+            $this->conn();
+            $sql = "INSERT INTO management_image_banner (url) VALUES ('$url');";
+            $query = mysqli_query($this->con,$sql);
+            return $query;
+        }
+        public function editManagement($key,$value)
+        {
+            $this->conn();
+            $sql = "UPDATE management_site SET $key = '$value'";
             $query = mysqli_query($this->con, $sql);
             return $query;
         }
@@ -168,23 +239,24 @@
                     }
             return $result;
         }
+
         public function delete($table,$object,$id)
         {
             $this->conn();
             $sql = "DELETE FROM $table WHERE $object = $id";
 			return mysqli_query($this->con, $sql);
         }
-        public function editUser($table,$id,$username,$fullname,$email,$lv)
+        public function editUser($id,$lv)
         {
             $this->conn();
-            $sql = "UPDATE $table SET username = '$username', fullname = '$fullname', email = '$email', lv = $lv, last_updated = now()  WHERE id = $id";
+            $sql = "UPDATE user SET  lv = $lv, last_updated = now()  WHERE id = $id";
             $query = mysqli_query($this->con, $sql);
             return $query;
         }
         public function editProduct($table,$id,$name,$image,$price,$qty,$description)
         {
             $this->conn();
-            $sql = "UPDATE $table SET name = '$name', image = '$image', price = $price, qty = $qty, description = '$description' last_updated = now() WHERE id = $id";
+            $sql = "UPDATE $table SET name = '$name', image = '$image', price = $price, qty = $qty, description = '$description', last_updated = now() WHERE id = $id";
             $query = mysqli_query($this->con, $sql);
             return $query;
         }

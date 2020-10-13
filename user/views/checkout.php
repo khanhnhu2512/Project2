@@ -11,8 +11,8 @@ if (!isset($_SESSION)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>My store</title>
-    <link rel="SHORTCUT ICON" href="./library/images/image-bg/LogoN-Black.png">
+    <title><?php echo $_SESSION['management_site']['title_website']; ?></title>
+    <link rel="SHORTCUT ICON" href="./library/images/image-bg/<?php echo $_SESSION['management_site']['logo_website']; ?>">
     <link rel="stylesheet" href="./public/css/user/checkout.css">
     <link type="text/css" rel="stylesheet" href="./public/fontawesome-free-5.13.0-web/css/all.css">
     <link type="text/css" rel="stylesheet" href="./public/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
@@ -54,7 +54,7 @@ if (!isset($_SESSION)) {
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
             <a href="" class="navbar-brand">
-                <img src="./library/images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
+            <img src="./library/images/image-bg/<?php echo $_SESSION['management_site']['logo_brand']; ?>" height="35" alt="" class="d-inline-block align-top"> <?php echo $_SESSION['management_site']['name_brand']; ?>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                 <span class="navbar-toggler-icon"></span>
@@ -67,16 +67,6 @@ if (!isset($_SESSION)) {
                     <li class="nav-item pr-5">
                         <a class="nav-link text-light" href="index.php?method=list-product">Product</a>
                     </li>
-                    <!-- <li class="nav-item dropdown pr-5">
-                        <a class="nav-link dropdown-toggle text-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Products</a>
-                        <div class="dropdown-menu">
-                            <a href="index.php?method=list-product&type=1" class="dropdown-item" href="#">iPhone</a>
-                            <a href="index.php?method=list-product&type=2" class="dropdown-item" href="#">iPad</a>
-                            <a href="index.php?method=list-product&type=3" class="dropdown-item" href="#">Macbook</a>
-                            <a href="index.php?method=list-product&type=4" class="dropdown-item" href="#">AirPods</a>
-                            <a href="index.php?method=list-product&type=0" class="dropdown-item" href="#">See all</a>
-                        </div>
-                    </li> -->
                     <li class="nav-item pr-5 ">
                         <a class="nav-link text-light" href="#">About Us</a>
                     </li>
@@ -200,7 +190,7 @@ if (!isset($_SESSION)) {
                 </div>
                 <div class="form-group">
                     <label for="address">Phone Number</label>
-                    <input type="number" class="form-control " id="number" name="number" placeholder="Phone number..." value="<?php echo (isset($_POST['submit'])) ? $_POST['number'] : ""; ?>" required="">
+                    <input type="number" class="form-control " onchange="phoneNumber()" id="number" name="number" placeholder="Phone number..." value="<?php echo (isset($_POST['submit'])) ? $_POST['number'] : ""; ?>" required="">
                 </div>
                 <div class="form-group">
                     <label for="address">Address</label>
@@ -238,27 +228,19 @@ if (!isset($_SESSION)) {
             <div class="row text-center">
                 <div class="col-md-4">
                     <hr class="light">
-                    <p>111-222-3333</p>
-                    <p>mymail@gmail.com</p>
-                    <p>Bach Mai street, Hanoi, Vietnam</p>
+                    <p><?php echo $_SESSION['management_site']['footer_information_left']; ?></p>
                 </div>
                 <div class="col-md-4">
                     <hr class="light">
-                    <h5>Working hours</h5>
-                    <p>Monday-Friday: 8am - 5pm</p>
-                    <p>Weekend: 8am - 12am</p>
+                    <p><?php echo $_SESSION['management_site']['footer_information_center']; ?></p>
                 </div>
                 <div class="col-md-4">
                     <hr class="light">
-                    <h5>Services</h5>
-                    <p>Outsourcing</p>
-                    <p>Website development</p>
-                    <p>Mobile applications</p>
+                    <p><?php echo $_SESSION['management_site']['footer_information_right']; ?></p>
                 </div>
                 <div class="col-12 ">
                     <hr class="light-100">
-                    <p>Designed with all the love in the world by KhanhNhu2512.</p>
-                    <p>Copyright © 2020 KhanhNhu's N-BUY. All rights reserved.</p>
+                    <p><?php echo $_SESSION['management_site']['footer_information_bottom']; ?></p>
                 </div>
             </div>
         </div>
@@ -271,6 +253,28 @@ if (!isset($_SESSION)) {
         //     alert("You need to login!");
         //     window.location = "index.php?method=login";
         // }
+        function phoneNumber() {
+            var phoneno = /^\d{10}$/;
+            var number = document.getElementById('number');
+            console.log(number.value);
+            if(number.value.match(phoneno)){
+            }else{
+                alert("Invalid phone number");
+            }
+            // if ((number.value.match(phoneno)) {
+            //         return true;
+            //     } else {
+            //         alert();
+            //         return false;
+            //     }
+            // }
+        }
+
+        // function phoneNumber() {
+        //     var phoneno = /^\d{10}$/;
+        //     var number = document.getElementById('number');
+
+
         function reload() {
             location.reload();
 

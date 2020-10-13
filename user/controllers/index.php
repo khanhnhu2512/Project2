@@ -11,6 +11,8 @@ class C_website extends M_users
     public function control()
     {
         $method = 'home';
+        $_SESSION['management_site'] = $this->getObject('management_site');
+        $_SESSION['management_site'] = $_SESSION['management_site']['0'];
         if (isset($_GET['method'])) {
             $method = $_GET['method'];
         }
@@ -20,28 +22,6 @@ class C_website extends M_users
         if (!isset($_SESSION['lv'])) { //chua dang nhap
             switch ($method) {
                 case ('home'):
-                    // $_SESSION['type'] = $this->getObject("product_category");
-                    // $product = array();
-                    // echo "<pre>";
-                    // $limit = 4;
-                    // print_r($_SESSION['type']);
-                    // foreach ($_SESSION['type'] as $k => $val) {
-                    //     switch ($val['id']) {
-                    //         case '1':
-                    //             $product['most-view'] = $this->Random('product', 'type', $val['id'], 8);
-                    //             break;
-                    //         case '2':
-                    //             $product[$val['id']] = $this->Random('product', 'type', $val['id'], 9);
-                    //             break;
-                    //         case '3':
-                    //             $product[$val['id']] = $this->Random('product', 'type', $val['id'], 10);
-                    //             break;
-                    //         case '4':
-                    //             $product[$val['id']] = $this->Random('product', 'type', $val['id'], 9);
-                    //             break;
-                    //     }
-                    // }
-                    // $product['mostview'] = $this->OrderBy('product','view','DESC');
                     $product['bestseller'] = $this->OrderBy('product', 'sold', 'DESC');
                     $product['new'] = $this->OrderBy('product', 'create_time', 'DESC');
                     // echo count($product['mostview']);
@@ -57,6 +37,12 @@ class C_website extends M_users
                     } else {
                         $type = 0;
                     }
+                    // if (isset($_GET['filter-price'])) {
+                    //     $filter_price = $_GET['filter-price'];
+                    //     $product = $this->getEverything_id('product', 'type', $type);
+                    // } else {
+                    //     $type = 0;
+                    // }
                     if (isset($_GET['sort'])) {
                         $sort = $_GET['sort'];
                         switch ($sort) {
@@ -147,6 +133,9 @@ class C_website extends M_users
                         $id = $_GET['id'];
                     }
                     // view
+                    $product_information = $this->getEverything_id('product_information', 'id_product', $id);
+                    $product_category_name = $this->getObject('product_category_name');
+                    $product_category_name = $product_category_name[0];
                     $views = $this->m_users->getSth('view', $id);
                     $views['view']++;
                     $updateViews = $this->m_users->updateSth('view', $views['view'], $id);
@@ -197,11 +186,16 @@ class C_website extends M_users
                             // $log="";
                             if ($this->m_users->login($username, $password)) {
                                 $user = $_SESSION['user'];
-                                if ($user['lv'] == 1) {
-                                    $_SESSION['lv'] = 1;
+                                if ($user['lv'] != 100) {
+                                    $_SESSION['lv'] = $user['lv'];
+                                    $_SESSION['noti'] = $this->getEverything_id('notifications', 'lv', $_SESSION['lv']);
+                                    $_SESSION['permission'] = $this->getEverything_id('user_permissions', 'id_lv', $_SESSION['lv']);
+                                    $_SESSION['permission'] = $_SESSION['permission']['0'];
+                                    // echo $_SESSION['lv'];
                                     header('location:/admin/index.php');
                                 } else {
-                                    $_SESSION['lv'] = 2;
+                                    $_SESSION['lv'] = 100;
+                                    $_SESSION['noti'] = $this->getEverything_id('notifications', 'lv', $_SESSION['lv']);
                                     header('location:/index.php');
                                 }
                             } else {
@@ -275,7 +269,7 @@ class C_website extends M_users
                     break;
             }
         } else {
-            if ($_SESSION['lv'] == 2) {
+            if ($_SESSION['lv'] == 100) {
                 switch ($method) {
                     case ('home'):
                         $product['mostview'] = $this->OrderBy('product', 'view', 'DESC');
@@ -302,6 +296,15 @@ class C_website extends M_users
 
                         //*page
                         include_once 'user/views/home.php';
+                        break;
+                    case ('delete-notification'):
+                        if (isset($_GET['id'])) {
+                            $id = $_GET['id'];
+                            $methodB = $_GET['methodB'];
+                            $this->delete('notifications', 'id', $id);
+                            header('location:index.php?method=' . $methodB);
+                            $_SESSION['noti'] = $this->getEverything_id('notifications', 'lv', $_SESSION['lv']);
+                        }
                         break;
                     case ('profile'):
                         require_once 'views/profile.php';
@@ -403,7 +406,7 @@ class C_website extends M_users
                             }
                         }
 
-                        require_once('user/views/index-list-product.php');
+                        require_once('user/views/home-list-product.php');
                         break;
 
 
@@ -445,6 +448,13 @@ class C_website extends M_users
                             $id = $_GET['id'];
                         }
                         // view
+                        $product_information = $this->getEverything_id('product_information', 'id_product', $id);
+                        $product_information = $product_information[0];
+                        $product_category_name = $this->getObject('product_category_name');
+                        $product_category_name = $product_category_name[0];
+                        $attached_img = $this->getObject('product_images');
+                        // echo "<pre>";
+                        // print_r($product_information);
                         $views = $this->m_users->getSth('view', $id);
                         $views['view']++;
                         $updateViews = $this->m_users->updateSth('view', $views['view'], $id);
@@ -474,7 +484,7 @@ class C_website extends M_users
                         include_once './plugin/mail.php';
                         $total = $_SESSION['cart-total'];
                         if (isset($_POST['submit'])) {
-                            $name = $_POST['name'];
+                            $fullname = $_POST['name'];
                             $email = $_POST['email'];
                             $number = $_POST['number'];
                             $address = $_POST['address'];
@@ -491,7 +501,7 @@ class C_website extends M_users
                             }
 
                             if ($outofstock == 0) {
-                                $add_order_list = $this->m_users->addOrderList('order_list', $_SESSION['user']['username'], $_SESSION['cart-total'], $address, $method);
+                                $add_order_list = $this->m_users->addOrderList('order_list', $_SESSION['user']['username'], $fullname, $email, $number, $_SESSION['cart-total'], $address, $method);
                                 $order_id = $this->m_users->getOrderId('order_list');
                                 // echo "<pre>";
                                 // print_r($order_id['id_order']);
@@ -506,9 +516,17 @@ class C_website extends M_users
                                     $sold['sold'] += $value['qty'];
                                     $updateSold = $this->m_users->updateSth('sold', $sold['sold'], $value['id']);
                                 }
+                                // send notification
+                                $content = 'New order from' . $fullname;
+                                $permission = $this->getObject('user_permissions');
+                                foreach ($permission as $k => $v) {
+                                    if ($v['notifications'] == 1) {
+                                        $this->addNotifications($v['id_lv'], $content);
+                                    }
+                                }
                                 // send mail
                                 $sendTo = $email;
-                                mailOrder($sendTo, $_SESSION['cart'], $name, $email, $number, $address, $total);
+                                mailOrder($sendTo, $_SESSION['cart'], $fullname, $email, $number, $address, $total);
 
                                 // log
                                 $log = "Done!";
@@ -520,7 +538,7 @@ class C_website extends M_users
                         break;
 
                     default:
-                        header('location:index.php');
+                        include_once 'user/views/404.php';
                         break;
                 }
             }

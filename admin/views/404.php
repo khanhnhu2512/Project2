@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Dashboard</title>
-    <link rel="SHORTCUT ICON" href="../library/images/image-bg/LogoN-Black.png">
+    <title><?php echo $_SESSION['management_site']['title_website']; ?></title>
+    <link rel="SHORTCUT ICON" href="/library/images/image-bg/<?php echo $_SESSION['management_site']['logo_website']; ?>">
     <link rel="stylesheet" href="../public/css/admin/home.css">
     <link type="text/css" rel="stylesheet" href="../public/fontawesome-free-5.13.0-web/css/all.css">
     <link type="text/css" rel="stylesheet" href="../public/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
@@ -21,38 +21,9 @@
     <div class="container-fluid padding">
         <div class="header paddingLR">
             <div class="navbar-brand p-0 page_brand">
-                <img src="../library/images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
+            <img src="/library/images/image-bg/<?php echo $_SESSION['management_site']['logo_brand']; ?>" height="35" alt="" class="d-inline-block align-top"> <?php echo $_SESSION['management_site']['name_brand']; ?>
             </div>
             <div class="nav-right">
-                <div class="col-4 text-right mr-1 p-0">
-                    <button class="btn btn-dark border-0 notice-icon" onclick="collapseNotice()" type="button" id="dropdownNoti">
-                        <i class="fas fa-bell text-white fa-1x btn-cart"></i>
-                    </button>
-                    <div class="nav-notice">
-                        <?php $i = 0;
-                        if (isset($_SESSION['noti'])) {
-                            foreach ($_SESSION['noti'] as $key => $value) {
-                                $i++; ?>
-                                <div class=" dropdown-item">
-                                    <img class="cart-img" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="">
-                                    <div class="cartProduct">
-                                        <p class="cart-name"><?php echo $value['name']; ?></p>
-                                        <div class="cartProduct-price">
-                                            <p class="cart-price"><?php echo $value['price']; ?>$</p>
-                                            <p>x <span><?php echo $value['qty']; ?></span></p>
-                                        </div>
-                                    </div>
-                                    <a href="index.php?method=delete-cart&id=<?php echo $value['id']; ?>">
-                                        <i class="fas fa-times fa-1x"></i>
-                                    </a>
-                                </div>
-                                <div class="dropdown-divider"></div>
-                            <?php } ?>
-                            <p class="total">Total: <span><?php echo $total; ?>$</span></p>
-                        <?php } ?>
-
-                    </div>
-                </div>
                 <div class="">
                     <div class="dropdown profile">
                         <button class="btn btn-dark dropdown-toggle border-0" type="button" id="dropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

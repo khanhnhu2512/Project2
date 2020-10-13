@@ -9,8 +9,8 @@ if (!isset($_SESSION)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>My store</title>
-    <link rel="SHORTCUT ICON" href="./library/images/image-bg/LogoN-Black.png">
+    <title><?php echo $_SESSION['management_site']['title_website']; ?></title>
+    <link rel="SHORTCUT ICON" href="./library/images/image-bg/<?php echo $_SESSION['management_site']['logo_website']; ?>">
     <link type="text/css" rel="stylesheet" href="./public/fontawesome-free-5.13.0-web/css/all.css">
     <link type="text/css" rel="stylesheet" href="./public/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="./public/css/style.css">
@@ -47,7 +47,7 @@ if (!isset($_SESSION)) {
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top pad-l-6 pad-r-6">
         <div class="container-fluid p-0">
             <a href="" class="navbar-brand">
-                <img src="./library/images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
+            <img src="./library/images/image-bg/<?php echo $_SESSION['management_site']['logo_brand']; ?>" height="35" alt="" class="d-inline-block align-top"> <?php echo $_SESSION['management_site']['name_brand']; ?>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                 <span class="navbar-toggler-icon"></span>
@@ -60,16 +60,6 @@ if (!isset($_SESSION)) {
                     <li class="nav-item pr-5">
                         <a class="nav-link text-light" href="index.php?method=list-product">Product</a>
                     </li>
-                    <!-- <li class="nav-item dropdown pr-5">
-                        <a class="nav-link dropdown-toggle text-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Products</a>
-                        <div class="dropdown-menu">
-                            <a href="index.php?method=list-product&type=1" class="dropdown-item" href="#">iPhone</a>
-                            <a href="index.php?method=list-product&type=2" class="dropdown-item" href="#">iPad</a>
-                            <a href="index.php?method=list-product&type=3" class="dropdown-item" href="#">Macbook</a>
-                            <a href="index.php?method=list-product&type=4" class="dropdown-item" href="#">AirPods</a>
-                            <a href="index.php?method=list-product&type=0" class="dropdown-item" href="#">See all</a>
-                        </div>
-                    </li> -->
                     <li class="nav-item pr-5 ">
                         <a class="nav-link text-light" href="#">About Us</a>
                     </li>
@@ -150,18 +140,12 @@ if (!isset($_SESSION)) {
                     </div>
                     <p class="font-weight-bold">Technical specifications</p>
                     <tbody>
+                        <?php foreach($product_information as $k => $v){ ?>
                         <tr>
-                            <th scope="col">#</th>
-                            <td scope="col">First</th>
+                            <th scope="col"><?php echo $product_category_name[$v]; ?></th>
+                            <td scope="col"><?php echo $v; ?></th>
                         </tr>
-                        <tr>
-                            <th scope="col">#</th>
-                            <td scope="col">First</th>
-                        </tr>
-                        <tr>
-                            <th scope="col">#</th>
-                            <td scope="col">First</th>
-                        </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
                 <button type="button" onclick="redirectLogin()" class=" mt-3 btn btn-secondary btn-danger btn-lg btn-block" <?php if ($product['qty'] == 0) {
@@ -175,27 +159,19 @@ if (!isset($_SESSION)) {
             <div class="row text-center">
                 <div class="col-md-4">
                     <hr class="light">
-                    <p>111-222-3333</p>
-                    <p>mymail@gmail.com</p>
-                    <p>Bach Mai street, Hanoi, Vietnam</p>
+                    <p><?php echo $_SESSION['management_site']['footer_information_left']; ?></p>
                 </div>
                 <div class="col-md-4">
                     <hr class="light">
-                    <h5>Working hours</h5>
-                    <p>Monday-Friday: 8am - 5pm</p>
-                    <p>Weekend: 8am - 12am</p>
+                    <p><?php echo $_SESSION['management_site']['footer_information_center']; ?></p>
                 </div>
                 <div class="col-md-4">
                     <hr class="light">
-                    <h5>Services</h5>
-                    <p>Outsourcing</p>
-                    <p>Website development</p>
-                    <p>Mobile applications</p>
+                    <p><?php echo $_SESSION['management_site']['footer_information_right']; ?></p>
                 </div>
                 <div class="col-12 ">
                     <hr class="light-100">
-                    <p>Designed with all the love in the world by KhanhNhu2512.</p>
-                    <p>Copyright © 2020 KhanhNhu's N-BUY. All rights reserved.</p>
+                    <p><?php echo $_SESSION['management_site']['footer_information_bottom']; ?></p>
                 </div>
             </div>
         </div>

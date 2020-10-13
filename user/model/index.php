@@ -35,7 +35,7 @@
         }
         public function signup($username,$fullname,$email,$password){
             $this->conn();
-            $sql = "INSERT INTO user (username,fullname,email,password,lv,create_time) VALUES ('$username','$fullname','$email','$password',2,now());";
+            $sql = "INSERT INTO user (username,fullname,email,password,lv,create_time) VALUES ('$username','$fullname','$email','$password',100,now());";
             $query = mysqli_query($this->con,$sql);
             return $query;
         }
@@ -60,6 +60,18 @@
                 $result = $row;
             }
             return $result;
+        }
+        public function delete($table,$object,$id)
+        {
+            $this->conn();
+            $sql = "DELETE FROM $table WHERE $object = $id";
+			return mysqli_query($this->con, $sql);
+        }
+        public function addNotifications($lv,$content){
+            $this->conn();
+            $sql = "INSERT INTO notifications (content,lv,create_time) VALUES ('$content',$lv,now());";
+            $query = mysqli_query($this->con,$sql);
+            return $query;
         }
         public function updateSth($col,$value,$id)
         {
@@ -186,9 +198,9 @@
             return $result;
         }
         
-        public function addOrderList($table,$username,$total_price,$address,$payment_method){
+        public function addOrderList($table,$username,$fullname,$email,$number,$total_price,$address,$payment_method){
             $this->conn();
-            $sql = "INSERT INTO $table (username,status,total_price,address,payment_method,create_time) VALUES ('$username',0,$total_price,'$address',$payment_method,NOW());";
+            $sql = "INSERT INTO $table (username,fullname,email,phone_number,status,total_price,address,payment_method,create_time) VALUES ('$username','$fullname','$email','$number',0,$total_price,'$address',$payment_method,NOW());";
             $query = mysqli_query($this->con,$sql);
             return $query;
         }

@@ -11,8 +11,8 @@ if (!isset($_SESSION)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>My store</title>
-    <link rel="SHORTCUT ICON" href="./library/images/image-bg/LogoN-Black.png">
+    <title><?php echo $_SESSION['management_site']['title_website']; ?></title>
+    <link rel="SHORTCUT ICON" href="./library/images/image-bg/<?php echo $_SESSION['management_site']['logo_website']; ?>">
     <link type="text/css" rel="stylesheet" href="./public/fontawesome-free-5.13.0-web/css/all.css">
     <link rel="stylesheet" href="./public/css/user/home.css">
     <link type="text/css" rel="stylesheet" href="./public/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
@@ -54,7 +54,7 @@ if (!isset($_SESSION)) {
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top pad-l-6 pad-r-3">
         <div class="container-fluid p-0">
             <a href="" class="navbar-brand">
-                <img src="./library/images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
+                <img src="./library/images/image-bg/<?php echo $_SESSION['management_site']['logo_brand']; ?>" height="35" alt="" class="d-inline-block align-top"> <?php echo $_SESSION['management_site']['name_brand']; ?>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                 <span class="navbar-toggler-icon"></span>
@@ -87,6 +87,30 @@ if (!isset($_SESSION)) {
                     <input type="hidden" name="method" value="search">
                 </div>
             </form>
+            <!--  -->
+            <div class="col-1 text-right mr-1 p-0">
+                <button class="btn btn-dark border-0 notice-icon" onclick="collapseNotice()" type="button" id="dropdownNoti">
+                    <i class="fas fa-bell text-white fa-2x btn-cart"></i>
+                </button>
+                <div class="nav-notice">
+                    <?php $i = 0;
+                    if (isset($_SESSION['noti'])) {
+                        foreach ($_SESSION['noti'] as $key => $value) {
+                    ?>
+                            <div class="m-0 dropdown-divider"></div>
+                            <div class="row m-0 text-left align-content-center p-0">
+                                <div class="text-dark col-10">
+                                    <p class="cart-name mt-2 mb-2 "><?php echo $value['content']; ?></p>
+                                </div>
+                                <a class="col p-0 m-0 flex-center text-decoration-none" href="index.php?method=delete-notification&methodB=<?php echo $method; ?>&id=<?php echo $value['id']; ?>">
+                                    <i class="fas fa-times fa-1x"></i>
+                                </a>
+                            </div>
+                            <div class="m-0 dropdown-divider"></div>
+                        <?php } ?>
+                    <?php } ?>
+                </div>
+            </div>
             <!-- cart -->
             <div class=" dropdown cart mr-1">
                 <!-- <i class="fas fa-shopping-cart text-white fa-2x btn-cart"></i> -->
@@ -270,7 +294,7 @@ if (!isset($_SESSION)) {
                                         <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
                                         <div class="card-title">
                                             <a class="card-link" href="index.php?method=add-cart&id=<?php echo $value['id']; ?>"">
-                                                <i class="fa fa-cart-plus fa-2x"></i>
+                                                <i class=" fa fa-cart-plus fa-2x"></i>
                                             </a>
                                         </div>
                                         <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id']; ?>">Learn more ></a>
@@ -305,27 +329,19 @@ if (!isset($_SESSION)) {
             <div class="row text-center">
                 <div class="col-md-4">
                     <hr class="light">
-                    <p>111-222-3333</p>
-                    <p>mymail@gmail.com</p>
-                    <p>Bach Mai street, Hanoi, Vietnam</p>
+                    <p><?php echo $_SESSION['management_site']['footer_information_left']; ?></p>
                 </div>
                 <div class="col-md-4">
                     <hr class="light">
-                    <h5>Working hours</h5>
-                    <p>Monday-Friday: 8am - 5pm</p>
-                    <p>Weekend: 8am - 12am</p>
+                    <p><?php echo $_SESSION['management_site']['footer_information_center']; ?></p>
                 </div>
                 <div class="col-md-4">
                     <hr class="light">
-                    <h5>Services</h5>
-                    <p>Outsourcing</p>
-                    <p>Website development</p>
-                    <p>Mobile applications</p>
+                    <p><?php echo $_SESSION['management_site']['footer_information_right']; ?></p>
                 </div>
                 <div class="col-12 ">
                     <hr class="light-100">
-                    <p>Designed with all the love in the world by KhanhNhu2512.</p>
-                    <p>Copyright © 2020 KhanhNhu's N-BUY. All rights reserved.</p>
+                    <p><?php echo $_SESSION['management_site']['footer_information_bottom']; ?></p>
                 </div>
             </div>
         </div>

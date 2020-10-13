@@ -3,7 +3,7 @@
     if(!isset($_SESSION)){
         session_start();
     }
-    if ($_SESSION['lv'] == 1) {
+    if ($_SESSION['lv'] != 100) {
         include_once '../admin/controllers/index.php';
         $website = new C_website();
         $website->control();

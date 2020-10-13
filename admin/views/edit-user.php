@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Dashboard</title>
-    <link rel="SHORTCUT ICON" href="../library/images/image-bg/LogoN-Black.png">
+    <title><?php echo $_SESSION['management_site']['title_website']; ?></title>
+    <link rel="SHORTCUT ICON" href="/library/images/image-bg/<?php echo $_SESSION['management_site']['logo_website']; ?>">
     <link type="text/css" rel="stylesheet" href="../public  /fontawesome-free-5.13.0-web/css/all.css">
     <link rel="stylesheet" href="../public/css/admin/edit-user.css">
     <link type="text/css" rel="stylesheet" href="../public/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
@@ -15,64 +15,14 @@
 
 <body>
     <div class="container-fluid p-0">
-        <div class="header paddingLR">
-            <div class="navbar-brand">
-                <img src="../library/images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
-            </div>
-            <div class="dropdown profile">
-                <button class="btn btn-dark dropdown-toggle border-0" type="button" id="dropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <?php echo isset($_SESSION['user']) ? $_SESSION['user']['fullname'] : ""; ?>
-                </button>
-                <div class="dropdown-menu btn-dark w-100 text-light" aria-labelledby="dropdownProfile">
-                    <div class="dropdown-item">
-                        <i class="fa fa-user-circle" aria-hidden="true"></i>
-                        <a class="link" href="#">Account</a>
-                    </div>
-                    <div class="dropdown-divider"></div>
-                    <div class="dropdown-item">
-                        <i class="fa fa-cog" aria-hidden="true"></i>
-                        <a class="link" href="#">Setting</a>
-                    </div>
-                    <div class="dropdown-divider"></div>
-                    <div class="dropdown-item">
-                        <i class="fa fa-sign-out-alt" aria-hidden="true"></i>
-                        <a class="link" href="index.php?method=signout">Sign out</a>
-                    </div>
-                </div>
-            </div>
+
+    </div>
+    <div class="header paddingLR">
+        <div class="navbar-brand p-0 page_brand">
+        <img src="/library/images/image-bg/<?php echo $_SESSION['management_site']['logo_brand']; ?>" height="35" alt="" class="d-inline-block align-top"> <?php echo $_SESSION['management_site']['name_brand']; ?>
         </div>
-        <div class="body">
-            <div class="menu">
-                <ul>
-                    <li>
-                        <a href="index.php?method=home">Dashboard</a>
-                    </li>
-                    <li style="background-color: #484848;">
-                        <a data-toggle="collapse" href="#products" role="button" aria-expanded="false" aria-controls="products">Products</a>
-                    </li>
-                    <ul class="collapse" id="products">
-                        <li>
-                            <a href="index.php?method=list-product&type=1">iPhone</a>
-                        </li>
-                        <li>
-                            <a href="index.php?method=list-product&type=2">iPad</a>
-                        </li>
-                        <li>
-                            <a href="index.php?method=list-product&type=3">Macbook</a>
-                        </li>
-                        <li>
-                            <a href="index.php?method=list-product&type=4">Airpods</a>
-                        </li>
-                    </ul>
-                    <li><a href="index.php?method=list-order">Order</a></li>
-                    <li><a href="index.php?method=list-user">Users</a></li>
-                </ul>
-            </div><div class="header paddingLR">
-            <div class="navbar-brand p-0 page_brand">
-                <img src="../library/images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
-            </div>
-            <div class="nav-right">
-                <div class="col-4 text-right mr-1 p-0">
+        <div class="nav-right">
+        <div class="col-4 text-right mr-1 p-0">
                     <button class="btn btn-dark border-0 notice-icon" onclick="collapseNotice()" type="button" id="dropdownNoti">
                         <i class="fas fa-bell text-white fa-1x btn-cart"></i>
                     </button>
@@ -80,134 +30,144 @@
                         <?php $i = 0;
                         if (isset($_SESSION['noti'])) {
                             foreach ($_SESSION['noti'] as $key => $value) {
-                                $i++; ?>
-                                <div class=" dropdown-item">
-                                    <img class="cart-img" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="">
-                                    <div class="cartProduct">
-                                        <p class="cart-name"><?php echo $value['name']; ?></p>
-                                        <div class="cartProduct-price">
-                                            <p class="cart-price"><?php echo $value['price']; ?>$</p>
-                                            <p>x <span><?php echo $value['qty']; ?></span></p>
-                                        </div>
+                                ?>
+                                <div class="m-0 dropdown-divider"></div>
+                                <div class="row m-0 text-left align-content-center p-0">
+                                    <div class="text-dark col-10">
+                                        <p class="cart-name mt-2 mb-2 "><?php echo $value['content']; ?></p>
                                     </div>
-                                    <a href="index.php?method=delete-cart&id=<?php echo $value['id']; ?>">
+                                    <a class="col p-0 m-0 flex-center text-decoration-none" href="index.php?method=delete-notification&methodB=<?php echo $method; ?>&id=<?php echo $value['id']; ?>">
                                         <i class="fas fa-times fa-1x"></i>
                                     </a>
                                 </div>
-                                <div class="dropdown-divider"></div>
+                                <div class="m-0 dropdown-divider"></div>
                             <?php } ?>
-                            <p class="total">Total: <span><?php echo $total; ?>$</span></p>
                         <?php } ?>
-
                     </div>
                 </div>
-                <div class="">
-                    <div class="dropdown profile">
-                        <button class="btn btn-dark dropdown-toggle border-0" type="button" id="dropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <?php echo isset($_SESSION['user']) ? $_SESSION['user']['fullname'] : ""; ?>
-                        </button>
-                        <div class="dropdown-menu btn-dark w-100 text-light" aria-labelledby="dropdownProfile">
-                            <div class="dropdown-item">
-                                <i class="fa fa-user-circle" aria-hidden="true"></i>
-                                <a class="link" href="#">Account</a>
-                            </div>
-                            <div class="dropdown-divider"></div>
-                            <div class="dropdown-item">
-                                <i class="fa fa-sign-out-alt" aria-hidden="true"></i>
-                                <a class="link" href="index.php?method=signout">Sign out</a>
-                            </div>
+            <div class="">
+                <div class="dropdown profile">
+                    <button class="btn btn-dark dropdown-toggle border-0" type="button" id="dropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <?php echo isset($_SESSION['user']) ? $_SESSION['user']['fullname'] : ""; ?>
+                    </button>
+                    <div class="dropdown-menu btn-dark w-100 text-light" aria-labelledby="dropdownProfile">
+                        <div class="dropdown-item">
+                            <i class="fa fa-user-circle" aria-hidden="true"></i>
+                            <a class="link" href="#">Account</a>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item">
+                            <i class="fa fa-sign-out-alt" aria-hidden="true"></i>
+                            <a class="link" href="index.php?method=signout">Sign out</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row col">
-            <div class="menu col-2 p-0 h-auto">
+    </div>
+    <div class="row col">
+    <div class="menu col-2 p-0 h-auto">
                 <ul>
-                    <li>
-                        <a onclick="collapse(0)" class='menu-item product'><i class="text-white w-15 text-center fas fa-tachometer-alt"></i> Dashboard</a>
-                        <ul class="child-menu">
-                            <li class='child-menu-item'>
-                                <a href="index.php?method=home">> Analytics</a>
-                            </li>
+                    <?php $i=0; if ($_SESSION['permission']['dashboard'] == 1) { ?>
+                        <li>
+                            <a onclick="collapse(<?php echo $i; $i++ ?>)" class='menu-item product'><i class="text-white w-15 text-center fas fa-tachometer-alt"></i> Dashboard</a>
+                            <ul class="child-menu">
+                                <li class='child-menu-item'>
+                                    <a href="index.php?method=home">> Analytics</a>
+                                </li>
 
-                        </ul>
-                    </li>
-                    <li>
-                        <a onclick="collapse(1)" class='menu-item product'><i class="text-white w-15 text-center fas fa-box-open"></i> Catalogs</a>
-                        <ul class="child-menu">
-                            <li class='child-menu-item'>
-                                <a href="index.php?method=list-product">> List Products</a>
-                            </li>
-                            <li class='child-menu-item'>
-                                <a href="index.php?method=category">> Category</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a onclick="collapse(2)" class='menu-item product'><i class=" text-white w-15 text-center fas fa-dollar-sign"></i> Sales</a>
-                        <ul class="child-menu">
-                            <li class='child-menu-item'>
-                                <a href="index.php?method=list-order">> Order</a>
-                            </li>
-
-                        </ul>
-                    </li>
-                    <li>
-                        <a onclick="collapse(3)" class='menu-item product'><i class=" text-white w-15 text-center fas fa-male"></i> Customers</a>
-                        <ul class="child-menu">
-                            <li class='child-menu-item'>
-                                <a href="index.php?method=list-user">> Users</a>
-                            </li>
-                            <li class='child-menu-item'>
-                                <a href="index.php?method=role">> Permissions</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a onclick="collapse(4)" class='menu-item product'><i class="w-15 text-center text-white fas fa-pager"></i> Content</a>
-                        <ul class="child-menu">
-                            <li class='child-menu-item'>
-                                <a href="index.php?method=notification">> Notification</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a onclick="collapse(5)" class='menu-item product'><i class="w-15 text-center text-white fas fa-sliders-h"></i> Website management</a>
-                        <ul class="child-menu">
-                            <li class='child-menu-item'>
-                                <a href="index.php?method=custom">> Settings</a>
-                            </li>
-                        </ul>
-                    </li>
+                            </ul>
+                        </li>
+                    <?php } ?>
+                    <?php if ($_SESSION['permission']['product_see'] == 1) { ?>
+                        <li>
+                            <a onclick="collapse(<?php echo $i; $i++ ?>)" class='menu-item product'><i class="text-white w-15 text-center fas fa-box-open"></i> Catalogs</a>
+                            <ul class="child-menu">
+                                <li class='child-menu-item'>
+                                    <a href="index.php?method=list-product">> List Products</a>
+                                </li>
+                                <li class='child-menu-item'>
+                                    <a href="index.php?method=category">> Category</a>
+                                </li>
+                            </ul>
+                        </li>
+                    <?php } ?>
+                    <?php if ($_SESSION['permission']['order_see'] == 1) { ?>
+                        <li>
+                            <a onclick="collapse(<?php echo $i; $i++ ?>)" class='menu-item product'><i class=" text-white w-15 text-center fas fa-dollar-sign"></i> Sales</a>
+                            <ul class="child-menu">
+                                <li class='child-menu-item'>
+                                    <a href="index.php?method=list-order">> Order</a>
+                                </li>
+                            </ul>
+                        </li>
+                    <?php } ?>
+                    <?php if (($_SESSION['permission']['user_see'] == 1) && ($_SESSION['permission']['permission'] == 1)) { ?>
+                        <li>
+                            <a onclick="collapse(<?php echo $i; $i++ ?>)" class='menu-item product'><i class=" text-white w-15 text-center fas fa-male"></i> Customers</a>
+                            <ul class="child-menu">
+                                <?php if ($_SESSION['permission']['user_see'] == 1) { ?>
+                                    <li class='child-menu-item'>
+                                        <a href="index.php?method=list-user">> Users</a>
+                                    </li>
+                                <?php } ?>
+                                <?php if ($_SESSION['permission']['permission'] == 1) { ?>
+                                    <li class='child-menu-item'>
+                                        <a href="index.php?method=role">> Permissions</a>
+                                    </li>
+                                <?php } ?>
+                            </ul>
+                        </li>
+                    <?php } ?>
+                    <?php if ($_SESSION['permission']['notifications'] == 1) { ?>
+                        <li>
+                            <a onclick="collapse(<?php echo $i; $i++ ?>)" class='menu-item product'><i class="w-15 text-center text-white fas fa-pager"></i> Content</a>
+                            <ul class="child-menu">
+                                <li class='child-menu-item'>
+                                    <a href="index.php?method=notification">> Notification</a>
+                                </li>
+                            </ul>
+                        </li>
+                    <?php } ?>
+                    <?php if ($_SESSION['permission']['management'] == 1) { ?>
+                        <li>
+                            <a onclick="collapse(<?php echo $i; $i++ ?>)" class='menu-item product'><i class="w-15 text-center text-white fas fa-sliders-h"></i> Website management</a>
+                            <ul class="child-menu">
+                                <li class='child-menu-item'>
+                                    <a href="index.php?method=custom">> Settings</a>
+                                </li>
+                            </ul>
+                        </li>
+                    <?php } ?>
                 </ul>
             </div>
-            <div class="col-10" style="height: 93vh;">
+        <div class="col-10" style="height: 93vh;">
             <div class="display">
-                <h3 class="col">Edit Product</h3>
+                <h3 class="col">Edit User</h3>
                 <form method="post" enctype="multipart/form-data">
                     <div class="form-group col">
                         <label for="fullname" class="col-form-label">Full Name</label>
-                        <input class="form-control" type="text" id="fullname" name="fullname" value="<?php echo (isset($_POST['update'])) ? $_POST['fullname'] : $user['0']['fullname']; ?>">
+                        <input class="form-control" type="text" id="fullname" name="fullname" value="<?php echo  $user['fullname']; ?>" disabled>
                     </div>
 
                     <div class="form-group col">
                         <label for="username" class="col-form-label">Username</label>
-                        <input class="form-control" type="text" id="username" name="username" value="<?php echo (isset($_POST['update'])) ? $_POST['username'] : $user['0']['username']; ?>">
+                        <input class="form-control" type="text" id="username" name="username" value="<?php echo  $user['username']; ?>" disabled>
                     </div>
                     <div class="form-group col">
                         <label for="email" class="col-form-label">Email</label>
-                        <input class="form-control" type="email" id="email" name="email" value="<?php echo (isset($_POST['update'])) ? $_POST['email'] : $user['0']['email']; ?>">
+                        <input class="form-control" type="email" id="email" name="email" value="<?php echo  $user['email']; ?>" disabled>
                     </div>
                     <div class="form-group col">
-                    <label for="lv">Permission</label>
+                        <label for="lv">Permission</label>
                         <select name="lv">
-                            <option value=1>Admin</option>
-                            <option value=2 <?php if (isset($_POST['update'])) {
-                                                echo ($_POST['lv'] == 2) ? 'selected' : '';
-                                            } else {
-                                                echo ($user['0']['lv'] == 2) ? 'selected' : '';
-                                            }  ?>>User</option>
+                            <?php foreach ($role as $k => $v) { ?>
+                                <option value="<?php echo $v['id_lv']; ?>" <?php if (isset($_POST['update'])) {
+                                                                                echo ($_POST['lv'] == $v['id_lv']) ? 'selected' : '';
+                                                                            } else {
+                                                                                echo ($user['lv'] == $v['id_lv']) ? 'selected' : '';
+                                                                            }  ?>><?php echo $v['name']; ?></option>
+                            <?php } ?>
                         </select>
                     </div>
 
@@ -221,7 +181,9 @@
         </div>
     </div>
     </div>
-
+    <?php if (isset($log)) {
+        echo $log;
+    } ?>
     <script>
         var isProductOpened = false;
 

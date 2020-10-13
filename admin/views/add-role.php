@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Dashboard</title>
-    <link rel="SHORTCUT ICON" href="../library/images/image-bg/LogoN-Black.png">
+    <title><?php echo $_SESSION['management_site']['title_website']; ?></title>
+    <link rel="SHORTCUT ICON" href="/library/images/image-bg/<?php echo $_SESSION['management_site']['logo_website']; ?>">
     <link rel="stylesheet" href="../public/css/admin/home.css">
     <link type="text/css" rel="stylesheet" href="../public/fontawesome-free-5.13.0-web/css/all.css">
     <link type="text/css" rel="stylesheet" href="../public/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
@@ -19,9 +19,9 @@
 
 <body>
     <div class="container-fluid padding">
-    <div class="header paddingLR">
+        <div class="header paddingLR">
             <div class="navbar-brand p-0 page_brand">
-                <img src="../library/images/image-bg/LogoN-White.png" height="35" alt="" class="d-inline-block align-top"> My store
+            <img src="/library/images/image-bg/<?php echo $_SESSION['management_site']['logo_brand']; ?>" height="35" alt="" class="d-inline-block align-top"> <?php echo $_SESSION['management_site']['name_brand']; ?>
             </div>
             <div class="nav-right">
                 <div class="col-4 text-right mr-1 p-0">
@@ -32,25 +32,19 @@
                         <?php $i = 0;
                         if (isset($_SESSION['noti'])) {
                             foreach ($_SESSION['noti'] as $key => $value) {
-                                $i++; ?>
-                                <div class=" dropdown-item">
-                                    <img class="cart-img" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="">
-                                    <div class="cartProduct">
-                                        <p class="cart-name"><?php echo $value['name']; ?></p>
-                                        <div class="cartProduct-price">
-                                            <p class="cart-price"><?php echo $value['price']; ?>$</p>
-                                            <p>x <span><?php echo $value['qty']; ?></span></p>
-                                        </div>
+                        ?>
+                                <div class="m-0 dropdown-divider"></div>
+                                <div class="row m-0 text-left align-content-center p-0">
+                                    <div class="text-dark col-10">
+                                        <p class="cart-name mt-2 mb-2 "><?php echo $value['content']; ?></p>
                                     </div>
-                                    <a href="index.php?method=delete-cart&id=<?php echo $value['id']; ?>">
+                                    <a class="col p-0 m-0 flex-center text-decoration-none" href="index.php?method=delete-notification&methodB=<?php echo $method; ?>&id=<?php echo $value['id']; ?>">
                                         <i class="fas fa-times fa-1x"></i>
                                     </a>
                                 </div>
-                                <div class="dropdown-divider"></div>
+                                <div class="m-0 dropdown-divider"></div>
                             <?php } ?>
-                            <p class="total">Total: <span><?php echo $total; ?>$</span></p>
                         <?php } ?>
-
                     </div>
                 </div>
                 <div class="">
@@ -74,64 +68,79 @@
             </div>
         </div>
         <div class="row col">
-            <div class="menu col-2 p-0 h-auto">
+        <div class="menu col-2 p-0 h-auto">
                 <ul>
-                    <li>
-                        <a onclick="collapse(0)" class='menu-item product'><i class="text-white w-15 text-center fas fa-tachometer-alt"></i> Dashboard</a>
-                        <ul class="child-menu">
-                            <li class='child-menu-item'>
-                                <a href="index.php?method=home">> Analytics</a>
-                            </li>
+                    <?php $i=0; if ($_SESSION['permission']['dashboard'] == 1) { ?>
+                        <li>
+                            <a onclick="collapse(<?php echo $i; $i++ ?>)" class='menu-item product'><i class="text-white w-15 text-center fas fa-tachometer-alt"></i> Dashboard</a>
+                            <ul class="child-menu">
+                                <li class='child-menu-item'>
+                                    <a href="index.php?method=home">> Analytics</a>
+                                </li>
 
-                        </ul>
-                    </li>
-                    <li>
-                        <a onclick="collapse(1)" class='menu-item product'><i class="text-white w-15 text-center fas fa-box-open"></i> Catalogs</a>
-                        <ul class="child-menu">
-                            <li class='child-menu-item'>
-                                <a href="index.php?method=list-product">> List Products</a>
-                            </li>
-                            <li class='child-menu-item'>
-                                <a href="index.php?method=category">> Category</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a onclick="collapse(2)" class='menu-item product'><i class=" text-white w-15 text-center fas fa-dollar-sign"></i> Sales</a>
-                        <ul class="child-menu">
-                            <li class='child-menu-item'>
-                                <a href="index.php?method=list-order">> Order</a>
-                            </li>
-
-                        </ul>
-                    </li>
-                    <li>
-                        <a onclick="collapse(3)" class='menu-item product'><i class=" text-white w-15 text-center fas fa-male"></i> Customers</a>
-                        <ul class="child-menu">
-                            <li class='child-menu-item'>
-                                <a href="index.php?method=list-user">> Users</a>
-                            </li>
-                            <li class='child-menu-item'>
-                                <a href="index.php?method=role">> Permissions</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a onclick="collapse(4)" class='menu-item product'><i class="w-15 text-center text-white fas fa-pager"></i> Content</a>
-                        <ul class="child-menu">
-                            <li class='child-menu-item'>
-                                <a href="index.php?method=notification">> Notification</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a onclick="collapse(5)" class='menu-item product'><i class="w-15 text-center text-white fas fa-sliders-h"></i> Website management</a>
-                        <ul class="child-menu">
-                            <li class='child-menu-item'>
-                                <a href="index.php?method=custom">> Settings</a>
-                            </li>
-                        </ul>
-                    </li>
+                            </ul>
+                        </li>
+                    <?php } ?>
+                    <?php if ($_SESSION['permission']['product_see'] == 1) { ?>
+                        <li>
+                            <a onclick="collapse(<?php echo $i; $i++ ?>)" class='menu-item product'><i class="text-white w-15 text-center fas fa-box-open"></i> Catalogs</a>
+                            <ul class="child-menu">
+                                <li class='child-menu-item'>
+                                    <a href="index.php?method=list-product">> List Products</a>
+                                </li>
+                                <li class='child-menu-item'>
+                                    <a href="index.php?method=category">> Category</a>
+                                </li>
+                            </ul>
+                        </li>
+                    <?php } ?>
+                    <?php if ($_SESSION['permission']['order_see'] == 1) { ?>
+                        <li>
+                            <a onclick="collapse(<?php echo $i; $i++ ?>)" class='menu-item product'><i class=" text-white w-15 text-center fas fa-dollar-sign"></i> Sales</a>
+                            <ul class="child-menu">
+                                <li class='child-menu-item'>
+                                    <a href="index.php?method=list-order">> Order</a>
+                                </li>
+                            </ul>
+                        </li>
+                    <?php } ?>
+                    <?php if (($_SESSION['permission']['user_see'] == 1) && ($_SESSION['permission']['permission'] == 1)) { ?>
+                        <li>
+                            <a onclick="collapse(<?php echo $i; $i++ ?>)" class='menu-item product'><i class=" text-white w-15 text-center fas fa-male"></i> Customers</a>
+                            <ul class="child-menu">
+                                <?php if ($_SESSION['permission']['user_see'] == 1) { ?>
+                                    <li class='child-menu-item'>
+                                        <a href="index.php?method=list-user">> Users</a>
+                                    </li>
+                                <?php } ?>
+                                <?php if ($_SESSION['permission']['permission'] == 1) { ?>
+                                    <li class='child-menu-item'>
+                                        <a href="index.php?method=role">> Permissions</a>
+                                    </li>
+                                <?php } ?>
+                            </ul>
+                        </li>
+                    <?php } ?>
+                    <?php if ($_SESSION['permission']['notifications'] == 1) { ?>
+                        <li>
+                            <a onclick="collapse(<?php echo $i; $i++ ?>)" class='menu-item product'><i class="w-15 text-center text-white fas fa-pager"></i> Content</a>
+                            <ul class="child-menu">
+                                <li class='child-menu-item'>
+                                    <a href="index.php?method=notification">> Notification</a>
+                                </li>
+                            </ul>
+                        </li>
+                    <?php } ?>
+                    <?php if ($_SESSION['permission']['management'] == 1) { ?>
+                        <li>
+                            <a onclick="collapse(<?php echo $i; $i++ ?>)" class='menu-item product'><i class="w-15 text-center text-white fas fa-sliders-h"></i> Website management</a>
+                            <ul class="child-menu">
+                                <li class='child-menu-item'>
+                                    <a href="index.php?method=custom">> Settings</a>
+                                </li>
+                            </ul>
+                        </li>
+                    <?php } ?>
                 </ul>
             </div>
             <div class="col-10" style=>
@@ -139,7 +148,7 @@
                 <form method="post" enctype="multipart/form-data">
                     <div class="form-group col">
                         <label for="name" class="col-form-label">Role's Name</label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Name..." value="<?php echo (isset($_POST['submit'])) ? $_POST['name'] : ""; ?>">
+                        <input type="text" id="name" name="name" class="form-control col-5" placeholder="Name..." value="<?php echo (isset($_POST['submit'])) ? $_POST['name'] : ""; ?>" required>
                     </div>
                     <legend class="col">Permission</legend>
                     <div class="form-group col">
@@ -151,29 +160,29 @@
                     </div>
                     <div class="form-group col">
                         <p class="font-weight-bold mb-0">Product </p>
-                        <input type="checkbox" id="product-1" name="product-see" value="1">
+                        <input type="checkbox" id="product-1" name="product_see" value="1">
                         <label for="product-1" class="col-form-label">See</label><br>
-                        <input type="checkbox" id="product-2" name="product-add" value="1">
+                        <input type="checkbox" id="product-2" name="product_add" value="1">
                         <label for="product-2" class="col-form-label">Add</label><br>
-                        <input type="checkbox" id="product-3" name="product-edit" value="1">
+                        <input type="checkbox" id="product-3" name="product_edit" value="1">
                         <label for="product-3" class="col-form-label">Edit</label><br>
-                        <input type="checkbox" id="product-4" name="product-delete" value="1">
+                        <input type="checkbox" id="product-4" name="product_delete" value="1">
                         <label for="product-4" class="col-form-label">Delete</label><br>
                     </div>
                     <div class="form-group col">
                         <p class="font-weight-bold mb-0">Order </p>
-                        <input type="checkbox" id="order-1" name="order-see" value="1">
+                        <input type="checkbox" id="order-1" name="order_see" value="1">
                         <label for="order-1" class="col-form-label">See</label><br>
-                        <input type="checkbox" id="order-2" name="order-confirm" value="1">
+                        <input type="checkbox" id="order-2" name="order_confirm" value="1">
                         <label for="order-2" class="col-form-label">Confirm</label><br>
-                        <input type="checkbox" id="order-3" name="order-delete" value="1">
+                        <input type="checkbox" id="order-3" name="order_delete" value="1">
                         <label for="order-3" class="col-form-label">Delete</label><br>
                     </div>
                     <div class="form-group col">
                         <p class="font-weight-bold mb-0">User </p>
-                        <input type="checkbox" id="user-1" name="user-see" value="1">
+                        <input type="checkbox" id="user-1" name="user_see" value="1">
                         <label for="user-1" class="col-form-label">See</label><br>
-                        <input type="checkbox" id="user-2" name="user-confirm" value="1">
+                        <input type="checkbox" id="user-2" name="user_confirm" value="1">
                         <label for="user-2" class="col-form-label">Edit</label><br>
                     </div>
                     <div class="form-group col">
@@ -184,17 +193,17 @@
                         <label for="permission-0" class="col-form-label">Dont Allow</label>
                     </div>
                     <div class="form-group col">
-                        <p class="font-weight-bold mb-0">Notigication </p>
-                        <input type="radio" id="notigication-1" name="notigication" value="1">
+                        <p class="font-weight-bold mb-0">Notification </p>
+                        <input type="radio" id="notigication-1" name="notifications" value="1">
                         <label for="notigication-1" class="col-form-label">Allow</label><br>
-                        <input type="radio" id="notigication-0" name="notigication" value="0">
+                        <input type="radio" id="notigication-0" name="notification" value="0">
                         <label for="notigication-0" class="col-form-label">Dont Allow</label>
                     </div>
                     <div class="form-group col">
-                        <p class="font-weight-bold mb-0">Custom </p>
-                        <input type="radio" id="custom-1" name="custom" value="1">
+                        <p class="font-weight-bold mb-0">Management site </p>
+                        <input type="radio" id="custom-1" name="management" value="1">
                         <label for="custom-1" class="col-form-label">Allow</label><br>
-                        <input type="radio" id="custom-0" name="custom" value="0">
+                        <input type="radio" id="custom-0" name="management" value="0">
                         <label for="custom-0" class="col-form-label">Dont Allow</label>
                     </div>
                     <div class="btn w-100">
