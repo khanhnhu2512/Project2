@@ -1,5 +1,4 @@
 <?php
-    // require_once 'libs/connect-db.php';
     include_once ('public/connect-db.php');
     class M_users extends connect_db
     {

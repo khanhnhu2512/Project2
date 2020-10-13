@@ -5,12 +5,39 @@ include "PHPMailer/src/Exception.php";
 include "PHPMailer/src/OAuth.php";
 include "PHPMailer/src/POP3.php";
 include "PHPMailer/src/SMTP.php";
+include_once('../public/connect-db.php'); //goi connect_db
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+class getMail extends connect_db
+{
+    function conn()
+    {
+        parent::__construct();
+        // if(isset($this->con))
+    }
+    public function getInfo(){
+        $this->conn();
+        // print_r($this->con);
+        $sql = "SELECT * FROM site_mail";
+        $query = mysqli_query($this->con,$sql);
+        $result = array();
+        if (mysqli_num_rows($query) > 0) {
+            $row = mysqli_fetch_assoc($query);
+            $result = $row;
+        }
+        return $result;
+    }
+}
+
 function sendmail($sendTo, $mailTitle, $mailBody)
 {
+    $getMail = new getMail();
+    $Mail_data = $getMail->getInfo();
+    $Mail_username = $Mail_data['username'];
+    $Mail_password = $Mail_data['password'];
+    
     $mail = new PHPMailer(true); // Passing `true` enables exceptions
     // try {
     //Server settings
@@ -18,8 +45,8 @@ function sendmail($sendTo, $mailTitle, $mailBody)
     $mail->isSMTP(); // Set mailer to use SMTP
     $mail->Host = 'smtp.gmail.com'; // Specify main and backup SMTP servers
     $mail->SMTPAuth = true; // Enable SMTP authentication
-    $mail->Username = '[your mail]'; // SMTP username
-    $mail->Password = '[password]'; // SMTP password
+    $mail->Username = $Mail_username; // SMTP username
+    $mail->Password = $Mail_password; // SMTP password
     $mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 587; // TCP port lớn connect to
     //Recipients
@@ -42,8 +69,8 @@ function sendmail($sendTo, $mailTitle, $mailBody)
     // }
     // }
 }
-function mailOrder($sendTo, $cart, $name, $email, $number, $address,$total)
-{   
+function mailOrder($sendTo, $cart, $name, $email, $number, $address, $total)
+{
     $mailTitle = "Order Confirmation";
     $mailBody = "<div style='border: 0px solid; font-size: 1rem; width: 50%; margin: auto;'>";
     $mailBody .=  "<h2 style='color: #000; text-align: center;margin: 0px; font-size: 1.5rem; border-bottom: 1px solid #000;'>Order Confirmation</h2> <br>";
@@ -100,8 +127,8 @@ function mailOrder($sendTo, $cart, $name, $email, $number, $address,$total)
     $mailBody .= "</div>";
     sendmail($sendTo, $mailTitle, $mailBody);
 }
-function mailResetpass($sendTo,$code)
-{   
+function mailResetpass($sendTo, $code)
+{
     $mailTitle = "Reset Password";
     $mailBody = "<div style='border: 0px solid; font-size: 1rem; width: 50%; margin: auto;'>";
     $mailBody .=  "<h2 style='color: #000; text-align: center;margin: 0px; font-size: 1.5rem; border-bottom: 1px solid #000;'>Order Confirmation</h2> <br>";
@@ -112,7 +139,8 @@ function mailResetpass($sendTo,$code)
     $mailBody .= "</div>";
     sendmail($sendTo, $mailTitle, $mailBody);
 }
-function test(){
+function test()
+{
     echo "ok";
 }
 // $mailBody =  "<table border='1px' width='100%' cellpadding='0' cellspacing='0'>
