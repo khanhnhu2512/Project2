@@ -147,16 +147,14 @@ if (!isset($_SESSION)) {
                 <h1 class="display-4">New Products</h1>
                 <h3 class="m-2"><a href="index.php?method=list-product">See all Products></a></h3>
             </div>
-            <!-- Carousel product -->
+            <!-- Carousel product // cái data-interval này là chỉnh thời gian tự động chạy, tính bằng mili giây -->
             <div id="slides " class="carousel slide w-100" data-ride="carousel" data-interval="3000">
                 <div class="carousel-inner container-fluid">
                     <div class="carousel-item active">
                         <div class="container-fluid card-deck justify-content-between mt-2">
                             <?php $i = 1;
-                            foreach ($product['new'] as $key => $value) :
-
+                            foreach ($product as $key => $value) :
                             ?>
-
                                 <div class="card border-0">
                                     <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
                                         <img class="card-img-bottom h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
@@ -165,7 +163,7 @@ if (!isset($_SESSION)) {
                                         <h4 class="card-title"><?php echo $value['name']; ?></h4>
                                         <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
                                         <div class="card-title">
-                                            <a class="card-link" onclick="redirectLogin()">
+                                            <a class="card-link"">
                                                 <i class="fa fa-cart-plus fa-2x"></i>
                                             </a>
                                         </div>
@@ -180,11 +178,10 @@ if (!isset($_SESSION)) {
                                 }
                                 $i++;
                                 ?>
-
                             <?php endforeach; ?>
                         </div>
                     </div>
-
+                    <!-- 2 nút điều hướng, không nhất thiết phải ở cuối, bạn có thể chuyển đi chỗ bạn muốn và css lại -->
                     <a class="carousel-control-prev " href="#slides " role="button " data-slide="prev">
                         <span class="carousel-control-prev-icon " aria-hidden="true "></span>
                         <span class="sr-only ">Previous</span>
