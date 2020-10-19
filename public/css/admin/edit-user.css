@@ -96,7 +96,7 @@ body {
 }
 
 .menu ul li a {
-    font-size: 1rem !important;
+    font-size: 0.75rem !important;
     color: #fff;
     text-decoration: none;
     font-weight: bold;

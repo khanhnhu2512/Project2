@@ -5,7 +5,7 @@ include "PHPMailer/src/Exception.php";
 include "PHPMailer/src/OAuth.php";
 include "PHPMailer/src/POP3.php";
 include "PHPMailer/src/SMTP.php";
-include_once('../public/connect-db.php'); //goi connect_db
+include_once('./public/connect-db.php'); //goi connect_db
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -15,11 +15,9 @@ class getMail extends connect_db
     function conn()
     {
         parent::__construct();
-        // if(isset($this->con))
     }
     public function getInfo(){
         $this->conn();
-        // print_r($this->con);
         $sql = "SELECT * FROM site_mail";
         $query = mysqli_query($this->con,$sql);
         $result = array();
@@ -37,7 +35,6 @@ function sendmail($sendTo, $mailTitle, $mailBody)
     $Mail_data = $getMail->getInfo();
     $Mail_username = $Mail_data['username'];
     $Mail_password = $Mail_data['password'];
-    
     $mail = new PHPMailer(true); // Passing `true` enables exceptions
     // try {
     //Server settings

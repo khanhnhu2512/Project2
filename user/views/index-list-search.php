@@ -15,6 +15,10 @@ if (!isset($_SESSION)) {
     <link type="text/css" rel="stylesheet" href="./public/bootstrap4/bootstrap-4.5.0-dist/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="./public/css/style.css">
     <script src="./public/jquery/jquery-3.5.1.min.js"></script>
+    <!-- slick -->
+    <link rel="stylesheet" type="text/css" href="./public/slick/slick.css" />
+    <!-- Add the new slick-theme.css if you want the default styling -->
+    <link rel="stylesheet" type="text/css" href="./public/slick/slick-theme.css" />
 
 </head>
 
@@ -126,21 +130,22 @@ if (!isset($_SESSION)) {
                     <?php } ?>
                 </ul>
                 <h3>Filter</h3>
+                <h5 class="mt-3">Price</h5>
                 <ul>
-                    <li>
-                        <a href=""> < 100 USD</a>
+                    <li class="list-style-type-none ">
+                        <a class="text-decoration-none a-block-light pl-1" href="index.php?method=list-product&filter=<100"> < 100 USD</a>
                     </li>
-                    <li>
-                        <a href=""> 100 - 200 USD</a>
+                    <li class="list-style-type-none ">
+                        <a class="text-decoration-none a-block-light pl-1" href="index.php?method=list-product&filter=100-200"> 100 - 200 USD</a>
                     </li>
-                    <li>
-                        <a href=""> 200 - 500 USD</a>
+                    <li class="list-style-type-none ">
+                        <a class="text-decoration-none a-block-light pl-1" href="index.php?method=list-product&filter=200-500"> 200 - 500 USD</a>
                     </li>
-                    <li>
-                        <a href=""> 500 - 1000 USD</a>
+                    <li class="list-style-type-none ">
+                        <a class="text-decoration-none a-block-light pl-1" href="index.php?method=list-product&filter=500-1000"> 500 - 1000 USD</a>
                     </li>
-                    <li>
-                        <a href=""> > 1000 USD</a>
+                    <li class="list-style-type-none ">
+                        <a class="text-decoration-none a-block-light pl-1" href="index.php?method=list-product&filter=>1000"> > 1000 USD</a>
                     </li>
                 </ul>
             </div>

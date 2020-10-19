@@ -46,24 +46,22 @@ if (!isset($_SESSION)) {
     <!-- Your Chat Plugin code -->
     <div class="fb-customerchat" attribution=setup_tool page_id="115832540259102">
     </div>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top pad-r-6 pad-l-6">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top pad-l-6 pad-r-6">
         <div class="container-fluid p-0">
             <a href="" class="navbar-brand">
-            <img src="./library/images/image-bg/<?php echo $_SESSION['management_site']['logo_brand']; ?>" height="35" alt="" class="d-inline-block align-top"> <?php echo $_SESSION['management_site']['name_brand']; ?>
+                <img src="./library/images/image-bg/<?php echo $_SESSION['management_site']['logo_brand']; ?>" height="35" alt="" class="d-inline-block align-top"> <?php echo $_SESSION['management_site']['name_brand']; ?>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav nav-pills ml-auto mr-auto justify-content-center">
-                    <li class="nav-item pr-5">
-                        <a class="nav-link text-light" href="index.php?method=home">Home</a>
-                    </li>
-                    <li class="nav-item pr-5">
+                    <li class="nav-item pr-3">
+                        <a class="nav-link text-light" href="index.php?method=home">Home</a> </li>
+                    <li class="nav-item pr-3">
                         <a class="nav-link text-light" href="index.php?method=list-product">Product</a>
                     </li>
-                    <li class="nav-item pr-5 ">
+                    <li class="nav-item pr-3 ">
                         <a class="nav-link text-light" href="#">About Us</a>
                     </li>
                     <li class="nav-item ">
@@ -85,28 +83,28 @@ if (!isset($_SESSION)) {
             </form>
             <!--  -->
             <div class="col-1 text-right mr-1 p-0">
-                    <button class="btn btn-dark border-0 notice-icon" onclick="collapseNotice()" type="button" id="dropdownNoti">
-                        <i class="fas fa-bell text-white fa-2x btn-cart"></i>
-                    </button>
-                    <div class="nav-notice">
-                        <?php $i = 0;
-                        if (isset($_SESSION['noti'])) {
-                            foreach ($_SESSION['noti'] as $key => $value) {
-                        ?>
-                                <div class="m-0 dropdown-divider"></div>
-                                <div class="row m-0 text-left align-content-center p-0">
-                                    <div class="text-dark col-10">
-                                        <p class="cart-name mt-2 mb-2 "><?php echo $value['content']; ?></p>
-                                    </div>
-                                    <a class="col p-0 m-0 flex-center text-decoration-none" href="index.php?method=delete-notification&methodB=<?php echo $method; ?>&id=<?php echo $value['id']; ?>">
-                                        <i class="fas fa-times fa-1x"></i>
-                                    </a>
+                <button class="btn btn-dark border-0 notice-icon" onclick="collapseNotice()" type="button" id="dropdownNoti">
+                    <i class="fas fa-bell text-white fa-2x btn-cart"></i>
+                </button>
+                <div class="nav-notice" style="top: 50px;left: -31px;">
+                    <?php $i = 0;
+                    if (isset($_SESSION['noti'])) {
+                        foreach ($_SESSION['noti'] as $key => $value) {
+                    ?>
+                            <div class="m-0 dropdown-divider"></div>
+                            <div class="row m-0 text-left align-content-center p-0">
+                                <div class="text-dark col-10">
+                                    <p class="cart-name mt-2 mb-2 "><?php echo $value['content']; ?></p>
                                 </div>
-                                <div class="m-0 dropdown-divider"></div>
-                            <?php } ?>
+                                <a class="col p-0 m-0 flex-center text-decoration-none" href="index.php?method=delete-notification&methodB=<?php echo $method; ?>&id=<?php echo $value['id']; ?>">
+                                    <i class="fas fa-times fa-1x"></i>
+                                </a>
+                            </div>
+                            <div class="m-0 dropdown-divider"></div>
                         <?php } ?>
-                    </div>
+                    <?php } ?>
                 </div>
+            </div>
             <!-- cart -->
             <div class=" dropdown cart mr-1">
                 <!-- <i class="fas fa-shopping-cart text-white fa-2x btn-cart"></i> -->
@@ -120,12 +118,12 @@ if (!isset($_SESSION)) {
                         foreach ($_SESSION['cart'] as $key => $value) {
                             $i++; ?>
                             <div class="dropdown-item">
-                                <img class="cart-img" src="../images/image-product/<?php echo $value['image']; ?>" alt="">
+                                <img class="cart-img" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="">
                                 <div class="cartProduct">
                                     <p class="cart-name"><?php echo $value['name']; ?></p>
                                     <div class="cartProduct-price">
                                         <p class="cart-price"><?php echo $value['price']; ?>$</p>
-                                        <p>x <span>1</span></p>
+                                        <p>x <span><?php echo $value['qty']; ?></span></p>
                                     </div>
                                 </div>
                                 <a href="index.php?method=delete-cart&id=<?php echo $value['id']; ?>">
@@ -137,9 +135,7 @@ if (!isset($_SESSION)) {
                         <p class="total">Total: <span><?php echo $total; ?>$</span></p>
                     <?php } ?>
                     <div class="btn btn-danger w-100">
-                        <a class="btn-link" href="index.php?method=checkout">Check out</a>
-                    </div>
-                    <div class="btn btn-dark dropdown-toggle border-0" type="button" id="dropdownProfile" da toggle="dropdown" aria-hanspopup="true">
+                        <a class="btn-link btn-block" href="index.php?method=checkout">Check out</a>
                     </div>
                 </div>
             </div>
@@ -152,12 +148,6 @@ if (!isset($_SESSION)) {
                     <div class="dropdown-item">
                         <i class="fa fa-user-circle" aria-hidden="true"></i>
                         <a class="link" href="#">Account</a>
-
-
-                        <div class="drop-menu">
-
-                        </div>
-
                     </div>
                     <div class="dropdown-divider"></div>
                     <div class="dropdown-item">
@@ -171,9 +161,6 @@ if (!isset($_SESSION)) {
                     </div>
                 </div>
             </div>
-        </div>
-
-
         </div>
     </nav>
 
@@ -198,21 +185,21 @@ if (!isset($_SESSION)) {
                     <?php } ?>
                 </ul>
                 <h3>Filter</h3>
+                <h5 class="mt-3">Price</h5>
                 <ul>
-                    <li>
-                        <a href=""> < 100 USD</a>
+                    <li class="list-style-type-none ">
+                        <a class="text-decoration-none a-block-light pl-1" href="index.php?method=list-product&filter=<100">
+                            < 100 USD</a> </li> <li class="list-style-type-none ">
+                                <a class="text-decoration-none a-block-light pl-1" href="index.php?method=list-product&filter=100-200"> 100 - 200 USD</a>
                     </li>
-                    <li>
-                        <a href=""> 100 - 200 USD</a>
+                    <li class="list-style-type-none ">
+                        <a class="text-decoration-none a-block-light pl-1" href="index.php?method=list-product&filter=200-500"> 200 - 500 USD</a>
                     </li>
-                    <li>
-                        <a href=""> 200 - 500 USD</a>
+                    <li class="list-style-type-none ">
+                        <a class="text-decoration-none a-block-light pl-1" href="index.php?method=list-product&filter=500-1000"> 500 - 1000 USD</a>
                     </li>
-                    <li>
-                        <a href=""> 500 - 1000 USD</a>
-                    </li>
-                    <li>
-                        <a href=""> > 1000 USD</a>
+                    <li class="list-style-type-none ">
+                        <a class="text-decoration-none a-block-light pl-1" href="index.php?method=list-product&filter=>1000"> > 1000 USD</a>
                     </li>
                 </ul>
             </div>
@@ -224,23 +211,23 @@ if (!isset($_SESSION)) {
                             <option value="index.php?method=list-product<?php if (isset($type)) {
                                                                             echo "&type=$type";
                                                                         } ?>&sort=new" <?php if (isset($_GET['sort'])) {
-                                                                                                                                        echo ($_GET['sort'] == 'new') ? "selected" : "";
-                                                                                                                                    } ?>>New</option>
+                                                                                            echo ($_GET['sort'] == 'new') ? "selected" : "";
+                                                                                        } ?>>New</option>
                             <option value="index.php?method=list-product<?php if (isset($type)) {
                                                                             echo "&type=$type";
                                                                         } ?>&sort=view" <?php if (isset($_GET['sort'])) {
-                                                                                                                                        echo ($_GET['sort'] == 'view') ? "selected" : "";
-                                                                                                                                    } ?>>View</option>
+                                                                                            echo ($_GET['sort'] == 'view') ? "selected" : "";
+                                                                                        } ?>>View</option>
                             <option value="index.php?method=list-product<?php if (isset($type)) {
                                                                             echo "&type=$type";
                                                                         } ?>&sort=price-desc" <?php if (isset($_GET['sort'])) {
-                                                                                                                                            echo ($_GET['sort'] == 'price-desc') ? "selected" : "";
-                                                                                                                                        } ?>>Price (Desc)</option>
+                                                                                                    echo ($_GET['sort'] == 'price-desc') ? "selected" : "";
+                                                                                                } ?>>Price (Desc)</option>
                             <option value="index.php?method=list-product<?php if (isset($type)) {
                                                                             echo "&type=$type";
                                                                         } ?>&sort=price-asc" <?php if (isset($_GET['sort'])) {
-                                                                                                                                            echo ($_GET['sort'] == 'price-asc') ? "selected" : "";
-                                                                                                                                        } ?>>Price (Asc)</option>
+                                                                                                    echo ($_GET['sort'] == 'price-asc') ? "selected" : "";
+                                                                                                } ?>>Price (Asc)</option>
                         </select>
                     </div>
 
@@ -255,7 +242,7 @@ if (!isset($_SESSION)) {
                                 <h4 class="card-title"><?php echo $value['name']; ?></h4>
                                 <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
                                 <div class="card-title">
-                                    <a class="card-link" onclick="redirectLogin()">
+                                    <a class="card-link" href="index.php?method=add-cart&id=<?php echo $value['id']; ?>">
                                         <i class="fa fa-cart-plus fa-2x"></i>
                                     </a>
                                 </div>
@@ -292,7 +279,38 @@ if (!isset($_SESSION)) {
     </footer>
 
 
+    <script>
+        var isProductOpened = false;
 
+        function collapse(i) {
+            const childMenu = document.querySelectorAll('.child-menu');
+            if (!isProductOpened) {
+                childMenu[i].classList.add('child-menu--active');
+                isProductOpened = true;
+            } else if (isProductOpened) {
+                childMenu[i].classList.remove('child-menu--active');
+                isProductOpened = false;
+            }
+
+
+        }
+        var isProductOpenedNotice = false;
+
+        function collapseNotice() {
+            // notice bell
+
+            console.log(isProductOpenedNotice);
+            const notice_icon = document.querySelector('.notic-icon');
+            const nav_notice = document.querySelector('.nav-notice');
+            if (!isProductOpenedNotice) {
+                nav_notice.classList.add('nav-notice-active');
+                isProductOpenedNotice = true;
+            } else if (isProductOpenedNotice) {
+                nav_notice.classList.remove('nav-notice-active');
+                isProductOpenedNotice = false;
+            }
+        }
+    </script>
     <script language="javascript">
         function btnSearch() {
             var searchInput = document.getElementById("search-form-input");

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 12, 2020 lúc 11:00 PM
+-- Thời gian đã tạo: Th10 19, 2020 lúc 02:25 AM
 -- Phiên bản máy phục vụ: 10.4.13-MariaDB
 -- Phiên bản PHP: 7.2.31
 
@@ -33,6 +33,13 @@ CREATE TABLE `logs` (
   `lv` int(11) NOT NULL,
   `create_time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `logs`
+--
+
+INSERT INTO `logs` (`username`, `action`, `lv`, `create_time`) VALUES
+('admin', 'View detail order', 1, '2020-10-19 07:17:27');
 
 -- --------------------------------------------------------
 
@@ -79,6 +86,7 @@ CREATE TABLE `management_site` (
 --
 
 INSERT INTO `management_site` (`logo_brand`, `name_brand`, `title_website`, `logo_website`, `footer_information_left`, `footer_information_center`, `footer_information_right`, `footer_information_bottom`) VALUES
+('LogoN-White.png', 'My store', 'My store', 'LogoN-Black.png', 'a', 'a', 'a', 'Copyright © 2020 KhanhNhu\'s N-BUY. All rights reserved.'),
 ('LogoN-White.png', 'My store', 'My store', 'LogoN-Black.png', 'a', 'a', 'a', 'Copyright © 2020 KhanhNhu\'s N-BUY. All rights reserved.');
 
 -- --------------------------------------------------------
@@ -99,9 +107,8 @@ CREATE TABLE `notifications` (
 --
 
 INSERT INTO `notifications` (`id`, `content`, `lv`, `create_time`) VALUES
-(2, 'test2', 1, '2020-10-12 14:56:36'),
-(3, 'test2', 15, '2020-10-12 14:56:36'),
-(4, 'test3', 1, '2020-10-12 14:56:53');
+(5, 'New order fromLương Văn Như', 1, '2020-10-19 02:02:48'),
+(6, 'New order fromLương Văn Như', 15, '2020-10-19 02:02:48');
 
 -- --------------------------------------------------------
 
@@ -148,7 +155,8 @@ INSERT INTO `order_detail` (`id`, `id_order`, `id_product`, `price`, `qty`) VALU
 (115, 152, 55, 699, 1),
 (116, 152, 54, 699, 1),
 (117, 153, 55, 699, 1),
-(118, 153, 54, 699, 1);
+(118, 153, 54, 699, 1),
+(119, 154, 50, 699, 1);
 
 -- --------------------------------------------------------
 
@@ -188,7 +196,8 @@ INSERT INTO `order_list` (`username`, `id_order`, `fullname`, `email`, `phone_nu
 ('khanhnhu', 149, '', '', 0, 0, 9395, 'test', 0, '2020-09-29 09:49:30'),
 ('khanhnhu', 150, '', '', 0, 0, 199, 'Test', 0, '2020-09-29 10:57:50'),
 ('khanhnhu', 152, 'Lương Văn Như 2', '', 123456789, 0, 1398, 'Ha Noi', 0, '2020-10-12 12:24:47'),
-('khanhnhu', 153, 'Lương Văn Như 2', 'luongvannhu2512@gmail.com', 123456789, 0, 1398, 'Ha Noi', 0, '2020-10-12 12:26:40');
+('khanhnhu', 153, 'Lương Văn Như 2', 'luongvannhu2512@gmail.com', 123456789, 0, 1398, 'Ha Noi', 0, '2020-10-12 12:26:40'),
+('khanhnhu', 154, 'Lương Văn Như', 'luongvannhu2512@gmail.com', 123456789, 0, 699, 'Ha Noi', 0, '2020-10-19 02:02:48');
 
 -- --------------------------------------------------------
 
@@ -216,14 +225,14 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `name`, `type`, `image`, `price`, `qty`, `description`, `status`, `create_time`, `last_updated`, `view`, `sold`) VALUES
-(1, 'Iphone 11 Pro Max', 1, 'ip12-1.jpg', 1099, 7, 'Triple-camera system (Ultra Wide, Wide, Telephoto)<br>    Up to 20 hours of video playback1    Water resistant to a depth of 4 meters for up to 30 minutes    5.8” or 6.5” Super Retina XDR display', 0, '0000-00-00 00:00:00', '2020-09-12 11:33:21', 85, 0),
+(1, 'Iphone 11 Pro Max', 1, 'ip12-1.jpg', 1099, 7, 'Triple-camera system (Ultra Wide, Wide, Telephoto)<br>    Up to 20 hours of video playback1    Water resistant to a depth of 4 meters for up to 30 minutes    5.8” or 6.5” Super Retina XDR display', 0, '0000-00-00 00:00:00', '2020-09-12 11:33:21', 87, 0),
 (2, 'iPhone XS Max', 1, 'ip12-2.jpg', 1249, 0, '\r\n    Dual-camera system (Ultra Wide, Wide)\r\n    Up to 17 hours of video playback1\r\n    Water resistant to a depth of 2 meters for up to 30 minutes\r\n    6.1” Liquid Retina HD display\r\n', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 10, 0),
 (3, 'iPhone 11', 1, 'ip12-3.jpg', 599, 0, '\r\n    \r\n    Dual-camera system (Ultra Wide, Wide)\r\n    Up to 17 hours of video playback1\r\n    Water resistant to a depth of 2 meters for up to 30 minutes\r\n    6.1” Liquid Retina HD display\r\n\r\n', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 4, 0),
-(29, 'Macbook', 3, 'macbook-pro-2018-2.jpeg', 2099, 95, 'abc', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 5),
+(29, 'Macbook', 3, 'macbook-pro-2018-2.jpeg', 2099, 95, 'abc', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 5),
 (30, 'Iphone 11 Pro Max', 1, 'ip12-3.jpg', 999, 20, 'abc', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0),
 (31, 'iPhone 11', 1, 'ip12-4.jpg', 999, 10, 'abc', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 3, 1),
 (32, 'iPhone 11', 2, 'ip12-4.jpg', 999, 11, 'abc', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 4, 0),
-(33, 'Macbook 2', 3, '4477207_tinhte_tren_tay_apple_macbook_air_2018_2.jpg', 1499, 10, 'abc', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0),
+(33, 'Macbook 2', 3, '4477207_tinhte_tren_tay_apple_macbook_air_2018_2.jpg', 1499, 10, 'abc', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 0),
 (34, 'iPhone 12', 1, 'ip12-3.jpg', 1999, 50, 'zxc', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0),
 (35, 'iPhone 7', 1, 'ip7-32.jpg', 399, 50, 'zxc', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0),
 (36, 'iPhone X', 1, 'ip12-2.jpg', 899, 100, 'asd', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0),
@@ -238,13 +247,13 @@ INSERT INTO `product` (`id`, `name`, `type`, `image`, `price`, `qty`, `descripti
 (47, 'ipad 1', 2, 'ip12-1.jpg', 699, 100, 'sadsdaas', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0),
 (48, 'iPhone', 1, 'ip12-1.jpg', 9999, 100, 'test', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 0),
 (49, 'AirPods 2020', 4, 'ITunes_12.2_logo.png', 699, 10, 'Very Good', 0, '2020-10-12 10:08:45', '0000-00-00 00:00:00', 0, 0),
-(50, 'AirPods 2020', 4, 'ITunes_12.2_logo.png', 699, 10, 'Very Good', 0, '2020-10-12 10:10:17', '0000-00-00 00:00:00', 0, 0),
+(50, 'AirPods 2020', 4, 'ITunes_12.2_logo.png', 699, 9, 'Very Good', 0, '2020-10-12 10:10:17', '0000-00-00 00:00:00', 0, 1),
 (51, 'AirPods 2020', 4, 'ITunes_12.2_logo.png', 699, 10, 'Very Good', 0, '2020-10-12 10:10:39', '0000-00-00 00:00:00', 0, 0),
 (52, 'AirPods 2020', 4, 'ITunes_12.2_logo.png', 699, 10, 'Very Good', 0, '2020-10-12 10:11:09', '0000-00-00 00:00:00', 0, 0),
 (53, 'AirPods 2020', 4, 'ITunes_12.2_logo.png', 699, 10, 'Very Good', 1, '2020-10-12 10:13:54', '0000-00-00 00:00:00', 0, 0),
-(54, 'AirPods 2020', 4, 'ITunes_12.2_logo.png', 699, 7, 'Very Good', 1, '2020-10-12 10:14:08', '0000-00-00 00:00:00', 0, 3),
+(54, 'AirPods 2020', 4, 'ITunes_12.2_logo.png', 699, 7, 'Very Good', 1, '2020-10-12 10:14:08', '0000-00-00 00:00:00', 3, 3),
 (55, 'AirPods 2020', 4, 'ITunes_12.2_logo.png', 699, 7, 'Very Good', 1, '2020-10-12 10:18:01', '0000-00-00 00:00:00', 0, 3),
-(58, 'Macbook 2020', 3, '4477207_tinhte_tren_tay_apple_macbook_air_2018_2.jpg', 1099, 20, 'Good', 1, '2020-10-13 02:16:39', '0000-00-00 00:00:00', 51, 0);
+(58, 'Macbook 2020', 3, '4477207_tinhte_tren_tay_apple_macbook_air_2018_2.jpg', 1099, 20, 'Good', 1, '2020-10-13 02:16:39', '0000-00-00 00:00:00', 115, 0);
 
 -- --------------------------------------------------------
 
@@ -339,6 +348,7 @@ CREATE TABLE `product_category_name` (
 --
 
 INSERT INTO `product_category_name` (`display`, `operating_system`, `front_camera`, `rear_camera`, `cpu`, `ram`, `rom`, `battery`, `security`, `charging_port`, `compatible`, `sound_technology`, `used_time`, `connect`, `weight`, `brand`, `made_in`, `hard_drive`, `graphic_card`) VALUES
+('Display', 'OS', 'Front camera', 'Rear camera', 'CPU', 'RAM', 'ROM', 'Battery', 'Security', 'Charging port', 'Compatible', 'Sound technology', 'Used time', 'Connect', 'Weight', 'Brand', 'Made in', 'Hard drive', 'Graphic card'),
 ('Display', 'OS', 'Front camera', 'Rear camera', 'CPU', 'RAM', 'ROM', 'Battery', 'Security', 'Charging port', 'Compatible', 'Sound technology', 'Used time', 'Connect', 'Weight', 'Brand', 'Made in', 'Hard drive', 'Graphic card');
 
 -- --------------------------------------------------------
@@ -357,6 +367,8 @@ CREATE TABLE `product_images` (
 --
 
 INSERT INTO `product_images` (`id_product`, `url`) VALUES
+(58, 'icon.png'),
+(58, 'macbook-pro-2018-2.jpeg'),
 (58, 'icon.png'),
 (58, 'macbook-pro-2018-2.jpeg');
 
@@ -395,6 +407,24 @@ CREATE TABLE `product_information` (
 
 INSERT INTO `product_information` (`id_product`, `display`, `operating_system`, `front_camera`, `rear_camera`, `cpu`, `ram`, `rom`, `battery`, `security`, `charging_port`, `compatible`, `sound_technology`, `used_time`, `connect`, `weight`, `brand`, `made_in`, `hard_drive`, `graphic_card`) VALUES
 (58, '16 Inch', '11', '8 MP', '11 MP', 'i9 9900K', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `site_mail`
+--
+
+CREATE TABLE `site_mail` (
+  `username` varchar(256) NOT NULL,
+  `password` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `site_mail`
+--
+
+INSERT INTO `site_mail` (`username`, `password`) VALUES
+('test.khanhnhu25@gmail.com', 'Test44448888');
 
 -- --------------------------------------------------------
 
@@ -575,19 +605,19 @@ ALTER TABLE `management_image_banner`
 -- AUTO_INCREMENT cho bảng `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 
 --
 -- AUTO_INCREMENT cho bảng `order_list`
 --
 ALTER TABLE `order_list`
-  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
+  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
 
 --
 -- AUTO_INCREMENT cho bảng `product`

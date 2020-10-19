@@ -105,6 +105,7 @@ class C_website extends M_admin
                     $id = $_GET['id'];
                     $methodB = $_GET['methodB'];
                     $this->delete('notifications', 'id', $id);
+                    $this->addLogs($_SESSION['user']['username'], 'Delete Notification', $_SESSION['user']['lv']);
                     header('location:index.php?method=' . $methodB);
                     $_SESSION['noti'] = $this->getEverything_id('notifications', 'lv', $_SESSION['lv']);
                 }
@@ -152,7 +153,7 @@ class C_website extends M_admin
                         foreach ($category_information as $k => $v) {
                             $this->editCategory_information($id_category['id'], $k, $v);
                         }
-
+                        $this->addLogs($_SESSION['user']['username'], 'Add Category', $_SESSION['user']['lv']);
                         header('location:index.php?method=category');
                     }
                 } else {
@@ -186,6 +187,7 @@ class C_website extends M_admin
                         foreach ($category_information as $k => $v) {
                             $this->editCategory_information($id, $k, $v);
                         }
+                        $this->addLogs($_SESSION['user']['username'], 'Edit Category', $_SESSION['user']['lv']);
                         header('location:index.php?method=category');
                     }
                 } else {
@@ -201,6 +203,8 @@ class C_website extends M_admin
                     $management = $this->getObject('management_site');
                     $banner_img = $this->getObject('management_image_banner');
                     $management = $management[0];
+                    $email = $this->getObject('site_mail');
+                    $email = $email[0];
                     // echo "<pre>";
                     // print_r($management);
                     if (isset($_POST['submit'])) {
@@ -211,6 +215,14 @@ class C_website extends M_admin
                         // echo "<pre>";
                         // print_r($management);
                         // options
+                        if ($_POST['email'] !=  $email['username']) {
+                            $this->editEmail('username', $_POST['email']);
+                            $this->addLogs($_SESSION['user']['username'], 'Change email username', $_SESSION['user']['lv']);
+                        }
+                        if ($_POST['password'] !=  $email['password']) {
+                            $this->editEmail('password', $_POST['password']);
+                            $this->addLogs($_SESSION['user']['username'], 'Change email password', $_SESSION['user']['lv']);
+                        }
                         foreach ($management as $k => $v) {
                             if (($k != 'logo_brand') && ($k != 'logo_website')) {
                                 $management[$k] = $_POST[$k];
@@ -238,6 +250,7 @@ class C_website extends M_admin
 
                         foreach ($management as $k => $v) {
                             $this->editManagement($k, $v);
+                            $this->addLogs($_SESSION['user']['username'], 'Edit management', $_SESSION['user']['lv']);
                         }
 
                         // banner
@@ -290,12 +303,14 @@ class C_website extends M_admin
                             // $sold = $this->getSth('sold', $id);
                             // $sold['sold'] += $view['view'];
                             // $updateSold = $this->m_users->updateSth('sold', $sold['sold'], $id);
+                            $this->addLogs($_SESSION['user']['username'], 'Accept order', $_SESSION['user']['lv']);
                             header('location:index.php?method=list-order');
                         }
                         if ($action == 'delete-order') {
 
                             $this->delete('order_list', 'id_order', $id);
                             $this->delete('order_detail', 'id_order', $id);
+                            $this->addLogs($_SESSION['user']['username'], 'Delete order', $_SESSION['user']['lv']);
                             header('location:index.php?method=list-order');
                         }
                     }
@@ -315,6 +330,7 @@ class C_website extends M_admin
                     $product = $this->getObject("product");
                     $order_list = $this->getEverything_id('order_list', 'id_order', $id);
                     $order_list = $order_list[0];
+                    $this->addLogs($_SESSION['user']['username'], 'View detail order', $_SESSION['user']['lv']);
                 } else {
                     include_once('views/404.php');
                 }
@@ -343,6 +359,7 @@ class C_website extends M_admin
                         if ($lv == 0) {
                             foreach ($role as $k => $v) {
                                 $this->addNotifications($v['id_lv'], $content);
+                                $this->addLogs($_SESSION['user']['username'], 'Add notifications', $_SESSION['user']['lv']);
                             }
                         } else {
                             $this->addNotifications($lv, $content);
@@ -425,6 +442,7 @@ class C_website extends M_admin
                         $role = $this->getObject('user_level');
                         $lv = $_POST['lv'];
                         $this->editUser($id, $lv);
+                        $this->addLogs($_SESSION['user']['username'], 'Edit user', $_SESSION['user']['lv']);
                         // $log = "Done!";
                         $log = "<script>alert('Successful!')</script>";
                         // header('location:index.php?method=list-user');
@@ -462,6 +480,7 @@ class C_website extends M_admin
                         foreach ($role as $k => $v) {
                             if ($k != 'id_lv') {
                                 $this->editPermission($_SESSION['id_role'], $k, $v);
+                                $this->addLogs($_SESSION['user']['username'], 'Edit role', $_SESSION['user']['lv']);
                             }
                         }
                     }
@@ -488,6 +507,7 @@ class C_website extends M_admin
                         echo "<pre>";
                         print_r($permission);
                         $this->addPermission_name($name);
+                        $this->addLogs($_SESSION['user']['username'], 'Add role', $_SESSION['user']['lv']);
                         $id_lv = $this->getId('user_level', 'id_lv');
                         $id = $id_lv['id_lv'];
                         $this->addPermission_id($id);
@@ -598,7 +618,7 @@ class C_website extends M_admin
                                 $this->addProduct_images($id, $v);
                             }
                         }
-
+                        $this->addLogs($_SESSION['user']['username'], 'Edit product', $_SESSION['user']['lv']);
                         $log = "<script>alert('Successful!')</script>";
                     }
                 } else {
@@ -665,6 +685,7 @@ class C_website extends M_admin
                         foreach ($attached_img as $k => $v) {
                             $this->addProduct_images($id_product['id'], $v);
                         }
+                        $this->addLogs($_SESSION['user']['username'], 'Add product', $_SESSION['user']['lv']);
                         $log = "<script>alert('Successful!')</script>";
                     }
                 } else {
@@ -681,6 +702,7 @@ class C_website extends M_admin
                     $table = 'user';
                     $object = 'id';
                     $this->delete($table, $object, $id);
+                    $this->addLogs($_SESSION['user']['username'], 'Delete user', $_SESSION['user']['lv']);
                 } else {
                     include_once('views/404.php');
                 }
@@ -694,6 +716,7 @@ class C_website extends M_admin
                     $table = 'product';
                     $object = 'id';
                     $this->delete($table, $object, $id);
+                    $this->addLogs($_SESSION['user']['username'], 'Delete product', $_SESSION['user']['lv']);
                     $logDelete = true;
                     header('location:index.php?method=list-product');
                     // echo "<script> alert('Deleted!'); </script>";
@@ -701,6 +724,11 @@ class C_website extends M_admin
                     include_once('views/404.php');
                 }
                 include_once 'views/list-product.php';
+                break;
+            case 'logs':
+                $logs = $this->getObject('logs');
+                $user_lv = $this->getObject('user_level');
+                include_once 'views/logs.php';
                 break;
             case 'error404':
 

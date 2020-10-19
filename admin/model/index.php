@@ -167,6 +167,13 @@
             $query = mysqli_query($this->con, $sql);
             return $query;
         }
+        public function editEmail($key,$value)
+        {
+            $this->conn();
+            $sql = "UPDATE product_information SET $key = '$value'";
+            $query = mysqli_query($this->con, $sql);
+            return $query;
+        }
         public function addProduct_images($id,$image_name){
             $this->conn();
             $sql = "INSERT INTO product_images (id_product,url) VALUES ($id,'$image_name');";
@@ -176,6 +183,12 @@
         public function addNotifications($lv,$content){
             $this->conn();
             $sql = "INSERT INTO notifications (content,lv,create_time) VALUES ('$content',$lv,now());";
+            $query = mysqli_query($this->con,$sql);
+            return $query;
+        }
+        public function addLogs($username,$action,$lv){
+            $this->conn();
+            $sql = "INSERT INTO logs (username,action,lv,create_time) VALUES ('$username','$action',$lv,now());";
             $query = mysqli_query($this->con,$sql);
             return $query;
         }

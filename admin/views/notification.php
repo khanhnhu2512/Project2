@@ -141,6 +141,14 @@
                                 </li>
                             </ul>
                         </li>
+                        <li>
+                            <a onclick="collapse(<?php echo $i; $i++ ?>)" class='menu-item product'><i class="w-15 text-center text-white fas fa-sliders-h"></i> Logs</a>
+                            <ul class="child-menu">
+                                <li class='child-menu-item'>
+                                    <a href="index.php?method=logs">> View</a>
+                                </li>
+                            </ul>
+                        </li>
                     <?php } ?>
                 </ul>
             </div>

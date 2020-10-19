@@ -25,6 +25,7 @@ class C_website extends M_users
                     $product['bestseller'] = $this->OrderBy('product', 'sold', 'DESC');
                     $product['new'] = $this->OrderBy('product', 'create_time', 'DESC');
                     // echo count($product['mostview']);
+                    $banner = $this->getObject('management_image_banner');
                     include_once 'user/views/index.php';
                     break;
                 case ('search'):
@@ -88,6 +89,26 @@ class C_website extends M_users
                     } else {
                         $type = 0;
                     }
+                    if (isset($_GET['filter'])) {
+                        $filter = $_GET['filter'];
+                        switch ($filter) {
+                            case '<100':
+                                $product = $this->filter('product', 'price < 100');
+                                break;
+                            case '100-200':
+                                $product = $this->filterAnd('product', 'price >= 100', 'price<200');
+                                break;
+                            case '200-500':
+                                $product = $this->filterAnd('product', 'price >= 200', 'price<500');
+                                break;
+                            case '500-1000':
+                                $product = $this->filterAnd('product', 'price >= 500', 'price<1000');
+                                break;
+                            case '>1000':
+                                $product = $this->filter('product', 'price >= 1000');
+                                break;
+                        }
+                    }
                     if (isset($_GET['sort'])) {
                         $sort = $_GET['sort'];
                         switch ($sort) {
@@ -132,16 +153,39 @@ class C_website extends M_users
                     if (isset($_GET['id'])) {
                         $id = $_GET['id'];
                     }
+                    
+                    if (isset($_GET['filter'])) {
+                        $filter = $_GET['filter'];
+                        switch ($filter) {
+                            case '<100':
+                                $product = $this->filter('product', 'price < 100');
+                                break;
+                            case '100-200':
+                                $product = $this->filterAnd('product', 'price >= 100', 'price<200');
+                                break;
+                            case '200-500':
+                                $product = $this->filterAnd('product', 'price >= 200', 'price<500');
+                                break;
+                            case '500-1000':
+                                $product = $this->filterAnd('product', 'price >= 500', 'price<1000');
+                                break;
+                            case '>1000':
+                                $product = $this->filter('product', 'price >= 1000');
+                                break;
+                        }
+                    }
                     // view
                     $product_information = $this->getEverything_id('product_information', 'id_product', $id);
                     $product_category_name = $this->getObject('product_category_name');
                     $product_category_name = $product_category_name[0];
+                    $product_information = $product_information[0];
                     $views = $this->m_users->getSth('view', $id);
                     $views['view']++;
                     $updateViews = $this->m_users->updateSth('view', $views['view'], $id);
                     $product = $this->m_users->getObject_id($id, $table);
+                    $attached_img = $this->getEverything_id('product_images','id_product',$id);
                     // echo "<pre>";
-                    // print_r($product);
+                    // print_r($product_information);
                     include_once 'user/views/index-product-details.php';
                     break;
                 case ('form-reset'):
@@ -275,7 +319,7 @@ class C_website extends M_users
                         $product['mostview'] = $this->OrderBy('product', 'view', 'DESC');
                         $product['bestseller'] = $this->OrderBy('product', 'sold', 'DESC');
                         $product['new'] = $this->OrderBy('product', 'create_time', 'DESC');
-
+                        $banner = $this->getObject('management_image_banner');
 
                         if (!isset($_SESSION['cart-count'])) {
                             $_SESSION['cart-count'] = 0;
@@ -322,6 +366,26 @@ class C_website extends M_users
                         } else {
                             $type = 0;
                         }
+                        if (isset($_GET['filter'])) {
+                            $filter = $_GET['filter'];
+                            switch ($filter) {
+                                case '<100':
+                                    $product = $this->filter('product', 'price < 100');
+                                    break;
+                                case '100-200':
+                                    $product = $this->filterAnd('product', 'price >= 100', 'price<200');
+                                    break;
+                                case '200-500':
+                                    $product = $this->filterAnd('product', 'price >= 200', 'price<500');
+                                    break;
+                                case '500-1000':
+                                    $product = $this->filterAnd('product', 'price >= 500', 'price<1000');
+                                    break;
+                                case '>1000':
+                                    $product = $this->filter('product', 'price >= 1000');
+                                    break;
+                            }
+                        }
                         if (isset($_GET['sort'])) {
                             $sort = $_GET['sort'];
                             switch ($sort) {
@@ -355,7 +419,7 @@ class C_website extends M_users
                                     break;
                             }
                         }
-                        include_once('user/views/index-list-search.php');
+                        include_once('user/views/home-list-search.php');
                         break;
                     case ('signout'):
                         session_unset();
@@ -371,6 +435,26 @@ class C_website extends M_users
                             $product = $this->getEverything_id('product', 'type', $type);
                         } else {
                             $type = 0;
+                        }
+                        if (isset($_GET['filter'])) {
+                            $filter = $_GET['filter'];
+                            switch ($filter) {
+                                case '<100':
+                                    $product = $this->filter('product', 'price < 100');
+                                    break;
+                                case '100-200':
+                                    $product = $this->filterAnd('product', 'price >= 100', 'price<200');
+                                    break;
+                                case '200-500':
+                                    $product = $this->filterAnd('product', 'price >= 200', 'price<500');
+                                    break;
+                                case '500-1000':
+                                    $product = $this->filterAnd('product', 'price >= 500', 'price<1000');
+                                    break;
+                                case '>1000':
+                                    $product = $this->filter('product', 'price >= 1000');
+                                    break;
+                            }
                         }
                         if (isset($_GET['sort'])) {
                             $sort = $_GET['sort'];
@@ -452,7 +536,7 @@ class C_website extends M_users
                         $product_information = $product_information[0];
                         $product_category_name = $this->getObject('product_category_name');
                         $product_category_name = $product_category_name[0];
-                        $attached_img = $this->getObject('product_images');
+                        $attached_img = $this->getEverything_id('product_images','id_product',$id);
                         // echo "<pre>";
                         // print_r($product_information);
                         $views = $this->m_users->getSth('view', $id);
@@ -517,7 +601,7 @@ class C_website extends M_users
                                     $updateSold = $this->m_users->updateSth('sold', $sold['sold'], $value['id']);
                                 }
                                 // send notification
-                                $content = 'New order from' . $fullname;
+                                $content = 'New order from ' . $fullname;
                                 $permission = $this->getObject('user_permissions');
                                 foreach ($permission as $k => $v) {
                                     if ($v['notifications'] == 1) {

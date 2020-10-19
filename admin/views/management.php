@@ -141,6 +141,14 @@
                                 </li>
                             </ul>
                         </li>
+                        <li>
+                            <a onclick="collapse(<?php echo $i; $i++ ?>)" class='menu-item product'><i class="w-15 text-center text-white fas fa-sliders-h"></i> Logs</a>
+                            <ul class="child-menu">
+                                <li class='child-menu-item'>
+                                    <a href="index.php?method=logs">> View</a>
+                                </li>
+                            </ul>
+                        </li>
                     <?php } ?>
                 </ul>
             </div>
@@ -190,6 +198,15 @@
                         <div class="form-group col-3">
                             <label for="qty" class="col-form-label font-weight-bolder">Tilte Website</label>
                             <input type="text" id="qty" name="title_website" class="form-control" placeholder="Title Website" value="<?php echo (isset($management)) ? $management['title_website'] : ''; ?>" required="">
+                        </div>
+                        <legend class="col p-0 font-weight-bolder">Email</legend>
+                        <div class="form-group col-6">
+                            <label for="qty" class="col-form-label font-weight-bolder">Username</label>
+                            <input type="email" id="qty" name="email" class="form-control" placeholder="Email" value="<?php echo (isset($management)) ? $email['username'] : ''; ?>" required="">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="qty" class="col-form-label font-weight-bolder">Password</label>
+                            <input type="password" id="qty" name="password" class="form-control" placeholder="Email" value="<?php echo (isset($management)) ? $email['password'] : ''; ?>" required="">
                         </div>
                         <legend class="col p-0 font-weight-bolder">Footer information</legend>
                         <div class="row p-0 justify-content-lg-between">

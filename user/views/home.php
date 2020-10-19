@@ -19,7 +19,11 @@ if (!isset($_SESSION)) {
     <link type="text/css" rel="stylesheet" href="./public/css/style.css">
     <script type="text/javascript" src="./public/jquery/jquery-3.5.1.slim.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
-    <!-- <script src="../libs/jquery/jquery-3.5.1.min.js"></script> -->
+    <!-- slick -->
+    <link rel="stylesheet" type="text/css" href="./public/slick/slick.css" />
+    <!-- Add the new slick-theme.css if you want the default styling -->
+    <link rel="stylesheet" type="text/css" href="./public/slick/slick-theme.css" />
+    <script src="./public/jquery/jquery-3.5.1.min.js"></script>
     <style>
 
     </style>
@@ -51,7 +55,7 @@ if (!isset($_SESSION)) {
     <div class="fb-customerchat" attribution=setup_tool page_id="115832540259102">
     </div>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top pad-l-6 pad-r-3">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top pad-l-6 pad-r-6">
         <div class="container-fluid p-0">
             <a href="" class="navbar-brand">
                 <img src="./library/images/image-bg/<?php echo $_SESSION['management_site']['logo_brand']; ?>" height="35" alt="" class="d-inline-block align-top"> <?php echo $_SESSION['management_site']['name_brand']; ?>
@@ -61,13 +65,13 @@ if (!isset($_SESSION)) {
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav nav-pills ml-auto mr-auto justify-content-center">
-                    <li class="nav-item pr-5">
-                        <a class="nav-link text-light" href="#">Home</a>
+                    <li class="nav-item pr-3">
+                        <a class="nav-link text-light" href="index.php?method=home">Home</a>
                     </li>
-                    <li class="nav-item pr-5">
+                    <li class="nav-item pr-3">
                         <a class="nav-link text-light" href="index.php?method=list-product">Product</a>
                     </li>
-                    <li class="nav-item pr-5 ">
+                    <li class="nav-item pr-3 ">
                         <a class="nav-link text-light" href="#">About Us</a>
                     </li>
                     <li class="nav-item ">
@@ -92,7 +96,7 @@ if (!isset($_SESSION)) {
                 <button class="btn btn-dark border-0 notice-icon" onclick="collapseNotice()" type="button" id="dropdownNoti">
                     <i class="fas fa-bell text-white fa-2x btn-cart"></i>
                 </button>
-                <div class="nav-notice">
+                <div class="nav-notice" style="top: 50px;left: -31px;">
                     <?php $i = 0;
                     if (isset($_SESSION['noti'])) {
                         foreach ($_SESSION['noti'] as $key => $value) {
@@ -172,41 +176,13 @@ if (!isset($_SESSION)) {
 
 
     <!-- Carousel -->
-    <div id="slides " class="carousel slide" data-ride="carousel" data-interval="2500">
-        <ul class="carousel-indicators ">
-            <li data-target="#slides " data-slide-to="0 " class="active "></li>
-            <li data-target="#slides " data-slide-to="1 "></li>
-            <li data-target="#slides " data-slide-to="2 "></li>
-            <li data-target="#slides " data-slide-to="3 "></li>
-        </ul>
-        <div class="carousel-inner ">
-            <div class="carousel-item active ">
-                <img class="d-block w-100 " src="./library/images/image-bg/bg5.jpg ">
-
+    <div class="main-slides">
+        <?php foreach ($banner as $k => $v) { ?>
+            <div>
+                <img class="w-100" src="./library/images/image-bg/<?php echo $v['url']; ?>" alt="">
             </div>
-            <div class="carousel-item ">
-                <img class="d-block w-100 " src="./library/images/image-bg/bg1.jpg ">
-
-            </div>
-            <div class="carousel-item ">
-                <img class="d-block w-100 " src="./library/images/image-bg/bg3.jpg ">
-
-            </div>
-            <div class="carousel-item ">
-                <img class="d-block w-100 " src="./library/images/image-bg/bg2.jpg ">
-
-            </div>
-            <a class="carousel-control-prev " href="#slides " role="button " data-slide="prev">
-                <span class="carousel-control-prev-icon " aria-hidden="true "></span>
-                <span class="sr-only ">Previous</span>
-            </a>
-            <a class="carousel-control-next " href="#slides " role="button " data-slide="next">
-                <span class="carousel-control-next-icon " aria-hidden="true "></span>
-                <span class="sr-only ">Next</span>
-            </a>
-        </div>
+        <?php } ?>
     </div>
-
     <!-- Body -->
     <div class="container-fluid padding pad-r-6 pad-l-6">
         <div class="row welcome text-center pt-5 justify-content-center">
@@ -220,108 +196,61 @@ if (!isset($_SESSION)) {
                 <h1 class="display-4">New Products</h1>
                 <h3 class="m-2"><a href="index.php?method=list-product">See all Products></a></h3>
             </div>
-            <!-- Carousel product -->
-            <div id="slides " class="carousel slide w-100" data-ride="carousel" data-interval="3000">
-                <div class="carousel-inner container-fluid">
-                    <div class="carousel-item active">
-                        <div class="container-fluid card-deck justify-content-between mt-2">
-                            <?php $i = 1;
-                            foreach ($product['new'] as $key => $value) :
-
-                            ?>
-
-                                <div class="card border-0">
-                                    <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
-                                        <img class="card-img-bottom h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
+            <!-- product new -->
+            <div class="product-slides w-100">
+                <?php foreach ($product['new'] as $key => $value) { ?>
+                    <div>
+                        <div class="card border mr-2">
+                            <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
+                                <img class="card-img-bottom h-285 mt-2" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
+                            </a>
+                            <div class="card-body">
+                                <h4 class="card-title"><?php echo $value['name']; ?></h4>
+                                <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
+                                <div class="card-title">
+                                    <a class="card-link" onclick="redirectLogin()">
+                                        <i class=" fa fa-cart-plus fa-2x"></i>
                                     </a>
-                                    <div class="card-body">
-                                        <h4 class="card-title"><?php echo $value['name']; ?></h4>
-                                        <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
-                                        <div class="card-title">
-                                            <a class="card-link" href="index.php?method=add-cart&id=<?php echo $value['id']; ?>">
-                                                <i class="fa fa-cart-plus fa-2x"></i>
-                                            </a>
-                                        </div>
-                                        <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id']; ?>">Learn more ></a>
-                                    </div>
                                 </div>
-                                <?php if (($i % 4 == 0) && ($i != count($product['new']))) {
-                                    echo "</div>";
-                                    echo "</div>";
-                                    echo "<div class='carousel-item'>";
-                                    echo "<div class='container-fluid card-deck justify-content-between mt-2'>";
-                                }
-                                $i++;
-                                ?>
-
-                            <?php endforeach; ?>
+                                <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id']; ?>">Learn more ></a>
+                            </div>
                         </div>
                     </div>
-
-                    <a class="carousel-control-prev " href="#slides " role="button " data-slide="prev">
-                        <span class="carousel-control-prev-icon " aria-hidden="true "></span>
-                        <span class="sr-only ">Previous</span>
-                    </a>
-                    <a class="carousel-control-next " href="#slides " role="button " data-slide="next">
-                        <span class="carousel-control-next-icon " aria-hidden="true "></span>
-                        <span class="sr-only ">Next</span>
-                    </a>
-                </div>
+                <?php } ?>
             </div>
-
+            <div class="w-100 mt-4 mb-4">
+                <img class="w-100 h-auto" src="./library/images/image-bg/bg-home-1.jpg" alt="">
+            </div>
             <!-- Product-->
             <div class="col-12 mt-5">
                 <h1 class="display-4">Best seller</h1>
                 <h3 class="m-2"><a href="index.php?method=list-product">See all Products></a></h3>
             </div>
-
             <!-- Carousel product -->
-            <div id="slides " class="carousel slide w-100" data-ride="carousel" data-interval="3000">
-                <div class="carousel-inner container-fluid">
-                    <div class="carousel-item active">
-                        <div class="container-fluid card-deck justify-content-between mt-2">
-                            <?php $i = 1;
-                            foreach ($product['bestseller'] as $key => $value) :
-
-                            ?>
-
-                                <div class="card border-0">
-                                    <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
-                                        <img class="card-img-bottom h-285" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
+            <div class="product-slides w-100">
+                <?php foreach ($product['bestseller'] as $key => $value) { ?>
+                    <div>
+                        <div class="card border mr-2">
+                            <a href="index.php?method=detail&id=<?php echo $value['id']; ?>">
+                                <img class="card-img-bottom h-285 mt-2" src="./library/images/image-product/<?php echo $value['image']; ?>" alt="Card image cap">
+                            </a>
+                            <div class="card-body">
+                                <h4 class="card-title"><?php echo $value['name']; ?></h4>
+                                <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
+                                <div class="card-title">
+                                    <a class="card-link" href="index.php?method=add-cart&id=<?php echo $value['id']; ?>"">
+                                        <i class=" fa fa-cart-plus fa-2x"></i>
                                     </a>
-                                    <div class="card-body">
-                                        <h4 class="card-title"><?php echo $value['name']; ?></h4>
-                                        <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
-                                        <div class="card-title">
-                                            <a class="card-link" href="index.php?method=add-cart&id=<?php echo $value['id']; ?>"">
-                                                <i class=" fa fa-cart-plus fa-2x"></i>
-                                            </a>
-                                        </div>
-                                        <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id']; ?>">Learn more ></a>
-                                    </div>
                                 </div>
-                                <?php if (($i % 4 == 0) && ($i != count($product['bestseller']))) {
-                                    echo "</div>";
-                                    echo "</div>";
-                                    echo "<div class='carousel-item'>";
-                                    echo "<div class='container-fluid card-deck justify-content-between mt-2'>";
-                                }
-                                $i++;
-                                ?>
-
-                            <?php endforeach; ?>
+                                <a class="card-link" href="index.php?method=detail&id=<?php echo $value['id']; ?>">Learn more ></a>
+                            </div>
                         </div>
                     </div>
-                    <a class="carousel-control-prev " href="#slides " role="button " data-slide="prev">
-                        <span class="carousel-control-prev-icon " aria-hidden="true "></span>
-                        <span class="sr-only ">Previous</span>
-                    </a>
-                    <a class="carousel-control-next " href="#slides " role="button " data-slide="next">
-                        <span class="carousel-control-next-icon " aria-hidden="true "></span>
-                        <span class="sr-only ">Next</span>
-                    </a>
-                </div>
+                <?php } ?>
             </div>
+        </div>
+        <div class="w-100 mt-4 mb-4">
+            <img class="w-100 h-auto" src="./library/images/image-bg/bg-home-2.jpg" alt="">
         </div>
     </div>
     <footer>
@@ -347,7 +276,31 @@ if (!isset($_SESSION)) {
         </div>
     </footer>
 
+    <!-- slick -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.product-slides').slick({
+                centerMode: true,
+                // dot: true,
+                centerPading: '20px',
+                // infinite: false,
+                slidesToShow: 3,
+                SlidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 1000
+            });
+            $('.main-slides').slick({
+                // centerMode: true,
+                dot: true,
+                infinite: false,
+                centerPading: '60px',
+                slidesToShow: 1,
+                autoplay: true,
+                autoplaySpeed: 3000
+            });
 
+        });
+    </script>
     <script language="javascript">
         // function redirectLogin() {
         //     alert("You need to login!");
@@ -382,9 +335,44 @@ if (!isset($_SESSION)) {
             alert("Done!");
         }
     </script>
+    <script>
+        var isProductOpened = false;
+
+        function collapse(i) {
+            const childMenu = document.querySelectorAll('.child-menu');
+            if (!isProductOpened) {
+                childMenu[i].classList.add('child-menu--active');
+                isProductOpened = true;
+            } else if (isProductOpened) {
+                childMenu[i].classList.remove('child-menu--active');
+                isProductOpened = false;
+            }
+
+
+        }
+        var isProductOpenedNotice = false;
+
+        function collapseNotice() {
+            // notice bell
+
+            console.log(isProductOpenedNotice);
+            const notice_icon = document.querySelector('.notic-icon');
+            const nav_notice = document.querySelector('.nav-notice');
+            if (!isProductOpenedNotice) {
+                nav_notice.classList.add('nav-notice-active');
+                isProductOpenedNotice = true;
+            } else if (isProductOpenedNotice) {
+                nav_notice.classList.remove('nav-notice-active');
+                isProductOpenedNotice = false;
+            }
+        }
+    </script>
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="./public/slick/slick.js"></script>
 </body>
 
 </html>

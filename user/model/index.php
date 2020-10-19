@@ -125,6 +125,32 @@
             }
             return $result;
         }
+        public function filter($table,$where)
+        {
+            $this->conn();
+            $sql = "SELECT * from $table WHERE $where ORDER BY 'DESC'";
+            $query = mysqli_query($this->con, $sql);
+            $result = array();
+            if ($query){ 
+                while($row = mysqli_fetch_assoc($query)){
+                $result[] = $row;
+                }
+            }
+            return $result;
+        }
+        public function filterAnd($table,$where, $and)
+        {
+            $this->conn();
+            $sql = "SELECT * from $table WHERE $where AND $and ORDER BY 'DESC'";
+            $query = mysqli_query($this->con, $sql);
+            $result = array();
+            if ($query){ 
+                while($row = mysqli_fetch_assoc($query)){
+                $result[] = $row;
+                }
+            }
+            return $result;
+        }
         public function OrderBy($table,$object,$value)
         {
             $this->conn();
