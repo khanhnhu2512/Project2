@@ -152,7 +152,7 @@
                     <?php } ?>
                 </ul>
             </div>
-            <div class="col-10">
+            <div class="col-10" style="height: 93vh">
                 <div class="display__body mt-3">
                     <table border="1px" width="100%" cellpadding="0" cellspacing="0">
                         <tr>
@@ -188,8 +188,8 @@
                                 <td>
                                     <?php echo ($value['status'] == 0) ? 'Pending' : 'Complete'; ?>
                                 </td>
-                                <td class="display__body-btn">
-                                    <button style="width: 80px;" class="btn btn-outline-danger mr-1"><a class="btn-link" <?php echo ($value['status'] == 0) ? "href='index.php?method=list-order&action=accept-order&id=" . $value['id_order'] . "'>Accept" : ">Acepted" ?> </a> </button> <button class="btn btn-outline-danger"><a class="btn-link" href="index.php?method=list-order&action=delete-order&id=<?php echo $value['id_order']; ?>">Delete</a></button>
+                                <td class="display__body-btn text-center">
+                                    <button style="width: 80px; padding-left: 0px; padding-right: 0px" class="btn btn-outline-danger"><a class="btn-link text-center" <?php  if($value['status'] == 0){echo "href='index.php?method=list-order&action=accept-order&id=" . $value['id_order'] . "'>Shiping";}else{echo ($value['status']==1) ? "href='index.php?method=list-order&action=completed-order&id=" . $value['id_order'] . "'>Done" : '>Completed' ;} ?> </a> </button> <button class="btn btn-outline-danger"><a class="btn-link" href="index.php?method=list-order&action=delete-order&id=<?php echo $value['id_order']; ?>">Delete</a></button>
                                 </td>
                                 <td class="btn">
                                     <div class="btn btn-danger"><a class="btn-link" href="index.php?method=detail-order&id=<?php echo $value['id_order']; ?>">View</a></div>

@@ -208,7 +208,7 @@ if (!isset($_SESSION)) {
                                 <h4 class="card-title"><?php echo $value['name']; ?></h4>
                                 <h5 class="card-title">Starting at $<span><?php echo $value['price']; ?></h5>
                                 <div class="card-title">
-                                    <a class="card-link" onclick="redirectLogin()">
+                                    <a class="card-link" href="index.php?method=add-cart&id=<?php echo $value['id']; ?>">
                                         <i class=" fa fa-cart-plus fa-2x"></i>
                                     </a>
                                 </div>

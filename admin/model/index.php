@@ -280,6 +280,13 @@
             $query = mysqli_query($this->con, $sql);
             return $query;
         }
+        public function completeOrder($id)
+        {
+            $this->conn();
+            $sql = "UPDATE order_list SET status = 2 WHERE id_order = $id";
+            $query = mysqli_query($this->con, $sql);
+            return $query;
+        }
         // public function logout(){
         //     session_destroy();
         //     header('location:../index.php'); 

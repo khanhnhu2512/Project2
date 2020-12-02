@@ -72,7 +72,7 @@ class C_website extends M_admin
                 foreach ($preMonth_order as $k => $v) {
                     $total_revenue_preMonth += $v['total_price'];
                 }
-                $profit = ($total_revenue / $total_revenue_preMonth) * 100;
+                if($total_revenue_preMonth != 0){    $profit = ($total_revenue / $total_revenue_preMonth) * 100;}else{$profit = 0;}
                 $profit = $profit - 100;
                 $profit = number_format($profit, 1);
                 // echo $profit;
@@ -297,6 +297,15 @@ class C_website extends M_admin
                     if (isset($_GET['action'])) {
                         $action = $_GET['action'];
                         $id = $_GET['id'];
+                        if ($action == 'completed-order') {
+                            $this->completeOrder($id);
+                            // update sold
+                            // $sold = $this->getSth('sold', $id);
+                            // $sold['sold'] += $view['view'];
+                            // $updateSold = $this->m_users->updateSth('sold', $sold['sold'], $id);
+                            $this->addLogs($_SESSION['user']['username'], 'Completed order', $_SESSION['user']['lv']);
+                            header('location:index.php?method=list-order');
+                        }
                         if ($action == 'accept-order') {
                             $this->acceptOrder($id);
                             // update sold
